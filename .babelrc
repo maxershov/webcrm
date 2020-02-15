@@ -1,0 +1,18 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "loose": true
+    }],
+    "@babel/preset-react"
+  ],
+  "env": {
+    "production": {
+      "presets": [
+        ["@babel/preset-env", {
+          "loose": true
+        }],
+        "@babel/preset-react"
+      ]
+    }
+  }
+}

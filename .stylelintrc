@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    "stylelint-no-unsupported-browser-features"
+  ],
+  "rules": {
+    "plugin/no-unsupported-browser-features": [true, {
+      "browsers": [">1%", "not OperaMini all"],
+      "severity": "warning"
+    }]
+  }
+}

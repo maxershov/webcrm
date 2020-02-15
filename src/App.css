@@ -1,0 +1,341 @@
+* {
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box;
+    --img-width: 25vw;
+    --img-height: 25vw;
+    --form-width: 25vw;
+    --back-color: rgba(224, 224, 224, 0.315);
+    --back-color-light: rgba(224, 224, 224, 0.1);
+    --form-color: rgba(224, 224, 224, 0.6);
+    --table-color: rgba(0, 92, 204);
+}
+
+::-webkit-scrollbar {
+    /*hide -y scrollbar*/
+    display: none;
+}
+
+html {
+    font-size: 1rem;
+    /* background-color: rgb(0, 0, 0); */
+    background-image: url("./images/bg.jpeg");
+    background-size: 100vw;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #151a20;
+}
+
+.askPhoneTurn {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 0.6em;
+        background-image: url("./images/bg768.jpg");
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1366px) {
+    html {
+        background-image: url("./images/bg1366.jpg");
+    }
+}
+
+@media (min-width: 3840px) {
+    html {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+    html {
+        visibility: hidden;
+        background-image: none;
+    }
+    .askPhoneTurn {
+        display: block;
+        visibility: visible;
+        font-size: 4rem !important;
+        text-align: center;
+    }
+}
+
+.font_white_shadow {
+    text-shadow: 2px 2px 0.1rem black;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.table {
+    background-color: var(--back-color);
+    text-align: center;
+}
+
+.tableHeader {
+    white-space: pre-line !important;
+    word-wrap: break-word;
+}
+
+#tablePhotoButton {
+    align-items: center;
+}
+
+#tablePhoto {
+    height: 5em;
+    max-width: auto;
+}
+
+#tablePhoto:hover {
+    position: absolute;
+    height: 20em;
+    width: auto;
+    background-color: rgba(0, 92, 204, 0.3);
+    cursor: pointer;
+}
+
+.table button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+}
+
+.table input {
+    background-color: var(--back-color) !important;
+    cursor: pointer;
+}
+
+.menu-container {
+    display: flex;
+    margin: 0 0 0.3em 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.menu-container>a {
+    color: black;
+    background-color: var(--back-color);
+    flex: 1;
+    text-shadow: 2px 1px 0.2em white;
+    padding: 0.4rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+}
+
+.menu-container .is-active {
+    border: none;
+    background-color: var(--back-color-light);
+    color: white;
+    outline: none;
+    transition: color 0.2s linear;
+}
+
+.userPage {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-rows: repeat(4, auto);
+    justify-items: center;
+    align-content: flex-start;
+}
+
+.userPage-container {
+    grid-column: 2/3;
+    grid-row: 1/3;
+    width: 100%;
+}
+
+.userPage .img-container {
+    grid-column: 1/2;
+    grid-row: 1/3;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    background-color: inherit;
+    align-items: center;
+}
+
+.userPage .img-container>img {
+    padding-top: 1rem;
+    flex: 1;
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: scale-down;
+}
+
+.userPage label,
+.table,
+.calendar,
+.mainPage textarea {
+    animation: fadein 0.5s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translate(-1em);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+*>label,
+.tableHeader {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    width: 80%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 0.1rem black;
+    letter-spacing: 0.04em;
+}
+
+*>input {
+    color: black;
+    border: none;
+    border-bottom: 1px solid black;
+    width: 80%;
+    font-size: 1.35rem;
+    background-color: var(--back-color);
+    margin-bottom: 0.5rem;
+    font-weight: bolder;
+    text-shadow: 0 0 0.1em white;
+}
+
+*>input:hover {
+    background-color: rgba(224, 224, 224, 0.4);
+    transition: background-color 0.5s linear;
+}
+
+*>input::placeholder {
+    font-size: 1.3rem;
+    color: rgba(0, 0, 0, 0.5);
+    text-shadow: none;
+    font-weight: initial;
+}
+
+.absolute_position_button button {
+    position: absolute;
+}
+
+.userPage button,
+.mainPage button {
+    width: 30vw;
+    border-style: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 0.3rem;
+    background-image: linear-gradient( to right, #005c97 0%, #363795 51%, #005c97 100%);
+}
+
+.userPage-container form button,
+.FieldsAction button,
+.newProfileField button,
+.notesMain button {
+    display: none;
+}
+
+.userPage-container>*:hover>form>button,
+.userPage-container>*:hover>button,
+.FieldsAction>*:hover button,
+.newProfileField:hover button,
+.notesMain:hover button {
+    display: block;
+}
+
+.notesField>button {
+    display: block;
+}
+
+.notesField>textarea {
+    background-color: var(--form-color);
+    width: 80%;
+    height: 15vh;
+    font-size: inherit;
+}
+
+.notesField {
+    grid-column: 3/4;
+    grid-row: 2/3;
+    width: 100%;
+}
+
+.tableHistory {
+    margin-top: 1vw;
+    grid-column: 1/4;
+    grid-row: 3/4;
+    width: 95%;
+}
+
+.FieldsAction {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    width: 100%;
+}
+
+.calendar button {
+    background-image: none;
+    font-size: 1em;
+}
+
+.mainPage {
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(5, auto);
+    justify-items: center;
+    align-content: flex-start;
+}
+
+.tableMain {
+    margin-left: 2%;
+    margin-right: 2%;
+    grid-column: 1/3;
+    grid-row: 4/5;
+}
+
+.calendarMain {
+    grid-column: 1/2;
+    grid-row: 1/3;
+}
+
+.notesMain {
+    grid-column: 2/3;
+    grid-row: 1/3;
+    width: 100%;
+}
+
+.notesMain>textarea {
+    width: 100%;
+    height: 70%;
+    background-color: var(--back-color);
+    font-size: 1.3em;
+}
+
+.newProfileField {
+    margin: 1rem;
+    grid-column: 2/3;
+    grid-row: 3/4;
+    width: 50%;
+}
+
+.newCodeField {
+    margin: 1rem;
+    grid-column: 1/2;
+    grid-row: 3/4;
+    width: 100%;
+}

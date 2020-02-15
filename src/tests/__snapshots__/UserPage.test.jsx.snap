@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render EmployeeParams correctly 1`] = `
+<Fragment>
+  <FormData
+    formLabel="Дата рождения:"
+    inputType="dateBirth"
+    type="PERSON"
+  />
+  <FormData
+    formLabel="Тип профиля:"
+    inputType="contract"
+    type="PERSON"
+  />
+  <FormData
+    formLabel="Код карты:"
+    inputType="code"
+    type="PERSON"
+  />
+  <FormData
+    formLabel="Парковка оплачена до:"
+    inputType="autoMonth"
+    type="PERSON"
+  />
+  <FieldDeposite />
+</Fragment>
+`;
+
+exports[`should render LeadParams correctly 1`] = `
+<Fragment>
+  <FormData
+    formLabel="Тип профиля:"
+    inputType="contract"
+    type="PERSON"
+  />
+  <CalendarHideable
+    dateType="rent"
+    сalendarName="Дата первого обращения:"
+  />
+</Fragment>
+`;
+
+exports[`should render LostPersonParams correctly 1`] = `
+<Fragment>
+  <FormData
+    formLabel="Тип профиля:"
+    inputType="contract"
+    type="PERSON"
+  />
+  <FormData
+    formLabel="Дата рождения:"
+    inputType="dateBirth"
+    type="PERSON"
+  />
+  <FormData
+    formLabel="Код карты:"
+    inputType="code"
+    type="PERSON"
+  />
+  <FieldDeposite />
+  <CalendarHideable
+    dateType="days"
+    сalendarName="Дата окончания контракта:"
+  />
+</Fragment>
+`;
+
+exports[`should render PersonParams correctly 1`] = `
+<Fragment>
+  <FormData
+    formLabel="Дата рождения:"
+    inputType="dateBirth"
+    type="PERSON"
+  />
+  <FormData
+    formLabel="Абонемент:"
+    inputType="contract"
+    type="PERSON"
+  />
+  <FormData
+    formLabel="Остаток тренировок:"
+    inputType="remain"
+    type="PERSON"
+  />
+  <FormData
+    formLabel="Код карты:"
+    inputType="code"
+    type="PERSON"
+  />
+  <FormData
+    formLabel="Месяц парковки:"
+    inputType="autoMonth"
+    type="PERSON"
+  />
+  <CalendarHideable
+    dateType="days"
+    сalendarName="Срок контракта:"
+  />
+  <CalendarHideable
+    dateType="rent"
+    сalendarName="Срок аренды шкафа:"
+  />
+  <FieldDeposite />
+</Fragment>
+`;
+
+exports[`should render UserPage person correctly 1`] = `
+<div
+  className="userPage"
+>
+  <div
+    className="img-container"
+  >
+    <img
+      alt="profilePhoto"
+      onClick={[Function]}
+      src={Object {}}
+    />
+  </div>
+  <div
+    className="userPage-container"
+  >
+    <FormData
+      baseValue="Иванов Иван Иванович"
+      formLabel="Имя:"
+      inputType="personName"
+      type="PERSON"
+    />
+    <FormData
+      baseValue=""
+      formLabel="Номер телефона:"
+      inputType="telNum"
+      type="PERSON"
+    />
+    <PersonParams
+      person={
+        Object {
+          "autoMonth": "02",
+          "code": "111111",
+          "contract": "12 мес",
+          "dateBirth": "29-02-1980",
+          "days": "10-10-2021",
+          "deposite": 2000,
+          "notes": "Заметка",
+          "personName": "Иванов Иван Иванович",
+          "photoId": 0,
+          "remain": "",
+          "rent": "10-02-2021",
+          "telNum": "",
+        }
+      }
+    />
+  </div>
+  <div
+    className="notesField"
+  >
+    <label>
+      Заметки:
+    </label>
+    <AreaNotes
+      notesValue="Заметка"
+      type="PERSON"
+    />
+  </div>
+  <MyActionFields
+    code="111111"
+    namesArr={
+      Array [
+        "Иванов Иван Иванович",
+      ]
+    }
+  />
+  <Connect(TableHistory)
+    code="111111"
+    tableDataType="personData"
+  />
+</div>
+`;
