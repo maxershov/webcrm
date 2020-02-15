@@ -6,6 +6,7 @@ const expressStaticGzip = require('express-static-gzip');
 const helmet = require('helmet');
 const path = require("path");
 const fs = require('fs');
+const cors = require('cors');
 const myLocalHost = require("./host");
 
 
@@ -33,20 +34,24 @@ const activityDataString = readDataJSON(pathActivitiesData)
 
 
 // const staticFiles = express.static(path.join(__dirname, "dist"));
-const staticFiles = expressStaticGzip(path.join(__dirname, "dist"));
+
+// const staticFiles = expressStaticGzip(path.join(__dirname, "dist"));
 
 const app = express();
-
+app.use(cors());
 app.get('/getData', (req, res) => {
     res.send(personDataString)
 })
+ 
 
+// app.use(helmet());
+// app.use(helmet.noCache());
 
-app.use(helmet());
-app.use(helmet.noCache());
-app.use(staticFiles);
-app.use(history());
-const port = 6969;
+// app.use(staticFiles);
+// app.use(history());
+
+const port = 6700;
 app.listen(port, myLocalHost.host);
-app.use(staticFiles)
+
+// app.use(staticFiles)
 console.log(`App is listening on port ${port}`);

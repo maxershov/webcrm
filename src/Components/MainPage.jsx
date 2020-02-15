@@ -32,7 +32,7 @@ export const MainPage = (props) => {
   
 
   async function fetchData() {
-    const res = await fetch("http://192.168.1.150:6969/getData");
+    const res = await fetch("http://192.168.1.150:6700/getData");
     res
       .json()
       .then(res => console.log(res))
