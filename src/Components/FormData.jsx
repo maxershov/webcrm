@@ -12,6 +12,17 @@ const FormData = (props) => {
   const placeholder = `Добавить ${  formLabel.slice(0, -1).toLowerCase()}`;
   const sendToDb = (event) => {
     event.preventDefault();
+
+    console.log(codeLink, inputValue, inputType);
+    
+    fetch("http://192.168.1.150:6700/change", {
+      method:'post',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        type: inputType, 
+        value: inputValue })
+    });
+
     if (type === 'PERSON') ChangeProfileValue(codeLink, inputValue, inputType);
     if (type === 'NEW_PERSON') {
       // create new profile and open it's page

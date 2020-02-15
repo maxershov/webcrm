@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const path = require("path");
 const fs = require('fs');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const myLocalHost = require("./host");
 
 
@@ -38,11 +39,17 @@ const activityDataString = readDataJSON(pathActivitiesData)
 // const staticFiles = expressStaticGzip(path.join(__dirname, "dist"));
 
 const app = express();
+app.use(bodyParser.json());
 app.use(cors());
 app.get('/getData', (req, res) => {
     res.send(personDataString)
 })
  
+app.post('/change', (req,res) => {
+    const { type, value } = req.body;
+    console.log(type, value);
+    res.json('sucess');
+})
 
 // app.use(helmet());
 // app.use(helmet.noCache());
