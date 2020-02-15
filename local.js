@@ -37,7 +37,7 @@ const staticFiles = expressStaticGzip(path.join(__dirname, "dist"));
 
 const app = express();
 
-app.get('/', (req, res) => {
+app.get('/getData', (req, res) => {
     res.send(personDataString)
 })
 

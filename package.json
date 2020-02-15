@@ -14,7 +14,8 @@
         "prod": "cross-env NODE_ENV=production webpack-dev-server --config ./webpack.config.js",
         "start": "node server.js",
         "local": "node local.js",
-        "build": "cross-env NODE_ENV=production webpack --config webpack.config.js"
+        "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+        "testBuild": "webpack --config testWebpack.config.js"
     },
     "repository": {
         "type": "git",

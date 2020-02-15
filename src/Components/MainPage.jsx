@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
 import { format, parse } from 'date-fns'
@@ -22,12 +22,28 @@ function isToday(date){
 }
 
 
+
+
 export const MainPage = (props) => {
   const history = useHistory();
   const personData = JSON.parse(props.personData);
   const [loadedDate, setLoadedDate] = useState(format(new Date(),'dd-MM-yyyy'));
   const data = JSON.parse(getDateObj(loadedDate));
   
+
+  async function fetchData() {
+    const res = await fetch("http://192.168.1.150:6969/getData");
+    res
+      .json()
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+    fetchData();
+  });
+
+
   const changeLoadDate = (date) => {
     const formatedDate = format(date, 'dd-MM-yyyy');
     setLoadedDate(formatedDate);
