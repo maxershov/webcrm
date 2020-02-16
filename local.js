@@ -1,38 +1,34 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require("express");
-const history = require('connect-history-api-fallback');
-const expressStaticGzip = require('express-static-gzip');
-const helmet = require('helmet');
+const history = require("connect-history-api-fallback");
+const expressStaticGzip = require("express-static-gzip");
+const helmet = require("helmet");
 const path = require("path");
-const fs = require('fs');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const fs = require("fs");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 const myLocalHost = require("./host");
 
-
-
-
 let homePath = null;
-process.platform === 'win32' ? homePath = path.join(path.dirname((require('os')).homedir()), 'Public') : homePath = (require('os')).homedir();
+process.platform === "win32"
+  ? (homePath = path.join(path.dirname(require("os").homedir()), "Public"))
+  : (homePath = require("os").homedir());
 
-const pathPersonData = path.join(homePath, 'db', 'personDATA.json');
-const pathDayData = path.join(homePath, 'db', 'dayDATA.json');
-const pathActivitiesData = path.join(homePath, 'db', 'activityDATA.json');
+const pathPersonData = path.join(homePath, "db", "personDATA.json");
+const pathDayData = path.join(homePath, "db", "dayDATA.json");
+const pathActivitiesData = path.join(homePath, "db", "activityDATA.json");
 
 function readDataJSON(pathTo) {
-    const bitArray = fs.readFileSync(pathTo);
-    return JSON.stringify(JSON.parse(bitArray));
+  const bitArray = fs.readFileSync(pathTo);
+  return JSON.stringify(JSON.parse(bitArray));
 }
-
 
 const personDataString = readDataJSON(pathPersonData);
 
 const dayDataString = readDataJSON(pathDayData);
 
-const activityDataString = readDataJSON(pathActivitiesData)
-
-
+const activityDataString = readDataJSON(pathActivitiesData);
 
 // const staticFiles = express.static(path.join(__dirname, "dist"));
 
@@ -41,15 +37,24 @@ const activityDataString = readDataJSON(pathActivitiesData)
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-app.get('/getData', (req, res) => {
-    res.send(personDataString)
-})
- 
-app.post('/change', (req,res) => {
-    const { type, value } = req.body;
-    console.log(type, value);
-    res.json('sucess');
-})
+
+app.get("/getperson", (req, res) => {
+  res.send(personDataString);
+});
+
+app.get("/getday", (req, res) => {
+  res.send(dayDataString);
+});
+
+app.get("/getactivity", (req, res) => {
+  res.send(activityDataString);
+});
+
+app.post("/change", (req, res) => {
+  const { type, value } = req.body;
+  console.log(type, value);
+  res.json("sucess");
+});
 
 // app.use(helmet());
 // app.use(helmet.noCache());

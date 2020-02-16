@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {useParams} from 'react-router-dom';
 import { ChangeProfileValue, addNewPersonToJSON } from '../App';
 
+import host from "../../host";
 
 const FormData = (props) => {
 
@@ -14,8 +15,7 @@ const FormData = (props) => {
     event.preventDefault();
 
     console.log(codeLink, inputValue, inputType);
-    
-    fetch("http://192.168.1.150:6700/change", {
+    fetch(`http://${host.host  }:6700/change`, {
       method:'post',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({

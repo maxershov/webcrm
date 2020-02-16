@@ -7,7 +7,10 @@ import Calendar from 'react-calendar/dist/entry.nostyle';
 import AreaNotes from './AreaNotes';
 import CodeScanner from './CodeScanner'
 import FormData from './FormData';
+import {fetchPersons} from '../store/testData/testDataActions'
 import { getIndexByCode, getDateObj  } from '../App';
+
+import host from "../../host";
 
 
 // set width to table colums by .className size
@@ -31,17 +34,25 @@ export const MainPage = (props) => {
   const data = JSON.parse(getDateObj(loadedDate));
   
 
-  async function fetchData() {
-    const res = await fetch("http://192.168.1.150:6700/getData");
-    res
-      .json()
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  }
+  // async function fetchData() {
+  //   const res = await fetch(`http://${host.host  }:6700/getperson`);
+  //   res
+  //     .json()
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err));
+  // }
 
-  useEffect(() => {
-    fetchData();
-  });
+  // async function fetchData() {
+  //   const res = await fetch(`http://${host.host  }:6700/getday`);
+  //   res
+  //     .json()
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err));
+  // }
+
+  // useEffect(() => {
+  //   fetchData();
+  // });
 
 
   const changeLoadDate = (date) => {
@@ -57,6 +68,16 @@ export const MainPage = (props) => {
     <>
       <div className="mainPage">
         <Calendar className="calendar calendarMain" value={parse(loadedDate, 'dd-MM-yyyy', new Date())} onChange={(date) => changeLoadDate(date)} />
+
+        <button
+          type="button"
+          onClick={() => {
+          fetchPersons(props.dispatch)
+        }}
+        >FETCHH
+        </button>
+        {props.testData.loading ? <p>LOADING</p> : <p>{JSON.stringify(props.testData.data)}</p>}
+        
         <div className="notesMain font-white-shadow"><AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} /></div>
         <div className="newProfileField"><FormData baseValue="" formLabel="Новый профиль:" type="NEW_PERSON" route={history} /></div>
         {isToday(loadedDate) 
@@ -111,7 +132,8 @@ export const MainPage = (props) => {
 const mapStateToProps = state => {
   return {
     personData: state.personStore.data,
-    dayData: state.dayDataStore.data
+    dayData: state.dayDataStore.data,
+    testData:state.testDataStore
   }
 }
 
