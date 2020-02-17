@@ -15,10 +15,24 @@ export const errorPersons = () => {
   return { type: "REQUEST_PERSONS_FAILED" };
 };
 
-export const fetchPersons = dispatch => {
-  console.log("fetchPersons");
+// export const fetchPersons = dispatch => {
+//   console.log("fetchPersons");
+//   dispatch(requestPersons());
+//   return fetch(`http://${host.host}:6700/getperson`)
+//     .then(res => res.json())
+//     .then(
+//       data => {
+//         console.log(typeof data, data);
+//         dispatch(getPersons(data));
+//       },
+//       err => dispatch(errorPersons())
+//     );
+// };
+
+export const fetchPersons = () => {
+  return (dispatch) => {
   dispatch(requestPersons());
-  return fetch(`http://${host.host}:6700/getperson`)
+  fetch(`http://${host.host}:6700/getperson`)
     .then(res => res.json())
     .then(
       data => {
@@ -27,4 +41,5 @@ export const fetchPersons = dispatch => {
       },
       err => dispatch(errorPersons())
     );
+  };
 };

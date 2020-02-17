@@ -72,7 +72,8 @@ export const MainPage = (props) => {
         <button
           type="button"
           onClick={() => {
-          fetchPersons(props.dispatch)
+          // fetchPersons(props.dispatch)
+          props.fetchPersons()
         }}
         >FETCHH
         </button>
@@ -137,4 +138,8 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(MainPage);
+const mapDispatchToProps = dispatch => ({
+  fetchPersons: () => dispatch(fetchPersons())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
