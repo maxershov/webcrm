@@ -1,15 +1,18 @@
 /* eslint-disable no-underscore-dangle */
 import { createStore, combineReducers, applyMiddleware , compose} from "redux";
-import thunk from 'redux-thunk';
-// import createSagaMiddlewate from 'redux-saga';
+// import thunk from 'redux-thunk';
+import createSagaMiddlewate from 'redux-saga';
+
 import dayDataReducer from "./dayData/dayDataReducer";
 import personReducer from "./allPersons/allPersonsReducer";
 import activityReducer from "./activities/ActivitiesReducer";
 import testDataReducer from "./testData/testDataReducer";
 
-// import watchPersons from './testData/testDataActions';
+import { watchFetchPersons} from './testData/testDataActions';
 
-const middlewares = [thunk];
+const sagaMiddleware = createSagaMiddlewate();
+
+const middlewares = [sagaMiddleware];
 
 if (process.env.NODE_ENV === 'development') {
   const { logger } = require('redux-logger');
@@ -26,6 +29,8 @@ const store = createStore(
   }),
   compose(applyMiddleware(...middlewares))
 );
+
+sagaMiddleware.run(watchFetchPersons);
 
 export default store;
 
