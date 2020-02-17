@@ -12,7 +12,7 @@ export default function testDataReducer(state = initialState, action) {
         loading: true,
         error: false
       };
-    case "GET_PERSONS":
+    case "REQUEST_PERSONS_SUCCEEDED":
       return {
         data: action.data,
         loading: false,

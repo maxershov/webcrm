@@ -62,7 +62,7 @@ export const MainPage = props => {
         {props.loading ? (
           <p>LOADING</p>
         ) : (
-          <p>{JSON.stringify(props.testData.data)}</p>
+          <p>{JSON.stringify(props.testData)}</p>
         )}
 
         <div className="notesMain font-white-shadow">
