@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/favicon.ico';
+import 'whatwg-fetch';
 
 import App from './App';
 

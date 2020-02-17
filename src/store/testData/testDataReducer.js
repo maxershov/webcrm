@@ -1,7 +1,8 @@
 const initialState = {
   data: "",
   loading: true,
-  error: false
+  error: false,
+  errorMsg:""
 };
 
 export default function testDataReducer(state = initialState, action) {
@@ -10,19 +11,22 @@ export default function testDataReducer(state = initialState, action) {
       return {
         data: "",
         loading: true,
-        error: false
+        error: false,
+        errorMsg:""
       };
     case "REQUEST_PERSONS_SUCCEEDED":
       return {
         data: action.data,
         loading: false,
-        error: false
+        error: false,
+        errorMsg:""
       };
     case "REQUEST_PERSONS_FAILED":
       return {
         data: "",
         loading: false,
-        error: true
+        error: true,
+        errorMsg:action.err
       };
     default:
       return state;
