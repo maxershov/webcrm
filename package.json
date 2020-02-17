@@ -13,7 +13,7 @@
         "dev": "webpack-dev-server  --config ./devWebpack.config.js",
         "prod": "cross-env NODE_ENV=production webpack-dev-server --config ./webpack.config.js",
         "start": "node server.js",
-        "local": "node local.js",
+        "local": "cross-env NODE_ENV=production node local.js",
         "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
         "testBuild": "webpack --config testWebpack.config.js"
     },
@@ -85,6 +85,7 @@
         "postcss-preset-env": "^6.7.0",
         "prettier": "^1.19.1",
         "puppeteer-core": "^2.1.1",
+        "redux-logger": "^3.0.6",
         "regenerator-runtime": "^0.13.3",
         "stylelint": "^13.1.0",
         "stylelint-no-unsupported-browser-features": "^4.0.0",
