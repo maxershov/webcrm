@@ -25,7 +25,7 @@ export function* watchFetchActivities() {
 function* fetchActivitiesAsync() {
   try {
     yield put(reqActivities());
-    yield sleep(2000)
+    yield sleep(1000)
     const data = yield call(() => {
       return fetch(`http://${host.host}:6700/getactivity`).then(res =>
         res.json()

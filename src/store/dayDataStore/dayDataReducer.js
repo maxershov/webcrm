@@ -1,5 +1,5 @@
 const initialState = {
-  data: "",
+  data: [],
   loading: false,
   error: false,
   errorMsg: ""
@@ -9,7 +9,7 @@ export default function testDataDayReducer(state = initialState, action) {
   switch (action.type) {
     case "REQUEST_DAYS":
       return {
-        data: "",
+        data: [],
         loading: true,
         error: false,
         errorMsg: ""
@@ -23,7 +23,7 @@ export default function testDataDayReducer(state = initialState, action) {
       };
     case "REQUEST_DAYS_FAILED":
       return {
-        data: "",
+        data: [],
         loading: false,
         error: true,
         errorMsg: action.err

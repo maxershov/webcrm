@@ -13,28 +13,31 @@ function widthForTable(value) {
 
 const TableHistory = (props) => {
   console.log(props.activityData);
-  // const parsedData = props.activityData.filter(obj => obj.code === props.code);
-  const parsedData = []
+  console.log(props.loadingActivities);
+  
   useEffect(() => {
     console.log('useEffectTriggered');
     props.fetchActivities();
     console.log('useEffecDone');
+    
   }, []);
+  // const parsedData = props.activityData.filter(obj => obj.code === props.code);
+  const parsedData = []
 
-  return props.loadingActivities ? (<><Spinner /></>) : (
-    <div className="tableHistory">
-      <ReactTable
-        className="table font_white_shadow -striped -highlight"
-        previousText="Назад"
-        nextText="Вперед"
-        loadingText="Загрузка"
-        noDataText="Нет данных"
-        pageText="Страница"
-        ofText="из"
-        rowsText="профилей"
-        // data={parsedData[0].activity}
+    return props.loadingActivities ? (<><Spinner /></>) : (
+      <div className="tableHistory">
+        <ReactTable
+          className="table font_white_shadow -striped -highlight"
+          previousText="Назад"
+          nextText="Вперед"
+          loadingText="Загрузка"
+          noDataText="Нет данных"
+          pageText="Страница"
+          ofText="из"
+          rowsText="профилей"
+          // data={parsedData[0].activity}
         data={[]}
-        columns={[{
+          columns={[{
           Header: 'Тип',
           accessor: 'type',
           headerClassName: 'tableHeader',
@@ -68,10 +71,10 @@ const TableHistory = (props) => {
           headerClassName: 'tableHeader',
           style: { 'whiteSpace': 'unset' }
         }]}
-        defaultSorted={[{ id: 'date', desc: true }]}
-        defaultPageSize={10}
-      />
-    </div>
+          defaultSorted={[{ id: 'date', desc: true }]}
+          defaultPageSize={10}
+        />
+      </div>
   )
 }
 
