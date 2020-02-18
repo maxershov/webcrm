@@ -6,8 +6,8 @@ import createSagaMiddlewate from 'redux-saga';
 import dayDataReducer from "./dayData/dayDataReducer";
 import personReducer from "./allPersons/allPersonsReducer";
 import activityReducer from "./activities/ActivitiesReducer";
-import testDataReducer from "./testData/testDataReducer";
-import testDataDayReducer from "./testDataDay/testDataDayReducer";
+import testDataReducer from "./personsDataStore/personsDataReducer";
+import testDataDayReducer from "./dayDataStore/dayDataReducer";
 
 
 import rootSaga from "./root-saga";

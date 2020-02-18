@@ -1,22 +1,16 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 import UserPage from './UserPage';
 import TablePage from './TablePage';
 import TablePageShort from './TablePageShort';
 import MainPage from './MainPage';
 
-import WithSpinner from './WithSpinner';
-
-const MainPageWithSpinner = WithSpinner(MainPage);
-
-// <Route exact path="/main" component={MainPage} />
 
 const MainContent = props => {
   return (
     <Switch>
       <Redirect exact from="/" to="/main" />
-      <Route exact path="/main" render={() => <MainPageWithSpinner isLoading={props.loadingPersons} isLoadingSecond={props.loadingDays} {...props} />} />
+      <Route exact path="/main" component={MainPage} />
       <Route exact path="/clients/page/:pageNum" component={TablePage} />
       <Route exact path="/lead/page/:pageNum" render={() => <TablePageShort tableType="ЛИД" />} />
       <Route exact path="/employee/page/:pageNum" render={() => <TablePageShort tableType="СОТРУДНИК" />} />
@@ -26,16 +20,5 @@ const MainContent = props => {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    loadingPersons: state.testDataStore.loading,
-    loadingDays: state.testDataDayStore.loading
-  };
-};
 
-
-
-export default connect(mapStateToProps)(MainContent);
-
-
-// export default MainContent;
+export default MainContent;

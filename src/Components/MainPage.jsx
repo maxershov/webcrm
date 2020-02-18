@@ -7,12 +7,9 @@ import Calendar from "react-calendar/dist/entry.nostyle";
 import AreaNotes from "./AreaNotes";
 import CodeScanner from "./CodeScanner";
 import FormData from "./FormData";
-import { fetchPersons } from "../store/testData/testDataActions";
-import { fetchDays } from "../store/testDataDay/testDataDayActions";
+import { fetchPersons } from "../store/personsDataStore/personsDataActions";
+import { fetchDays } from "../store/dayDataStore/dayDataActions";
 import { getIndexByCode, getDateObj } from "../App";
-
-
-import WithSpinner from './WithSpinner';
 
 import Spinner from './Spinner';
 
@@ -36,9 +33,12 @@ export const MainPage = props => {
   );
   const data = JSON.parse(getDateObj(loadedDate));
 
-  // useEffect(() => {
-  //   fetchData();
-  // });
+  useEffect(() => {
+    console.log('useEffectTriggered');
+    props.fetchPersons();
+    props.fetchDays();
+    console.log('useEffecDone');
+  }, []);
 
   const changeLoadDate = date => {
     const formatedDate = format(date, "dd-MM-yyyy");
@@ -49,7 +49,7 @@ export const MainPage = props => {
     return personData[getIndexByCode(code)].photoId;
   }
 
-  return (
+  return props.loadingDays || props.loadingPersons ? (<><Spinner /></>) : (
     <>
       <div className="mainPage">
         <Calendar
@@ -60,7 +60,6 @@ export const MainPage = props => {
         <button
           type="button"
           onClick={() => {
-            // fetchPersons(props.dispatch)
             props.fetchDays();
           }}
         >
@@ -69,22 +68,19 @@ export const MainPage = props => {
         {props.loadingDays ? (
           <p>LOADING</p>
         ) : (
-          <p>{JSON.stringify(props.testDataDays)}</p>
-        )}
+            <p>{JSON.stringify(props.testDataDays)}</p>
+          )}
         <button
           type="button"
-          onClick={() => {
-            // fetchPersons(props.dispatch)
-            props.fetchPersons();
-          }}
+          onClick={() => { props.fetchPersons(); }}
         >
           FETCHH
         </button>
-        {props.loadingPerson ? (
+        {props.loadingPersons ? (
           <p>LOADING</p>
         ) : (
-          <p>{JSON.stringify(props.testData)}</p>
-        )}
+            <p>{JSON.stringify(props.testData)}</p>
+          )}
 
         <div className="notesMain font-white-shadow">
           <AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} />
@@ -102,8 +98,8 @@ export const MainPage = props => {
             <CodeScanner dayObject={data} date={loadedDate} />
           </div>
         ) : (
-          undefined
-        )}
+            undefined
+          )}
       </div>
       <div className="tableMain">
         <ReactTable
@@ -165,7 +161,7 @@ export const MainPage = props => {
         />
       </div>
     </>
-  );
+  )
 };
 
 const mapStateToProps = state => {
@@ -173,7 +169,7 @@ const mapStateToProps = state => {
     personData: state.personStore.data,
     dayData: state.dayDataStore.data,
     testData: state.testDataStore.data,
-    loadingPerson: state.testDataStore.loading,
+    loadingPersons: state.testDataStore.loading,
     loadingDays: state.testDataDayStore.loading,
     testDataDays: state.testDataDayStore.data
   };
