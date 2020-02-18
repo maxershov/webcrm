@@ -10,6 +10,8 @@ import FormData from "./FormData";
 import { fetchPersons } from "../store/testData/testDataActions";
 import { getIndexByCode, getDateObj } from "../App";
 
+import Spinner from './Spinner';
+
 // set width to table colums by .className size
 function widthForTable(value) {
   return Math.round(window.innerWidth * (value / 100));
@@ -49,7 +51,7 @@ export const MainPage = props => {
           value={parse(loadedDate, "dd-MM-yyyy", new Date())}
           onChange={date => changeLoadDate(date)}
         />
-
+        <Spinner></Spinner>
         <button
           type="button"
           onClick={() => {

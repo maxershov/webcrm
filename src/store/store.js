@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { createStore, combineReducers, applyMiddleware , compose} from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 // import thunk from 'redux-thunk';
 import createSagaMiddlewate from 'redux-saga';
 
@@ -8,7 +8,8 @@ import personReducer from "./allPersons/allPersonsReducer";
 import activityReducer from "./activities/ActivitiesReducer";
 import testDataReducer from "./testData/testDataReducer";
 
-import { watchFetchPersons} from './testData/testDataActions';
+
+import rootSaga from "./root-saga";
 
 const sagaMiddleware = createSagaMiddlewate();
 
@@ -30,7 +31,7 @@ const store = createStore(
   compose(applyMiddleware(...middlewares))
 );
 
-sagaMiddleware.run(watchFetchPersons);
+sagaMiddleware.run(rootSaga);
 
 export default store;
 

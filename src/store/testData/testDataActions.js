@@ -1,4 +1,4 @@
-import { takeEvery, put, call } from "redux-saga/effects";
+import { takeLatest, put, call } from "redux-saga/effects";
 
 import host from "../../../host";
 
@@ -11,7 +11,7 @@ export const reqPersonsSucess = personsData => {
 };
 
 export const reqPersonsError = err => {
-  return { type: "REQUEST_PERSONS_FAILED", error:err };
+  return { type: "REQUEST_PERSONS_FAILED", error: err };
 };
 
 export const fetchPersons = () => {
@@ -19,7 +19,7 @@ export const fetchPersons = () => {
 };
 
 export function* watchFetchPersons() {
-  yield takeEvery("FETCHED_PERSONS", fetchPersonsAsync);
+  yield takeLatest("FETCHED_PERSONS", fetchPersonsAsync);
 }
 
 function* fetchPersonsAsync() {
