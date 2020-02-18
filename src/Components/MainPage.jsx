@@ -10,6 +10,9 @@ import FormData from "./FormData";
 import { fetchPersons } from "../store/testData/testDataActions";
 import { getIndexByCode, getDateObj } from "../App";
 
+
+import WithSpinner from './WithSpinner';
+
 import Spinner from './Spinner';
 
 // set width to table colums by .className size
@@ -21,6 +24,8 @@ function isToday(date) {
   const todayDate = format(new Date(), "dd-MM-yyyy");
   return todayDate === date;
 }
+
+
 
 export const MainPage = props => {
   const history = useHistory();
@@ -51,7 +56,7 @@ export const MainPage = props => {
           value={parse(loadedDate, "dd-MM-yyyy", new Date())}
           onChange={date => changeLoadDate(date)}
         />
-        <Spinner></Spinner>
+
         <button
           type="button"
           onClick={() => {

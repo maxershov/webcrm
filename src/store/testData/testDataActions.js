@@ -25,6 +25,7 @@ export function* watchFetchPersons() {
 function* fetchPersonsAsync() {
   try {
     yield put(reqPersons());
+    yield sleep(5000)
     const data = yield call(() => {
       return fetch(`http://${host.host}:6700/getperson`).then(res =>
         res.json()
@@ -34,4 +35,9 @@ function* fetchPersonsAsync() {
   } catch (err) {
     yield put(reqPersonsError(err));
   }
+}
+
+
+function *sleep(time) {
+  yield new Promise(resolve => setTimeout(resolve, time));
 }
