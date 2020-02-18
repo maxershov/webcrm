@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { connect } from 'react-redux';
 import { getDaysLeft } from '../App';
+import Spinner from './Spinner';
+import { fetchActivities } from '../store/activitiesDataStore/activitiesDataActions'
 
 
 // set width to table colums by .className size
@@ -10,9 +12,16 @@ function widthForTable(value) {
 }
 
 const TableHistory = (props) => {
-  const parsedData = JSON.parse(props.activityData).filter(obj => obj.code === props.code);
+  console.log(props.activityData);
+  // const parsedData = props.activityData.filter(obj => obj.code === props.code);
+  const parsedData = []
+  useEffect(() => {
+    console.log('useEffectTriggered');
+    props.fetchActivities();
+    console.log('useEffecDone');
+  }, []);
 
-  return (
+  return props.loadingActivities ? (<><Spinner /></>) : (
     <div className="tableHistory">
       <ReactTable
         className="table font_white_shadow -striped -highlight"
@@ -23,7 +32,8 @@ const TableHistory = (props) => {
         pageText="Страница"
         ofText="из"
         rowsText="профилей"
-        data={parsedData[0].activity}
+        // data={parsedData[0].activity}
+        data={[]}
         columns={[{
           Header: 'Тип',
           accessor: 'type',
@@ -68,8 +78,13 @@ const TableHistory = (props) => {
 
 const mapStateToProps = state => {
   return {
-    activityData: state.activityStore.data
+    activityData: state.activitiesDataStore.data,
+    loadingActivities: state.activitiesDataStore.loading
   }
 }
 
-export default connect(mapStateToProps)(TableHistory);
+const mapDispatchToProps = dispatch => ({
+  fetchActivities: () => dispatch(fetchActivities()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableHistory);

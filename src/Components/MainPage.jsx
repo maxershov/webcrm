@@ -27,7 +27,7 @@ function isToday(date) {
 
 export const MainPage = props => {
   const history = useHistory();
-  const personData = JSON.parse(props.personData);
+  const personData = props.personData;
   const [loadedDate, setLoadedDate] = useState(
     format(new Date(), "dd-MM-yyyy")
   );
@@ -57,31 +57,6 @@ export const MainPage = props => {
           value={parse(loadedDate, "dd-MM-yyyy", new Date())}
           onChange={date => changeLoadDate(date)}
         />
-        <button
-          type="button"
-          onClick={() => {
-            props.fetchDays();
-          }}
-        >
-          FETCH DAY
-        </button>
-        {props.loadingDays ? (
-          <p>LOADING</p>
-        ) : (
-            <p>{JSON.stringify(props.testDataDays)}</p>
-          )}
-        <button
-          type="button"
-          onClick={() => { props.fetchPersons(); }}
-        >
-          FETCHH
-        </button>
-        {props.loadingPersons ? (
-          <p>LOADING</p>
-        ) : (
-            <p>{JSON.stringify(props.testData)}</p>
-          )}
-
         <div className="notesMain font-white-shadow">
           <AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} />
         </div>
@@ -166,9 +141,8 @@ export const MainPage = props => {
 
 const mapStateToProps = state => {
   return {
-    personData: state.personStore.data,
     dayData: state.dayDataStore.data,
-    testData: state.testDataStore.data,
+    personData: state.testDataStore.data,
     loadingPersons: state.testDataStore.loading,
     loadingDays: state.testDataDayStore.loading,
     testDataDays: state.testDataDayStore.data

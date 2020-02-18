@@ -23,7 +23,7 @@ export const UserPage = (props) => {
   const { codeLink } = useParams();
   const history = useHistory();
 
-  const data = JSON.parse(props.personData);
+  const data = props.personData;
 
   let person = data.find(profile => {
     return profile.code === codeLink
@@ -45,7 +45,7 @@ export const UserPage = (props) => {
 
   return (
     <div className="userPage">
-      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={require(`../images/${person.photoId}.jpg`)} /></div>
+      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={require(`../images/0.jpg`)} /></div>
       <div className="userPage-container">
         {renderPhotoId ? (
           <>
@@ -124,7 +124,7 @@ export const EmployeeParams = (props) => {
 
 const mapStateToProps = state => {
   return {
-    personData: state.personStore.data
+    personData: state.testDataStore.data,
   }
 }
 

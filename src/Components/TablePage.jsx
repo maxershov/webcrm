@@ -1,10 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { connect } from 'react-redux';
-import { getDaysLeft} from '../App';
+import { getDaysLeft } from '../App';
+import { fetchPersons } from "../store/personsDataStore/personsDataActions";
+import Spinner from './Spinner'
 
 
 // set width to table colums by .className size
@@ -16,7 +18,15 @@ function widthForTable(value) {
 const TablePage = (props) => {
   const history = useHistory();
   const { pageNum } = useParams();
-  return (
+  const personData = props.personData
+
+  useEffect(() => {
+    console.log('useEffectTriggered');
+    props.fetchPersons();
+    console.log('useEffecDone');
+  }, []);
+
+  return props.loadingPersons ? (<><Spinner /></>) : (
     <ReactTable
       className="table font_white_shadow -striped -highlight"
       page={parseInt(pageNum, 10) - 1}
@@ -29,7 +39,7 @@ const TablePage = (props) => {
       ofText="из"
       rowsText="профилей"
       headerClassName="tableHeader"
-      data={(JSON.parse(props.personData)).filter(obj => obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД' )}
+      data={personData.filter(obj => obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД')}
       filterable
       defaultFilterMethod={(filter, row) =>
         String(row[filter.id]) === filter.value}
@@ -39,7 +49,8 @@ const TablePage = (props) => {
           width: widthForTable(15),
           headerClassName: 'tableHeader',
           Cell: (value) => (
-            <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/${value.original.photoId}.jpg`)} /></button>)
+            <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/0.jpg`)} /></button>)
+          // <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/${value.original.photoId}.jpg`)} /></button>)
         },
         {
           Header: 'Имя',
@@ -119,8 +130,13 @@ const TablePage = (props) => {
 
 const mapStateToProps = state => {
   return {
-    personData: state.personStore.data
+    personData: state.testDataStore.data,
+    loadingPersons: state.testDataStore.loading,
   }
 }
 
-export default connect(mapStateToProps)(TablePage);
+const mapDispatchToProps = dispatch => ({
+  fetchPersons: () => dispatch(fetchPersons())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TablePage);

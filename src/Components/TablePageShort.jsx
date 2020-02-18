@@ -5,7 +5,8 @@ import ReactTable from 'react-table-6/react-table.min';
 import { connect } from 'react-redux';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { getDaysLeft } from '../App';
-
+import { fetchPersons } from "../store/personsDataStore/personsDataActions";
+import Spinner from './Spinner'
 
 // set width to table colums by .className size
 function widthForTable(value) {
@@ -54,7 +55,7 @@ const TablePageShort = (props) => {
   if (props.tableType === 'СОТРУДНИК') tableRow = employeeObj;
   if (props.tableType === 'НЕТ') tableRow = lostObj;
 
-  return (
+  return props.loadingPersons ? (<><Spinner /></>) : (
     <div className="table font_white_shadow">
       <ReactTable
         className="-striped -highlight"
@@ -67,7 +68,7 @@ const TablePageShort = (props) => {
         pageText="Страница"
         ofText="из"
         rowsText="профилей"
-        data={(JSON.parse(props.personData)).filter(obj => obj.contract === props.tableType )}
+        data={props.personData.filter(obj => obj.contract === props.tableType)}
         filterable
         defaultFilterMethod={(filter, row) =>
           String(row[filter.id]) === filter.value}
@@ -77,7 +78,7 @@ const TablePageShort = (props) => {
             width: widthForTable(25),
             headerClassName: 'tableHeader',
             Cell: (value) => (
-              <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/${value.original.photoId}.jpg`)} /></button>)
+              <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/0.jpg`)} /></button>)
           },
           {
             Header: 'Имя',
@@ -109,9 +110,13 @@ const TablePageShort = (props) => {
 
 const mapStateToProps = state => {
   return {
-    personData: state.personStore.data
+    personData: state.testDataStore.data,
+    loadingPersons: state.testDataStore.loading,
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  fetchPersons: () => dispatch(fetchPersons())
+});
 
-export default connect(mapStateToProps)(TablePageShort);
+export default connect(mapStateToProps, mapDispatchToProps)(TablePageShort);
