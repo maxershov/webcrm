@@ -16,7 +16,7 @@ const MainContent = props => {
   return (
     <Switch>
       <Redirect exact from="/" to="/main" />
-      <Route exact path="/main" render={() => <MainPageWithSpinner isLoading={props.loading} {...props} />} />
+      <Route exact path="/main" render={() => <MainPageWithSpinner isLoading={props.loadingPersons} isLoadingSecond={props.loadingDays} {...props} />} />
       <Route exact path="/clients/page/:pageNum" component={TablePage} />
       <Route exact path="/lead/page/:pageNum" render={() => <TablePageShort tableType="ЛИД" />} />
       <Route exact path="/employee/page/:pageNum" render={() => <TablePageShort tableType="СОТРУДНИК" />} />
@@ -28,7 +28,8 @@ const MainContent = props => {
 
 const mapStateToProps = state => {
   return {
-    loading: state.testDataStore.loading
+    loadingPersons: state.testDataStore.loading,
+    loadingDays: state.testDataDayStore.loading
   };
 };
 

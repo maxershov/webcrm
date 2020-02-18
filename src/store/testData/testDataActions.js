@@ -38,6 +38,6 @@ function* fetchPersonsAsync() {
 }
 
 
-function *sleep(time) {
+function* sleep(time) {
   yield new Promise(resolve => setTimeout(resolve, time));
 }

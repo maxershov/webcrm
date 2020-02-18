@@ -8,6 +8,7 @@ import AreaNotes from "./AreaNotes";
 import CodeScanner from "./CodeScanner";
 import FormData from "./FormData";
 import { fetchPersons } from "../store/testData/testDataActions";
+import { fetchDays } from "../store/testDataDay/testDataDayActions";
 import { getIndexByCode, getDateObj } from "../App";
 
 
@@ -56,7 +57,20 @@ export const MainPage = props => {
           value={parse(loadedDate, "dd-MM-yyyy", new Date())}
           onChange={date => changeLoadDate(date)}
         />
-
+        <button
+          type="button"
+          onClick={() => {
+            // fetchPersons(props.dispatch)
+            props.fetchDays();
+          }}
+        >
+          FETCH DAY
+        </button>
+        {props.loadingDays ? (
+          <p>LOADING</p>
+        ) : (
+          <p>{JSON.stringify(props.testDataDays)}</p>
+        )}
         <button
           type="button"
           onClick={() => {
@@ -66,7 +80,7 @@ export const MainPage = props => {
         >
           FETCHH
         </button>
-        {props.loading ? (
+        {props.loadingPerson ? (
           <p>LOADING</p>
         ) : (
           <p>{JSON.stringify(props.testData)}</p>
@@ -159,12 +173,15 @@ const mapStateToProps = state => {
     personData: state.personStore.data,
     dayData: state.dayDataStore.data,
     testData: state.testDataStore.data,
-    loading: state.testDataStore.loading
+    loadingPerson: state.testDataStore.loading,
+    loadingDays: state.testDataDayStore.loading,
+    testDataDays: state.testDataDayStore.data
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchPersons: () => dispatch(fetchPersons())
+  fetchPersons: () => dispatch(fetchPersons()),
+  fetchDays: () => dispatch(fetchDays())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

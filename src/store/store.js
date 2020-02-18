@@ -7,6 +7,7 @@ import dayDataReducer from "./dayData/dayDataReducer";
 import personReducer from "./allPersons/allPersonsReducer";
 import activityReducer from "./activities/ActivitiesReducer";
 import testDataReducer from "./testData/testDataReducer";
+import testDataDayReducer from "./testDataDay/testDataDayReducer";
 
 
 import rootSaga from "./root-saga";
@@ -26,7 +27,8 @@ const store = createStore(
     dayDataStore: dayDataReducer,
     personStore: personReducer,
     activityStore: activityReducer,
-    testDataStore: testDataReducer
+    testDataStore: testDataReducer,
+    testDataDayStore: testDataDayReducer
   }),
   compose(applyMiddleware(...middlewares))
 );
