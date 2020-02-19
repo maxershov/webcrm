@@ -28,6 +28,8 @@ export default function testDataReducer(state = initialState, action) {
         error: true,
         errorMsg:action.err
       };
+    case "CHANGE_PERSON_DATA":
+      return {...state, data: action.data}
     default:
       return state;
   }

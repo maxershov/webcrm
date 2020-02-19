@@ -124,7 +124,7 @@ export const EmployeeParams = (props) => {
 
 const mapStateToProps = state => {
   return {
-    personData: state.testDataStore.data,
+    personData: state.personsStore.data,
   }
 }
 

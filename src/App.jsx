@@ -9,7 +9,7 @@ import MainContent from './Components/MainContent';
 import Header from './Components/Header';
 import store from './store/store'
 import { getPersonStore, getDayDataStore, getActivityStore, getActivityStoreCode } from './store/storeGetters'
-
+import host from '../host'
 
 
 const App = (props) => {
@@ -24,9 +24,19 @@ const App = (props) => {
 }
 
 
+function sendData(data, dataType) {
+      fetch(`http://${host.host  }:6700/${dataType}`, {
+      method:'post',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+    //     type: inputType, 
+        data })
+    });
+}
+
 function changeCodeDayData(oldCode, newCode) {
   // if change code in personData => change code in historyData
-  const data = JSON.parse(getDayDataStore());
+  const data = getDayDataStore();
   data.forEach(element => {
     element.history = element.history.filter(obj => {
       if (obj.code === oldCode) return obj.code = newCode;
@@ -37,17 +47,17 @@ function changeCodeDayData(oldCode, newCode) {
 
 export function deletePerson(codeToDel) {
   deleteCodeDayData(codeToDel);
-  const personData = JSON.parse(getPersonStore());
+  const personData = getPersonStore();
   const newPersonData = personData.filter(obj => obj.code !== codeToDel);
 
-  const activityData = JSON.parse(getActivityStore());
+  const activityData = getActivityStore();
   const newActivityData = activityData.filter(obj => obj.code !== codeToDel);
   saveData(newPersonData, 'PERSON');
   saveData(newActivityData, 'ACTIVITY');
 }
 
 function deleteCodeDayData(codeToDel) {
-  const data = JSON.parse(getDayDataStore());
+  const data = getDayDataStore();
   data.forEach(element => {
     element.history = element.history.filter(obj => {
       return obj.code !== codeToDel
@@ -58,23 +68,25 @@ function deleteCodeDayData(codeToDel) {
 }
 
 export function getIndexByCode(code) {
-  return JSON.parse(getPersonStore()).findIndex(x => x.code === code);
+  return getPersonStore().findIndex(x => x.code === code);
 }
 
 export function getDateObj(dateTo) {
-  const data = JSON.parse(getDayDataStore());
+  console.log('getDateObj', dateTo);
+  const data = getDayDataStore();
   const indexDate = data.findIndex(x => x.date === dateTo);
-  if (indexDate !== -1) {
-    return JSON.stringify(data[indexDate]);
-  }
-  const newDateObj = { "date": dateTo, "notes": "", "history": [] };
-  addNewDayDataToJSON(newDateObj);
-  return JSON.stringify(newDateObj);
-
+  console.log('getDateObj', indexDate);
+  // if (indexDate !== -1) {
+  return data[indexDate];
+  // }
+  // const newDateObj = { "date": dateTo, "notes": "", "history": [] };
+  // console.log('add newDateObj in getDataObj', newDateObj);
+  // addNewDayDataToJSON(newDateObj);
+  // return newDateObj;
 }
 
 export function addNewDayDataToJSON(obj) {
-  const data = JSON.parse(getDayDataStore());
+  const data = getDayDataStore();
   const indexDate = data.findIndex(x => x.date === obj.date);
   if (indexDate !== -1) {
     data[indexDate] = obj;
@@ -87,7 +99,7 @@ export function addNewDayDataToJSON(obj) {
 
 
 export function addNewPersonToJSON(code, renderProfile, route) {
-  const data = JSON.parse(getPersonStore());
+  const data = getPersonStore();
   const indexDate = data.findIndex(x => x.code === code);
   if (indexDate !== -1) code += '*';
   const newPerson = { "personName": code, "contract": "", "dateBirth": "", "telNum": "", "code": code, "autoMonth": "", "notes": "", "remain": "", "days": "", "photoId": 0, "rent": "", "deposite": "", };
@@ -103,14 +115,14 @@ export function addNewPersonToJSON(code, renderProfile, route) {
 
 
 export function pushNewActivity(code, activityObj) {
-  const data = JSON.parse(getActivityStoreCode(code));
+  const data = getActivityStoreCode(code);
   data[0].activity.push(JSON.parse(activityObj));
   addNewActivityDataToJSON(data[0]);
 }
 
 export function addNewActivityDataToJSON(obj) {
   // take JSON string like {code:'123456, activity:[{...}]} and find, if already in list => change; if not in list => push new
-  const data = JSON.parse(getActivityStore());
+  const data = getActivityStore();
   const indexDate = data.findIndex(x => x.code === obj.code);
   if (indexDate !== -1) {
     data[indexDate] = obj;
@@ -124,7 +136,7 @@ export function addNewActivityDataToJSON(obj) {
 function changeCode(oldCode, newCode, activityObj) {
   // TODO set URL => '/new code'
 
-  const data = JSON.parse(getActivityStore());
+  const data = getActivityStore();
   const id = data.findIndex(x => x.code === oldCode);
   data[id].code = newCode;
   data[id].activity.push(activityObj);
@@ -135,7 +147,8 @@ function changeCode(oldCode, newCode, activityObj) {
 
 export function ChangeProfileValue(code, inputValue, inputType, date = format(new Date(),'dd-MM-yyyy')) {
   /** Change field in profiles page -> get data from field and change in JSON file -> send to SQL dB */
-  const data = JSON.parse(store.getState().personStore.data);
+  // const data = store.getState().personStore.data;
+  const data = getPersonStore();
   const id = getIndexByCode(code);
   const oldFieldValue = data[id][inputType];
   data[id][inputType] = inputValue;
@@ -165,13 +178,16 @@ export function getDaysLeft(date) {
 function saveData(data, dataType) {
   switch (dataType) {
     case 'PERSON':
-      store.dispatch({ type: 'CHANGE_PERSON_DATA', data: JSON.stringify(data) });
+      store.dispatch({ type: 'CHANGE_PERSON_DATA', data });
+      sendData(data, 'changepersons');  
       break;
     case 'DAY':
-      store.dispatch({ type: 'CHANGE_DAY_DATA', data: JSON.stringify(data) });
+      store.dispatch({ type: 'CHANGE_DAY_DATA', data });
+      sendData(data, 'changeday');
       break;
     case 'ACTIVITY':
-      store.dispatch({ type: 'CHANGE_ACTIVITY_DATA', data: JSON.stringify(data) });
+      store.dispatch({ type: 'CHANGE_ACTIVITIES_DATA', data});
+      sendData(data, 'changeactivities');
       break;
     default:
       break;

@@ -28,6 +28,8 @@ export default function testDataDayReducer(state = initialState, action) {
         error: true,
         errorMsg: action.err
       };
+    case "CHANGE_DAY_DATA":
+      return { ...PopStateEvent, data: action.data };
     default:
       return state;
   }

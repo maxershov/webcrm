@@ -31,7 +31,7 @@ export const MainPage = props => {
   const [loadedDate, setLoadedDate] = useState(
     format(new Date(), "dd-MM-yyyy")
   );
-  const data = JSON.parse(getDateObj(loadedDate));
+  const data = getDateObj(loadedDate);
 
   useEffect(() => {
     console.log('useEffectTriggered');
@@ -58,7 +58,7 @@ export const MainPage = props => {
           onChange={date => changeLoadDate(date)}
         />
         <div className="notesMain font-white-shadow">
-          <AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} />
+          <AreaNotes notesValue={data?.notes} type="DAY_DATA" dayObject={data} />
         </div>
         <div className="newProfileField">
           <FormData
@@ -86,7 +86,7 @@ export const MainPage = props => {
           pageText="Страница"
           ofText="из"
           rowsText="профилей"
-          data={data.history}
+          data={data?.history}
           columns={[
             {
               Header: "Фото",
@@ -141,11 +141,13 @@ export const MainPage = props => {
 
 const mapStateToProps = state => {
   return {
-    dayData: state.dayDataStore.data,
-    personData: state.testDataStore.data,
-    loadingPersons: state.testDataStore.loading,
-    loadingDays: state.testDataDayStore.loading,
-    testDataDays: state.testDataDayStore.data
+    // dayData: state.dayDataStore.data,
+    personData: state.personsStore.data,
+    loadingPersons: state.personsStore.loading,
+    // loadingDays: state.testDataDayStore.loading,
+    // testDataDays: state.testDataDayStore.data
+    dayData:state.dayStore.data,
+    loadingDays: state.dayStore.loading,
   };
 };
 

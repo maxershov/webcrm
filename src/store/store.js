@@ -1,13 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-// import thunk from 'redux-thunk';
 import createSagaMiddlewate from 'redux-saga';
 
-import dayDataReducer from "./dayData/dayDataReducer";
-import personReducer from "./allPersons/allPersonsReducer";
-import activityReducer from "./activities/ActivitiesReducer";
-import testDataReducer from "./personsDataStore/personsDataReducer";
-import testDataDayReducer from "./dayDataStore/dayDataReducer";
+import personsDataReducer from "./personsDataStore/personsDataReducer";
+import dayDataReducer from "./dayDataStore/dayDataReducer";
 import activitiesDataReducer from "./activitiesDataStore/activitiesDataReducer";
 
 
@@ -25,12 +21,9 @@ if (process.env.NODE_ENV === 'development') {
 
 const store = createStore(
   combineReducers({
-    dayDataStore: dayDataReducer,
-    personStore: personReducer,
-    activityStore: activityReducer,
-    testDataStore: testDataReducer,
-    testDataDayStore: testDataDayReducer,
-    activitiesDataStore: activitiesDataReducer
+    activitiesStore: activitiesDataReducer,
+    personsStore: personsDataReducer,
+    dayStore:dayDataReducer,
   }),
   compose(applyMiddleware(...middlewares))
 );

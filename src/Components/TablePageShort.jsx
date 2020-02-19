@@ -110,8 +110,8 @@ const TablePageShort = (props) => {
 
 const mapStateToProps = state => {
   return {
-    personData: state.testDataStore.data,
-    loadingPersons: state.testDataStore.loading,
+    personData: state.personsStore.data,
+    loadingPersons: state.personsStore.loading,
   }
 }
 

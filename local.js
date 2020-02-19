@@ -24,35 +24,61 @@ function readDataJSON(pathTo) {
   return JSON.stringify(JSON.parse(bitArray));
 }
 
-const personDataString = readDataJSON(pathPersonData);
-
-const dayDataString = readDataJSON(pathDayData);
-
-const activityDataString = readDataJSON(pathActivitiesData);
-
-// const staticFiles = express.static(path.join(__dirname, "dist"));
-
-// const staticFiles = expressStaticGzip(path.join(__dirname, "dist"));
-
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
 app.get("/getperson", (req, res) => {
+  const personDataString = readDataJSON(pathPersonData);
   res.send(personDataString);
 });
 
 app.get("/getday", (req, res) => {
+  const dayDataString = readDataJSON(pathDayData);
   res.send(dayDataString);
 });
 
 app.get("/getactivity", (req, res) => {
+  const activityDataString = readDataJSON(pathActivitiesData);
   res.send(activityDataString);
 });
 
-app.post("/change", (req, res) => {
-  const { type, value } = req.body;
-  console.log(type, value);
+// app.post("change", (req, res) => {
+//   const { type, value } = req.body;
+//   console.log(type, value);
+//   res.json("sucess");
+// });
+
+app.post("/changepersons", (req, res) => {
+  // console.log("changepersons in local");
+  const { data } = req.body;
+  // console.log(data);
+
+  fs.writeFile(pathPersonData, JSON.stringify(data), function (err) {
+    if (err) throw err;
+  })
+  res.json("sucess");
+});
+
+app.post("/changeactivities", (req, res) => {
+  // console.log("changeactivities in local");
+  const { data } = req.body;
+  // console.log(data);
+
+  fs.writeFile(pathActivitiesData, JSON.stringify(data), function (err) {
+    if (err) throw err;
+  })
+  res.json("sucess");
+});
+
+app.post("/changeday", (req, res) => {
+  console.log("changeday in local");
+  const { data } = req.body;
+  console.log(data);
+
+  fs.writeFile(pathDayData, JSON.stringify(data), function (err) {
+    if (err) throw err;
+  })
   res.json("sucess");
 });
 

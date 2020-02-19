@@ -90,8 +90,8 @@ const TableHistory = props => {
 
 const mapStateToProps = state => {
   return {
-    activityData: state.activitiesDataStore.data,
-    loadingActivities: state.activitiesDataStore.loading
+    activityData: state.activitiesStore.data,
+    loadingActivities: state.activitiesStore.loading
   };
 };
 

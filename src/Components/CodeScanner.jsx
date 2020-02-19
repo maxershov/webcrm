@@ -7,7 +7,7 @@ import { getPersonStore } from '../store/storeGetters'
 
 
 function substractOneRemain(code){
-  const personData = JSON.parse(getPersonStore());
+  const personData = getPersonStore();
   const index = getIndexByCode(code);
   const person = personData[index];
   if (person.remain !== "") ChangeProfileValue(code, (+person.remain -1) , 'remain',);
@@ -27,7 +27,7 @@ function addToTodayHistory(code, dayObject) {
 
 
 function handleNewCode(code, dayObject) {
-  const personData = JSON.parse(getPersonStore());
+  const personData = getPersonStore();
   const index = personData.findIndex(person => person.code === code);
   // TODO find if already in history..
 
