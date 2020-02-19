@@ -8,7 +8,7 @@ import AreaNotes from "./AreaNotes";
 import CodeScanner from "./CodeScanner";
 import FormData from "./FormData";
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
-import { fetchDays } from "../store/dayDataStore/dayDataActions";
+import { fetchDays, changeDay } from "../store/dayDataStore/dayDataActions";
 import { getIndexByCode, getDateObj } from "../App";
 
 
@@ -28,10 +28,7 @@ function isToday(date) {
 
 
 export const MainPage = props => {
-  console.log(props.loadingDays, props.loadingPersons);
-  console.log(props.loadingDays && props.loadingPersons);
   const history = useHistory();
-  const personData = props.personData;
   const [loadedDate, setLoadedDate] = useState(
     format(new Date(), "dd-MM-yyyy")
   );
@@ -46,12 +43,16 @@ export const MainPage = props => {
 
   const changeLoadDate = date => {
     const formatedDate = format(date, "dd-MM-yyyy");
-    setLoadedDate(formatedDate);
+
+    // async chg redux state 
+    props.addNewData(formatedDate);
+
+    // setLoadedDate(formatedDate);
   };
 
-  function getPhotoId(code) {
-    return personData[getIndexByCode(code)].photoId;
-  }
+  // function getPhotoId(code) {
+  //   return props.personData[getIndexByCode(code)].photoId;
+  // }
 
   return (!props.loadingDays && !props.loadingPersons) ? (
     <>
@@ -155,7 +156,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   fetchPersons: () => dispatch(fetchPersons()),
-  fetchDays: () => dispatch(fetchDays())
+  fetchDays: () => dispatch(fetchDays()),
+  // addNewData: (day) => dispatch(addDayAsync(day))
+  addNewData: (dateTo) => dispatch(changeDay(dateTo))
+  // addNewData: (day) => dispatch({ type: 'ADD_DAY_DATA', day })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

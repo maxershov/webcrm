@@ -68,6 +68,42 @@ function* fetchDaysAsync() {
   }
 }
 
+
+
+// function* handleInput({ input }) {
+//   // debounce by 500ms
+//   yield delay(500)
+//   ...
+// }
+
+// function* watchInput() {
+//   // will cancel current running handleInput task
+//   yield takeLatest('INPUT_CHANGED', handleInput);
+// }
+
+export const changeDay = (dateTo) => {
+  return { type: "CHANGE_DATE", dateTo };
+};
+
+function* handleDateChange ({dateTo}) {
+  yield console.log("handle", dateTo);
+}
+
+export function* watchDateChange() {
+  yield takeLatest('CHANGE_DATE', handleDateChange)
+}
+
+// export function* addDayAsync(dateTo) {
+//   try {
+//     yield console.log("addDayAsync", dateTo);
+//     // yield 
+//   } catch (err) {
+//     yield put(reqDaysError(err));
+//   }
+// }
+
+
+
 function* sleep(time) {
   yield new Promise(resolve => setTimeout(resolve, time));
 }

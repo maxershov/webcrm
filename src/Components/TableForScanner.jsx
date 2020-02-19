@@ -17,9 +17,10 @@ function widthForTable(value) {
 
 
 const TableForScanner = (props) => {
+
+  const index = props.dayData.findIndex(x => x.date === props.date); 
+
   //props.date
-
-
   // const [historyData, setHistoryData] = useState([]);
 
   // useEffect(() => {
@@ -49,7 +50,7 @@ const TableForScanner = (props) => {
         pageText="Страница"
         ofText="из"
         rowsText="профилей"
-        data={props.dayData[0].history}
+        data={props.dayData[index].history}
         columns={[
           {
             Header: "Фото",
