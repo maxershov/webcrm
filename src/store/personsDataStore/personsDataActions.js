@@ -7,6 +7,7 @@ export const reqPersons = () => {
 };
 
 export const reqPersonsSucess = personsData => {
+  console.log("REQ_PERSON_SUCESS");
   return { type: "REQUEST_PERSONS_SUCCEEDED", data: personsData };
 };
 

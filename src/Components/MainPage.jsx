@@ -28,6 +28,8 @@ function isToday(date) {
 
 
 export const MainPage = props => {
+  console.log(props.loadingDays, props.loadingPersons);
+  console.log(props.loadingDays && props.loadingPersons);
   const history = useHistory();
   const personData = props.personData;
   const [loadedDate, setLoadedDate] = useState(
@@ -51,7 +53,7 @@ export const MainPage = props => {
     return personData[getIndexByCode(code)].photoId;
   }
 
-  return props.loadingDays || props.loadingPersons ? (<><Spinner /></>) : (
+  return (!props.loadingDays && !props.loadingPersons) ? (
     <>
       <div className="mainPage">
         <Calendar
@@ -139,14 +141,14 @@ export const MainPage = props => {
         />
       </div> */}
     </>
-  )
+  ) : (<><Spinner /></>)
 };
 
 const mapStateToProps = state => {
   return {
     personData: state.personsStore.data,
     loadingPersons: state.personsStore.loading,
-    dayData:state.dayStore.data,
+    dayData: state.dayStore.data,
     loadingDays: state.dayStore.loading,
   };
 };
