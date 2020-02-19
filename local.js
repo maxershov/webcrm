@@ -35,6 +35,7 @@ app.get("/getperson", (req, res) => {
 
 app.get("/getday", (req, res) => {
   const dayDataString = readDataJSON(pathDayData);
+  console.log('getdayFirst', dayDataString);
   res.send(dayDataString);
 });
 

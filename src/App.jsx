@@ -72,7 +72,7 @@ export function getIndexByCode(code) {
 }
 
 export function getDateObj(dateTo) {
-  console.log('getDateObj', dateTo);
+  console.log('getDateObj called', dateTo);
   const data = getDayDataStore();
   const indexDate = data.findIndex(x => x.date === dateTo);
   console.log('getDateObj', indexDate);
@@ -86,6 +86,7 @@ export function getDateObj(dateTo) {
 }
 
 export function addNewDayDataToJSON(obj) {
+  console.log('addNewDayData called', obj);
   const data = getDayDataStore();
   const indexDate = data.findIndex(x => x.date === obj.date);
   if (indexDate !== -1) {

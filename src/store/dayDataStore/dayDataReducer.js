@@ -1,6 +1,6 @@
 const initialState = {
   data: [],
-  loading: false,
+  loading: true,
   error: false,
   errorMsg: ""
 };
@@ -29,7 +29,7 @@ export default function testDataDayReducer(state = initialState, action) {
         errorMsg: action.err
       };
     case "CHANGE_DAY_DATA":
-      return { ...PopStateEvent, data: action.data };
+      return { ...state, data: action.data };
     default:
       return state;
   }

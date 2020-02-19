@@ -11,6 +11,8 @@ import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import { fetchDays } from "../store/dayDataStore/dayDataActions";
 import { getIndexByCode, getDateObj } from "../App";
 
+
+import TableForScanner from './TableForScanner';
 import Spinner from './Spinner';
 
 // set width to table colums by .className size
@@ -76,7 +78,8 @@ export const MainPage = props => {
             undefined
           )}
       </div>
-      <div className="tableMain">
+      <TableForScanner date={loadedDate} />
+      {/* <div className="tableMain">
         <ReactTable
           className="table -striped -highlight"
           previousText="Назад"
@@ -102,7 +105,7 @@ export const MainPage = props => {
                     id="tablePhoto"
                     alt="tablePhoto"
                     height={80}
-                    src={require(`../images/${getPhotoId(value)}.jpg`)}
+                    src={require(`../images/0.jpg`)}
                   />
                 </button>
               )
@@ -115,7 +118,7 @@ export const MainPage = props => {
               style: { whiteSpace: "unset" },
               Cell: ({ value }) => (
                 <Link to={`/profile/${value}`}>
-                  {personData[getIndexByCode(value)].personName}
+                  {personData[getIndexByCode(value)]?.personName}
                 </Link>
               )
             },
@@ -134,18 +137,15 @@ export const MainPage = props => {
           ]}
           defaultPageSize={5}
         />
-      </div>
+      </div> */}
     </>
   )
 };
 
 const mapStateToProps = state => {
   return {
-    // dayData: state.dayDataStore.data,
     personData: state.personsStore.data,
     loadingPersons: state.personsStore.loading,
-    // loadingDays: state.testDataDayStore.loading,
-    // testDataDays: state.testDataDayStore.data
     dayData:state.dayStore.data,
     loadingDays: state.dayStore.loading,
   };
