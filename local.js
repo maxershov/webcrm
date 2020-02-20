@@ -9,6 +9,9 @@ const fs = require("fs");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const myLocalHost = require("./host");
+const format = require("date-fns/format")
+
+
 
 let homePath = null;
 process.platform === "win32"
@@ -83,6 +86,26 @@ app.post("/changeday", (req, res) => {
   res.json("sucess");
 });
 
+
+
+
+
+app.post('/code', (req, res) => {
+  const todayData = format(new Date(), "dd-MM-yyyy");
+  const dayData = JSON.parse(readDataJSON(pathDayData));
+  const indexDate = dayData.findIndex(x => x.date === todayData);
+  const code = (req.body.code).replace("\n", "");
+
+  const codeObj = { "code": code, "time": format(new Date(), 'HH:mm:ss') };
+  dayData[indexDate].history.push(codeObj)
+  fs.writeFile(pathDayData, JSON.stringify(dayData), function (err) {
+    if (err) throw err;
+  })
+  console.log(req.body.code);
+  // res.json("sucess");
+  res.json('ht');
+})
+
 // app.use(helmet());
 // app.use(helmet.noCache());
 
@@ -94,3 +117,44 @@ app.listen(port, myLocalHost.host);
 
 // app.use(staticFiles)
 console.log(`App is listening on port ${port}`);
+
+
+
+
+
+
+
+
+// function substractOneRemain(code) {
+//   const personData = getPersonStore();
+//   const index = getIndexByCode(code);
+//   const person = personData[index];
+//   if (person.remain !== "") ChangeProfileValue(code, (+person.remain - 1), 'remain');
+// }
+
+
+// function addToTodayHistory(code, dayObject) {
+//   const codeObj = { "code": code, "time": format(new Date(), 'HH:mm:ss') };
+//   // find if person already in history
+//   const index = dayObject.history.findIndex(x => x.code === code);
+//   if (index === -1) {
+//     dayObject.history.push(codeObj);
+//     substractOneRemain(code);
+//   }
+//   addNewDayDataToJSON(dayObject);
+// }
+
+
+// function handleNewCode(code, dayObject) {
+//   const personData = getPersonStore();
+//   const index = personData.findIndex(person => person.code === code);
+//   // TODO find if already in history..
+
+//   // If code not in db => create new + add to history. If already in db => add to history 
+//   if (index === -1) {
+//     addNewPersonToJSON(code, false);
+//     addToTodayHistory(code, dayObject);
+//   } else {
+//     addToTodayHistory(personData[index].code, dayObject);
+//   }
+// }
