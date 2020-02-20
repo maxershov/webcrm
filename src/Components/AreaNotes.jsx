@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ChangeProfileValue, addNewDayDataToJSON } from "../App";
-import { connect } from "react-redux";
-import { changeDay } from "../store/dayDataStore/dayDataActions";
+
 
 const AreaNotes = props => {
   const { notesValue, type, dayObject } = props;
@@ -16,7 +15,6 @@ const AreaNotes = props => {
         ChangeProfileValue(codeLink, notesData, "notes");
       } else if (type === "DAY_DATA") {
         dayObject.notes = notesData;
-        // props.addNewData(dayObject);
         addNewDayDataToJSON(dayObject);
       }
     }
@@ -41,9 +39,4 @@ const AreaNotes = props => {
 };
 
 
-const mapDispatchToProps = dispatch => ({
-  addNewData: (dayObj) => dispatch(changeDay(dayObj))
-});
-
-export default connect(null, mapDispatchToProps)(AreaNotes);
-// export default AreaNotes;
+export default AreaNotes;

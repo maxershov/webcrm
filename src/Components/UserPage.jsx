@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable import/no-cycle */
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom'
 import { deletePerson } from '../App';
 import FormData from './FormData';
@@ -11,6 +11,7 @@ import FieldDeposite from './FieldDeposite';
 import FieldsAction from './FieldsAction';
 import TableHistory from './TableHistory';
 import AreaNotes from './AreaNotes';
+import Spinner from './Spinner'
 
 
 function getAllPersonNames(data) {
@@ -18,24 +19,22 @@ function getAllPersonNames(data) {
 }
 
 export const UserPage = (props) => {
+  const personData = useSelector(state => state.personsStore.data);
+  const loading = useSelector(state => state.personsStore.loading);
   /** Show fields with User data and change it on submit */
   const [renderPhotoId, changeRenderPhotoId] = useState(false);
   const { codeLink } = useParams();
   const history = useHistory();
 
-  const data = props.personData;
-
-  let person = data.find(profile => {
+  let person = personData.find(profile => {
     return profile.code === codeLink
   })
 
   if (person === undefined) {
     // TODO kill this CRAP => prevent from crash if unvalid code in URL path
-    [person,] = data;
+    [person,] = personData;
     history.push('/main');
   }
-
-
 
   let renderFields = '';
   if (person.contract === 'ЛИД') { renderFields = <LeadParams person={person} /> }
@@ -43,7 +42,7 @@ export const UserPage = (props) => {
   else if (person.contract === 'НЕТ') { renderFields = <LostPersonParams person={person} /> }
   else { renderFields = <PersonParams person={person} /> }
 
-  return (
+  return loading ? <Spinner/> : (
     <div className="userPage">
       <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={require(`../images/0.jpg`)} /></div>
       <div className="userPage-container">
@@ -62,7 +61,7 @@ export const UserPage = (props) => {
         <label>Заметки:</label>
         <AreaNotes notesValue={person.notes} type="PERSON" />
       </div>
-      <FieldsAction code={person.code} namesArr={getAllPersonNames(data)} />
+      <FieldsAction code={person.code} namesArr={getAllPersonNames(personData)} />
       <TableHistory tableDataType="personData" code={person.code} />
     </div>
   );
@@ -122,10 +121,5 @@ export const EmployeeParams = (props) => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    personData: state.personsStore.data,
-  }
-}
 
-export default connect(mapStateToProps)(UserPage);
+export default UserPage;

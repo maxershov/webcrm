@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
+
 import { useHistory } from "react-router-dom";
 import { format, parse } from "date-fns";
 import Calendar from "react-calendar/dist/entry.nostyle";
@@ -23,17 +26,25 @@ function isToday(date) {
 
 
 export const MainPage = props => {
+  const personData = useSelector(state => state.personsStore.data);
+  const loadingPersons = useSelector(state => state.personsStore.loading);
+  const dayData = useSelector(state => state.dayStore.data);
+  const loadingDays = useSelector(state => state.dayStore.loading);
+
+
+  const dispatch = useDispatch()
+  
+
   const history = useHistory();
-  const [countState, setCountState] = useState(0);
   const [loadedDate, setLoadedDate] = useState(
     format(new Date(), "dd-MM-yyyy")
   );
-  const indexDate = props.dayData.findIndex(x => x.date === loadedDate);
-  const data = props.dayData[indexDate];
+  const indexDate = dayData.findIndex(x => x.date === loadedDate);
+  const data = dayData[indexDate];
 
   useEffect(() => {
-    props.fetchPersons();
-    props.fetchDays();
+    dispatch(fetchPersons());
+    dispatch(fetchDays());
   }, []);
 
   const changeLoadDate = date => {
@@ -43,7 +54,7 @@ export const MainPage = props => {
   };
 
 
-  return (!props.loadingDays && !props.loadingPersons) ? (
+  return (!loadingDays && !loadingPersons) ? (
     <>
       <div className="mainPage">
         <Calendar
@@ -70,24 +81,10 @@ export const MainPage = props => {
             undefined
           )}
       </div>
-      <TableForScanner count={data.history.length} date={loadedDate} data={props.dayData[indexDate]} />
+      <TableForScanner count={data.history.length} date={loadedDate} data={dayData[indexDate]} />
     </>
   ) : (<><Spinner /></>)
 };
 
-const mapStateToProps = state => {
-  return {
-    personData: state.personsStore.data,
-    loadingPersons: state.personsStore.loading,
-    dayData: state.dayStore.data,
-    loadingDays: state.dayStore.loading,
-  };
-};
 
-const mapDispatchToProps = dispatch => ({
-  fetchPersons: () => dispatch(fetchPersons()),
-  fetchDays: () => dispatch(fetchDays()),
-  addNewData: (dayObj) => dispatch(changeDay(dayObj))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default MainPage;

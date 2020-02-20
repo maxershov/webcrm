@@ -29,7 +29,9 @@ export default function testDataReducer(state = initialState, action) {
         errorMsg:action.err
       };
     case "CHANGE_PERSON_DATA":
-      return {...state, data: action.data}
+      return {...state, data: action.data, loading:false}
+    case "LOADING_PERSON":
+      return { ...state, loading: true }
     default:
       return state;
   }

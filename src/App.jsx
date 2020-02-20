@@ -179,15 +179,17 @@ export function getDaysLeft(date) {
 function saveData(data, dataType) {
   switch (dataType) {
     case 'PERSON':
+      store.dispatch({ type: 'LOADING_PERSON' }); 
       store.dispatch({ type: 'CHANGE_PERSON_DATA', data });
       sendData(data, 'changepersons');  
       break;
     case 'DAY':
-      store.dispatch({ type: 'LOADING' });  
+      store.dispatch({ type: 'LOADING_DAY' });  
       store.dispatch({ type: 'CHANGE_DAY_DATA', data });
       sendData(data, 'changeday');
       break;
     case 'ACTIVITY':
+      store.dispatch({ type: 'LOADING_ACTIVITIES' }); 
       store.dispatch({ type: 'CHANGE_ACTIVITIES_DATA', data});
       sendData(data, 'changeactivities');
       break;
