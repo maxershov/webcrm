@@ -2,7 +2,7 @@ import { all, call } from 'redux-saga/effects';
 
 import { watchFetchPersons } from './personsDataStore/personsDataActions';
 import { watchFetchDays, watchDateChange } from './dayDataStore/dayDataActions';
-import {watchFetchActivities} from './activitiesDataStore/activitiesDataActions';
+import { watchFetchActivities } from './activitiesDataStore/activitiesDataActions';
 
 export default function* rootSaga() {
     yield all([

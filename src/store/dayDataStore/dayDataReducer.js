@@ -28,11 +28,12 @@ export default function testDataDayReducer(state = initialState, action) {
         error: true,
         errorMsg: action.err
       };
+    case "START_ADD_DAY":
+      return { ...state, loading: true };
     case "CHANGE_DAY_DATA":
       return { ...state, data: action.data };
-    // case "ADD_DAY_DATA":
-    //   // [{"date":"20-02-2020","notes":"20 тест","history":[{"code":"TEST1", "time":"10:01:45"}]}]
-    //   return {...state, ...[{"date":action.day, "notes":"", "history":[]}]}
+    case "ADD_DAY_DATA":
+      return { ...state, data: [...state.data, action.day], loading: false }
     default:
       return state;
   }

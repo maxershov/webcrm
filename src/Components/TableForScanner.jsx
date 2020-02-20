@@ -18,7 +18,7 @@ function widthForTable(value) {
 
 const TableForScanner = (props) => {
 
-  const index = props.dayData.findIndex(x => x.date === props.date); 
+  const index = props.dayData.findIndex(x => x.date === props.date);
 
   //props.date
   // const [historyData, setHistoryData] = useState([]);

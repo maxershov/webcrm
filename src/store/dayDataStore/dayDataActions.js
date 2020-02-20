@@ -68,39 +68,38 @@ function* fetchDaysAsync() {
   }
 }
 
+export const dayAddStart = () => {
+  return { type: "START_ADD_DAY" };
+};
 
 
-// function* handleInput({ input }) {
-//   // debounce by 500ms
-//   yield delay(500)
-//   ...
-// }
+export const dayAddProcess = newDateObj => {
+  return { type: "ADD_DAY_DATA", day: newDateObj };
+};
 
-// function* watchInput() {
-//   // will cancel current running handleInput task
-//   yield takeLatest('INPUT_CHANGED', handleInput);
-// }
+// export const reqDays = dayData => {
+// return { type: "REQUEST_DAYS_SUCCEEDED", data: dayData };
+// };
 
 export const changeDay = (dateTo) => {
   return { type: "CHANGE_DATE", dateTo };
 };
 
-function* handleDateChange ({dateTo}) {
-  yield console.log("handle", dateTo);
+function* handleDateChange({ dateTo }) {
+  try {
+    yield console.log("handle", dateTo);
+    const newDateObj = { "date": dateTo, "notes": "", "history": [] }
+    yield put(dayAddStart())
+    yield put(dayAddProcess(newDateObj));
+    // yield put(reqDayAddSucess(dateTo))
+  } catch (err) {
+    yield put(reqDaysError(err));
+  }
 }
 
 export function* watchDateChange() {
   yield takeLatest('CHANGE_DATE', handleDateChange)
 }
-
-// export function* addDayAsync(dateTo) {
-//   try {
-//     yield console.log("addDayAsync", dateTo);
-//     // yield 
-//   } catch (err) {
-//     yield put(reqDaysError(err));
-//   }
-// }
 
 
 
