@@ -86,16 +86,16 @@ export function getDateObj(dateTo) {
 }
 
 export function addNewDayDataToJSON(obj) {
-  console.log('addNewDayData called', obj);
   const data = getDayDataStore();
   const indexDate = data.findIndex(x => x.date === obj.date);
-  if (indexDate !== -1) {
-    data[indexDate] = obj;
-    saveData(data, 'DAY');
-  } else {
-    data.push(obj);
-    saveData(data, 'DAY');
-  }
+  console.log('addNewDayData called', indexDate, obj);
+  // if (indexDate !== -1) {
+    // data[indexDate] = obj;
+    // saveData(data, 'DAY');
+  // } else {
+    // data.push(obj);
+    // saveData(data, 'DAY');
+  // }
 }
 
 

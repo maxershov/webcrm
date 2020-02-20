@@ -15,12 +15,8 @@ const AreaNotes = props => {
       } else if (type === "DAY_DATA") {
         if (dayObject === undefined) {
           console.log("UNDEF in NOTES");
-          // const newDateObj = { "date": todayDate, "notes": "", "history": [] };
-          //  dayData.push(newDateObj);
-
           // SEND new DATE OBJ in redux store => later it will save in addNewDayDataToJSON  !I NEED DAY for note
         }
-
         dayObject.notes = notesData;
         addNewDayDataToJSON(dayObject);
       }

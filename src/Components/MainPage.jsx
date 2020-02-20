@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { format, parse } from "date-fns";
 import Calendar from "react-calendar/dist/entry.nostyle";
 import AreaNotes from "./AreaNotes";
@@ -32,7 +32,7 @@ export const MainPage = props => {
   useEffect(() => {
     props.fetchPersons();
     props.fetchDays();
-    console.log('useEffecDone');
+    // console.log('useEffecDone');
   }, []);
 
   const changeLoadDate = date => {
