@@ -30,13 +30,13 @@ export const reqDaysSucess = dayData => {
   console.log("REQ_DAYS_SUCESS", dayData);
   const todayDate = format(new Date(), "dd-MM-yyyy");
   const indexDate = dayData.findIndex(x => x.date === todayDate);
-  console.log("indexData in REQ STORE", indexDate);
-  console.log("data before IF in REQ STORE", dayData);
+  // console.log("indexData in REQ STORE", indexDate);
+  // console.log("data before IF in REQ STORE", dayData);
   if (indexDate === -1) {
     //  console.log('data before in REQ STORE', dayData);
     const newDateObj = { date: todayDate, notes: "", history: [] };
     dayData.push(newDateObj);
-    console.log("data after in REQ STORE", dayData);
+    // console.log("data after in REQ STORE", dayData);
     // mb set this in server side??
     //save? if we doesn't change any data => we dont need this data in Db => if change => data will save from App.js
   }
@@ -77,20 +77,17 @@ export const dayAddProcess = newDateObj => {
   return { type: "ADD_DAY_DATA", day: newDateObj };
 };
 
-// export const reqDays = dayData => {
-// return { type: "REQUEST_DAYS_SUCCEEDED", data: dayData };
-// };
 
-export const changeDay = (dateTo) => {
-  return { type: "CHANGE_DATE", dateTo };
+export const changeDay = (dayObj) => {
+  return { type: "CHANGE_DATE", dayObj };
 };
 
-function* handleDateChange({ dateTo }) {
+function* handleDateChange({ dayObj }) {
   try {
     // yield console.log("handle", dateTo);
-    const newDateObj = { "date": dateTo, "notes": "", "history": [] }
+    // const newDateObj = { "date": dateTo, "notes": "", "history": [] }
     yield put(dayAddStart())
-    yield put(dayAddProcess(newDateObj));
+    yield put(dayAddProcess(dayObj));
     // yield put(reqDayAddSucess(dateTo))
   } catch (err) {
     yield put(reqDaysError(err));

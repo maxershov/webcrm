@@ -31,9 +31,11 @@ export default function testDataDayReducer(state = initialState, action) {
     case "START_ADD_DAY":
       return { ...state, loading: true };
     case "CHANGE_DAY_DATA":
-      return { ...state, data: action.data };
+      return { ...state, data: action.data, loading:false };
     case "ADD_DAY_DATA":
       return { ...state, data: [...state.data, action.day], loading: false }
+    case "LOADING":
+        return { ...state, loading: true }
     default:
       return state;
   }

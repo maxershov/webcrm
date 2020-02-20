@@ -6,6 +6,10 @@ import Spinner from './Spinner';
 import { getIndexByCode } from "../App";
 
 
+import { getDateObj } from "../App";
+
+
+
 // set width to table colums by .className size
 function widthForTable(value) {
   return Math.round(window.innerWidth * (value / 100));
@@ -18,29 +22,15 @@ function widthForTable(value) {
 
 const TableForScanner = (props) => {
 
-
   const history = useHistory();
 
   const index = props.dayData.findIndex(x => x.date === props.date);
 
-  //props.date
-  // const [historyData, setHistoryData] = useState([]);
+  const [historyData, setHistoryData] = useState([]);
 
-  // useEffect(() => {
-
-  // }, [])
-
-  // useEffect(() => {
-  //     if (props.data === undefined)  {
-  //         setHistoryData([]);
-  //     } else {
-  //         const index = props.dayData.findIndex(x => x.date === props.date); 
-  //         if (index !== -1) {
-  //             setHistoryData(props.dayData[index].history);
-  //             console.log('setHistory', props.dayData[index].history);
-  //         }
-  //     }
-  // }, [props.dayData])
+  useEffect(() => {
+    setHistoryData(props.data.history);
+  }, [props.data]);
 
   return props.loadingDays ? (<><Spinner /></>) : (
     <div className="tableMain">
@@ -53,7 +43,7 @@ const TableForScanner = (props) => {
         pageText="Страница"
         ofText="из"
         rowsText="профилей"
-        data={props.dayData[index].history}
+        data={historyData}
         columns={[
           {
             Header: "Фото",
@@ -75,18 +65,6 @@ const TableForScanner = (props) => {
             )
           },
           {
-            Header: "Имя",
-            accessor: "code",
-            width: widthForTable(60),
-            headerClassName: "tableHeader",
-            style: { whiteSpace: "unset" },
-            Cell: ({ value }) => (
-              <Link to={`/profile/${value}`}>
-                {props.personData[getIndexByCode(value)].personName}
-              </Link>
-            )
-          },
-          {
             Header: "Время",
             width: widthForTable(20),
             accessor: "time",
@@ -105,10 +83,9 @@ const TableForScanner = (props) => {
   )
 }
 
+
 const mapStateToProps = state => {
   return {
-    personData: state.personsStore.data,
-    loadingPersons: state.personsStore.loading,
     dayData: state.dayStore.data,
     loadingDays: state.dayStore.loading,
   };

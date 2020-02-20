@@ -24,21 +24,20 @@ function isToday(date) {
 
 export const MainPage = props => {
   const history = useHistory();
+  const [countState, setCountState] = useState(0);
   const [loadedDate, setLoadedDate] = useState(
     format(new Date(), "dd-MM-yyyy")
   );
-  const data = getDateObj(loadedDate);
+  const indexDate = props.dayData.findIndex(x => x.date === loadedDate);
+  const data = props.dayData[indexDate];
 
   useEffect(() => {
     props.fetchPersons();
     props.fetchDays();
-    // console.log('useEffecDone');
   }, []);
 
   const changeLoadDate = date => {
     const formatedDate = format(date, "dd-MM-yyyy");
-    // async chg redux state 
-    props.addNewData(formatedDate);
 
     setLoadedDate(formatedDate);
   };
@@ -71,7 +70,7 @@ export const MainPage = props => {
             undefined
           )}
       </div>
-      <TableForScanner date={loadedDate} />
+      <TableForScanner count={data.history.length} date={loadedDate} data={props.dayData[indexDate]} />
     </>
   ) : (<><Spinner /></>)
 };
@@ -88,7 +87,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   fetchPersons: () => dispatch(fetchPersons()),
   fetchDays: () => dispatch(fetchDays()),
-  addNewData: (dateTo) => dispatch(changeDay(dateTo))
+  addNewData: (dayObj) => dispatch(changeDay(dayObj))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

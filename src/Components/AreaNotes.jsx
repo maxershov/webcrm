@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ChangeProfileValue, addNewDayDataToJSON } from "../App";
+import { connect } from "react-redux";
+import { changeDay } from "../store/dayDataStore/dayDataActions";
 
 const AreaNotes = props => {
   const { notesValue, type, dayObject } = props;
@@ -13,17 +15,13 @@ const AreaNotes = props => {
       if (type === "PERSON") {
         ChangeProfileValue(codeLink, notesData, "notes");
       } else if (type === "DAY_DATA") {
-        if (dayObject === undefined) {
-          console.log("UNDEF in NOTES");
-          // SEND new DATE OBJ in redux store => later it will save in addNewDayDataToJSON  !I NEED DAY for note
-        }
         dayObject.notes = notesData;
+        // props.addNewData(dayObject);
         addNewDayDataToJSON(dayObject);
       }
     }
   };
   useEffect(() => {
-    console.log("notes in USEEFFECT", notesValue);
     if (notesValue === undefined) setNotesData("");
     else setNotesData(notesValue);
   }, [notesValue]);
@@ -42,4 +40,10 @@ const AreaNotes = props => {
   );
 };
 
-export default AreaNotes;
+
+const mapDispatchToProps = dispatch => ({
+  addNewData: (dayObj) => dispatch(changeDay(dayObj))
+});
+
+export default connect(null, mapDispatchToProps)(AreaNotes);
+// export default AreaNotes;

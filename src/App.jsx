@@ -89,13 +89,14 @@ export function addNewDayDataToJSON(obj) {
   const data = getDayDataStore();
   const indexDate = data.findIndex(x => x.date === obj.date);
   console.log('addNewDayData called', indexDate, obj);
-  // if (indexDate !== -1) {
-    // data[indexDate] = obj;
-    // saveData(data, 'DAY');
+  console.log(obj);
+  if (indexDate !== -1) {
+    data[indexDate] = obj;
+    saveData(data, 'DAY');
   // } else {
-    // data.push(obj);
-    // saveData(data, 'DAY');
-  // }
+  //   data.push(obj);
+  //   saveData(data, 'DAY');
+  }
 }
 
 
@@ -166,7 +167,6 @@ export function ChangeProfileValue(code, inputValue, inputType, date = format(ne
   if (inputType === 'code') changeCode(oldFieldValue, inputValue, activityObj);
 
   if (inputType !== 'photoId' && inputType !== 'notes' && inputType !== 'code') pushNewActivity(data[id].code, JSON.stringify(activityObj));
-
   saveData(data, 'PERSON');
 }
 
@@ -183,6 +183,7 @@ function saveData(data, dataType) {
       sendData(data, 'changepersons');  
       break;
     case 'DAY':
+      store.dispatch({ type: 'LOADING' });  
       store.dispatch({ type: 'CHANGE_DAY_DATA', data });
       sendData(data, 'changeday');
       break;
