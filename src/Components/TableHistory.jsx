@@ -15,9 +15,7 @@ const TableHistory = props => {
   console.log(props.loadingActivities);
 
   useEffect(() => {
-    console.log("useEffectTriggered");
     props.fetchActivities();
-    console.log("useEffecDone");
   }, []);
   const parsedData = props.activityData.filter(obj => obj.code === props.code);
 

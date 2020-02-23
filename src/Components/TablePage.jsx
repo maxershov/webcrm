@@ -21,12 +21,10 @@ const TablePage = (props) => {
   const personData = props.personData
 
   useEffect(() => {
-    console.log('useEffectTriggered');
     props.fetchPersons();
-    console.log('useEffecDone');
   }, []);
 
-  return props.loadingPersons ? (<><Spinner /></>) : (
+  return props.loadingPersons ? <Spinner /> : (
     <ReactTable
       className="table font_white_shadow -striped -highlight"
       page={parseInt(pageNum, 10) - 1}

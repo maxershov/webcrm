@@ -58,7 +58,7 @@ export function* watchFetchDays() {
 function* fetchDaysAsync() {
   try {
     yield put(reqDays());
-    yield sleep(1000);
+    // yield sleep(1000);
     const data = yield call(() => {
       return fetch(`http://${host.host}:6700/getday`).then(res => res.json());
     });

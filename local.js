@@ -134,7 +134,7 @@ function checkIfInPersons(code) {
   if (personIndex === -1) {
     createNewPerson(code);
   } else {
-    substractOneRemain(personData, personIndex);
+    substractOneRemain(personData, personIndex);    
   }
 }
 
@@ -147,11 +147,14 @@ function substractOneRemain(personData, personIndex) {
 
     const activityObj = { "date": date, "time": time, "type": `Изменение тренировок`, "person": "", "amount": `${oldFieldValue} => ${personData[personIndex].remain}` };
 
-    pushNewActivity(personData[personIndex].code, JSON.stringify(activityObj));
+    pushNewActivity(personData[personIndex].code, activityObj);
 
     fs.writeFile(pathPersonData, JSON.stringify(personData), function (err) {
       if (err) throw err;
     })
+  } else {
+    const visitObj = { "code": personData[personIndex].code, "activity": [{ "date": format(new Date(), 'dd-MM-yyyy'), "time": format(new Date(), 'HH:mm:ss'), "type": "Посещение", "person": "", "amount": "" }] };
+    pushNewActivity(personData[personIndex].code, visitObj);
   }
 }
 

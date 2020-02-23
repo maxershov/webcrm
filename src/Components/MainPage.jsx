@@ -33,7 +33,7 @@ export const MainPage = props => {
 
 
   const dispatch = useDispatch()
-  
+
 
   const history = useHistory();
   const [loadedDate, setLoadedDate] = useState(
@@ -81,9 +81,9 @@ export const MainPage = props => {
             undefined
           )}
       </div>
-      <TableForScanner count={data.history.length} date={loadedDate} data={dayData[indexDate]} />
+      <TableForScanner data={dayData[indexDate]} />
     </>
-  ) : (<><Spinner /></>)
+  ) : <Spinner />
 };
 
 

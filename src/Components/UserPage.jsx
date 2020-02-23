@@ -42,7 +42,7 @@ export const UserPage = (props) => {
   else if (person.contract === 'НЕТ') { renderFields = <LostPersonParams person={person} /> }
   else { renderFields = <PersonParams person={person} /> }
 
-  return loading ? <Spinner/> : (
+  return loading ? <Spinner /> : (
     <div className="userPage">
       <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={require(`../images/0.jpg`)} /></div>
       <div className="userPage-container">
