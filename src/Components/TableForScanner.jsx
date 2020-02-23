@@ -56,7 +56,6 @@ const TableForScanner = (props) => {
                 onClick={() => history.push(`/profile/${value}`)}
               >
                 <img
-                  id="tablePhoto"
                   alt="tablePhoto"
                   height={80}
                   src={require(`../images/0.jpg`)}

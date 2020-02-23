@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require("express");
@@ -5,11 +6,12 @@ const history = require("connect-history-api-fallback");
 const expressStaticGzip = require("express-static-gzip");
 const helmet = require("helmet");
 const path = require("path");
+const format = require("date-fns/format")
 const fs = require("fs");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const myLocalHost = require("./host");
-const format = require("date-fns/format")
+
 
 
 
@@ -91,20 +93,92 @@ app.post("/changeday", (req, res) => {
 
 
 app.post('/code', (req, res) => {
+  const code = (req.body.code).replace("\n", "");
+  handleCode(code);
+
+  // const todayData = format(new Date(), "dd-MM-yyyy");
+  // const dayData = JSON.parse(readDataJSON(pathDayData));
+  // const indexDate = dayData.findIndex(x => x.date === todayData);
+
+
+  // const codeObj = { "code": code, "time": format(new Date(), 'HH:mm:ss') };
+  // dayData[indexDate].history.push(codeObj)
+  // fs.writeFile(pathDayData, JSON.stringify(dayData), function (err) {
+  //   if (err) throw err;
+  // })
+  console.log(req.body.code);
+  res.json("sucess");
+  // res.json('ht');
+})
+
+
+function handleCode(code) {
   const todayData = format(new Date(), "dd-MM-yyyy");
   const dayData = JSON.parse(readDataJSON(pathDayData));
   const indexDate = dayData.findIndex(x => x.date === todayData);
-  const code = (req.body.code).replace("\n", "");
+  // find if person already in history
+  const index = dayData[indexDate].history.findIndex(x => x.code === code);
+  if (index === -1) {
+    const codeObj = { "code": code, "time": format(new Date(), 'HH:mm:ss') };
+    dayData[indexDate].history.push(codeObj)
+    fs.writeFile(pathDayData, JSON.stringify(dayData), function (err) {
+      if (err) throw err;
+    })
+    checkIfInPersons(code);
+  }
+}
 
-  const codeObj = { "code": code, "time": format(new Date(), 'HH:mm:ss') };
-  dayData[indexDate].history.push(codeObj)
-  fs.writeFile(pathDayData, JSON.stringify(dayData), function (err) {
+function checkIfInPersons(code) {
+  const personData = JSON.parse(readDataJSON(pathPersonData));
+  const personIndex = personData.findIndex(x => x.code === code);
+  if (personIndex === -1) {
+    createNewPerson(code);
+  } else {
+    substractOneRemain(personData, personIndex);
+  }
+}
+
+function substractOneRemain(personData, personIndex) {
+  if (personData[personIndex].remain !== "") {
+    const oldFieldValue = personData[personIndex].remain;
+    personData[personIndex].remain = +oldFieldValue - 1;
+    const time = format(new Date(), 'HH:mm:ss');
+    const date = format(new Date(), 'dd-MM-yyyy')
+
+    const activityObj = { "date": date, "time": time, "type": `Изменение тренировок`, "person": "", "amount": `${oldFieldValue} => ${personData[personIndex].remain}` };
+
+    pushNewActivity(personData[personIndex].code, JSON.stringify(activityObj));
+
+    fs.writeFile(pathPersonData, JSON.stringify(personData), function (err) {
+      if (err) throw err;
+    })
+  }
+}
+
+function pushNewActivity(code, activityObj) {
+  const activitiesData = JSON.parse(readDataJSON(pathActivitiesData));
+  const activitiesIndex = activitiesData.findIndex(x => x.code === code);
+  activitiesData[activitiesIndex].activity.push(activityObj);
+  fs.writeFile(pathActivitiesData, JSON.stringify(activitiesData), function (err) {
     if (err) throw err;
   })
-  console.log(req.body.code);
-  // res.json("sucess");
-  res.json('ht');
-})
+}
+
+function createNewPerson(code) {
+  const personData = JSON.parse(readDataJSON(pathPersonData));
+  const newPerson = { "personName": code, "contract": "", "dateBirth": "", "telNum": "", "code": code, "autoMonth": "", "notes": "", "remain": "", "days": "", "photoId": 0, "rent": "", "deposite": "", };
+  personData.push(newPerson);
+  fs.writeFile(pathPersonData, JSON.stringify(personData), function (err) {
+    if (err) throw err;
+  })
+  const activitiesObj = { "code": code, "activity": [{ "date": format(new Date(), 'dd-MM-yyyy'), "time": format(new Date(), 'HH:mm:ss'), "type": "Создание профиля", "person": "", "amount": "" }] };
+  const activitiesData = JSON.parse(readDataJSON(pathActivitiesData));
+  activitiesData.push(activitiesObj);
+  fs.writeFile(pathActivitiesData, JSON.stringify(activitiesData), function (err) {
+    if (err) throw err;
+  })
+}
+
 
 // app.use(helmet());
 // app.use(helmet.noCache());
@@ -117,44 +191,3 @@ app.listen(port, myLocalHost.host);
 
 // app.use(staticFiles)
 console.log(`App is listening on port ${port}`);
-
-
-
-
-
-
-
-
-// function substractOneRemain(code) {
-//   const personData = getPersonStore();
-//   const index = getIndexByCode(code);
-//   const person = personData[index];
-//   if (person.remain !== "") ChangeProfileValue(code, (+person.remain - 1), 'remain');
-// }
-
-
-// function addToTodayHistory(code, dayObject) {
-//   const codeObj = { "code": code, "time": format(new Date(), 'HH:mm:ss') };
-//   // find if person already in history
-//   const index = dayObject.history.findIndex(x => x.code === code);
-//   if (index === -1) {
-//     dayObject.history.push(codeObj);
-//     substractOneRemain(code);
-//   }
-//   addNewDayDataToJSON(dayObject);
-// }
-
-
-// function handleNewCode(code, dayObject) {
-//   const personData = getPersonStore();
-//   const index = personData.findIndex(person => person.code === code);
-//   // TODO find if already in history..
-
-//   // If code not in db => create new + add to history. If already in db => add to history 
-//   if (index === -1) {
-//     addNewPersonToJSON(code, false);
-//     addToTodayHistory(code, dayObject);
-//   } else {
-//     addToTodayHistory(personData[index].code, dayObject);
-//   }
-// }
