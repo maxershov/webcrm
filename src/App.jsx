@@ -25,13 +25,13 @@ const App = (props) => {
 
 
 function sendData(data, dataType) {
-      fetch(`http://${host.host  }:6700/${dataType}`, {
-      method:'post',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-    //     type: inputType, 
-        data })
-    });
+  fetch(`http://${host.host}:6700/${dataType}`, {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      data
+    })
+  });
 }
 
 function changeCodeDayData(oldCode, newCode) {
@@ -72,30 +72,17 @@ export function getIndexByCode(code) {
 }
 
 export function getDateObj(dateTo) {
-  console.log('getDateObj called', dateTo);
   const data = getDayDataStore();
   const indexDate = data.findIndex(x => x.date === dateTo);
-  console.log('getDateObj', indexDate);
-  // if (indexDate !== -1) {
   return data[indexDate];
-  // }
-  // const newDateObj = { "date": dateTo, "notes": "", "history": [] };
-  // console.log('add newDateObj in getDataObj', newDateObj);
-  // addNewDayDataToJSON(newDateObj);
-  // return newDateObj;
 }
 
 export function addNewDayDataToJSON(obj) {
   const data = getDayDataStore();
   const indexDate = data.findIndex(x => x.date === obj.date);
-  console.log('addNewDayData called', indexDate, obj);
-  console.log(obj);
   if (indexDate !== -1) {
     data[indexDate] = obj;
     saveData(data, 'DAY');
-  // } else {
-  //   data.push(obj);
-  //   saveData(data, 'DAY');
   }
 }
 
@@ -107,7 +94,7 @@ export function addNewPersonToJSON(code, renderProfile, route) {
   const newPerson = { "personName": code, "contract": "", "dateBirth": "", "telNum": "", "code": code, "autoMonth": "", "notes": "", "remain": "", "days": "", "photoId": 0, "rent": "", "deposite": "", };
   data.push(newPerson);
   saveData(data, 'PERSON');
-  addNewActivityDataToJSON({ "code": code, "activity": [{ "date": format(new Date(),'dd-MM-yyyy'), "time": format(new Date(),'HH:mm:ss'), "type": "Создание профиля", "person": "", "amount": "" }] });
+  addNewActivityDataToJSON({ "code": code, "activity": [{ "date": format(new Date(), 'dd-MM-yyyy'), "time": format(new Date(), 'HH:mm:ss'), "type": "Создание профиля", "person": "", "amount": "" }] });
 
   if (renderProfile) {
     // Open profile page with new person
@@ -147,9 +134,8 @@ function changeCode(oldCode, newCode, activityObj) {
 }
 
 
-export function ChangeProfileValue(code, inputValue, inputType, date = format(new Date(),'dd-MM-yyyy')) {
+export function ChangeProfileValue(code, inputValue, inputType, date = format(new Date(), 'dd-MM-yyyy')) {
   /** Change field in profiles page -> get data from field and change in JSON file -> send to SQL dB */
-  // const data = store.getState().personStore.data;
   const data = getPersonStore();
   const id = getIndexByCode(code);
   const oldFieldValue = data[id][inputType];
@@ -158,9 +144,9 @@ export function ChangeProfileValue(code, inputValue, inputType, date = format(ne
   // in LEAD date field used for first call date. In PERSON used for rent => change LEAD to other => rent=""
   if (oldFieldValue === 'ЛИД' && inputType === 'contract') data[id].rent = "";
 
-  let time = format(new Date(),'HH:mm:ss');
+  let time = format(new Date(), 'HH:mm:ss');
   // Set time to 00:00:00 if date not today => doesn't set incorrect time)
-  if (date !== format(new Date(),'dd-MM-yyyy')) time = '00:00:00'
+  if (date !== format(new Date(), 'dd-MM-yyyy')) time = '00:00:00'
   const activityObj = { "date": date, "time": time, "type": `Изменение ${inputType}`, "person": "", "amount": `${oldFieldValue} => ${inputValue}` };
 
   // use different func for code => to change URL and other
@@ -179,18 +165,18 @@ export function getDaysLeft(date) {
 function saveData(data, dataType) {
   switch (dataType) {
     case 'PERSON':
-      store.dispatch({ type: 'LOADING_PERSON' }); 
+      store.dispatch({ type: 'LOADING_PERSON' });
       store.dispatch({ type: 'CHANGE_PERSON_DATA', data });
-      sendData(data, 'changepersons');  
+      sendData(data, 'changepersons');
       break;
     case 'DAY':
-      store.dispatch({ type: 'LOADING_DAY' });  
+      store.dispatch({ type: 'LOADING_DAY' });
       store.dispatch({ type: 'CHANGE_DAY_DATA', data });
       sendData(data, 'changeday');
       break;
     case 'ACTIVITY':
-      store.dispatch({ type: 'LOADING_ACTIVITIES' }); 
-      store.dispatch({ type: 'CHANGE_ACTIVITIES_DATA', data});
+      store.dispatch({ type: 'LOADING_ACTIVITIES' });
+      store.dispatch({ type: 'CHANGE_ACTIVITIES_DATA', data });
       sendData(data, 'changeactivities');
       break;
     default:

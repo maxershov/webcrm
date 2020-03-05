@@ -10,7 +10,7 @@ import AreaNotes from "./AreaNotes";
 import CodeScanner from "./CodeScanner";
 import FormData from "./FormData";
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
-import { fetchDays, changeDay } from "../store/dayDataStore/dayDataActions";
+import { fetchDays, changeDay, dayAddProcess } from "../store/dayDataStore/dayDataActions";
 import { getDateObj } from "../App";
 
 
@@ -49,6 +49,12 @@ export const MainPage = props => {
 
   const changeLoadDate = date => {
     const formatedDate = format(date, "dd-MM-yyyy");
+
+
+    if (dayData.findIndex(x => x.date === formatedDate) === -1) {
+      const newDateObj = { date: formatedDate, notes: "", history: [] };
+      dispatch(dayAddProcess(newDateObj));
+    }
 
     setLoadedDate(formatedDate);
   };

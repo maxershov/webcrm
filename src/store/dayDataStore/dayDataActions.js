@@ -84,11 +84,8 @@ export const changeDay = (dayObj) => {
 
 function* handleDateChange({ dayObj }) {
   try {
-    // yield console.log("handle", dateTo);
-    // const newDateObj = { "date": dateTo, "notes": "", "history": [] }
     yield put(dayAddStart())
     yield put(dayAddProcess(dayObj));
-    // yield put(reqDayAddSucess(dateTo))
   } catch (err) {
     yield put(reqDaysError(err));
   }
