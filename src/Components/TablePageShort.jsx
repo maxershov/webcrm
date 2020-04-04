@@ -4,7 +4,7 @@ import React from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { connect } from 'react-redux';
 import { Link, useHistory, useParams } from "react-router-dom";
-import { getDaysLeft } from '../App';
+import { getDaysLeft, getIndexByCode, getImg } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import Spinner from './Spinner'
 
@@ -78,7 +78,8 @@ const TablePageShort = (props) => {
             width: widthForTable(25),
             headerClassName: 'tableHeader',
             Cell: (value) => (
-              <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/0.jpg`)} /></button>)
+              // <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/0.jpg`)} /></button>)
+              <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={getImg(props.personData[getIndexByCode(value.original.code)].photoId)} /></button>)
           },
           {
             Header: 'Имя',

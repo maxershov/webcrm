@@ -11,6 +11,7 @@ const MainContent = props => {
     <Switch>
       <Redirect exact from="/" to="/main" />
       <Route exact path="/main" component={MainPage} />
+      <Route exact path="/all/page/:pageNum" render={() => <TablePage all={true} />} />
       <Route exact path="/clients/page/:pageNum" component={TablePage} />
       <Route exact path="/lead/page/:pageNum" render={() => <TablePageShort tableType="ЛИД" />} />
       <Route exact path="/employee/page/:pageNum" render={() => <TablePageShort tableType="СОТРУДНИК" />} />

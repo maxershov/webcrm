@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom'
-import { deletePerson } from '../App';
+import { deletePerson, getImg } from '../App';
 import FormData from './FormData';
 import CalendarHideable from './CalendarHideable';
 import FieldDeposite from './FieldDeposite';
@@ -44,7 +44,7 @@ export const UserPage = (props) => {
 
   return loading ? <Spinner /> : (
     <div className="userPage">
-      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={require(`../images/0.jpg`)} /></div>
+       <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={getImg(person.photoId)} /></div>
       <div className="userPage-container">
         {renderPhotoId ? (
           <>

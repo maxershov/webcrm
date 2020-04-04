@@ -3,7 +3,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require("express");
 const history = require("connect-history-api-fallback");
-const expressStaticGzip = require("express-static-gzip");
 const helmet = require("helmet");
 const path = require("path");
 const format = require("date-fns/format")
@@ -11,6 +10,7 @@ const fs = require("fs");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const myLocalHost = require("./host");
+const staticFiles = express.static(path.join(__dirname, "dist"));
 
 
 
@@ -29,6 +29,33 @@ function readDataJSON(pathTo) {
   return JSON.stringify(JSON.parse(bitArray));
 }
 
+function writeData(pathTo, data) {
+  fs.writeFile(pathTo, JSON.stringify(data), function (err) {
+    if (err) throw err;
+  })
+}
+
+checkIfDir();
+
+function checkIfDir() {
+  const datePath = format(new Date(), "ddMMyyyy");
+  const pathTo = path.join(homePath, "db", "copyData", datePath);
+  if (fs.existsSync(pathTo)) {
+    console.log('The path exists.');
+  } else {
+    fs.mkdir(pathTo, function (err) {
+      if (err) {
+        return console.error(err);
+      }
+      writeData(pathTo + "/personDATA.json", JSON.parse(readDataJSON(pathPersonData)));
+      writeData(pathTo + "/activityDATA.json", JSON.parse(readDataJSON(pathActivitiesData)));
+      writeData(pathTo + "/dayDATA.json", JSON.parse(readDataJSON(pathDayData)));
+      console.log("Directory created successfully!"); //Create dir in case not found
+    });
+  }
+}
+
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -40,7 +67,7 @@ app.get("/getperson", (req, res) => {
 
 app.get("/getday", (req, res) => {
   const dayDataString = readDataJSON(pathDayData);
-  console.log('getdayFirst', dayDataString);
+  // console.log('getdayFirst', dayDataString);
   res.send(dayDataString);
 });
 
@@ -59,10 +86,7 @@ app.post("/changepersons", (req, res) => {
   // console.log("changepersons in local");
   const { data } = req.body;
   // console.log(data);
-
-  fs.writeFile(pathPersonData, JSON.stringify(data), function (err) {
-    if (err) throw err;
-  })
+  writeData(pathPersonData, data);
   res.json("sucess");
 });
 
@@ -71,20 +95,16 @@ app.post("/changeactivities", (req, res) => {
   const { data } = req.body;
   // console.log(data);
 
-  fs.writeFile(pathActivitiesData, JSON.stringify(data), function (err) {
-    if (err) throw err;
-  })
+  writeData(pathActivitiesData, data);
   res.json("sucess");
 });
 
 app.post("/changeday", (req, res) => {
-  console.log("changeday in local");
+  // console.log("changeday in local");
   const { data } = req.body;
-  console.log(data);
+  // console.log(data);
 
-  fs.writeFile(pathDayData, JSON.stringify(data), function (err) {
-    if (err) throw err;
-  })
+  writeData(pathDayData, data);
   res.json("sucess");
 });
 
@@ -95,35 +115,35 @@ app.post("/changeday", (req, res) => {
 app.post('/code', (req, res) => {
   const code = (req.body.code).replace("\n", "");
   handleCode(code);
-
-  // const todayData = format(new Date(), "dd-MM-yyyy");
-  // const dayData = JSON.parse(readDataJSON(pathDayData));
-  // const indexDate = dayData.findIndex(x => x.date === todayData);
-
-
-  // const codeObj = { "code": code, "time": format(new Date(), 'HH:mm:ss') };
-  // dayData[indexDate].history.push(codeObj)
-  // fs.writeFile(pathDayData, JSON.stringify(dayData), function (err) {
-  //   if (err) throw err;
-  // })
-  console.log(req.body.code);
+  // console.log(req.body.code);
   res.json("sucess");
-  // res.json('ht');
 })
 
 
 function handleCode(code) {
   const todayData = format(new Date(), "dd-MM-yyyy");
   const dayData = JSON.parse(readDataJSON(pathDayData));
-  const indexDate = dayData.findIndex(x => x.date === todayData);
+  let indexDate = dayData.findIndex(x => x.date === todayData);
+
+
+  // TODO create new date obj if indexData === -1
+  if (indexDate === -1) {
+    console.log('Create new day in Db')
+    const newDateObj = { date: todayData, notes: "", history: [] };
+    dayData.push(newDateObj);
+    indexDate = dayData.length - 1;
+    console.log("length", indexDate);
+    console.log(dayData.findIndex(x => x.date === todayData));
+  }
+
+
   // find if person already in history
   const index = dayData[indexDate].history.findIndex(x => x.code === code);
   if (index === -1) {
     const codeObj = { "code": code, "time": format(new Date(), 'HH:mm:ss') };
     dayData[indexDate].history.push(codeObj)
-    fs.writeFile(pathDayData, JSON.stringify(dayData), function (err) {
-      if (err) throw err;
-    })
+
+    writeData(pathDayData, dayData);
     checkIfInPersons(code);
   }
 }
@@ -134,7 +154,7 @@ function checkIfInPersons(code) {
   if (personIndex === -1) {
     createNewPerson(code);
   } else {
-    substractOneRemain(personData, personIndex);    
+    substractOneRemain(personData, personIndex);
   }
 }
 
@@ -149,9 +169,7 @@ function substractOneRemain(personData, personIndex) {
 
     pushNewActivity(personData[personIndex].code, activityObj);
 
-    fs.writeFile(pathPersonData, JSON.stringify(personData), function (err) {
-      if (err) throw err;
-    })
+    writeData(pathPersonData, personData);
   } else {
     const visitObj = { "code": personData[personIndex].code, "activity": [{ "date": format(new Date(), 'dd-MM-yyyy'), "time": format(new Date(), 'HH:mm:ss'), "type": "Посещение", "person": "", "amount": "" }] };
     pushNewActivity(personData[personIndex].code, visitObj);
@@ -162,35 +180,37 @@ function pushNewActivity(code, activityObj) {
   const activitiesData = JSON.parse(readDataJSON(pathActivitiesData));
   const activitiesIndex = activitiesData.findIndex(x => x.code === code);
   activitiesData[activitiesIndex].activity.push(activityObj);
-  fs.writeFile(pathActivitiesData, JSON.stringify(activitiesData), function (err) {
-    if (err) throw err;
-  })
+
+  writeData(pathActivitiesData, activitiesData);
 }
 
 function createNewPerson(code) {
   const personData = JSON.parse(readDataJSON(pathPersonData));
   const newPerson = { "personName": code, "contract": "", "dateBirth": "", "telNum": "", "code": code, "autoMonth": "", "notes": "", "remain": "", "days": "", "photoId": 0, "rent": "", "deposite": "", };
   personData.push(newPerson);
-  fs.writeFile(pathPersonData, JSON.stringify(personData), function (err) {
-    if (err) throw err;
-  })
+
+  writeData(pathPersonData, personData);
+
+
   const activitiesObj = { "code": code, "activity": [{ "date": format(new Date(), 'dd-MM-yyyy'), "time": format(new Date(), 'HH:mm:ss'), "type": "Создание профиля", "person": "", "amount": "" }] };
   const activitiesData = JSON.parse(readDataJSON(pathActivitiesData));
   activitiesData.push(activitiesObj);
-  fs.writeFile(pathActivitiesData, JSON.stringify(activitiesData), function (err) {
-    if (err) throw err;
-  })
+
+  writeData(pathActivitiesData, activitiesData);
 }
 
 
 // app.use(helmet());
 // app.use(helmet.noCache());
 
-// app.use(staticFiles);
-// app.use(history());
+
+app.use(staticFiles);
+app.use(history());
 
 const port = 6700;
 app.listen(port, myLocalHost.host);
 
-// app.use(staticFiles)
+app.use(staticFiles)
+
+
 console.log(`App is listening on port ${port}`);

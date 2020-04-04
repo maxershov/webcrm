@@ -3,7 +3,7 @@ import ReactTable from "react-table-6/react-table.min";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Spinner from './Spinner';
-import { getIndexByCode , getDateObj } from "../App";
+import { getIndexByCode , getImg } from "../App";
 
 
 
@@ -61,7 +61,8 @@ const TableForScanner = (props) => {
                 <img
                   alt="tablePhoto"
                   height={80}
-                  src={require(`../images/0.jpg`)}
+                  // src={require(`../images/0.jpg`)}
+                  src={getImg(personData[getIndexByCode(value)].photoId)}
                 />
               </button>
             )

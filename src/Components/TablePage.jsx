@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { connect } from 'react-redux';
-import { getDaysLeft } from '../App';
+import { getDaysLeft, getImg } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import Spinner from './Spinner'
 
@@ -37,7 +37,9 @@ const TablePage = (props) => {
       ofText="из"
       rowsText="профилей"
       headerClassName="tableHeader"
-      data={personData.filter(obj => obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД')}
+      data={props.all ? personData : 
+        personData.filter(obj => obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД')
+      }
       filterable
       defaultFilterMethod={(filter, row) =>
         String(row[filter.id]) === filter.value}
@@ -47,7 +49,8 @@ const TablePage = (props) => {
           width: widthForTable(15),
           headerClassName: 'tableHeader',
           Cell: (value) => (
-            <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/0.jpg`)} /></button>)
+            <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={getImg(value.original.photoId)} /></button>)
+            // <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/0.jpg`)} /></button>)
           // <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/${value.original.photoId}.jpg`)} /></button>)
         },
         {

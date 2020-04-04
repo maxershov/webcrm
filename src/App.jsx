@@ -45,6 +45,24 @@ function changeCodeDayData(oldCode, newCode) {
   saveData(data, 'DAY');
 }
 
+
+export function getImg(photoId) {
+  try {
+    return require(`./images/${photoId}.JPG`)
+  } catch (err) {
+    try {
+      return require(`./images/${photoId}.jpeg`);
+    } catch (err) {
+      try {
+        return require(`./images/${photoId}.jpg`);
+      } catch (err) {
+        return require('./images/0.jpg');
+      }
+    }
+  }
+}
+
+
 export function deletePerson(codeToDel) {
   deleteCodeDayData(codeToDel);
   const personData = getPersonStore();
