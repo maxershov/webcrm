@@ -9,8 +9,30 @@ const format = require("date-fns/format")
 const fs = require("fs");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const knex = require('knex')
+
+
+// const postgress = knex({
+//   client: 'pg',
+//   connection: {
+//     host: '127.0.0.1',
+//     user: 'User1',
+//     password: 'KBT',
+//     database: 'Test'
+//   }
+// });
+
+// postgress.select('*').from('employee').then(data => {
+//   console.log(data);
+// });
+
 const myLocalHost = require("./host");
 const staticFiles = express.static(path.join(__dirname, "dist"));
+
+
+
+
+
 
 
 
@@ -19,6 +41,38 @@ let homePath = null;
 process.platform === "win32"
   ? (homePath = path.join(path.dirname(require("os").homedir()), "Public"))
   : (homePath = require("os").homedir());
+
+
+
+
+
+
+
+const personDb = knex({
+  client: 'sqlite3',
+  connection: {
+    filename: path.join(homePath, "db", "personDATA.db")
+  }
+});
+
+const dayDb = knex({
+  client: 'sqlite3',
+  connection: {
+    filename: path.join(homePath, "db", "dayData.db")
+  }
+});
+
+personDb.select('*').from('personData').then(data => {
+  console.log(data);
+});
+
+dayDb.select('*').from('05-04-2020').then(data => {
+  console.log(data);
+});
+
+
+// INSERT INTO "main"."personData"("code","autoMonth","remain","days","rent","deposite") VALUES ('2',NULL,NULL,NULL,NULL,NULL);
+
 
 const pathPersonData = path.join(homePath, "db", "personDATA.json");
 const pathDayData = path.join(homePath, "db", "dayDATA.json");
