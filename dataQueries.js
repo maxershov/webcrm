@@ -33,6 +33,8 @@ DELETE FROM personData WHERE code = 'Ершов Максим Леонидови�
 // insert new person
 INSERT OR IGNORE INTO personData (personName, code) VALUES ('aaa', '123')
 
+
+
 // DAY DATA
 
 // Get data by day or create new 

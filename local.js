@@ -4,11 +4,10 @@
 
 // TODO add del func in personStore
 // TODO add api for activities
-// TODO add api for dates
 // TODO add func to dates
 // TODO add func to activities
 // add activitiesField
-// add deposite fields
+// chg code to NameSecondnameThirdname .replace(' ','')
 
 
 const express = require("express");
@@ -23,6 +22,7 @@ const knex = require('knex')
 
 
 const myLocalHost = require("./host");
+
 const staticFiles = express.static(path.join(__dirname, "dist"));
 
 
@@ -45,24 +45,20 @@ const personDb = knex({
   }
 });
 
-const activityData = knex({
+const activityDb = knex({
   client: 'sqlite3',
   connection: {
     filename: path.join(homePath, "db", "activityData.db")
-  },
-  useNullAsDefault: true
+  }
 });
 
-personDb.select('*').from('personData').then(data => {
-  // console.log(data);
-  // console.log(JSON.stringify(data));
-  console.log(JSON.parse(JSON.stringify(data)));
-
+const dayDb = knex({
+  client: 'sqlite3',
+  connection: {
+    filename: path.join(homePath, "db", "dayData.db")
+  }
 });
 
-
-
-// INSERT INTO "main"."personData"("code","autoMonth","remain","days","rent","deposite") VALUES ('2',NULL,NULL,NULL,NULL,NULL);
 
 
 const pathPersonData = path.join(homePath, "db", "personDATA.json");
@@ -111,7 +107,7 @@ function writeData(pathTo, data) {
 
 
 
-
+/* ************************************************** */
 
 const app = express();
 app.use(bodyParser.json());
@@ -214,11 +210,45 @@ app.post("/addNewPerson", async (req, res) => {
 // }); 
 // mb res.send => query new row with name and code => if already in list => will take saved profile!
 
+// DAY DATA
+
+
+app.get("/getDate/:day", (req, res) => {
+  // http://192.168.1.150:6700/getDate/05-04-2020
+  const { day } = req.params;
+  dayDb.raw(dayDb('dayData').insert({ "date": day }).toString().replace('insert', 'INSERT OR IGNORE'))
+    .then(() => dayDb.select('*').from('dayData').where('date', day).then(data => {
+      res.send(JSON.stringify(data));
+    }));
+});
+
+app.post("/chgNotes", (req, res) => {
+  // {
+  //   "day": "05-04-2020",
+  //   "notes": "aaaaaa"
+  // }
+  const { day, notes } = req.body;
+  dayDb('dayData')
+    .where('date', day)
+    .update({ 'notes': notes })
+    .then(() =>
+      dayDb.select('*').from('dayData').where('date', day).then(data => {
+        res.send(JSON.stringify(data));
+      }))
+});
 
 
 
 
 
+
+
+
+
+
+
+
+/** ********************** END ********************************************** */
 
 
 
