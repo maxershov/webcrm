@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { format} from 'date-fns'
 import CalendarHideable from './CalendarHideable';
 import { pushNewActivity} from '../App';
-
+import { useDispatch } from "react-redux";
+import { useParams } from 'react-router-dom';
+import { chgProfileValue } from "../store/profileStore/profileActions";
 
 
 const MyActionFields = (props) => {

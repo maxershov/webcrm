@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { format} from 'date-fns'
+import { format } from 'date-fns'
 import Calendar from 'react-calendar/dist/entry.nostyle';
-import { ChangeProfileValue } from '../App';
+import { useDispatch } from "react-redux";
+import { chgProfileValue } from "../store/profileStore/profileActions";
 
 
 const CalendarHideable = (props) => {
+  const dispatch = useDispatch();
   const [renderCalendar, setRenderCalendar] = useState('none');
   const { codeLink } = useParams();
 
   function changeDate(dateTo) {
     const date = format(dateTo, 'dd-MM-yyyy');
-    props.dateType === 'setParent' ?
-      props.setParentDate(date) :
-      ChangeProfileValue(codeLink, date, props.dateType);
+    props.dateType === 'setParent'
+      ? props.setParentDate(date)
+      : dispatch(chgProfileValue(codeLink, props.dateType, date));
+
     setRenderCalendar('none');
   }
 
   function deleteDate() {
-    ChangeProfileValue(codeLink, "", props.dateType);
+    dispatch(chgProfileValue(codeLink, props.dateType, ""));
     setRenderCalendar('none');
   }
   return (

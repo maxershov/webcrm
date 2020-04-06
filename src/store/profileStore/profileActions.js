@@ -18,12 +18,12 @@ export const fetchProfile = (code) => {
   return { type: "FETCHED_PROFILE", code };
 };
 
-export const chgProfileValue = (code,inputType, inputValue ) => {
-  return {type: "CHANGE_PROFILE_VALUE", code, inputType, inputValue};
+export const chgProfileValue = (code, inputType, inputValue) => {
+  return { type: "CHANGE_PROFILE_VALUE", code, inputType, inputValue };
 }
 
 export const chgCode = (oldCode, code) => {
-  return {type: "CHANGE_CODE", oldCode, code};
+  return { type: "CHANGE_CODE", oldCode, code };
 }
 
 export function* watchFetchProfile() {
@@ -52,7 +52,7 @@ function* sleep(time) {
   yield new Promise(resolve => setTimeout(resolve, time));
 }
 
-function* changeField({code, inputType, inputValue}) {
+function* changeField({ code, inputType, inputValue }) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -60,20 +60,20 @@ function* changeField({code, inputType, inputValue}) {
   };
   const updatedData = yield call(() => {
     return fetch(`http://${host.host}:6700/updateField`, requestOptions)
-    .then(res => res.json());
+      .then(res => res.json());
   });
   yield put(reqProfileSucess(updatedData[0]));
 }
 
-function* changeCode({oldCode, code}) {
+function* changeCode({ oldCode, code }) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ "oldCode": oldCode,"code": code})
+    body: JSON.stringify({ "oldCode": oldCode, "code": code })
   };
   const updatedData = yield call(() => {
     return fetch(`http://${host.host}:6700/updateCode`, requestOptions)
-    .then(res => res.json());
+      .then(res => res.json());
   });
   yield put(reqProfileSucess(updatedData[0]));
 }

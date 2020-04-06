@@ -10,7 +10,8 @@ const InputProfile = (props) => {
   const [inputValue, setValue] = useState(baseValue);
   const placeholder = `Добавить ${formLabel.slice(0, -1).toLowerCase()}`;
 
-  const dispatch = useDispatch(); const history = useHistory();
+  const dispatch = useDispatch(); 
+  const history = useHistory();
 
   const sendToDb = (event) => {
     event.preventDefault();
@@ -20,6 +21,9 @@ const InputProfile = (props) => {
       history.push('/main');
     }
     else dispatch(chgProfileValue(codeLink, inputType, inputValue));
+
+    // TODO add dispatch with activity
+    
   }
   return (
     <div className={`${inputType}Field absolute_position_button`}>
