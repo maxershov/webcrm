@@ -1,6 +1,16 @@
 /* eslint-disable func-names */
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
+
+// TODO add del func in personStore
+// TODO add api for activities
+// TODO add api for dates
+// TODO add func to dates
+// TODO add func to activities
+// add activitiesField
+// add deposite fields
+
+
 const express = require("express");
 const history = require("connect-history-api-fallback");
 const helmet = require("helmet");
@@ -24,7 +34,7 @@ process.platform === "win32"
 
 
 
-
+// TODO add  .catch(err => res.status(400).json(err))
 
 
 
@@ -44,7 +54,10 @@ const activityData = knex({
 });
 
 personDb.select('*').from('personData').then(data => {
-  console.log(data);
+  // console.log(data);
+  // console.log(JSON.stringify(data));
+  console.log(JSON.parse(JSON.stringify(data)));
+
 });
 
 
@@ -104,7 +117,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post("/deletePerson", (req, res) => {
+app.get("/deletePerson", (req, res) => {
   const { code } = req.body;
   personDb('personData')
     .where('code', code)
@@ -128,6 +141,8 @@ app.post("/updateCode", (req, res) => {
 });
 
 app.post("/updateField", async (req, res) => {
+  console.log(req.body);
+  // console.log(req.json());
   const { code, type, value } = req.body;
   personDb('personData')
     .where('code', code)
@@ -138,11 +153,22 @@ app.post("/updateField", async (req, res) => {
 });
 
 
-app.post("/getPersons", (req, res) => {
+app.get("/getPersons", (req, res) => {
   personDb.select('*').from('personData').then(data => {
     res.send(JSON.stringify(data));
   });
 });
+
+app.get("/getProfile/:code", (req, res) => {
+  const { code } = req.params;
+  personDb('personData')
+    .where('code', code)
+    .select('*')
+    .then(data => {
+      res.send(JSON.stringify(data));
+    });
+});
+
 
 
 app.post("/addNewPerson", async (req, res) => {
@@ -151,7 +177,6 @@ app.post("/addNewPerson", async (req, res) => {
   //   "code":"code3"
   // }
   let { personName, code } = req.body;
-
   // if code already in base => insert with "КОПИЯ" => users can have same names or its just error
   try {
     await personDb('personData').insert({ personName, code });

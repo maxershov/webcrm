@@ -5,41 +5,34 @@ const initialState = {
   errorMsg: ""
 };
 
-export default function personDataReducer(state = initialState, action) {
+export default function profileReducer(state = initialState, action) {
   switch (action.type) {
-    case "REQUEST_PERSONS":
+    case "REQUEST_PROFILE":
       return {
         data: [],
         loading: true,
         error: false,
         errorMsg: ""
       };
-    case "REQUEST_PERSONS_SUCCEEDED":
+    case "REQUEST_PROFILE_SUCCEEDED":
       return {
         data: action.data,
         loading: false,
         error: false,
         errorMsg: ""
       };
-    case "REQUEST_PERSONS_FAILED":
+    case "REQUEST_PROFILE_FAILED":
       return {
         data: [],
         loading: false,
         error: true,
         errorMsg: action.err
       };
-    case "CHANGE_PERSON_DATA":
+    case "CHANGE_PROFILE_DATA":
       return { ...state, data: action.data, loading: false }
-    case "LOADING_PERSON":
+    case "LOADING_PROFILE":
       return { ...state, loading: true }
     default:
       return state;
   }
 }
-
-
-//add method for upd data => CHANGE like this, but before add => 
-// get All data => replace one... or mutate => save in new const => send to redux
-
-
-//or just pull all new data from db...

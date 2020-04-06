@@ -5,6 +5,7 @@ import createSagaMiddlewate from 'redux-saga';
 import personsDataReducer from "./personsDataStore/personsDataReducer";
 import dayDataReducer from "./dayDataStore/dayDataReducer";
 import activitiesDataReducer from "./activitiesDataStore/activitiesDataReducer";
+import profileReducer from "./profileStore/profileReducer";
 
 
 import rootSaga from "./root-saga";
@@ -24,6 +25,7 @@ const store = createStore(
     activitiesStore: activitiesDataReducer,
     personsStore: personsDataReducer,
     dayStore:dayDataReducer,
+    profileStore:profileReducer
   }),
   compose(applyMiddleware(...middlewares))
 );

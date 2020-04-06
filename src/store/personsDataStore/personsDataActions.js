@@ -28,7 +28,8 @@ function* fetchPersonsAsync() {
     yield put(reqPersons());
     // yield sleep(2000)
     const data = yield call(() => {
-      return fetch(`http://${host.host}:6700/getperson`).then(res =>
+      // return fetch(`http://${host.host}:6700/getperson`).then(res =>
+      return fetch(`http://${host.host}:6700/getPersons`).then(res =>
         res.json()
       );
     });

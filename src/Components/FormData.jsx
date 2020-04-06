@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ChangeProfileValue, addNewPersonToJSON } from '../App';
 
 import host from "../../host";
@@ -7,14 +7,26 @@ import host from "../../host";
 const FormData = (props) => {
 
   // Pass @route for last prop => to use history.push on input(MainPage - new Person) to open new profile
-  const {formLabel, baseValue, inputType, type, route=''} = props;
+  const { code, formLabel, baseValue, inputType, type, route = '' } = props;
   const { codeLink } = useParams();
   const [inputValue, setValue] = useState(baseValue);
-  const placeholder = `Добавить ${  formLabel.slice(0, -1).toLowerCase()}`;
+  const placeholder = `Добавить ${formLabel.slice(0, -1).toLowerCase()}`;
   const sendToDb = (event) => {
     event.preventDefault();
+    // if (type === 'PERSON') ChangeProfileValue(codeLink, inputValue, inputType);
+    if (type === 'PERSON') {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ "code": code, "type": inputType, "value": inputValue })
+      };
+      fetch(`http://${host.host}:6700/updateField`, requestOptions)
+        .then(async response => {
+          const data = await response.json();
+          // ChangeProfileValue(codeLink, inputValue, inputType);
+        });
+    }
 
-    if (type === 'PERSON') ChangeProfileValue(codeLink, inputValue, inputType);
     if (type === 'NEW_PERSON') {
       // create new profile and open it's page
       addNewPersonToJSON(inputValue, true, route);
@@ -28,7 +40,7 @@ const FormData = (props) => {
         <button type="submit">Изменить</button>
       </form>
     </div>
-);
+  );
 }
 
 

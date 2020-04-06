@@ -11,6 +11,7 @@ import CodeScanner from "./CodeScanner";
 import FormData from "./FormData";
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import { fetchDays, changeDay, dayAddProcess } from "../store/dayDataStore/dayDataActions";
+import {fetchProfile} from "../store/profileStore/profileActions";
 import { getDateObj } from "../App";
 
 
@@ -44,7 +45,8 @@ export const MainPage = props => {
 
   useEffect(() => {
     dispatch(fetchPersons());
-    dispatch(fetchDays());
+    // dispatch(fetchDays());
+    // dispatch(fetchProfile('0008750571'))
   }, []);
 
   const changeLoadDate = date => {
@@ -59,37 +61,37 @@ export const MainPage = props => {
     setLoadedDate(formatedDate);
   };
 
-
-  return (!loadingDays && !loadingPersons) ? (
-    <>
-      <div className="mainPage">
-        <Calendar
-          className="calendar calendarMain"
-          value={parse(loadedDate, "dd-MM-yyyy", new Date())}
-          onChange={date => changeLoadDate(date)}
-        />
-        <div className="notesMain font-white-shadow">
-          <AreaNotes notesValue={data?.notes} type="DAY_DATA" dayObject={data} />
-        </div>
-        <div className="newProfileField">
-          <FormData
-            baseValue=""
-            formLabel="Новый профиль:"
-            type="NEW_PERSON"
-            route={history}
-          />
-        </div>
-        {isToday(loadedDate) ? (
-          <div className="newCodeField">
-            <CodeScanner dayObject={data} date={loadedDate} />
-          </div>
-        ) : (
-            undefined
-          )}
-      </div>
-      <TableForScanner data={dayData[indexDate]} />
-    </>
-  ) : <Spinner />
+  return <div><h1>Hi</h1></div>
+  // return (!loadingDays && !loadingPersons) ? (
+  //   <>
+  //     <div className="mainPage">
+  //       <Calendar
+  //         className="calendar calendarMain"
+  //         value={parse(loadedDate, "dd-MM-yyyy", new Date())}
+  //         onChange={date => changeLoadDate(date)}
+  //       />
+  //       <div className="notesMain font-white-shadow">
+  //         <AreaNotes notesValue={data?.notes} type="DAY_DATA" dayObject={data} />
+  //       </div>
+  //       <div className="newProfileField">
+  //         <FormData
+  //           baseValue=""
+  //           formLabel="Новый профиль:"
+  //           type="NEW_PERSON"
+  //           route={history}
+  //         />
+  //       </div>
+  //       {isToday(loadedDate) ? (
+  //         <div className="newCodeField">
+  //           <CodeScanner dayObject={data} date={loadedDate} />
+  //         </div>
+  //       ) : (
+  //           undefined
+  //         )}
+  //     </div>
+  //     <TableForScanner data={dayData[indexDate]} />
+  //   </>
+  // ) : <Spinner />
 };
 
 
