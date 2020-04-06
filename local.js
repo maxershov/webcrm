@@ -12,28 +12,8 @@ const bodyParser = require("body-parser");
 const knex = require('knex')
 
 
-// const postgress = knex({
-//   client: 'pg',
-//   connection: {
-//     host: '127.0.0.1',
-//     user: 'User1',
-//     password: 'KBT',
-//     database: 'Test'
-//   }
-// });
-
-// postgress.select('*').from('employee').then(data => {
-//   console.log(data);
-// });
-
 const myLocalHost = require("./host");
 const staticFiles = express.static(path.join(__dirname, "dist"));
-
-
-
-
-
-
 
 
 
@@ -55,20 +35,18 @@ const personDb = knex({
   }
 });
 
-const dayDb = knex({
+const activityData = knex({
   client: 'sqlite3',
   connection: {
-    filename: path.join(homePath, "db", "dayData.db")
-  }
+    filename: path.join(homePath, "db", "activityData.db")
+  },
+  useNullAsDefault: true
 });
 
 personDb.select('*').from('personData').then(data => {
   console.log(data);
 });
 
-dayDb.select('*').from('05-04-2020').then(data => {
-  console.log(data);
-});
 
 
 // INSERT INTO "main"."personData"("code","autoMonth","remain","days","rent","deposite") VALUES ('2',NULL,NULL,NULL,NULL,NULL);
@@ -89,30 +67,136 @@ function writeData(pathTo, data) {
   })
 }
 
-checkIfDir();
 
-function checkIfDir() {
-  const datePath = format(new Date(), "ddMMyyyy");
-  const pathTo = path.join(homePath, "db", "copyData", datePath);
-  if (fs.existsSync(pathTo)) {
-    console.log('The path exists.');
-  } else {
-    fs.mkdir(pathTo, function (err) {
-      if (err) {
-        return console.error(err);
-      }
-      writeData(pathTo + "/personDATA.json", JSON.parse(readDataJSON(pathPersonData)));
-      writeData(pathTo + "/activityDATA.json", JSON.parse(readDataJSON(pathActivitiesData)));
-      writeData(pathTo + "/dayDATA.json", JSON.parse(readDataJSON(pathDayData)));
-      console.log("Directory created successfully!"); //Create dir in case not found
-    });
-  }
-}
+// checkIfDir();
+
+// function checkIfDir() {
+//   const datePath = format(new Date(), "ddMMyyyy");
+//   const pathTo = path.join(homePath, "db", "copyData", datePath);
+//   if (fs.existsSync(pathTo)) {
+//     console.log('The path exists.');
+//   } else {
+//     fs.mkdir(pathTo, function (err) {
+//       if (err) {
+//         return console.error(err);
+//       }
+//       writeData(pathTo + "/personDATA.json", JSON.parse(readDataJSON(pathPersonData)));
+//       writeData(pathTo + "/activityDATA.json", JSON.parse(readDataJSON(pathActivitiesData)));
+//       writeData(pathTo + "/dayDATA.json", JSON.parse(readDataJSON(pathDayData)));
+//       console.log("Directory created successfully!"); //Create dir in case not found
+//     });
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
 
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+
+app.post("/deletePerson", (req, res) => {
+  const { code } = req.body;
+  personDb('personData')
+    .where('code', code)
+    .del().then(res.send('sucess'));
+  // TODO handle activities del
+});
+
+app.post("/updateCode", (req, res) => {
+  // {
+  //   "oldCode":"code12345",
+  //   "code":"code3"
+  // }
+  const { oldCode, code } = req.body;
+  personDb('personData')
+    .where('code', oldCode)
+    .update('code', code)
+    .then(() =>
+      personDb('personData').where('code', code).select('*')
+        .then(data => res.send(JSON.stringify(data))));
+  // TODO handle activities rename
+});
+
+app.post("/updateField", async (req, res) => {
+  const { code, type, value } = req.body;
+  personDb('personData')
+    .where('code', code)
+    .update(type, value)
+    .then(() =>
+      personDb('personData').where('code', code).select('*'))
+    .then(data => res.send(JSON.stringify(data)));
+});
+
+
+app.post("/getPersons", (req, res) => {
+  personDb.select('*').from('personData').then(data => {
+    res.send(JSON.stringify(data));
+  });
+});
+
+
+app.post("/addNewPerson", async (req, res) => {
+  // {
+  //   "personName": "test3",
+  //   "code":"code3"
+  // }
+  let { personName, code } = req.body;
+
+  // if code already in base => insert with "КОПИЯ" => users can have same names or its just error
+  try {
+    await personDb('personData').insert({ personName, code });
+  } catch {
+    personName += ' Копия';
+    code += ' Копия';
+    await personDb('personData').insert({ personName, code });
+  }
+  const newUser = await personDb('personData').where('code', code);
+  await res.send(JSON.stringify(newUser));
+});
+
+
+// personDb('personData').where('code', code)
+
+// app.post("/addNewPerson", async (req, res) => {
+//   // TODO handle equal codes
+//   const { personName, code } = req.body;
+//   console.log(personName, code);
+//   await personDb('personData').insert({ personName, code });
+//   const newUser = await personDb('personData').where('code', code)
+//   console.log(newUser);
+//   await res.send(newUser);
+// });
+
+// app.post("/addNewPerson", (req, res) => {
+//   const { personName, code } = req.body;
+//   console.log(personName, code);
+//   personDb.raw(personDb('personData').insert({
+//     personName,
+//     code
+//   }).toString().replace('insert', 'INSERT OR IGNORE')).then(
+//     res.send('sucess')
+//   );
+// }); 
+// mb res.send => query new row with name and code => if already in list => will take saved profile!
+
+
+
+
+
+
+
+
+
 
 app.get("/getperson", (req, res) => {
   const personDataString = readDataJSON(pathPersonData);

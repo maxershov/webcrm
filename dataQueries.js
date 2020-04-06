@@ -30,3 +30,14 @@ UPDATE personData SET code = 'test1' WHERE code = 'Ершов Максим Ле�
 // Delete person (by code)
 DELETE FROM personData WHERE code = 'Ершов Максим Леонидович'
 
+// insert new person
+INSERT OR IGNORE INTO personData (personName, code) VALUES ('aaa', '123')
+
+// DAY DATA
+
+// Get data by day or create new 
+INSERT OR IGNORE INTO dayData (date) VALUES ('06-04-2020')
+SELECT * FROM dayData WHERE date='06-04-2020'
+
+// upd notes 
+UPDATE dayData SET notes = 'test123' WHERE date = '06-04-2020'
