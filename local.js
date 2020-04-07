@@ -239,7 +239,7 @@ app.post("/chgNotes", (req, res) => {
 
 
 // Get  activ for day history
-app.get("/getVisits/:day", (req, res) => {
+app.get("/getVisits/:date", (req, res) => {
   // http://192.168.1.150:6700/getHistory/05-04-2020
   const { date } = req.params;
   activityDb.select('*').from('activityData').where({ 'date': date, 'type': 'Посещение' }).then(data => {
