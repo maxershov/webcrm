@@ -53,6 +53,7 @@ function* changeNotesAsync({ date, notes }) {
     body: JSON.stringify({ "day": date, "notes": notes })
   };
   try {
+    yield put(reqDays());
     const updatedData = yield call(() => {
       return fetch(`http://${host.host}:6700/chgNotes`, requestOptions)
         .then(res => res.json());

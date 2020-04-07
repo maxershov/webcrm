@@ -3,9 +3,7 @@ import ReactTable from "react-table-6/react-table.min";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Spinner from './Spinner';
-import { getIndexByCode , getImg } from "../App";
-
-
+import { getIndexByCode, getImg } from "../App";
 
 
 
@@ -23,19 +21,21 @@ function widthForTable(value) {
 const TableForScanner = (props) => {
 
   const personData = useSelector(state => state.personsStore.data);
+  const historyData = useSelector(state => state.activitiesStore.data);
   const loadingPersons = useSelector(state => state.personsStore.loading);
-  const loadingDays = useSelector(state => state.dayStore.loading);
+  const loadingActivities = useSelector(state => state.activitiesStore.loading);
+  // const loadingDays = useSelector(state => state.dayStore.loading);
 
   const history = useHistory();
 
 
-  const [historyData, setHistoryData] = useState([]);
+  // const [historyData, setHistoryData] = useState([]);
 
-  useEffect(() => {
-    setHistoryData(props.data.history);
-  }, [props.data]);
+  // useEffect(() => {
+  //   setHistoryData(props.data.history);
+  // }, [props.data]);
 
-  return (!loadingDays && !loadingPersons) ? (
+  return (!loadingActivities && !loadingPersons) ? (
     <div className="tableMain">
       <ReactTable
         className="table -striped -highlight"
@@ -73,7 +73,7 @@ const TableForScanner = (props) => {
             width: widthForTable(60),
             headerClassName: 'tableHeader',
             style: { whiteSpace: 'unset' },
-            Cell: ({value}) => (<Link to={`/profile/${value}`}>{personData[getIndexByCode(value)].personName}</Link>)
+            Cell: ({ value }) => (<Link to={`/profile/${value}`}>{personData[getIndexByCode(value)].personName}</Link>)
           },
           {
             Header: "Время",
@@ -91,7 +91,7 @@ const TableForScanner = (props) => {
         defaultPageSize={5}
       />
     </div>
-  ) :  <Spinner />
+  ) : <Spinner />
 }
 
 

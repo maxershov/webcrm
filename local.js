@@ -2,8 +2,9 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 
+
+// TODO try to move loading to components => if i change date in main page => just components load => and not all at once
 // TODO add del func in personStore
-// TODO add api for activities
 // TODO add func to activities
 // add activitiesField
 // chg code to NameSecondThird .replace(' ','')
@@ -235,7 +236,7 @@ app.post("/chgNotes", (req, res) => {
 
 
 // Get  activ for day history
-app.get("/getHistory/:day", (req, res) => {
+app.get("/getVisits/:day", (req, res) => {
   // http://192.168.1.150:6700/getHistory/05-04-2020
   const { day } = req.params;
   activityDb.select('*').from('activityData').where({ 'date': day, 'type': 'Посещение' }).then(data => {

@@ -12,6 +12,7 @@ import InputNewProfile from "./InputNewProfile";
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import { fetchDays } from "../store/dayDataStore/dayDataActions";
 import { fetchProfile } from "../store/profileStore/profileActions";
+import { fetchVisits, fetchHistory } from "../store/activitiesDataStore/activitiesDataActions";
 import { getDateObj } from "../App";
 
 
@@ -28,44 +29,56 @@ function isToday(date) {
 
 export const MainPage = props => {
   const personData = useSelector(state => state.personsStore.data);
-  const loadingPersons = useSelector(state => state.personsStore.loading);
   const dayData = useSelector(state => state.dayStore.data);
+  const loadingPersons = useSelector(state => state.personsStore.loading);
   const loadingDays = useSelector(state => state.dayStore.loading);
+  const loadingActivities = useSelector(state => state.activitiesStore.loading);
 
 
   const dispatch = useDispatch();
 
 
   const history = useHistory();
-  // const [loadedDate, setLoadedDate] = useState(
-  //   format(new Date(), "dd-MM-yyyy")
-  // );
+  const [loadedDate, setLoadedDate] = useState(
+    format(new Date(), "dd-MM-yyyy")
+  );
   // const indexDate = dayData.findIndex(x => x.date === loadedDate);
   // const data = dayData[indexDate];
 
   useEffect(() => {
+    dispatch(fetchVisits(loadedDate));
     dispatch(fetchPersons());
-    dispatch(fetchDays('05-04-2020'));
-    // dispatch(fetchProfile('0008750571'))
-  }, [dispatch]);
+    dispatch(fetchDays(loadedDate));
+  }, [dispatch, loadedDate]);
 
   const changeLoadDate = date => {
-    const formatedDate = format(date, "dd-MM-yyyy");
-    dispatch(fetchDays(formatedDate));
+    setLoadedDate(format(date, "dd-MM-yyyy"))
+    // const formatedDate = format(date, "dd-MM-yyyy");
+    dispatch(fetchDays(loadedDate));
+    dispatch(fetchVisits(loadedDate));
   };
 
-  return (!loadingDays && !loadingPersons) ? (
+  return (!loadingDays && !loadingPersons && !loadingActivities) ? (
     <>
       <div className="mainPage">
+      <h1>days{loadingDays.toString()}persons{loadingPersons.toString()}activities{loadingActivities.toString()}</h1>
         <Calendar
           className="calendar calendarMain"
-          value={parse(dayData.date, "dd-MM-yyyy", new Date())}
+          value={parse(loadedDate, "dd-MM-yyyy", new Date())}
           onChange={date => changeLoadDate(date)}
         />
         <div className="notesMain font-white-shadow">
           <AreaNotes notesValue={dayData?.notes} type="DAY_DATA" date={dayData?.date} />
         </div>
+        {isToday(loadedDate) ? (
+          <div className="newCodeField">
+            <CodeScanner dayObject={dayData} date={loadedDate} />
+          </div>
+        ) : (
+            undefined
+          )}
       </div>
+      <TableForScanner />
     </>
   ) : <Spinner />
 
