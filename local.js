@@ -8,6 +8,8 @@
 // TODO add func to activities
 // add activitiesField
 // chg code to NameSecondThird .replace(' ','')
+// TODO check for func => where i need to return new data (add new profile => route.push => fetchData)
+
 
 
 const express = require("express");
@@ -239,8 +241,8 @@ app.post("/chgNotes", (req, res) => {
 // Get  activ for day history
 app.get("/getVisits/:day", (req, res) => {
   // http://192.168.1.150:6700/getHistory/05-04-2020
-  const { day } = req.params;
-  activityDb.select('*').from('activityData').where({ 'date': day, 'type': 'Посещение' }).then(data => {
+  const { date } = req.params;
+  activityDb.select('*').from('activityData').where({ 'date': date, 'type': 'Посещение' }).then(data => {
     res.send(JSON.stringify(data));
   });
 });
@@ -249,6 +251,7 @@ app.get("/getVisits/:day", (req, res) => {
 
 // Add new profile to day history
 app.post("/addToHistory", (req, res) => {
+
   /* {
    "code": "Иванов123",
    "day": "05-04-2020",
@@ -258,7 +261,7 @@ app.post("/addToHistory", (req, res) => {
   activityDb('activityData')
     .insert({ "code": code, "date": date, "time": time, "type": "Посещение", "person": "", "amount": "" })
     .then(() =>
-      activityDb.select('*').from('activityData').where({"date":date,"type": "Посещение"} ).then(data => {
+      activityDb.select('*').from('activityData').where({ "date": date, "type": "Посещение" }).then(data => {
         res.send(JSON.stringify(data));
       }))
 });
@@ -326,9 +329,9 @@ app.post("/addActivity", (req, res) => {
    "person": "",
    "amount": ""
   } */
-  const { code, day, time = '00:00:00', type = '', person = '', amount = '' } = req.body;
+  const { code, date, time = '00:00:00', type = '', person = '', amount = '' } = req.body;
   activityDb('activityData')
-    .insert({ "code": code, "date": day, "time": time, "type": type, "person": person, "amount": amount })
+    .insert({ "code": code, "date": date, "time": time, "type": type, "person": person, "amount": amount })
     .then(() =>
       activityDb.select('*').from('activityData').where("code", code).then(data => {
         res.send(JSON.stringify(data));

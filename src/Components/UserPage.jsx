@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom'
 import { fetchProfile, chgProfileValue } from "../store/profileStore/profileActions";
+import {fetchHistory, addToHistory} from "../store/activitiesDataStore/activitiesDataActions";
 import { deletePerson, getImg } from '../App';
 import FormData from './FormData';
 import CalendarHideable from './CalendarHideable';
@@ -31,7 +32,8 @@ export const UserPage = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProfile(codeLink));
-  }, []);
+    dispatch(fetchHistory(codeLink))
+  }, [codeLink, dispatch]);
 
 
   if (person === undefined) {
@@ -65,8 +67,9 @@ export const UserPage = (props) => {
         <label>Заметки:</label>
         <AreaNotes notesValue={person.notes} type="PERSON" />
       </div>
-      {/*<FieldsAction code={person.code} namesArr={getAllPersonNames(personData)} />*/}
       <TableHistory tableDataType="personData" code={person.code} />
+      {/* <FieldsAction code={person.code} namesArr={getAllPersonNames(personData)} />
+        <TableHistory tableDataType="personData" code={person.code} /> */}
     </div>
   );
 }

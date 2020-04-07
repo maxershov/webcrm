@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from "react";
-// import { connect } from "react-redux";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { useHistory } from "react-router-dom";
 import { format, parse } from "date-fns";
 import Calendar from "react-calendar/dist/entry.nostyle";
 import AreaNotes from "./AreaNotes";
 import CodeScanner from "./CodeScanner";
-import InputNewProfile from "./InputNewProfile";
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import { fetchDays } from "../store/dayDataStore/dayDataActions";
-import { fetchProfile } from "../store/profileStore/profileActions";
-import { fetchVisits, fetchHistory } from "../store/activitiesDataStore/activitiesDataActions";
-import { getDateObj } from "../App";
+import { fetchVisits } from "../store/activitiesDataStore/activitiesDataActions";
 
 
 import TableForScanner from './TableForScanner';
@@ -28,8 +22,8 @@ function isToday(date) {
 
 
 export const MainPage = props => {
-  const personData = useSelector(state => state.personsStore.data);
-  const dayData = useSelector(state => state.dayStore.data);
+  // const personData = useSelector(state => state.personsStore.data);
+  // const dayData = useSelector(state => state.dayStore.data);
   const loadingPersons = useSelector(state => state.personsStore.loading);
   const loadingDays = useSelector(state => state.dayStore.loading);
   const loadingActivities = useSelector(state => state.activitiesStore.loading);
@@ -42,8 +36,6 @@ export const MainPage = props => {
   const [loadedDate, setLoadedDate] = useState(
     format(new Date(), "dd-MM-yyyy")
   );
-  // const indexDate = dayData.findIndex(x => x.date === loadedDate);
-  // const data = dayData[indexDate];
 
   useEffect(() => {
     dispatch(fetchVisits(loadedDate));
@@ -53,7 +45,6 @@ export const MainPage = props => {
 
   const changeLoadDate = date => {
     setLoadedDate(format(date, "dd-MM-yyyy"))
-    // const formatedDate = format(date, "dd-MM-yyyy");
     dispatch(fetchDays(loadedDate));
     dispatch(fetchVisits(loadedDate));
   };
@@ -71,12 +62,8 @@ export const MainPage = props => {
         </div>
         {isToday(loadedDate) ? (
           <>
-            <div className="newProfileField">
-              <CodeScanner type="PROFILE" />
-            </div>
-            <div className="newCodeField">
-              <CodeScanner type="SCANNER" />
-            </div>
+            <CodeScanner divName="newProfileField" route={history} type="PROFILE" />
+            <CodeScanner divName="newCodeField" type="SCANNER" />
           </>
         ) : (
             undefined

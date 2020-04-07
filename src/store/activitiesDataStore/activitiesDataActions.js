@@ -22,13 +22,18 @@ export const fetchHistory = (code) => {
   return { type: "FETCHED_HISTORY_ACTIVITIES", code };
 };
 
-export const addToHistory = (code, day, time) => {
-  return { type: "ADD_TO_HISTORY", code, day, time };
+export const addToVisits = (code, date, time) => {
+  return { type: "ADD_TO_VISITS", code, date, time };
+}
+
+export const addToHistory = (code, date, time, typeInput, person, amount) => {
+  return { type: "ADD_TO_HISTORY", code, date, time, typeInput, person, amount };
 }
 
 export function* watchFetchActivities() {
   yield takeLatest("FETCHED_VISIT_ACTIVITIES", fetchVisitsAsync);
   yield takeLatest("FETCHED_HISTORY_ACTIVITIES", fetchHistoryAsync);
+  yield takeLatest("ADD_TO_VISITS", addToVisitsAsync);
   yield takeLatest("ADD_TO_HISTORY", addToHistoryAsync);
 }
 
@@ -63,11 +68,11 @@ function* fetchHistoryAsync({ code }) {
   }
 }
 
-function* addToHistoryAsync({ code, day, time }) {
+function* addToVisitsAsync({ code, date, time }) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ "code": code, "date": day, "time": time })
+    body: JSON.stringify({ "code": code, "date": date, "time": time })
   };
   try {
     yield put(reqActivities());
@@ -82,6 +87,28 @@ function* addToHistoryAsync({ code, day, time }) {
     yield put(reqActivitiesError(err));
   }
 }
+
+function* addToHistoryAsync({ code, date, time, typeInput, person, amount }) {
+  console.log("AAAADDDD", code, date, time, typeInput, person, amount);
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(
+      { "code": code, "date": date, "time": time, "type": typeInput, "person": person, "amount": amount })
+  };
+    try {
+      yield put(reqActivities());
+      yield sleep(1000)
+      const data = yield call(() => {
+        return fetch(`http://${host.host}:6700/addActivity`, requestOptions).then(res =>
+          res.json()
+        );
+      });
+      yield put(reqActivitiesSucess(data));
+    } catch (err) {
+      yield put(reqActivitiesError(err));
+    }
+};
 
 
 function* sleep(time) {

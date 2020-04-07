@@ -1,52 +1,32 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 import { useDispatch, useSelector } from "react-redux";
-import { addNewDayDataToJSON, getIndexByCode } from '../App';
-import { getPersonStore } from '../store/storeGetters'
 import { chgProfileValue, addNewProfile } from "../store/profileStore/profileActions";
-import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
-import { fetchPersons } from "../store/personsDataStore/personsDataActions";
-
-
-/* code scanner => 
-  0. Check if user exist => if not => CREATE NEW PROFILE
-  1. Check if user already in today history (ON CLIENT)
-  2. If not => add to today history and check if it has REMAIN field
-  3. If has => changeValue 
-  4. Add to history - mb in redux add
-
-newProfile field =>
-  1.CREATE NEW PROFILE
-  2.SEND NEW CODE TO HISTORY
-*/
+import { addToVisits } from "../store/activitiesDataStore/activitiesDataActions";
 
 
 
 
 const CodeScanner = (props) => {
-  const { type } = props;
+  const { type, route, divName } = props;
   const personData = useSelector(state => state.personsStore.data);
   const historyData = useSelector(state => state.activitiesStore.data);
   const dispatch = useDispatch();
 
-  function substractOneRemain(code, index) {
-    console.log('substract ONE');
-    const person = personData[index];
-    if (person.remain !== "") dispatch(chgProfileValue(code, 'remain', (+person.remain - 1)));
+  function createProfile(code) {
+    dispatch(addNewProfile(code));
+    // open user page with new profile
+    route.push(`/profile/${code}`)
   }
 
-  // function addToTodayHistory(code, dayObject) {
+  function substractOneRemain(code, index) {
+    const person = personData[index];
+    if (person.remain !== "") dispatch(chgProfileValue(code, 'remain', (+person.remain - 1)));
 
-  //   const codeObj = { "code": code, "time": format(new Date(), 'HH:mm:ss') };
-  //   // find if person already in history
-  //   const index = dayObject.history.findIndex(x => x.code === code);
-  //   if (index === -1) {
-  //     dayObject.history.push(codeObj);
-  //     substractOneRemain(code);
-  //   }
-  //   addNewDayDataToJSON(dayObject);
-  // }
+    // TODO add dispatch to activity => without return activity for this profile!
+  }
+
 
   function handleNewCode(code) {
     // find if in history
@@ -56,11 +36,15 @@ const CodeScanner = (props) => {
       const indexPerson = personData.findIndex(person => person.code === code);
       if (indexPerson === -1) {
         dispatch(addNewProfile(code));
-        dispatch(addToHistory(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
-        // dispatch(fetchPersons());
+        dispatch(addToVisits(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
+
+        // TODO add activity {create profile...}
+
       } else {
-        dispatch(addToHistory(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
+        dispatch(addToVisits(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
         substractOneRemain(code, indexPerson);
+
+        // TODO add activity { substract one with date}
       }
     }
   }
@@ -74,12 +58,12 @@ const CodeScanner = (props) => {
     if (type === 'PROFILE') createProfile(codeSaved);
   }
   return (
-    <>
+    <div className={divName}>
       <label>{type === 'PROFILE' ? "Создать профиль:" : "Сканер карт:"}</label>
       <form name="codeForm" onSubmit={enterCode}>
         <input required minLength={1} placeholder=" Введите данные" type="text" name={props.inputType} onChange={event => setCode(event.target.value)} value={code} />
       </form>
-    </>
+    </div>
   );
 }
 
