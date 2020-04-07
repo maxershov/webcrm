@@ -26,10 +26,15 @@ export const chgCode = (oldCode, code) => {
   return { type: "CHANGE_CODE", oldCode, code };
 }
 
+export const addNewProfile = (code) => {
+  return { type: "ADD_NEW_PROFILE", code };
+}
+
 export function* watchFetchProfile() {
   yield takeLatest("FETCHED_PROFILE", fetchProfileAsync);
-  yield takeLatest("CHANGE_PROFILE_VALUE", changeField);
-  yield takeLatest("CHANGE_CODE", changeCode);
+  yield takeLatest("CHANGE_PROFILE_VALUE", changeFieldAsync);
+  yield takeLatest("CHANGE_CODE", changeCodeAsync);
+  yield takeLatest("ADD_NEW_PROFILE", addNewProfileAsync);
 }
 
 function* fetchProfileAsync({ code }) {
@@ -52,28 +57,50 @@ function* sleep(time) {
   yield new Promise(resolve => setTimeout(resolve, time));
 }
 
-function* changeField({ code, inputType, inputValue }) {
+function* changeFieldAsync({ code, inputType, inputValue }) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ "code": code, "type": inputType, "value": inputValue })
   };
-  const updatedData = yield call(() => {
-    return fetch(`http://${host.host}:6700/updateField`, requestOptions)
-      .then(res => res.json());
-  });
-  yield put(reqProfileSucess(updatedData[0]));
+  try {
+    const updatedData = yield call(() => {
+      return fetch(`http://${host.host}:6700/updateField`, requestOptions)
+        .then(res => res.json());
+    });
+    yield put(reqProfileSucess(updatedData[0]));
+  } catch (err) {
+    yield put(reqProfileError(err));
+  }
 }
 
-function* changeCode({ oldCode, code }) {
+function* changeCodeAsync({ oldCode, code }) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ "oldCode": oldCode, "code": code })
   };
-  const updatedData = yield call(() => {
-    return fetch(`http://${host.host}:6700/updateCode`, requestOptions)
-      .then(res => res.json());
-  });
-  yield put(reqProfileSucess(updatedData[0]));
+  try {
+    const updatedData = yield call(() => {
+      return fetch(`http://${host.host}:6700/updateCode`, requestOptions)
+        .then(res => res.json());
+    });
+    yield put(reqProfileSucess(updatedData[0]));
+  } catch (err) {
+    yield put(reqProfileError(err));
+  }
+}
+
+
+function* addNewProfileAsync({ code }) {
+  try {
+    const newPerson = yield call(() => {
+      return fetch(`http://${host.host}:6700/addNewPerson:${code}`).then(res =>
+        res.json()
+      );
+    });
+    yield put(reqProfileSucess(newPerson[0]));
+  } catch (err) {
+    yield put(reqProfileError(err));
+  }
 }

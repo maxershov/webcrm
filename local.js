@@ -167,9 +167,8 @@ app.get("/getProfile/:code", (req, res) => {
 
 
 
-app.post("/addNewPerson", async (req, res) => {
+app.get("/addNewPerson/:code", async (req, res) => {
   // {
-  //   "personName": "test3",
   //   "code":"code3"
   // }
   let { personName, code } = req.body;

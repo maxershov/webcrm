@@ -8,10 +8,10 @@ import { format, parse } from "date-fns";
 import Calendar from "react-calendar/dist/entry.nostyle";
 import AreaNotes from "./AreaNotes";
 import CodeScanner from "./CodeScanner";
-import FormData from "./FormData";
+import InputNewProfile from "./InputNewProfile";
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
-import { fetchDays, changeDay, dayAddProcess } from "../store/dayDataStore/dayDataActions";
-import {fetchProfile} from "../store/profileStore/profileActions";
+import { fetchDays } from "../store/dayDataStore/dayDataActions";
+import { fetchProfile } from "../store/profileStore/profileActions";
 import { getDateObj } from "../App";
 
 
@@ -33,43 +33,50 @@ export const MainPage = props => {
   const loadingDays = useSelector(state => state.dayStore.loading);
 
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
 
   const history = useHistory();
-  const [loadedDate, setLoadedDate] = useState(
-    format(new Date(), "dd-MM-yyyy")
-  );
-  const indexDate = dayData.findIndex(x => x.date === loadedDate);
-  const data = dayData[indexDate];
+  // const [loadedDate, setLoadedDate] = useState(
+  //   format(new Date(), "dd-MM-yyyy")
+  // );
+  // const indexDate = dayData.findIndex(x => x.date === loadedDate);
+  // const data = dayData[indexDate];
 
   useEffect(() => {
     dispatch(fetchPersons());
-    // dispatch(fetchDays());
+    dispatch(fetchDays('05-04-2020'));
     // dispatch(fetchProfile('0008750571'))
-  }, []);
+  }, [dispatch]);
 
   const changeLoadDate = date => {
     const formatedDate = format(date, "dd-MM-yyyy");
-
-
-    if (dayData.findIndex(x => x.date === formatedDate) === -1) {
-      const newDateObj = { date: formatedDate, notes: "", history: [] };
-      dispatch(dayAddProcess(newDateObj));
-    }
-
-    setLoadedDate(formatedDate);
+    dispatch(fetchDays(formatedDate));
   };
 
-  return <div><h1>Hi</h1></div>
-  // return (!loadingDays && !loadingPersons) ? (
+  return (!loadingDays && !loadingPersons) ? (
+    <>
+      <div className="mainPage">
+        <Calendar
+          className="calendar calendarMain"
+          value={parse(dayData.date, "dd-MM-yyyy", new Date())}
+          onChange={date => changeLoadDate(date)}
+        />
+        <div className="notesMain font-white-shadow">
+          <AreaNotes notesValue={dayData?.notes} type="DAY_DATA" date={dayData?.date} />
+        </div>
+      </div>
+    </>
+  ) : <Spinner />
+
+};
+
+
+export default MainPage;
+
+
+// return (!loadingDays && !loadingPersons) ? (
   //   <>
-  //     <div className="mainPage">
-  //       <Calendar
-  //         className="calendar calendarMain"
-  //         value={parse(loadedDate, "dd-MM-yyyy", new Date())}
-  //         onChange={date => changeLoadDate(date)}
-  //       />
   //       <div className="notesMain font-white-shadow">
   //         <AreaNotes notesValue={data?.notes} type="DAY_DATA" dayObject={data} />
   //       </div>
@@ -92,7 +99,3 @@ export const MainPage = props => {
   //     <TableForScanner data={dayData[indexDate]} />
   //   </>
   // ) : <Spinner />
-};
-
-
-export default MainPage;

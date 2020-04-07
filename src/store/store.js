@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 /* eslint-disable no-underscore-dangle */
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import createSagaMiddlewate from 'redux-saga';

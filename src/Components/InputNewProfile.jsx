@@ -3,11 +3,10 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { chgProfileValue } from "../store/profileStore/profileActions";
 
-const InputProfile = (props) => {
+const InputNewProfile = (props) => {
 
   // Pass @route for last prop => to use history.push on input(MainPage - new Person) to open new profile
-  const { type, code } = props;
-  const forCode = (type === 'code');
+  const { type, date } = props;;
   const [inputValue, setValue] = useState(baseValue);
   const placeholder = `Добавить ${formLabel.slice(0, -1).toLowerCase()}`;
 
@@ -30,4 +29,4 @@ const InputProfile = (props) => {
 
 
 
-export default InputProfile;
+export default InputNewProfile;
