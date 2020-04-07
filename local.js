@@ -258,7 +258,7 @@ app.post("/addToHistory", (req, res) => {
   activityDb('activityData')
     .insert({ "code": code, "date": date, "time": time, "type": "Посещение", "person": "", "amount": "" })
     .then(() =>
-      activityDb.select('*').from('activityData').where("date", date).then(data => {
+      activityDb.select('*').from('activityData').where({"date":date,"type": "Посещение"} ).then(data => {
         res.send(JSON.stringify(data));
       }))
 });

@@ -29,13 +29,12 @@ const CodeScanner = (props) => {
   const personData = useSelector(state => state.personsStore.data);
   const historyData = useSelector(state => state.activitiesStore.data);
   const dispatch = useDispatch();
-  
-  // function substractOneRemain(code) {
-  //   // const personData = getPersonStore();
-  //   const index = getIndexByCode(code);
-  //   const person = personData[index];
-  //   if (person.remain !== "") dispatch(chgProfileValue(code, 'remain'), (+person.remain - 1));
-  // }
+
+  function substractOneRemain(code, index) {
+    console.log('substract ONE');
+    const person = personData[index];
+    if (person.remain !== "") dispatch(chgProfileValue(code, 'remain', (+person.remain - 1)));
+  }
 
   // function addToTodayHistory(code, dayObject) {
 
@@ -61,7 +60,7 @@ const CodeScanner = (props) => {
         // dispatch(fetchPersons());
       } else {
         dispatch(addToHistory(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
-        // substract remain
+        substractOneRemain(code, indexPerson);
       }
     }
   }
@@ -76,7 +75,7 @@ const CodeScanner = (props) => {
   }
   return (
     <>
-      <label>{type=== 'PROFILE' ? "Создать профиль:" : "Сканер карт:"}</label>
+      <label>{type === 'PROFILE' ? "Создать профиль:" : "Сканер карт:"}</label>
       <form name="codeForm" onSubmit={enterCode}>
         <input required minLength={1} placeholder=" Введите данные" type="text" name={props.inputType} onChange={event => setCode(event.target.value)} value={code} />
       </form>
