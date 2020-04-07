@@ -173,17 +173,18 @@ app.get("/getProfile/:code", (req, res) => {
 
 
 app.get("/addNewPerson/:code", async (req, res) => {
-  const { personName, code } = req.body;
+  const { code } = req.params;
   let codeCyrillic = decodeURI(code);
+  console.log(codeCyrillic);
   // if code already in base => insert with "КОПИЯ" => users can have same names or its just error
   try {
-    await personDb('personData').insert({ personName, codeCyrillic });
+    await personDb('personData').insert({ "personName": codeCyrillic, "code": codeCyrillic });
   } catch {
-    personName += ' Копия';
     codeCyrillic += ' Копия';
-    await personDb('personData').insert({ personName, codeCyrillic });
+    await personDb('personData').insert({ "personName": codeCyrillic, "code": codeCyrillic });
   }
   const newUser = await personDb('personData').where('code', codeCyrillic);
+  console.log(newUser);
   await res.send(JSON.stringify(newUser));
 });
 
@@ -253,11 +254,11 @@ app.post("/addToHistory", (req, res) => {
    "day": "05-04-2020",
    "time": "12:01:11"
   } */
-  const { code, day, time } = req.body;
+  const { code, date, time } = req.body;
   activityDb('activityData')
-    .insert({ "code": code, "date": day, "time": time, "type": "Посещение", "person": "", "amount": "" })
+    .insert({ "code": code, "date": date, "time": time, "type": "Посещение", "person": "", "amount": "" })
     .then(() =>
-      activityDb.select('*').from('activityData').where("date", day).then(data => {
+      activityDb.select('*').from('activityData').where("date", date).then(data => {
         res.send(JSON.stringify(data));
       }))
 });
@@ -293,9 +294,9 @@ app.get("/deleteActivities/:code", (req, res) => {
   const codeCyrillic = decodeURI(code);
 
   activityDb.select('*').from('activityData').where("code", codeCyrillic).del()
-  .then(() => {
-    res.send('sucess');
-  });
+    .then(() => {
+      res.send('sucess');
+    });
 });
 
 

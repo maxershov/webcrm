@@ -28,6 +28,8 @@ export default function personDataReducer(state = initialState, action) {
         error: true,
         errorMsg: action.err
       };
+    case "PUSH_NEW_PERSON":
+      return {...state.data.push(action.person) }
     case "CHANGE_PERSON_DATA":
       return { ...state, data: action.data, loading: false }
     case "LOADING_PERSON":
@@ -38,8 +40,8 @@ export default function personDataReducer(state = initialState, action) {
 }
 
 
-//add method for upd data => CHANGE like this, but before add => 
+// add method for upd data => CHANGE like this, but before add => 
 // get All data => replace one... or mutate => save in new const => send to redux
 
 
-//or just pull all new data from db...
+// or just pull all new data from db...

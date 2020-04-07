@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { format, fromUnixTime } from 'date-fns'
+import { format } from 'date-fns'
 import { useDispatch, useSelector } from "react-redux";
 import { addNewDayDataToJSON, getIndexByCode } from '../App';
 import { getPersonStore } from '../store/storeGetters'
 import { chgProfileValue, addNewProfile } from "../store/profileStore/profileActions";
 import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
+import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 
 
 /* code scanner => 
@@ -27,7 +28,7 @@ const CodeScanner = (props) => {
   const personData = useSelector(state => state.personsStore.data);
   const historyData = useSelector(state => state.activitiesStore.data);
   const dispatch = useDispatch();
-
+  
   // function substractOneRemain(code) {
   //   // const personData = getPersonStore();
   //   const index = getIndexByCode(code);
@@ -53,22 +54,13 @@ const CodeScanner = (props) => {
     if (indexHistory === -1) {
       // find if in persons
       const indexPerson = personData.findIndex(person => person.code === code);
-      if (index === -1) {
+      if (indexPerson === -1) {
         dispatch(addNewProfile(code));
-        dispatch(addToHistory(code, format(date, "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
+        dispatch(addToHistory(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
+        dispatch(fetchPersons());
       } else {
-        // dispatch 
+        dispatch(addToHistory(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
       }
-      // TODO find if already in history..
-
-      // If code not in db => create new + add to history. If already in db => add to history 
-      // if (index === -1) {
-      //   dispatch(addNewProfile(code));
-
-      //   addToTodayHistory(code, dayObject);
-      // } else {
-      //   addToTodayHistory(personData[index].code, dayObject);
-      // }
     }
   }
 

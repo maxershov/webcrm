@@ -33,7 +33,7 @@ export const MainPage = props => {
   const loadingPersons = useSelector(state => state.personsStore.loading);
   const loadingDays = useSelector(state => state.dayStore.loading);
   const loadingActivities = useSelector(state => state.activitiesStore.loading);
-
+  const notesValue = useSelector(state => state.dayStore.data.notes);
 
   const dispatch = useDispatch();
 
@@ -61,14 +61,13 @@ export const MainPage = props => {
   return (!loadingDays && !loadingPersons && !loadingActivities) ? (
     <>
       <div className="mainPage">
-      <h1>days{loadingDays.toString()}persons{loadingPersons.toString()}activities{loadingActivities.toString()}</h1>
         <Calendar
           className="calendar calendarMain"
           value={parse(loadedDate, "dd-MM-yyyy", new Date())}
           onChange={date => changeLoadDate(date)}
         />
         <div className="notesMain font-white-shadow">
-          <AreaNotes notesValue={dayData?.notes} type="DAY_DATA" date={dayData?.date} />
+          <AreaNotes type="DAY_DATA" notesValue={notesValue} date={loadedDate} />
         </div>
         {isToday(loadedDate) ? (
           <div className="newCodeField">

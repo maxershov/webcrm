@@ -1,5 +1,5 @@
 import { takeLatest, put, call } from "redux-saga/effects";
-
+import {pushNewPerson} from "../personsDataStore/personsDataActions";
 import host from "../../../host";
 
 export const reqProfile = () => {
@@ -46,6 +46,7 @@ function* fetchProfileAsync({ code }) {
         res.json()
       );
     });
+    yield put(pushNewPerson(data[0]));
     yield put(reqProfileSucess(data[0]));
   } catch (err) {
     yield put(reqProfileError(err));
@@ -95,7 +96,7 @@ function* changeCodeAsync({ oldCode, code }) {
 function* addNewProfileAsync({ code }) {
   try {
     const newPerson = yield call(() => {
-      return fetch(`http://${host.host}:6700/addNewPerson:${encodeURI(code)}`).then(res =>
+      return fetch(`http://${host.host}:6700/addNewPerson/${encodeURI(code)}`).then(res =>
         res.json()
       );
     });

@@ -73,7 +73,7 @@ function* addToHistoryAsync({ code, day, time }) {
     yield put(reqActivities());
     yield sleep(1000)
     const data = yield call(() => {
-      return fetch(`http://${host.host}:6700/getActivities/addToHistory`, requestOptions).then(res =>
+      return fetch(`http://${host.host}:6700/addToHistory`, requestOptions).then(res =>
         res.json()
       );
     });

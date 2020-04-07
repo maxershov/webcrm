@@ -22,8 +22,8 @@ const TableForScanner = (props) => {
 
   const personData = useSelector(state => state.personsStore.data);
   const historyData = useSelector(state => state.activitiesStore.data);
-  const loadingPersons = useSelector(state => state.personsStore.loading);
-  const loadingActivities = useSelector(state => state.activitiesStore.loading);
+  // const loadingPersons = useSelector(state => state.personsStore.loading);
+  // const loadingActivities = useSelector(state => state.activitiesStore.loading);
   // const loadingDays = useSelector(state => state.dayStore.loading);
 
   const history = useHistory();
@@ -35,7 +35,8 @@ const TableForScanner = (props) => {
   //   setHistoryData(props.data.history);
   // }, [props.data]);
 
-  return (!loadingActivities && !loadingPersons) ? (
+  return (
+  // return (!loadingActivities && !loadingPersons) ? (
     <div className="tableMain">
       <ReactTable
         className="table -striped -highlight"
@@ -91,7 +92,8 @@ const TableForScanner = (props) => {
         defaultPageSize={5}
       />
     </div>
-  ) : <Spinner />
+  );
+  // ) : <Spinner />
 }
 
 
