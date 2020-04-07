@@ -28,11 +28,8 @@ export default function personDataReducer(state = initialState, action) {
         error: true,
         errorMsg: action.err
       };
-    case "PUSH_NEW_PERSON":
-      return {...state.data.push(action.person) }
-    case "CHANGE_PERSON_DATA":
-      return { ...state, data: action.data, loading: false }
-    case "LOADING_PERSON":
+
+    case "LOADING_PERSON_DATA":
       return { ...state, loading: true }
     default:
       return state;

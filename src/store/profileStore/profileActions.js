@@ -46,7 +46,6 @@ function* fetchProfileAsync({ code }) {
         res.json()
       );
     });
-    yield put(pushNewPerson(data[0]));
     yield put(reqProfileSucess(data[0]));
   } catch (err) {
     yield put(reqProfileError(err));
@@ -100,6 +99,8 @@ function* addNewProfileAsync({ code }) {
         res.json()
       );
     });
+    console.log("addNewProfile", newPerson[0]);
+    yield put(pushNewPerson(newPerson[0]));
     yield put(reqProfileSucess(newPerson[0]));
   } catch (err) {
     yield put(reqProfileError(err));

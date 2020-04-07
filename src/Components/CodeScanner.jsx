@@ -25,6 +25,7 @@ newProfile field =>
 
 
 const CodeScanner = (props) => {
+  const { type } = props;
   const personData = useSelector(state => state.personsStore.data);
   const historyData = useSelector(state => state.activitiesStore.data);
   const dispatch = useDispatch();
@@ -48,18 +49,19 @@ const CodeScanner = (props) => {
   //   addNewDayDataToJSON(dayObject);
   // }
 
-  function handleNewCode(code, dayObject) {
+  function handleNewCode(code) {
     // find if in history
     const indexHistory = historyData.findIndex(person => person.code === code);
     if (indexHistory === -1) {
-      // find if in persons
+      // find if in persons => if not => create new profile and add to history
       const indexPerson = personData.findIndex(person => person.code === code);
       if (indexPerson === -1) {
         dispatch(addNewProfile(code));
         dispatch(addToHistory(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
-        dispatch(fetchPersons());
+        // dispatch(fetchPersons());
       } else {
         dispatch(addToHistory(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
+        // substract remain
       }
     }
   }
@@ -69,13 +71,14 @@ const CodeScanner = (props) => {
     event.preventDefault();
     const codeSaved = code;
     setCode(''); // clear codeField
-    handleNewCode(codeSaved, props.dayObject);
+    if (type === 'SCANNER') handleNewCode(codeSaved);
+    if (type === 'PROFILE') createProfile(codeSaved);
   }
   return (
     <>
-      <label>Сканер карт:</label>
+      <label>{type=== 'PROFILE' ? "Создать профиль:" : "Сканер карт:"}</label>
       <form name="codeForm" onSubmit={enterCode}>
-        <input required minLength={1} placeholder="Введите код" type="text" name={props.inputType} onChange={event => setCode(event.target.value)} value={code} />
+        <input required minLength={1} placeholder=" Введите данные" type="text" name={props.inputType} onChange={event => setCode(event.target.value)} value={code} />
       </form>
     </>
   );

@@ -70,9 +70,14 @@ export const MainPage = props => {
           <AreaNotes type="DAY_DATA" notesValue={notesValue} date={loadedDate} />
         </div>
         {isToday(loadedDate) ? (
-          <div className="newCodeField">
-            <CodeScanner dayObject={dayData} date={loadedDate} />
-          </div>
+          <>
+            <div className="newProfileField">
+              <CodeScanner type="PROFILE" />
+            </div>
+            <div className="newCodeField">
+              <CodeScanner type="SCANNER" />
+            </div>
+          </>
         ) : (
             undefined
           )}
