@@ -4,10 +4,9 @@
 
 // TODO add del func in personStore
 // TODO add api for activities
-// TODO add func to dates
 // TODO add func to activities
 // add activitiesField
-// chg code to NameSecondnameThirdname .replace(' ','')
+// chg code to NameSecondThird .replace(' ','')
 
 
 const express = require("express");
@@ -42,21 +41,24 @@ const personDb = knex({
   client: 'sqlite3',
   connection: {
     filename: path.join(homePath, "db", "personDATA.db")
-  }
+  },
+  useNullAsDefault: true
 });
 
 const activityDb = knex({
   client: 'sqlite3',
   connection: {
     filename: path.join(homePath, "db", "activityData.db")
-  }
+  },
+  useNullAsDefault: true
 });
 
 const dayDb = knex({
   client: 'sqlite3',
   connection: {
     filename: path.join(homePath, "db", "dayData.db")
-  }
+  },
+  useNullAsDefault: true
 });
 
 
@@ -118,7 +120,7 @@ app.get("/deletePerson", (req, res) => {
   personDb('personData')
     .where('code', code)
     .del().then(res.send('sucess'));
-  // TODO handle activities del
+  // TODO handle activities del ?????????????????????
 });
 
 app.post("/updateCode", (req, res) => {
@@ -133,7 +135,8 @@ app.post("/updateCode", (req, res) => {
     .then(() =>
       personDb('personData').where('code', code).select('*')
         .then(data => res.send(JSON.stringify(data))));
-  // TODO handle activities rename
+
+  // TODO handle activities rename => from client coz i need new data
 });
 
 app.post("/updateField", async (req, res) => {
@@ -157,8 +160,9 @@ app.get("/getPersons", (req, res) => {
 
 app.get("/getProfile/:code", (req, res) => {
   const { code } = req.params;
+  const codeCyrillic = decodeURI(code);
   personDb('personData')
-    .where('code', code)
+    .where('code', codeCyrillic)
     .select('*')
     .then(data => {
       res.send(JSON.stringify(data));
@@ -168,24 +172,19 @@ app.get("/getProfile/:code", (req, res) => {
 
 
 app.get("/addNewPerson/:code", async (req, res) => {
-  // {
-  //   "code":"code3"
-  // }
-  let { personName, code } = req.body;
+  const { personName, code } = req.body;
+  let codeCyrillic = decodeURI(code);
   // if code already in base => insert with "КОПИЯ" => users can have same names or its just error
   try {
-    await personDb('personData').insert({ personName, code });
+    await personDb('personData').insert({ personName, codeCyrillic });
   } catch {
     personName += ' Копия';
-    code += ' Копия';
-    await personDb('personData').insert({ personName, code });
+    codeCyrillic += ' Копия';
+    await personDb('personData').insert({ personName, codeCyrillic });
   }
-  const newUser = await personDb('personData').where('code', code);
+  const newUser = await personDb('personData').where('code', codeCyrillic);
   await res.send(JSON.stringify(newUser));
 });
-
-
-// personDb('personData').where('code', code)
 
 // app.post("/addNewPerson", async (req, res) => {
 //   // TODO handle equal codes
@@ -197,19 +196,11 @@ app.get("/addNewPerson/:code", async (req, res) => {
 //   await res.send(newUser);
 // });
 
-// app.post("/addNewPerson", (req, res) => {
-//   const { personName, code } = req.body;
-//   console.log(personName, code);
-//   personDb.raw(personDb('personData').insert({
-//     personName,
-//     code
-//   }).toString().replace('insert', 'INSERT OR IGNORE')).then(
-//     res.send('sucess')
-//   );
-// }); 
-// mb res.send => query new row with name and code => if already in list => will take saved profile!
 
-// DAY DATA
+
+
+/** ********************** DAY ********************************************** */
+
 
 
 app.get("/getDate/:day", (req, res) => {
@@ -239,6 +230,131 @@ app.post("/chgNotes", (req, res) => {
 
 
 
+/** ********************** ACTIVITY ********************************************** */
+
+
+
+// Get  activ for day history
+app.get("/getHistory/:day", (req, res) => {
+  // http://192.168.1.150:6700/getHistory/05-04-2020
+  const { day } = req.params;
+  activityDb.select('*').from('activityData').where({ 'date': day, 'type': 'Посещение' }).then(data => {
+    res.send(JSON.stringify(data));
+  });
+});
+
+
+
+// Add new profile to day history
+app.post("/addToHistory", (req, res) => {
+  /* {
+   "code": "Иванов123",
+   "day": "05-04-2020",
+   "time": "12:01:11"
+  } */
+  const { code, day, time } = req.body;
+  activityDb('activityData')
+    .insert({ "code": code, "date": day, "time": time, "type": "Посещение", "person": "", "amount": "" })
+    .then(() =>
+      activityDb.select('*').from('activityData').where("date", day).then(data => {
+        res.send(JSON.stringify(data));
+      }))
+});
+
+
+
+// change all codes by code
+app.post("/changeActivityCode", (req, res) => {
+  // return activity for profile
+  /* {
+    "code":"ЕршовМаксимЛеонидович",
+    "oldCode": "ааабвгд"
+  } */
+
+  const { oldCode, code } = req.body;
+  console.log(oldCode, code);
+  // const codeCyrillic = decodeURIComponent(escape(code));
+  activityDb.select('*')
+    .from('activityData')
+    .where("code", oldCode)
+    .update({ 'code': code })
+    .then(() =>
+      activityDb.select('*').from('activityData').where("code", code).then(data => {
+        res.send(JSON.stringify(data));
+      }));
+});
+
+
+// delete all activities by code
+app.get("/deleteActivities/:code", (req, res) => {
+  // http://192.168.1.150:6700/deleteActivities/ЕршовМаксимЛеонидович
+  const { code } = req.params;
+  const codeCyrillic = decodeURI(code);
+
+  activityDb.select('*').from('activityData').where("code", codeCyrillic).del()
+  .then(() => {
+    res.send('sucess');
+  });
+});
+
+
+
+
+
+// get activities by code
+app.get("/getActivities/:code", (req, res) => {
+  // http://192.168.1.150:6700/getActivities/ЕршовМаксимЛеонидович
+  const { code } = req.params;
+  const codeCyrillic = decodeURI(code);
+
+  // const codeCyrillic = decodeURIComponent(escape(code));
+  activityDb.select('*').from('activityData').where("code", codeCyrillic).then(data => {
+    res.send(JSON.stringify(data));
+  });
+});
+
+
+// add activity by code
+app.post("/addActivity", (req, res) => {
+  /* {
+   "code": "ЕршовМаксимЛеонидович",
+   "day": "05-04-2020",
+   "time": "10:01:11",
+   "type": "ПТ",
+   "person": "",
+   "amount": ""
+  } */
+  const { code, day, time = '00:00:00', type = '', person = '', amount = '' } = req.body;
+  activityDb('activityData')
+    .insert({ "code": code, "date": day, "time": time, "type": type, "person": person, "amount": amount })
+    .then(() =>
+      activityDb.select('*').from('activityData').where("code", code).then(data => {
+        res.send(JSON.stringify(data));
+      }))
+});
+
+
+
+
+// del activity by code. date, time
+app.post("/delActivity", (req, res) => {
+  /* {
+   "code": "ЕршовМаксимЛеонидович",
+   "day": "05-04-2020",
+   "time": "10:01:11",
+   "type": "ПТ",
+   "person": "",
+   "amount": ""
+  } */
+  const { code, day, time, type, person, amount } = req.body;
+  activityDb('activityData')
+    .where({ "code": code, "date": day, "time": time, "type": type, "person": person, "amount": amount })
+    .del()
+    .then(() =>
+      activityDb.select('*').from('activityData').where("code", code).then(data => {
+        res.send(JSON.stringify(data));
+      }))
+});
 
 
 
