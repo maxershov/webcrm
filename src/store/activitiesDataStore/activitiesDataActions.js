@@ -101,18 +101,18 @@ function* addToHistoryAsync({ code, date, time, typeInput, person, amount }) {
     body: JSON.stringify(
       { "code": code, "date": date, "time": time, "type": typeInput, "person": person, "amount": amount })
   };
-    try {
-      yield put(reqActivities());
-      yield sleep(1000)
-      const data = yield call(() => {
-        return fetch(`http://${host.host}:6700/addActivity`, requestOptions).then(res =>
-          res.json()
-        );
-      });
-      yield put(reqActivitiesSucess(data));
-    } catch (err) {
-      yield put(reqActivitiesError(err));
-    }
+  try {
+    yield put(reqActivities());
+    yield sleep(1000)
+    const data = yield call(() => {
+      return fetch(`http://${host.host}:6700/addActivity`, requestOptions).then(res =>
+        res.json()
+      );
+    });
+    yield put(reqActivitiesSucess(data));
+  } catch (err) {
+    yield put(reqActivitiesError(err));
+  }
 };
 
 

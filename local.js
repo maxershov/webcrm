@@ -4,13 +4,9 @@
 
 
 // TODO try to move loading to components => if i change date in main page => just components load => and not all at once
-// TODO add del func in personStore
-// TODO add func to activities
-// add activitiesField
 // chg code to NameSecondThird .replace(' ','')
 // TODO add sort by date and time in history table =>person
 // TODO check for func => where i need to return new data (add new profile => route.push => fetchData)
-
 
 
 const express = require("express");
@@ -22,23 +18,16 @@ const fs = require("fs");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const knex = require('knex')
-
-
 const myLocalHost = require("./host");
 
-const staticFiles = express.static(path.join(__dirname, "dist"));
 
+const staticFiles = express.static(path.join(__dirname, "dist"));
 
 
 let homePath = null;
 process.platform === "win32"
   ? (homePath = path.join(path.dirname(require("os").homedir()), "Public"))
   : (homePath = require("os").homedir());
-
-
-
-// TODO add  .catch(err => res.status(400).json(err))
-
 
 
 const personDb = knex({
@@ -49,6 +38,7 @@ const personDb = knex({
   useNullAsDefault: true
 });
 
+
 const activityDb = knex({
   client: 'sqlite3',
   connection: {
@@ -57,6 +47,7 @@ const activityDb = knex({
   useNullAsDefault: true
 });
 
+
 const dayDb = knex({
   client: 'sqlite3',
   connection: {
@@ -64,7 +55,6 @@ const dayDb = knex({
   },
   useNullAsDefault: true
 });
-
 
 
 const pathPersonData = path.join(homePath, "db", "personDATA.json");
@@ -119,20 +109,40 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/deletePerson", (req, res) => {
-  const { code } = req.body;
+app.get("/deleteProfile/:code", (req, res) => {
+  const { code } = req.params;
+  const codeCyrillic = decodeURI(code);
+  console.log('DELETE', codeCyrillic);
   personDb('personData')
-    .where('code', code)
-    .del().then(res.send('sucess'));
-  // TODO handle activities del ?????????????????????
+    .where('code', codeCyrillic)
+    .del().then(() =>
+      activityDb.select('*').from('activityData').where("code", codeCyrillic).del()
+        .then(() => {
+          res.send('sucess');
+        }
+        ));
 });
+
+
+// app.get("/deleteProfile", (req, res) => {
+//   const { code } = req.params;
+//   personDb('personData')
+//     .where('code', code)
+//     .del().then((res.send('sucess')));
+
+
+//   // TODO handle activities del ?????????????????????
+// });
+
 
 app.post("/updateCode", (req, res) => {
   // {
   //   "oldCode":"code12345",
   //   "code":"code3"
   // }
-  const { oldCode, code } = req.body;
+  let { oldCode, code } = req.body;
+  code = code.replace(/ /g, '');
+
   personDb('personData')
     .where('code', oldCode)
     .update('code', code)
@@ -142,6 +152,7 @@ app.post("/updateCode", (req, res) => {
 
   // TODO handle activities rename => from client coz i need new data
 });
+
 
 app.post("/updateField", async (req, res) => {
   console.log(req.body);
@@ -162,6 +173,7 @@ app.get("/getPersons", (req, res) => {
   });
 });
 
+
 app.get("/getProfile/:code", (req, res) => {
   const { code } = req.params;
   const codeCyrillic = decodeURI(code);
@@ -176,18 +188,19 @@ app.get("/getProfile/:code", (req, res) => {
 
 
 app.get("/addNewPerson/:code", async (req, res) => {
-  const { code } = req.params;
-  let codeCyrillic = decodeURI(code);
-  console.log(codeCyrillic);
+  let { code } = req.params;
+  let nameCyrillic = decodeURI(code);
+  code = nameCyrillic.replace(/ /g, '');
   // if code already in base => insert with "КОПИЯ" => users can have same names or its just error
   try {
-    await personDb('personData').insert({ "personName": codeCyrillic, "code": codeCyrillic });
+    await personDb('personData').insert({ "personName": nameCyrillic, "code": code });
   } catch {
-    codeCyrillic += ' Копия';
-    await personDb('personData').insert({ "personName": codeCyrillic, "code": codeCyrillic });
+    nameCyrillic += ' Копия';
+    code += 'Копия';
+    await personDb('personData').insert({ "personName": nameCyrillic, "code": code });
   }
-  const newUser = await personDb('personData').where('code', codeCyrillic);
-  console.log(newUser);
+  const newUser = await personDb('personData').where('code', code);
+  // console.log(newUser);
   await res.send(JSON.stringify(newUser));
 });
 

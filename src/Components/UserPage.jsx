@@ -4,9 +4,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom'
-import { fetchProfile, chgProfileValue } from "../store/profileStore/profileActions";
-import {fetchHistory, addToHistory} from "../store/activitiesDataStore/activitiesDataActions";
-import { deletePerson, getImg } from '../App';
+import { fetchProfile, chgProfileValue, deleteProfile } from "../store/profileStore/profileActions";
+import { fetchHistory, addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
+import { getImg } from '../App';
 import FormData from './FormData';
 import CalendarHideable from './CalendarHideable';
 import FieldDeposite from './FieldDeposite';
@@ -35,8 +35,11 @@ export const UserPage = (props) => {
     dispatch(fetchHistory(codeLink))
   }, [codeLink, dispatch]);
 
-
   if (person === undefined) {
+    history.push('/main');
+  }
+  function delProfile(code) {
+    dispatch(deleteProfile(person.code))
     history.push('/main');
   }
 
@@ -54,7 +57,7 @@ export const UserPage = (props) => {
           <>
             <InputProfile formLabel="Изменить код фото:" baseValue={person.photoId} inputType="photoId" />
             <label>Удаление:</label>
-            <button type="button" onClick={() => deletePerson(person.code)}>Удалить пользователя</button>
+            <button type="button" onClick={() => delProfile(person.code)}>Удалить пользователя</button>
           </>
         ) : undefined}
         <InputProfile formLabel="Имя:" baseValue={person.personName} inputType="personName" />

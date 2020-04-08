@@ -10,7 +10,7 @@ const InputProfile = (props) => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const { codeLink } = useParams();
+  const { codeFromURL } = useParams();
 
   const person = useSelector(state => state.profileStore.data);
 
@@ -21,14 +21,14 @@ const InputProfile = (props) => {
 
   const sendToDb = (event) => {
     event.preventDefault();
-    if (oldFieldValue === 'ЛИД') dispatch(chgProfileValue(codeLink, "rent", ""));
+    if (oldFieldValue === 'ЛИД') dispatch(chgProfileValue(codeFromURL, "rent", ""));
     if (inputType === 'code') {
-      dispatch(chgCode(codeLink, inputValue));
+      dispatch(chgCode(codeFromURL, inputValue));
       history.push('/main');
     }
     else {
-      dispatch(chgProfileValue(codeLink, inputType, inputValue));
-      dispatch(addToHistory(codeLink, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${inputType}`, "", `${oldFieldValue} => ${inputValue}`));
+      dispatch(chgProfileValue(codeFromURL, inputType, inputValue));
+      dispatch(addToHistory(codeFromURL, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${inputType}`, "", `${oldFieldValue} => ${inputValue}`));
     }
 
   }

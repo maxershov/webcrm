@@ -9,7 +9,7 @@ import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions
 const CalendarHideable = (props) => {
   const dispatch = useDispatch();
   const [renderCalendar, setRenderCalendar] = useState('none');
-  const { codeLink } = useParams();
+  const { codeFromURL } = useParams();
 
   const person = useSelector(state => state.profileStore.data);
   const oldFieldValue = person[props.dateType];
@@ -19,8 +19,8 @@ const CalendarHideable = (props) => {
     if (props.dateType === 'setParent') {
       props.setParentDate(date)
     } else {
-      dispatch(chgProfileValue(codeLink, props.dateType, date));
-      dispatch(addToHistory(codeLink, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${props.dateType}`, "", `${oldFieldValue} => ${date}`));
+      dispatch(chgProfileValue(codeFromURL, props.dateType, date));
+      dispatch(addToHistory(codeFromURL, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${props.dateType}`, "", `${oldFieldValue} => ${date}`));
 
     }
 
@@ -28,7 +28,7 @@ const CalendarHideable = (props) => {
   }
 
   function deleteDate() {
-    dispatch(chgProfileValue(codeLink, props.dateType, ""));
+    dispatch(chgProfileValue(codeFromURL, props.dateType, ""));
     setRenderCalendar('none');
   }
   return (

@@ -31,12 +31,20 @@ export const addNewProfile = (code) => {
   return { type: "ADD_NEW_PROFILE", code };
 }
 
+export const deleteProfile = (code) => {
+  return {type:"DELETE_PROFILE", code};
+}
+
 export function* watchFetchProfile() {
   yield takeLatest("FETCHED_PROFILE", fetchProfileAsync);
   yield takeLatest("CHANGE_PROFILE_VALUE", changeFieldAsync);
   yield takeLatest("CHANGE_CODE", changeCodeAsync);
   yield takeLatest("ADD_NEW_PROFILE", addNewProfileAsync);
+  yield takeLatest("DELETE_PROFILE", deleteProfileAsync);
 }
+
+
+/* ************************* functions ************************************************************* */
 
 function* fetchProfileAsync({ code }) {
   try {
@@ -106,9 +114,23 @@ function* addNewProfileAsync({ code }) {
         res.json()
       );
     });
-    console.log("addNewProfile", newPerson[0]);
+    
+    // push new person to personData
     yield put(pushNewPerson(newPerson[0]));
     yield put(reqProfileSucess(newPerson[0]));
+  } catch (err) {
+    yield put(reqProfileError(err));
+  }
+}
+
+
+function* deleteProfileAsync({ code }) {
+  yield put(reqProfile());
+  try {
+    yield call(() => {
+      return fetch(`http://${host.host}:6700/deleteProfile/${encodeURI(code)}`)
+    });
+    // yield put(reqProfileSucess(undefined));
   } catch (err) {
     yield put(reqProfileError(err));
   }

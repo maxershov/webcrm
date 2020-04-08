@@ -17,7 +17,7 @@ const CodeScanner = (props) => {
   function createProfile(code) {
     dispatch(addNewProfile(code));
     // open user page with new profile
-    route.push(`/profile/${code}`)
+    route.push(`/profile/${code.replace(/ /g, '')}`)
   }
 
   function substractOneRemain(code, index) {
