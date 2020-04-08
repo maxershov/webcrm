@@ -323,9 +323,11 @@ app.post("/delActivity", (req, res) => {
    "person": "",
    "amount": ""
   } */
-  const { code, day, time, type, person, amount } = req.body;
+  const { code, date, time, type, person, amount } = req.body;
+  console.log('code, date, time, type, person, amount');
+  console.log(code, date, time, type, person, amount);
   activityDb('activityData')
-    .where({ "code": code, "date": day, "time": time, "type": type, "person": person, "amount": amount })
+    .where({ "code": code, "date": date, "time": time, "type": type, "person": person, "amount": amount })
     .del()
     .then(() =>
       activityDb.select('*').from('activityData').where("code", code).then(data => {

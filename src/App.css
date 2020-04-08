@@ -463,3 +463,10 @@ a {
         -webkit-transform: scaleY(1.0);
     }
 }
+
+#DeleteButton {
+    background-color: rgba(255, 0, 0, 0.795);
+    color:rgba(255, 255, 255, 0.719);
+    background-image: none;
+    width: auto;
+}

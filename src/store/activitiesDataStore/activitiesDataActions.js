@@ -30,8 +30,12 @@ export const addToHistory = (code, date, time, typeInput, person, amount) => {
   return { type: "ADD_TO_HISTORY", code, date, time, typeInput, person, amount };
 }
 
-export const changeCodeHistory = (oldCode, code) => {
-  return { type: "CHANGE_CODE_HISTORY", oldCode, code };
+// export const changeCodeHistory = (oldCode, code) => {
+//   return { type: "CHANGE_CODE_HISTORY", oldCode, code };
+// }
+
+export const deleteHistoryObj = (code, date, time, typeInput, person, amount) => {
+  return { type: "DELETE_HISTORY_OBJECT", code, date, time, typeInput, person, amount };
 }
 
 export function* watchFetchActivities() {
@@ -39,7 +43,8 @@ export function* watchFetchActivities() {
   yield takeLatest("FETCHED_HISTORY_ACTIVITIES", fetchHistoryAsync);
   yield takeLatest("ADD_TO_VISITS", addToVisitsAsync);
   yield takeLatest("ADD_TO_HISTORY", addToHistoryAsync);
-  yield takeLatest("CHANGE_CODE_HISTORY", changeCodeHistoryAsync);
+  // yield takeLatest("CHANGE_CODE_HISTORY", changeCodeHistoryAsync);
+  yield takeLatest("DELETE_HISTORY_OBJECT", deleteHistoryObjAsync);
 }
 
 function* fetchVisitsAsync({ date }) {
@@ -117,17 +122,40 @@ function* addToHistoryAsync({ code, date, time, typeInput, person, amount }) {
 
 
 
-function* changeCodeHistoryAsync({ oldCode, code }) {
+// function* changeCodeHistoryAsync({ oldCode, code }) {
+//   const requestOptions = {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify({ "code": code, "date": date, "time": time })
+//   };
+//   try {
+//     yield put(reqActivities());
+//     yield sleep(1000)
+//     const data = yield call(() => {
+//       return fetch(`http://${host.host}:6700/addToHistory`, requestOptions).then(res =>
+//         res.json()
+//       );
+//     });
+//     yield put(reqActivitiesSucess(data));
+//   } catch (err) {
+//     yield put(reqActivitiesError(err));
+//   }
+// }
+
+
+function* deleteHistoryObjAsync({ code, date, time, typeInput, person, amount }) {
+  console.log("DEL", code, date, time, typeInput, person, amount);
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ "code": code, "date": date, "time": time })
+    body: JSON.stringify(
+      { "code": code, "date": date, "time": time, "type": typeInput, "person": person, "amount": amount })
   };
   try {
     yield put(reqActivities());
     yield sleep(1000)
     const data = yield call(() => {
-      return fetch(`http://${host.host}:6700/addToHistory`, requestOptions).then(res =>
+      return fetch(`http://${host.host}:6700/delActivity`, requestOptions).then(res =>
         res.json()
       );
     });
@@ -135,7 +163,7 @@ function* changeCodeHistoryAsync({ oldCode, code }) {
   } catch (err) {
     yield put(reqActivitiesError(err));
   }
-}
+};
 
 function* sleep(time) {
   yield new Promise(resolve => setTimeout(resolve, time));
