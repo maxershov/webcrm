@@ -1,9 +1,11 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-console */
 
 // TODO try to move loading to components => if i change date in main page => just components load => and not all at once
 // TODO check for func => where i need to return new data (add new profile => route.push => fetchData)
 // TODO handle visit with remain
 // TODO handle Pi RFID scanner
+// TODO add in visits => "Посещение учет" 
 
 const express = require("express");
 const history = require("connect-history-api-fallback");
@@ -47,33 +49,31 @@ const dayDb = knex({
 });
 
 
-const pathPersonData = path.join(homePath, "db", "personDATA.json");
+function writeData(pathTo, dbName) {
+  const source = path.join(homePath, "db", dbName);
+  fs.copyFile(source, path.join(pathTo, dbName), (err) => {
+    if (err) throw err;
+    console.log(`${dbName} was copied to ${pathTo}`);
+  });
+}
 
 
-// function writeData(pathTo, data) {
-//   fs.writeFile(pathTo, JSON.stringify(data), function (err) {
-//     if (err) throw err;
-//   })
-// }
-
-// checkIfDir();
-// function checkIfDir() {
-//   const datePath = format(new Date(), "ddMMyyyy");
-//   const pathTo = path.join(homePath, "db", "copyData", datePath);
-//   if (fs.existsSync(pathTo)) {
-//     console.log('The path exists.');
-//   } else {
-//     fs.mkdir(pathTo, function (err) {
-//       if (err) {
-//         return console.error(err);
-//       }
-//       writeData(pathTo + "/personDATA.json", JSON.parse(readDataJSON(pathPersonData)));
-//       writeData(pathTo + "/activityDATA.json", JSON.parse(readDataJSON(pathActivitiesData)));
-//       writeData(pathTo + "/dayDATA.json", JSON.parse(readDataJSON(pathDayData)));
-//       console.log("Directory created successfully!"); //Create dir in case not found
-//     });
-//   }
-// }
+(function DbCopy() {
+  const datePath = format(new Date(), "ddMMyyyy");
+  const pathTo = path.join(homePath, "db", "copyData", datePath);
+  if (fs.existsSync(pathTo)) {
+    console.log('Database already copied today');
+  } else {
+    fs.mkdir(pathTo, function error (err) {
+      if (err) {
+        return console.error(err);
+      }
+      writeData(pathTo, "personDATA.db");
+      writeData(pathTo, "activityDATA.db");
+      writeData(pathTo, "dayDATA.db");
+    });
+  }
+})();
 
 
 const app = express();
@@ -205,7 +205,7 @@ app.get("/getVisits/:date", (req, res) => {
 
 
 // Add new profile to day history
-app.post("/addToHistory", (req, res) => {
+app.post("/addToVisits", (req, res) => {
   /* {
    "code": "Иванов123",
    "day": "05-04-2020",
@@ -218,6 +218,8 @@ app.post("/addToHistory", (req, res) => {
       activityDb.select('*').from('activityData').where({ "date": date, "type": "Посещение" }).then(data => {
         res.send(JSON.stringify(data));
       }))
+
+      // TODO add substract one remain
 });
 
 
@@ -309,88 +311,33 @@ app.post('/code', (req, res) => {
   res.json("sucess");
 })
 
+// handleCode("МаксимЛеонидович");
+// handleCode("ЕршовМаксимЛеонидович");
 
-function handleCode(code) {
+// call func in addVisitor ! 
+async function handleCode(code) {
   const todayData = format(new Date(), "dd-MM-yyyy");
-  const dayData = JSON.parse(readDataJSON(pathDayData));
-  let indexDate = dayData.findIndex(x => x.date === todayData);
+  const time = format(new Date(), 'HH:mm:ss');
+  const data = await activityDb.select('*').from('activityData').where({ 'code': code, 'date': todayData, 'type': 'Посещение' });
+  let amount = "";
 
-
-  // TODO create new date obj if indexData === -1
-  if (indexDate === -1) {
-    const newDateObj = { date: todayData, notes: "", history: [] };
-    dayData.push(newDateObj);
-    indexDate = dayData.length - 1;
-
-  }
-
-  /*
-  // find if person already in history
-  const index = dayData[indexDate].history.findIndex(x => x.code === code);
-  if (index === -1) {
-    const codeObj = { "code": code, "time": format(new Date(), 'HH:mm:ss') };
-    dayData[indexDate].history.push(codeObj)
-
-    // writeData(pathDayData, dayData);
-    checkIfInPersons(code);
+  if (!data.length) {
+    // find if in persons
+    const profiles = await personDb('personData').where('code', code).select('*');
+    if (profiles.length && profiles[0].remain !== "") {
+      const newRemain = (+profiles[0].remain - 1);
+      amount = `УЧЁТ ${profiles[0].remain} => ${newRemain}`;
+      await personDb('personData').where('code', code).update("remain", newRemain);
+    }
+    if (!profiles.length) {
+      console.log("create new profile");
+      await personDb('personData').insert({ "personName": code, "code": code });
+    }
+    await activityDb('activityData')
+      .insert({ "code": code, "date": todayData, "time": time, "type": "Посещение", "person": "", "amount": amount });
   }
 }
 
-
-function checkIfInPersons(code) {
-  const personData = JSON.parse(readDataJSON(pathPersonData));
-  const personIndex = personData.findIndex(x => x.code === code);
-  if (personIndex === -1) {
-    createNewPerson(code);
-  } else {
-    substractOneRemain(personData, personIndex);
-  }
-}
-
-
-function substractOneRemain(personData, personIndex) {
-  if (personData[personIndex].remain !== "") {
-    const oldFieldValue = personData[personIndex].remain;
-    personData[personIndex].remain = +oldFieldValue - 1;
-    const time = format(new Date(), 'HH:mm:ss');
-    const date = format(new Date(), 'dd-MM-yyyy')
-
-    const activityObj = { "date": date, "time": time, "type": `Изменение тренировок`, "person": "", "amount": `${oldFieldValue} => ${personData[personIndex].remain}` };
-
-    pushNewActivity(personData[personIndex].code, activityObj);
-
-    writeData(pathPersonData, personData);
-  } else {
-    const visitObj = { "code": personData[personIndex].code, "activity": [{ "date": format(new Date(), 'dd-MM-yyyy'), "time": format(new Date(), 'HH:mm:ss'), "type": "Посещение", "person": "", "amount": "" }] };
-    pushNewActivity(personData[personIndex].code, visitObj);
-  }
-}
-
-
-function pushNewActivity(code, activityObj) {
-  const activitiesData = JSON.parse(readDataJSON(pathActivitiesData));
-  const activitiesIndex = activitiesData.findIndex(x => x.code === code);
-  activitiesData[activitiesIndex].activity.push(activityObj);
-
-  writeData(pathActivitiesData, activitiesData);
-}
-
-
-function createNewPerson(code) {
-  const personData = JSON.parse(readDataJSON(pathPersonData));
-  const newPerson = { "personName": code, "contract": "", "dateBirth": "", "telNum": "", "code": code, "autoMonth": "", "notes": "", "remain": "", "days": "", "photoId": 0, "rent": "", "deposite": "", };
-  personData.push(newPerson);
-
-  writeData(pathPersonData, personData);
-
-  const activitiesObj = { "code": code, "activity": [{ "date": format(new Date(), 'dd-MM-yyyy'), "time": format(new Date(), 'HH:mm:ss'), "type": "Создание профиля", "person": "", "amount": "" }] };
-  const activitiesData = JSON.parse(readDataJSON(pathActivitiesData));
-  activitiesData.push(activitiesObj);
-
-  writeData(pathActivitiesData, activitiesData);
-}
-
-*/
 // app.use(helmet());
 // app.use(helmet.noCache());
 app.use(staticFiles);

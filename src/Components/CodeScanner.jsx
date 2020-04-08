@@ -20,12 +20,12 @@ const CodeScanner = (props) => {
   }
 
 
-  function substractOneRemain(code, index) {
-    const person = personData[index];
-    if (person.remain !== "") dispatch(chgProfileValue(code, 'remain', (+person.remain - 1)));
+  // function substractOneRemain(code, index) {
+  //   const person = personData[index];
+  //   if (person.remain !== "") dispatch(chgProfileValue(code, 'remain', (+person.remain - 1)));
 
-    // TODO add dispatch to activity => without return activity for this profile!
-  }
+  //   // TODO add dispatch to activity => without return activity for this profile!
+  // }
 
 
   function handleNewCode(code) {
@@ -41,7 +41,9 @@ const CodeScanner = (props) => {
 
       } else {
         dispatch(addToVisits(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
-        substractOneRemain(code, indexPerson);
+        // change dispatch position => one line after
+
+        // substractOneRemain(code, indexPerson);
       }
     }
   }
