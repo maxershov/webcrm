@@ -24,6 +24,11 @@ const App = (props) => {
 }
 
 
+export function isToday(date) {
+  const todayDate = format(new Date(), "dd-MM-yyyy");
+  return todayDate === date;
+}
+
 function sendData(data, dataType) {
   fetch(`http://${host.host}:6700/${dataType}`, {
     method: 'post',

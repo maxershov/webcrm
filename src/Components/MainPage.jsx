@@ -5,6 +5,7 @@ import { format, parse } from "date-fns";
 import Calendar from "react-calendar/dist/entry.nostyle";
 import AreaNotes from "./AreaNotes";
 import CodeScanner from "./CodeScanner";
+import {isToday} from "../App";
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import { fetchDays } from "../store/dayDataStore/dayDataActions";
 import { fetchVisits } from "../store/activitiesDataStore/activitiesDataActions";
@@ -12,12 +13,6 @@ import { fetchVisits } from "../store/activitiesDataStore/activitiesDataActions"
 
 import TableForScanner from './TableForScanner';
 import Spinner from './Spinner';
-
-
-function isToday(date) {
-  const todayDate = format(new Date(), "dd-MM-yyyy");
-  return todayDate === date;
-}
 
 
 

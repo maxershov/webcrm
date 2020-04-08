@@ -1,6 +1,7 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import {pushNewPerson} from "../personsDataStore/personsDataActions";
 import host from "../../../host";
+import { reqActivitiesSucess } from "../activitiesDataStore/activitiesDataActions";
 
 export const reqProfile = () => {
   return { type: "REQUEST_PROFILE" };
@@ -85,7 +86,13 @@ function* changeCodeAsync({ oldCode, code }) {
       return fetch(`http://${host.host}:6700/updateCode`, requestOptions)
         .then(res => res.json());
     });
+    // handle history change
+    const updatedHistoryData = yield call(() => {
+      return fetch(`http://${host.host}:6700/changeActivityCode`, requestOptions)
+        .then(res => res.json());
+    });
     yield put(reqProfileSucess(updatedData[0]));
+    yield put(reqActivitiesSucess(updatedHistoryData))
   } catch (err) {
     yield put(reqProfileError(err));
   }

@@ -8,6 +8,7 @@
 // TODO add func to activities
 // add activitiesField
 // chg code to NameSecondThird .replace(' ','')
+// TODO add sort by date and time in history table =>person
 // TODO check for func => where i need to return new data (add new profile => route.push => fetchData)
 
 
@@ -270,7 +271,10 @@ app.post("/addToHistory", (req, res) => {
 
 // change all codes by code
 app.post("/changeActivityCode", (req, res) => {
-  // return activity for profile
+  /* Get old and new code => add new activity to history about change
+  ** Change all codes in activities db 
+  ** Return all activities for one user 
+  */
   /* {
     "code":"ЕршовМаксимЛеонидович",
     "oldCode": "ааабвгд"
@@ -279,14 +283,17 @@ app.post("/changeActivityCode", (req, res) => {
   const { oldCode, code } = req.body;
   console.log(oldCode, code);
   // const codeCyrillic = decodeURIComponent(escape(code));
-  activityDb.select('*')
-    .from('activityData')
-    .where("code", oldCode)
-    .update({ 'code': code })
+  activityDb('activityData')
+    .insert({ "code": code, "date": format(new Date(), 'dd-MM-yyyy'), "time": format(new Date(), 'HH:mm:ss'), "type": "Изменение кода", "amount": `${oldCode}=>${code}` })
     .then(() =>
-      activityDb.select('*').from('activityData').where("code", code).then(data => {
-        res.send(JSON.stringify(data));
-      }));
+      activityDb.select('*')
+        .from('activityData')
+        .where("code", oldCode)
+        .update({ 'code': code })
+        .then(() =>
+          activityDb.select('*').from('activityData').where("code", code).then(data => {
+            res.send(JSON.stringify(data));
+          })));
 });
 
 

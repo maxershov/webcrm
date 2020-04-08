@@ -67,9 +67,8 @@ export const UserPage = (props) => {
         <label>Заметки:</label>
         <AreaNotes notesValue={person.notes} type="PERSON" />
       </div>
+      <FieldsAction code={person.code} namesArr={[]} />
       <TableHistory tableDataType="personData" code={person.code} />
-      {/* <FieldsAction code={person.code} namesArr={getAllPersonNames(personData)} />
-        <TableHistory tableDataType="personData" code={person.code} /> */}
     </div>
   );
 }

@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { format} from 'date-fns'
-import CalendarHideable from './CalendarHideable';
-import { pushNewActivity} from '../App';
+import { format } from 'date-fns'
 import { useDispatch } from "react-redux";
-import { useParams } from 'react-router-dom';
-import { chgProfileValue } from "../store/profileStore/profileActions";
-
+import CalendarHideable from './CalendarHideable';
+import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
+import { isToday } from "../App";
 
 const MyActionFields = (props) => {
   const [actionType, setActionType] = useState('');
   const [actionAmout, setActionAmout] = useState('');
-  const [actionDate, setActionDate] = useState(format(new Date(),'dd-MM-yyyy'));  // change!
+  const [actionDate, setActionDate] = useState(format(new Date(), 'dd-MM-yyyy'));
   const [actionPerson, setActionPerson] = useState('');
+  let time = format(new Date(), 'HH:mm:ss');
+  const dispatch = useDispatch();
   const sendActionsToDb = (event) => {
     event.preventDefault();
-    const newActivity = { "date": actionDate, "time": format(new Date(),'HH:mm:ss'), "type": actionType, "person": actionPerson, "amount": actionAmout };
-    pushNewActivity(props.code, JSON.stringify(newActivity));
+    if (!isToday(actionDate)) time = "00:00:00";
+    dispatch(addToHistory(props.code, actionDate, time, actionType, actionPerson, actionAmout));
   }
   return (
     <div className="FieldsAction">
@@ -49,7 +49,7 @@ const MyActionFields = (props) => {
         <button type="submit">Добавить событие</button>
       </form>
     </div>
-);
+  );
 }
 
 
