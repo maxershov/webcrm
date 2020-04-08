@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactTable from 'react-table-6/react-table.min';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { getDaysLeft, getIndexByCode, getImg } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
@@ -20,6 +20,14 @@ const TablePageShort = (props) => {
   // TODO CRAP => can't change page in path => get path from history and del number 
   const path = history.location.pathname.replace(/[0-9]/g, '');
 
+  const personData = useSelector(state => state.personsStore.data);
+  const loadingPersons = useSelector(state => state.personsStore.loading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPersons());
+  }, []);
+
   // some obj's for table => don't repeat photo and name column 
   const leadObj = {
     Header: 'Дата первого контакта',
@@ -32,12 +40,14 @@ const TablePageShort = (props) => {
       return (dayA === "") - (dayB === "") || +(dayA > dayB) || -(dayA < dayB);
     }
   }
+
   const employeeObj = {
     Header: 'Депозит',
     width: widthForTable(25),
     accessor: 'deposite',
     headerClassName: 'tableHeader'
   }
+
   const lostObj = {
     Header: 'Срок действия последнего абонемента',
     accessor: 'days',
@@ -50,12 +60,13 @@ const TablePageShort = (props) => {
     }
   }
 
+  // use different types of columns for lead, employee and lost table 
   let tableRow = {};
   if (props.tableType === 'ЛИД') tableRow = leadObj;
   if (props.tableType === 'СОТРУДНИК') tableRow = employeeObj;
   if (props.tableType === 'НЕТ') tableRow = lostObj;
 
-  return props.loadingPersons ? (<><Spinner /></>) : (
+  return loadingPersons ? (<><Spinner /></>) : (
     <div className="table font_white_shadow">
       <ReactTable
         className="-striped -highlight"
@@ -68,7 +79,7 @@ const TablePageShort = (props) => {
         pageText="Страница"
         ofText="из"
         rowsText="профилей"
-        data={props.personData.filter(obj => obj.contract === props.tableType)}
+        data={personData.filter(obj => obj.contract === props.tableType)}
         filterable
         defaultFilterMethod={(filter, row) =>
           String(row[filter.id]) === filter.value}
@@ -79,7 +90,7 @@ const TablePageShort = (props) => {
             headerClassName: 'tableHeader',
             Cell: (value) => (
               // <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/0.jpg`)} /></button>)
-              <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={getImg(props.personData[getIndexByCode(value.original.code)].photoId)} /></button>)
+              <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={getImg(personData[getIndexByCode(value.original.code)].photoId)} /></button>)
           },
           {
             Header: 'Имя',
@@ -109,15 +120,5 @@ const TablePageShort = (props) => {
 }
 
 
-const mapStateToProps = state => {
-  return {
-    personData: state.personsStore.data,
-    loadingPersons: state.personsStore.loading,
-  }
-}
 
-const mapDispatchToProps = dispatch => ({
-  fetchPersons: () => dispatch(fetchPersons())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TablePageShort);
+export default TablePageShort;

@@ -4,7 +4,6 @@
 
 
 // TODO try to move loading to components => if i change date in main page => just components load => and not all at once
-// chg code to NameSecondThird .replace(' ','')
 // TODO add sort by date and time in history table =>person
 // TODO check for func => where i need to return new data (add new profile => route.push => fetchData)
 

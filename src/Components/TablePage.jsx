@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { Link, useHistory, useParams } from "react-router-dom";
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getDaysLeft, getImg } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import Spinner from './Spinner'
@@ -18,13 +18,17 @@ function widthForTable(value) {
 const TablePage = (props) => {
   const history = useHistory();
   const { pageNum } = useParams();
-  const personData = props.personData
+  const personData = useSelector(state => state.personsStore.data);
+  const loadingPersons = useSelector(state => state.personsStore.loading);
+  const dispatch = useDispatch();
 
+
+  
   useEffect(() => {
-    props.fetchPersons();
+    dispatch(fetchPersons());
   }, []);
 
-  return props.loadingPersons ? <Spinner /> : (
+  return loadingPersons ? <Spinner /> : (
     <ReactTable
       className="table font_white_shadow -striped -highlight"
       page={parseInt(pageNum, 10) - 1}
@@ -38,8 +42,7 @@ const TablePage = (props) => {
       rowsText="профилей"
       headerClassName="tableHeader"
       data={props.all ? personData : 
-        personData.filter(obj => obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД')
-      }
+        personData.filter(obj => obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД')}
       filterable
       defaultFilterMethod={(filter, row) =>
         String(row[filter.id]) === filter.value}
@@ -129,15 +132,4 @@ const TablePage = (props) => {
 }
 
 
-const mapStateToProps = state => {
-  return {
-    personData: state.personsStore.data,
-    loadingPersons: state.personsStore.loading,
-  }
-}
-
-const mapDispatchToProps = dispatch => ({
-  fetchPersons: () => dispatch(fetchPersons())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TablePage);
+export default TablePage;
