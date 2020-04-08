@@ -72,29 +72,3 @@ export const MainPage = props => {
 
 
 export default MainPage;
-
-
-// return (!loadingDays && !loadingPersons) ? (
-  //   <>
-  //       <div className="notesMain font-white-shadow">
-  //         <AreaNotes notesValue={data?.notes} type="DAY_DATA" dayObject={data} />
-  //       </div>
-  //       <div className="newProfileField">
-  //         <FormData
-  //           baseValue=""
-  //           formLabel="Новый профиль:"
-  //           type="NEW_PERSON"
-  //           route={history}
-  //         />
-  //       </div>
-  //       {isToday(loadedDate) ? (
-  //         <div className="newCodeField">
-  //           <CodeScanner dayObject={data} date={loadedDate} />
-  //         </div>
-  //       ) : (
-  //           undefined
-  //         )}
-  //     </div>
-  //     <TableForScanner data={dayData[indexDate]} />
-  //   </>
-  // ) : <Spinner />

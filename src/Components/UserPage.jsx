@@ -7,7 +7,6 @@ import { useParams, useHistory } from 'react-router-dom'
 import { fetchProfile, chgProfileValue, deleteProfile } from "../store/profileStore/profileActions";
 import { fetchHistory, addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
 import { getImg } from '../App';
-import FormData from './FormData';
 import CalendarHideable from './CalendarHideable';
 import FieldDeposite from './FieldDeposite';
 import FieldsAction from './FieldsAction';
@@ -121,10 +120,10 @@ export const EmployeeParams = (props) => {
   const { person } = props;
   return (
     <>
-      <FormData code={person.code} formLabel="Дата рождения:" baseValue={person.dateBirth} inputType="dateBirth" type="PERSON" />
-      <FormData code={person.code} formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" type="PERSON" />
-      <FormData code={person.code} formLabel="Код карты:" baseValue={person.code} inputType="code" type="PERSON" />
-      <FormData code={person.code} formLabel="Парковка оплачена до:" baseValue={person.autoMonth} inputType="autoMonth" type="PERSON" />
+      <InputProfile formLabel="Дата рождения:" baseValue={person.dateBirth} inputType="dateBirth" />
+      <InputProfile formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" />
+      <InputProfile formLabel="Код карты:" baseValue={person.code} inputType="code" />
+      <InputProfile formLabel="Парковка оплачена до:" baseValue={person.autoMonth} inputType="autoMonth" />
       <FieldDeposite depositeValue={person.deposite} />
     </>
   )

@@ -20,9 +20,7 @@ const CalendarHideable = (props) => {
     } else {
       dispatch(chgProfileValue(codeLink, props.dateType, date));
       dispatch(addToHistory(codeLink, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${props.dateType}`, "", `${oldFieldValue} => ${date}`));
-
     }
-
     setRenderCalendar('none');
   }
 

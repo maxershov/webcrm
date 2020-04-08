@@ -26,7 +26,6 @@ const InputProfile = (props) => {
       history.push('/main');
     }
     else {
-      console.log('CODE', codeLink);
       dispatch(chgProfileValue(codeLink, inputType, inputValue));
       dispatch(addToHistory(codeLink, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${inputType}`, "", `${oldFieldValue} => ${inputValue}`));
     }

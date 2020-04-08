@@ -5,9 +5,6 @@ import { changeNotes } from "../store/dayDataStore/dayDataActions";
 import { chgProfileValue } from "../store/profileStore/profileActions";
 
 const AreaNotes = props => {
-
-  // const notesValue = useSelector(state => state.dayStore.data.notes);
-  // const date = useSelector(state => state.dayStore.data.date);
   const { type, notesValue, date } = props;
   const [notesData, setNotesData] = useState(notesValue);
   const { codeLink } = useParams();

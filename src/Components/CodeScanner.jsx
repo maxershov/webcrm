@@ -6,19 +6,19 @@ import { chgProfileValue, addNewProfile } from "../store/profileStore/profileAct
 import { addToVisits } from "../store/activitiesDataStore/activitiesDataActions";
 
 
-
-
 const CodeScanner = (props) => {
   const { type, route, divName } = props;
   const personData = useSelector(state => state.personsStore.data);
   const historyData = useSelector(state => state.activitiesStore.data);
   const dispatch = useDispatch();
 
+
   function createProfile(code) {
     dispatch(addNewProfile(code));
     // open user page with new profile
     route.push(`/profile/${code.replace(/ /g, '')}`)
   }
+
 
   function substractOneRemain(code, index) {
     const person = personData[index];
@@ -37,19 +37,18 @@ const CodeScanner = (props) => {
       if (indexPerson === -1) {
         dispatch(addNewProfile(code));
         dispatch(addToVisits(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
-
         // TODO add activity {create profile...}
 
       } else {
         dispatch(addToVisits(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
         substractOneRemain(code, indexPerson);
-
-        // TODO add activity { substract one with date}
       }
     }
   }
 
+
   const [code, setCode] = useState('');
+
   const enterCode = (event) => {
     event.preventDefault();
     const codeSaved = code;
@@ -57,6 +56,7 @@ const CodeScanner = (props) => {
     if (type === 'SCANNER') handleNewCode(codeSaved);
     if (type === 'PROFILE') createProfile(codeSaved);
   }
+
   return (
     <div className={divName}>
       <label>{type === 'PROFILE' ? "Создать профиль:" : "Сканер карт:"}</label>
