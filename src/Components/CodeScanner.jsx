@@ -20,31 +20,25 @@ const CodeScanner = (props) => {
   }
 
 
-  // function substractOneRemain(code, index) {
-  //   const person = personData[index];
-  //   if (person.remain !== "") dispatch(chgProfileValue(code, 'remain', (+person.remain - 1)));
-
-  //   // TODO add dispatch to activity => without return activity for this profile!
-  // }
+  function substractOneRemain(code, index) {
+    const person = personData[index];
+    if (Number.isInteger(person.remain)) {
+      dispatch(chgProfileValue(code, 'remain', (person.remain - 1)));
+      return `УЧЁТ ${person.remain} => ${(person.remain - 1)}`;
+    } return "";
+  }
 
 
   function handleNewCode(code) {
     // find if in history
     const indexHistory = historyData.findIndex(person => person.code === code);
+    let amount = "";
     if (indexHistory === -1) {
       // find if in persons => if not => create new profile and add to history
       const indexPerson = personData.findIndex(person => person.code === code);
-      if (indexPerson === -1) {
-        dispatch(addNewProfile(code));
-        dispatch(addToVisits(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
-        // TODO add activity {create profile...}
-
-      } else {
-        dispatch(addToVisits(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss')));
-        // change dispatch position => one line after
-
-        // substractOneRemain(code, indexPerson);
-      }
+      if (indexPerson === -1) dispatch(addNewProfile(code));
+      else amount = substractOneRemain(code, indexPerson);
+      dispatch(addToVisits(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), amount));
     }
   }
 

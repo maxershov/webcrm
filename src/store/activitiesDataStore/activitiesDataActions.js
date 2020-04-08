@@ -26,8 +26,8 @@ export const fetchHistory = (code) => {
 };
 
 
-export const addToVisits = (code, date, time) => {
-  return { type: "ADD_TO_VISITS", code, date, time };
+export const addToVisits = (code, date, time, amount) => {
+  return { type: "ADD_TO_VISITS", code, date, time, amount };
 };
 
 
@@ -82,11 +82,11 @@ function* fetchHistoryAsync({ code }) {
 };
 
 
-function* addToVisitsAsync({ code, date, time }) {
+function* addToVisitsAsync({ code, date, time, amount }) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ "code": code, "date": date, "time": time })
+    body: JSON.stringify({ "code": code, "date": date, "time": time, "amount": amount })
   };
   try {
     yield put(reqActivities());

@@ -64,7 +64,7 @@ function writeData(pathTo, dbName) {
   if (fs.existsSync(pathTo)) {
     console.log('Database already copied today');
   } else {
-    fs.mkdir(pathTo, function error (err) {
+    fs.mkdir(pathTo, function error(err) {
       if (err) {
         return console.error(err);
       }
@@ -209,20 +209,19 @@ app.post("/addToVisits", (req, res) => {
   /* {
    "code": "Иванов123",
    "day": "05-04-2020",
-   "time": "12:01:11"
+   "time": "12:01:11",
+   "amount":""
   } */
-  const { code, date, time } = req.body;
+  const { code, date, time, amount } = req.body;
   activityDb('activityData')
-    .insert({ "code": code, "date": date, "time": time, "type": "Посещение", "person": "", "amount": "" })
+    .insert({ "code": code, "date": date, "time": time, "type": "Посещение", "person": "", "amount": amount })
     .then(() =>
       activityDb.select('*').from('activityData').where({ "date": date, "type": "Посещение" }).then(data => {
         res.send(JSON.stringify(data));
       }))
-
-      // TODO add substract one remain
 });
 
-
+// if remain true => insert new amount and chg remain
 
 app.post("/changeActivityCode", (req, res) => {
   /* Get old and new code => add new activity to history about change
@@ -314,7 +313,7 @@ app.post('/code', (req, res) => {
 // handleCode("МаксимЛеонидович");
 // handleCode("ЕршовМаксимЛеонидович");
 
-// call func in addVisitor ! 
+
 async function handleCode(code) {
   const todayData = format(new Date(), "dd-MM-yyyy");
   const time = format(new Date(), 'HH:mm:ss');
@@ -324,13 +323,12 @@ async function handleCode(code) {
   if (!data.length) {
     // find if in persons
     const profiles = await personDb('personData').where('code', code).select('*');
-    if (profiles.length && profiles[0].remain !== "") {
+    if (profiles.length && Number.isInteger(profiles[0].remain)) {
       const newRemain = (+profiles[0].remain - 1);
       amount = `УЧЁТ ${profiles[0].remain} => ${newRemain}`;
       await personDb('personData').where('code', code).update("remain", newRemain);
     }
     if (!profiles.length) {
-      console.log("create new profile");
       await personDb('personData').insert({ "personName": code, "code": code });
     }
     await activityDb('activityData')
