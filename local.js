@@ -61,20 +61,14 @@ const pathPersonData = path.join(homePath, "db", "personDATA.json");
 const pathDayData = path.join(homePath, "db", "dayDATA.json");
 const pathActivitiesData = path.join(homePath, "db", "activityDATA.json");
 
-function readDataJSON(pathTo) {
-  const bitArray = fs.readFileSync(pathTo);
-  return JSON.stringify(JSON.parse(bitArray));
-}
 
-function writeData(pathTo, data) {
-  fs.writeFile(pathTo, JSON.stringify(data), function (err) {
-    if (err) throw err;
-  })
-}
-
+// function writeData(pathTo, data) {
+//   fs.writeFile(pathTo, JSON.stringify(data), function (err) {
+//     if (err) throw err;
+//   })
+// }
 
 // checkIfDir();
-
 // function checkIfDir() {
 //   const datePath = format(new Date(), "ddMMyyyy");
 //   const pathTo = path.join(homePath, "db", "copyData", datePath);
@@ -98,16 +92,11 @@ function writeData(pathTo, data) {
 
 
 
-
-
-
-
-
-/* ************************************************** */
-
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+
+/* ************************* API************************* */
 
 app.get("/deleteProfile/:code", (req, res) => {
   const { code } = req.params;
@@ -124,17 +113,6 @@ app.get("/deleteProfile/:code", (req, res) => {
 });
 
 
-// app.get("/deleteProfile", (req, res) => {
-//   const { code } = req.params;
-//   personDb('personData')
-//     .where('code', code)
-//     .del().then((res.send('sucess')));
-
-
-//   // TODO handle activities del ?????????????????????
-// });
-
-
 app.post("/updateCode", (req, res) => {
   // {
   //   "oldCode":"code12345",
@@ -149,8 +127,6 @@ app.post("/updateCode", (req, res) => {
     .then(() =>
       personDb('personData').where('code', code).select('*')
         .then(data => res.send(JSON.stringify(data))));
-
-  // TODO handle activities rename => from client coz i need new data
 });
 
 
@@ -186,7 +162,6 @@ app.get("/getProfile/:code", (req, res) => {
 });
 
 
-
 app.get("/addNewPerson/:code", async (req, res) => {
   let { code } = req.params;
   let nameCyrillic = decodeURI(code);
@@ -200,25 +175,13 @@ app.get("/addNewPerson/:code", async (req, res) => {
     await personDb('personData').insert({ "personName": nameCyrillic, "code": code });
   }
   const newUser = await personDb('personData').where('code', code);
-  // console.log(newUser);
   await res.send(JSON.stringify(newUser));
 });
-
-// app.post("/addNewPerson", async (req, res) => {
-//   // TODO handle equal codes
-//   const { personName, code } = req.body;
-//   console.log(personName, code);
-//   await personDb('personData').insert({ personName, code });
-//   const newUser = await personDb('personData').where('code', code)
-//   console.log(newUser);
-//   await res.send(newUser);
-// });
 
 
 
 
 /** ********************** DAY ********************************************** */
-
 
 
 app.get("/getDate/:day", (req, res) => {
@@ -229,6 +192,7 @@ app.get("/getDate/:day", (req, res) => {
       res.send(JSON.stringify(data));
     }));
 });
+
 
 app.post("/chgNotes", (req, res) => {
   // {
@@ -251,7 +215,6 @@ app.post("/chgNotes", (req, res) => {
 /** ********************** ACTIVITY ********************************************** */
 
 
-
 // Get  activ for day history
 app.get("/getVisits/:date", (req, res) => {
   // http://192.168.1.150:6700/getHistory/05-04-2020
@@ -262,10 +225,8 @@ app.get("/getVisits/:date", (req, res) => {
 });
 
 
-
 // Add new profile to day history
 app.post("/addToHistory", (req, res) => {
-
   /* {
    "code": "Иванов123",
    "day": "05-04-2020",
@@ -281,21 +242,18 @@ app.post("/addToHistory", (req, res) => {
 });
 
 
-
-// change all codes by code
 app.post("/changeActivityCode", (req, res) => {
   /* Get old and new code => add new activity to history about change
   ** Change all codes in activities db 
   ** Return all activities for one user 
   */
+
   /* {
     "code":"ЕршовМаксимЛеонидович",
     "oldCode": "ааабвгд"
   } */
-
   const { oldCode, code } = req.body;
   console.log(oldCode, code);
-  // const codeCyrillic = decodeURIComponent(escape(code));
   activityDb('activityData')
     .insert({ "code": code, "date": format(new Date(), 'dd-MM-yyyy'), "time": format(new Date(), 'HH:mm:ss'), "type": "Изменение кода", "amount": `${oldCode}=>${code}` })
     .then(() =>
@@ -315,7 +273,6 @@ app.get("/deleteActivities/:code", (req, res) => {
   // http://192.168.1.150:6700/deleteActivities/ЕршовМаксимЛеонидович
   const { code } = req.params;
   const codeCyrillic = decodeURI(code);
-
   activityDb.select('*').from('activityData').where("code", codeCyrillic).del()
     .then(() => {
       res.send('sucess');
@@ -323,16 +280,11 @@ app.get("/deleteActivities/:code", (req, res) => {
 });
 
 
-
-
-
 // get activities by code
 app.get("/getActivities/:code", (req, res) => {
   // http://192.168.1.150:6700/getActivities/ЕршовМаксимЛеонидович
   const { code } = req.params;
   const codeCyrillic = decodeURI(code);
-
-  // const codeCyrillic = decodeURIComponent(escape(code));
   activityDb.select('*').from('activityData').where("code", codeCyrillic).then(data => {
     res.send(JSON.stringify(data));
   });
@@ -385,65 +337,13 @@ app.post("/delActivity", (req, res) => {
 
 
 
-
-
-
 /** ********************** END ********************************************** */
 
 
 
 
-app.get("/getperson", (req, res) => {
-  const personDataString = readDataJSON(pathPersonData);
-  res.send(personDataString);
-});
-
-app.get("/getday", (req, res) => {
-  const dayDataString = readDataJSON(pathDayData);
-  // console.log('getdayFirst', dayDataString);
-  res.send(dayDataString);
-});
-
-app.get("/getactivity", (req, res) => {
-  const activityDataString = readDataJSON(pathActivitiesData);
-  res.send(activityDataString);
-});
-
-// app.post("change", (req, res) => {
-//   const { type, value } = req.body;
-//   console.log(type, value);
-//   res.json("sucess");
-// });
-
-app.post("/changepersons", (req, res) => {
-  // console.log("changepersons in local");
-  const { data } = req.body;
-  // console.log(data);
-  writeData(pathPersonData, data);
-  res.json("sucess");
-});
-
-app.post("/changeactivities", (req, res) => {
-  // console.log("changeactivities in local");
-  const { data } = req.body;
-  // console.log(data);
-
-  writeData(pathActivitiesData, data);
-  res.json("sucess");
-});
-
-app.post("/changeday", (req, res) => {
-  // console.log("changeday in local");
-  const { data } = req.body;
-  // console.log(data);
-
-  writeData(pathDayData, data);
-  res.json("sucess");
-});
-
-
-
-
+// FOR RFID SCANNER
+/*
 
 app.post('/code', (req, res) => {
   const code = (req.body.code).replace("\n", "");
@@ -476,7 +376,7 @@ function handleCode(code) {
     const codeObj = { "code": code, "time": format(new Date(), 'HH:mm:ss') };
     dayData[indexDate].history.push(codeObj)
 
-    writeData(pathDayData, dayData);
+    // writeData(pathDayData, dayData);
     checkIfInPersons(code);
   }
 }
@@ -531,7 +431,7 @@ function createNewPerson(code) {
 
   writeData(pathActivitiesData, activitiesData);
 }
-
+*/
 
 // app.use(helmet());
 // app.use(helmet.noCache());
