@@ -49,7 +49,7 @@ export function* watchFetchProfile() {
 function* fetchProfileAsync({ code }) {
   try {
     yield put(reqProfile());
-    yield sleep(1000);
+    // yield sleep(1000);
     const data = yield call(() => {
       return fetch(`http://${host.host}:6700/getProfile/${encodeURI(code)}`).then(res =>
         res.json()

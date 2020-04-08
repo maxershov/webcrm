@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { useParams } from 'react-router-dom';
 import { chgProfileValue } from "../store/profileStore/profileActions";
 import CalendarHideable from './CalendarHideable';
-import { ChangeProfileValue } from '../App';
 
 
 const FieldDeposite = (props) => {

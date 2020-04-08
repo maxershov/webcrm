@@ -28,11 +28,6 @@ export default function activitiesDataReducer(state = initialState, action) {
         error: true,
         errorMsg: action.err
       };
-
-    // case "CHANGE_ACTIVITIES_DATA":
-    //   return { ...state, data: action.data, loading:false };
-    // case "LOADING_ACTIVITIES":
-    //   return { ...state, loading: true }
     default:
       return state;
   }

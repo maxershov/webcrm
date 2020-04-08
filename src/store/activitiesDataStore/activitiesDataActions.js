@@ -50,7 +50,7 @@ export function* watchFetchActivities() {
 function* fetchVisitsAsync({ date }) {
   try {
     yield put(reqActivities());
-    yield sleep(1000)
+    // yield sleep(1000)
     const data = yield call(() => {
       return fetch(`http://${host.host}:6700/getVisits/${encodeURI(date)}`).then(res =>
         res.json()
@@ -66,7 +66,7 @@ function* fetchVisitsAsync({ date }) {
 function* fetchHistoryAsync({ code }) {
   try {
     yield put(reqActivities());
-    yield sleep(1000)
+    // yield sleep(1000)
     const data = yield call(() => {
       return fetch(`http://${host.host}:6700/getActivities/${encodeURI(code)}`).then(res =>
         res.json()
@@ -86,7 +86,7 @@ function* addToVisitsAsync({ code, date, time }) {
   };
   try {
     yield put(reqActivities());
-    yield sleep(1000)
+    // yield sleep(1000)
     const data = yield call(() => {
       return fetch(`http://${host.host}:6700/addToHistory`, requestOptions).then(res =>
         res.json()
@@ -108,7 +108,7 @@ function* addToHistoryAsync({ code, date, time, typeInput, person, amount }) {
   };
   try {
     yield put(reqActivities());
-    yield sleep(1000)
+    // yield sleep(1000)
     const data = yield call(() => {
       return fetch(`http://${host.host}:6700/addActivity`, requestOptions).then(res =>
         res.json()
@@ -153,7 +153,7 @@ function* deleteHistoryObjAsync({ code, date, time, typeInput, person, amount })
   };
   try {
     yield put(reqActivities());
-    yield sleep(1000)
+    // yield sleep(1000)
     const data = yield call(() => {
       return fetch(`http://${host.host}:6700/delActivity`, requestOptions).then(res =>
         res.json()
