@@ -15,11 +15,13 @@ import Spinner from './Spinner'
 import InputProfile from './InputProfile';
 
 
-function getAllPersonNames(data) {
+function getPersonNames(data) {
+  if (data === undefined) return [];
   return data.map(obj => { return obj.personName });
 }
 
 export const UserPage = (props) => {
+  const persons = useSelector(state => state.personsStore.data);
   const person = useSelector(state => state.profileStore.data);
   const loading = useSelector(state => state.profileStore.loading);
   const [renderPhotoId, changeRenderPhotoId] = useState(false);
@@ -48,7 +50,6 @@ export const UserPage = (props) => {
   let renderFields = '';
   if (person.contract === 'ЛИД') renderFields = <LeadParams person={person} />
   else if (person.contract === 'СОТРУДНИК') renderFields = <EmployeeParams person={person} />
-  else if (person.contract === 'НЕТ') renderFields = <LostPersonParams person={person} />
   else renderFields = <PersonParams person={person} />
 
   return loading ? <Spinner /> : (
@@ -72,7 +73,7 @@ export const UserPage = (props) => {
         <label>Заметки:</label>
         <AreaNotes notesValue={person.notes} type="PERSON" />
       </div>
-      <FieldsAction code={person.code} namesArr={[]} />
+      <FieldsAction code={person.code} namesArr={getPersonNames(persons)} />
       <TableHistory tableDataType="personData" code={person.code} />
     </div>
   );
@@ -101,20 +102,6 @@ export const LeadParams = (props) => {
     <>
       <InputProfile formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" />
       <CalendarHideable сalendarName="Дата первого обращения:" dateType="rent" date={person.rent} />
-    </>
-  )
-}
-
-
-export const LostPersonParams = (props) => {
-  const { person } = props;
-  return (
-    <>
-      <InputProfile formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" />
-      <InputProfile formLabel="Дата рождения:" baseValue={person.dateBirth} inputType="dateBirth" />
-      <InputProfile formLabel="Код карты:" baseValue={person.code} inputType="code" />
-      <FieldDeposite depositeValue={person.deposite} />
-      <CalendarHideable сalendarName="Дата окончания контракта:" dateType="days" date={person.days} />
     </>
   )
 }

@@ -1,12 +1,9 @@
-/* eslint-disable func-names */
 /* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
-
 
 // TODO try to move loading to components => if i change date in main page => just components load => and not all at once
 // TODO check for func => where i need to return new data (add new profile => route.push => fetchData)
 // TODO handle visit with remain
-// TODO handle code scanner
+// TODO handle Pi RFID scanner
 
 const express = require("express");
 const history = require("connect-history-api-fallback");
@@ -31,27 +28,21 @@ process.platform === "win32"
 
 const personDb = knex({
   client: 'sqlite3',
-  connection: {
-    filename: path.join(homePath, "db", "personDATA.db")
-  },
+  connection: { filename: path.join(homePath, "db", "personDATA.db") },
   useNullAsDefault: true
 });
 
 
 const activityDb = knex({
   client: 'sqlite3',
-  connection: {
-    filename: path.join(homePath, "db", "activityData.db")
-  },
+  connection: { filename: path.join(homePath, "db", "activityData.db") },
   useNullAsDefault: true
 });
 
 
 const dayDb = knex({
   client: 'sqlite3',
-  connection: {
-    filename: path.join(homePath, "db", "dayData.db")
-  },
+  connection: { filename: path.join(homePath, "db", "dayData.db") },
   useNullAsDefault: true
 });
 
@@ -85,10 +76,6 @@ const pathPersonData = path.join(homePath, "db", "personDATA.json");
 // }
 
 
-
-
-
-
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -98,7 +85,6 @@ app.use(cors());
 app.get("/deleteProfile/:code", (req, res) => {
   const { code } = req.params;
   const codeCyrillic = decodeURI(code);
-  console.log('DELETE', codeCyrillic);
   personDb('personData')
     .where('code', codeCyrillic)
     .del().then(() =>
@@ -128,8 +114,6 @@ app.post("/updateCode", (req, res) => {
 
 
 app.post("/updateField", async (req, res) => {
-  console.log(req.body);
-  // console.log(req.json());
   const { code, type, value } = req.body;
   personDb('personData')
     .where('code', code)
@@ -249,7 +233,6 @@ app.post("/changeActivityCode", (req, res) => {
     "oldCode": "ааабвгд"
   } */
   const { oldCode, code } = req.body;
-  console.log(oldCode, code);
   activityDb('activityData')
     .insert({ "code": code, "date": format(new Date(), 'dd-MM-yyyy'), "time": format(new Date(), 'HH:mm:ss'), "type": "Изменение кода", "amount": `${oldCode}=>${code}` })
     .then(() =>
@@ -306,8 +289,6 @@ app.post("/delActivity", (req, res) => {
    "amount": ""
   } */
   const { code, date, time, type, person, amount } = req.body;
-  console.log('code, date, time, type, person, amount');
-  console.log(code, date, time, type, person, amount);
   activityDb('activityData')
     .where({ "code": code, "date": date, "time": time, "type": type, "person": person, "amount": amount })
     .del()
@@ -321,14 +302,13 @@ app.post("/delActivity", (req, res) => {
 
 // FOR RFID SCANNER
 
-
 app.post('/code', (req, res) => {
   const code = (req.body.code).replace("\n", "");
   handleCode(code);
   console.log(req.body.code);
   res.json("sucess");
 })
-/*
+
 
 function handleCode(code) {
   const todayData = format(new Date(), "dd-MM-yyyy");
@@ -338,15 +318,13 @@ function handleCode(code) {
 
   // TODO create new date obj if indexData === -1
   if (indexDate === -1) {
-    console.log('Create new day in Db')
     const newDateObj = { date: todayData, notes: "", history: [] };
     dayData.push(newDateObj);
     indexDate = dayData.length - 1;
-    console.log("length", indexDate);
-    console.log(dayData.findIndex(x => x.date === todayData));
+
   }
 
-
+  /*
   // find if person already in history
   const index = dayData[indexDate].history.findIndex(x => x.code === code);
   if (index === -1) {
@@ -358,6 +336,7 @@ function handleCode(code) {
   }
 }
 
+
 function checkIfInPersons(code) {
   const personData = JSON.parse(readDataJSON(pathPersonData));
   const personIndex = personData.findIndex(x => x.code === code);
@@ -367,6 +346,7 @@ function checkIfInPersons(code) {
     substractOneRemain(personData, personIndex);
   }
 }
+
 
 function substractOneRemain(personData, personIndex) {
   if (personData[personIndex].remain !== "") {
@@ -386,6 +366,7 @@ function substractOneRemain(personData, personIndex) {
   }
 }
 
+
 function pushNewActivity(code, activityObj) {
   const activitiesData = JSON.parse(readDataJSON(pathActivitiesData));
   const activitiesIndex = activitiesData.findIndex(x => x.code === code);
@@ -394,6 +375,7 @@ function pushNewActivity(code, activityObj) {
   writeData(pathActivitiesData, activitiesData);
 }
 
+
 function createNewPerson(code) {
   const personData = JSON.parse(readDataJSON(pathPersonData));
   const newPerson = { "personName": code, "contract": "", "dateBirth": "", "telNum": "", "code": code, "autoMonth": "", "notes": "", "remain": "", "days": "", "photoId": 0, "rent": "", "deposite": "", };
@@ -401,26 +383,20 @@ function createNewPerson(code) {
 
   writeData(pathPersonData, personData);
 
-
   const activitiesObj = { "code": code, "activity": [{ "date": format(new Date(), 'dd-MM-yyyy'), "time": format(new Date(), 'HH:mm:ss'), "type": "Создание профиля", "person": "", "amount": "" }] };
   const activitiesData = JSON.parse(readDataJSON(pathActivitiesData));
   activitiesData.push(activitiesObj);
 
   writeData(pathActivitiesData, activitiesData);
 }
-*/
 
+*/
 // app.use(helmet());
 // app.use(helmet.noCache());
-
-
 app.use(staticFiles);
 app.use(history());
 
 const port = 6700;
 app.listen(port, myLocalHost.host);
-
 app.use(staticFiles)
-
-
 console.log(`App is listening on port ${port}`);

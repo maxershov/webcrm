@@ -17,7 +17,6 @@
 
 html {
     font-size: 1rem;
-    /* background-color: rgb(0, 0, 0); */
     background-image: url("./images/bg.jpeg");
     background-size: 100vw;
     background-attachment: fixed;

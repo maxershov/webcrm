@@ -67,4 +67,5 @@ const CodeScanner = (props) => {
   );
 }
 
+
 export default CodeScanner;

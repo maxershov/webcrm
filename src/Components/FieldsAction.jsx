@@ -5,18 +5,22 @@ import CalendarHideable from './CalendarHideable';
 import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
 import { isToday } from "../App";
 
-const MyActionFields = (props) => {
+
+const FieldsAction = (props) => {
   const [actionType, setActionType] = useState('');
   const [actionAmout, setActionAmout] = useState('');
   const [actionDate, setActionDate] = useState(format(new Date(), 'dd-MM-yyyy'));
   const [actionPerson, setActionPerson] = useState('');
   let time = format(new Date(), 'HH:mm:ss');
   const dispatch = useDispatch();
+
+
   const sendActionsToDb = (event) => {
     event.preventDefault();
     if (!isToday(actionDate)) time = "00:00:00";
     dispatch(addToHistory(props.code, actionDate, time, actionType, actionPerson, actionAmout));
   }
+
   return (
     <div className="FieldsAction">
       <form onSubmit={sendActionsToDb}>
@@ -53,4 +57,4 @@ const MyActionFields = (props) => {
 }
 
 
-export default MyActionFields;
+export default FieldsAction;

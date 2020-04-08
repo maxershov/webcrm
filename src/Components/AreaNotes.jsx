@@ -36,5 +36,3 @@ const AreaNotes = props => {
 
 
 export default AreaNotes;
-
-

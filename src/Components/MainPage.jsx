@@ -13,7 +13,6 @@ import TableForScanner from './TableForScanner';
 import Spinner from './Spinner';
 
 
-
 export const MainPage = props => {
   const loadingPersons = useSelector(state => state.personsStore.loading);
   const loadingDays = useSelector(state => state.dayStore.loading);
