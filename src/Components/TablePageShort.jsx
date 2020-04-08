@@ -17,7 +17,6 @@ function widthForTable(value) {
 const TablePageShort = (props) => {
   const { pageNum } = useParams();
   const history = useHistory();
-  // TODO CRAP => can't change page in path => get path from history and del number 
   const path = history.location.pathname.replace(/[0-9]/g, '');
 
   const personData = useSelector(state => state.personsStore.data);

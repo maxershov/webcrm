@@ -1,11 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
-
 // TODO try to move loading to components => if i change date in main page => just components load => and not all at once
 // TODO check for func => where i need to return new data (add new profile => route.push => fetchData)
-// TODO handle visit with remain
-// TODO handle Pi RFID scanner
-// TODO add in visits => "Посещение учет" 
 
 const express = require("express");
 const history = require("connect-history-api-fallback");
@@ -17,7 +13,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const knex = require('knex')
 const myLocalHost = require("./host");
-
 
 const staticFiles = express.static(path.join(__dirname, "dist"));
 
@@ -80,6 +75,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+
 /* ************************* API************************* */
 
 app.get("/deleteProfile/:code", (req, res) => {
@@ -103,7 +99,6 @@ app.post("/updateCode", (req, res) => {
   // }
   let { oldCode, code } = req.body;
   code = code.replace(/ /g, '');
-
   personDb('personData')
     .where('code', oldCode)
     .update('code', code)
@@ -129,6 +124,7 @@ app.get("/getPersons", (req, res) => {
     res.send(JSON.stringify(data));
   });
 });
+
 
 app.get("/getProfile/:code", (req, res) => {
   const { code } = req.params;
@@ -157,7 +153,6 @@ app.get("/addNewPerson/:code", async (req, res) => {
   const newUser = await personDb('personData').where('code', code);
   await res.send(JSON.stringify(newUser));
 });
-
 
 
 
@@ -190,9 +185,7 @@ app.post("/chgNotes", (req, res) => {
 
 
 
-
 /** ********************** ACTIVITY ********************************************** */
-
 
 // Get  activ for day history
 app.get("/getVisits/:date", (req, res) => {
@@ -221,14 +214,12 @@ app.post("/addToVisits", (req, res) => {
       }))
 });
 
-// if remain true => insert new amount and chg remain
 
 app.post("/changeActivityCode", (req, res) => {
   /* Get old and new code => add new activity to history about change
   ** Change all codes in activities db 
   ** Return all activities for one user 
   */
-
   /* {
     "code":"ЕршовМаксимЛеонидович",
     "oldCode": "ааабвгд"
@@ -250,7 +241,6 @@ app.post("/changeActivityCode", (req, res) => {
 
 // get activities by code
 app.get("/getActivities/:code", (req, res) => {
-  // http://192.168.1.150:6700/getActivities/ЕршовМаксимЛеонидович
   const { code } = req.params;
   const codeCyrillic = decodeURI(code);
   activityDb.select('*').from('activityData').where("code", codeCyrillic).then(data => {
@@ -302,16 +292,12 @@ app.post("/delActivity", (req, res) => {
 
 
 // FOR RFID SCANNER
-
 app.post('/code', (req, res) => {
   const code = (req.body.code).replace("\n", "");
   handleCode(code);
   console.log(req.body.code);
   res.json("sucess");
 })
-
-// handleCode("МаксимЛеонидович");
-// handleCode("ЕршовМаксимЛеонидович");
 
 
 async function handleCode(code) {
