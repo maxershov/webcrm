@@ -28,10 +28,6 @@ export default function dayDataReducer(state = initialState, action) {
         error: true,
         errorMsg: action.err
       };
-    // case "ADD_DAY_DATA":
-    //   return { ...state, data: [...state.data, action.day], loading: false }
-    // case "LOADING_DAY":
-    //   return { ...state, loading: true  }
     default:
       return state;
   }

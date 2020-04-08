@@ -28,17 +28,9 @@ export default function personDataReducer(state = initialState, action) {
         error: true,
         errorMsg: action.err
       };
-
     case "LOADING_PERSON_DATA":
       return { ...state, loading: true }
     default:
       return state;
   }
 }
-
-
-// add method for upd data => CHANGE like this, but before add => 
-// get All data => replace one... or mutate => save in new const => send to redux
-
-
-// or just pull all new data from db...

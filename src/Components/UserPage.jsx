@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable import/no-cycle */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom'
-import { fetchProfile, chgProfileValue, deleteProfile } from "../store/profileStore/profileActions";
-import { fetchHistory, addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
+import { fetchProfile, deleteProfile } from "../store/profileStore/profileActions";
+import { fetchHistory } from "../store/activitiesDataStore/activitiesDataActions";
 import { getImg } from '../App';
 import CalendarHideable from './CalendarHideable';
 import FieldDeposite from './FieldDeposite';
@@ -13,7 +12,6 @@ import FieldsAction from './FieldsAction';
 import TableHistory from './TableHistory';
 import AreaNotes from './AreaNotes';
 import Spinner from './Spinner'
-
 import InputProfile from './InputProfile';
 
 
@@ -27,20 +25,25 @@ export const UserPage = (props) => {
   const [renderPhotoId, changeRenderPhotoId] = useState(false);
   const { codeLink } = useParams();
   const history = useHistory();
-
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     dispatch(fetchProfile(codeLink));
     dispatch(fetchHistory(codeLink))
   }, [codeLink, dispatch]);
 
+
   if (person === undefined) {
     history.push('/main');
   }
+
+
   function delProfile(code) {
     dispatch(deleteProfile(person.code))
     history.push('/main');
   }
+
 
   let renderFields = '';
   if (person.contract === 'ЛИД') renderFields = <LeadParams person={person} />
@@ -101,6 +104,7 @@ export const LeadParams = (props) => {
     </>
   )
 }
+
 
 export const LostPersonParams = (props) => {
   const { person } = props;

@@ -1,9 +1,6 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import host from "../../../host";
-
-
-// TODO check if i need reqDays in each async func => add throttle to all and check
-
+import {sleep} from "../storeGetters";
 
 export const reqDays = () => {
   return { type: "REQUEST_DAYS" };
@@ -14,22 +11,27 @@ export const reqDaysSucess = dayData => {
   return { type: "REQUEST_DAYS_SUCCEEDED", data: dayData };
 };
 
+
 export const reqDaysError = err => {
   return { type: "REQUEST_DAYS_FAILED", error: err };
 };
+
 
 export const fetchDays = (date) => {
   return { type: "FETCHED_DAYS", date };
 };
 
+
 export const changeNotes = (date, notes) => {
   return { type: "CHANGE_DATE_NOTES", date, notes };
-}
+};
+
 
 export function* watchFetchDays() {
   yield takeLatest("FETCHED_DAYS", fetchDaysAsync);
   yield takeLatest("CHANGE_DATE_NOTES", changeNotesAsync);
-}
+};
+
 
 function* fetchDaysAsync({ date }) {
   try {
@@ -42,7 +44,7 @@ function* fetchDaysAsync({ date }) {
   } catch (err) {
     yield put(reqDaysError(err));
   }
-}
+};
 
 
 function* changeNotesAsync({ date, notes }) {
@@ -61,10 +63,4 @@ function* changeNotesAsync({ date, notes }) {
   } catch (err) {
     yield put(reqDaysError(err));
   }
-}
-
-
-
-function* sleep(time) {
-  yield new Promise(resolve => setTimeout(resolve, time));
-}
+};

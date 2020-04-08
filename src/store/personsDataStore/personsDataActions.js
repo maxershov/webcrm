@@ -1,21 +1,23 @@
 import { takeLatest, put, call, select } from "redux-saga/effects";
 import host from "../../../host";
+import {sleep} from "../storeGetters";
 
 export const getStatePersonData = state => state.personsStore.data
+
 
 export const reqPersons = () => {
   return { type: "REQUEST_PERSONS" };
 };
 
+
 export const setLoading = () => {
   return { type: "LOADING_PERSON_DATA" };
 }
 
+
 export const reqPersonsSucess = personsData => {
   return { type: "REQUEST_PERSONS_SUCCEEDED", data: personsData };
 };
-
-
 
 
 export const pushNewPerson = (newPerson) => {
@@ -23,10 +25,10 @@ export const pushNewPerson = (newPerson) => {
 }
 
 
-
 export const reqPersonsError = err => {
   return { type: "REQUEST_PERSONS_FAILED", error: err };
 };
+
 
 export const fetchPersons = () => {
   return { type: "FETCHED_PERSONS" };
@@ -37,6 +39,7 @@ export function* watchFetchPersons() {
   yield takeLatest("FETCHED_PERSONS", fetchPersonsAsync);
   yield takeLatest("PUSH_NEW_PERSON", pushNewPersonAsync);
 }
+
 
 function* fetchPersonsAsync() {
   try {
@@ -60,10 +63,5 @@ export function* pushNewPersonAsync({ newPerson }) {
   yield put(setLoading());
   const data = yield select(getStatePersonData);
   const updData = yield data.concat(newPerson);
-  // console.log('newData', updData);
   yield put(reqPersonsSucess(updData));
 };
-
-function* sleep(time) {
-  yield new Promise(resolve => setTimeout(resolve, time));
-}

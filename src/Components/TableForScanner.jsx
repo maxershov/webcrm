@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactTable from "react-table-6/react-table.min";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import Spinner from './Spinner';
 import { getIndexByCode, getImg } from "../App";
-
 
 
 
@@ -13,30 +11,14 @@ function widthForTable(value) {
   return Math.round(window.innerWidth * (value / 100));
 }
 
-// function getPhotoId(code) {
-//     return personData[getIndexByCode(code)].photoId;
-//   }
-
 
 const TableForScanner = (props) => {
 
   const personData = useSelector(state => state.personsStore.data);
   const historyData = useSelector(state => state.activitiesStore.data);
-  // const loadingPersons = useSelector(state => state.personsStore.loading);
-  // const loadingActivities = useSelector(state => state.activitiesStore.loading);
-  // const loadingDays = useSelector(state => state.dayStore.loading);
-
   const history = useHistory();
 
-
-  // const [historyData, setHistoryData] = useState([]);
-
-  // useEffect(() => {
-  //   setHistoryData(props.data.history);
-  // }, [props.data]);
-
   return (
-  // return (!loadingActivities && !loadingPersons) ? (
     <div className="tableMain">
       <ReactTable
         className="table -striped -highlight"
@@ -62,7 +44,6 @@ const TableForScanner = (props) => {
                 <img
                   alt="tablePhoto"
                   height={80}
-                  // src={require(`../images/0.jpg`)}
                   src={getImg(personData[getIndexByCode(value)].photoId)}
                 />
               </button>
@@ -93,7 +74,6 @@ const TableForScanner = (props) => {
       />
     </div>
   );
-  // ) : <Spinner />
 }
 
 

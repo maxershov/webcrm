@@ -4,9 +4,9 @@
 
 
 // TODO try to move loading to components => if i change date in main page => just components load => and not all at once
-// TODO add sort by date and time in history table =>person
 // TODO check for func => where i need to return new data (add new profile => route.push => fetchData)
-
+// TODO handle visit with remain
+// TODO handle code scanner
 
 const express = require("express");
 const history = require("connect-history-api-fallback");
@@ -57,8 +57,6 @@ const dayDb = knex({
 
 
 const pathPersonData = path.join(homePath, "db", "personDATA.json");
-const pathDayData = path.join(homePath, "db", "dayDATA.json");
-const pathActivitiesData = path.join(homePath, "db", "activityDATA.json");
 
 
 // function writeData(pathTo, data) {
@@ -97,8 +95,6 @@ app.use(cors());
 
 /* ************************* API************************* */
 
-
-// use
 app.get("/deleteProfile/:code", (req, res) => {
   const { code } = req.params;
   const codeCyrillic = decodeURI(code);
@@ -114,7 +110,6 @@ app.get("/deleteProfile/:code", (req, res) => {
 });
 
 
-// use
 app.post("/updateCode", (req, res) => {
   // {
   //   "oldCode":"code12345",
@@ -132,7 +127,6 @@ app.post("/updateCode", (req, res) => {
 });
 
 
-// use
 app.post("/updateField", async (req, res) => {
   console.log(req.body);
   // console.log(req.json());
@@ -145,14 +139,13 @@ app.post("/updateField", async (req, res) => {
     .then(data => res.send(JSON.stringify(data)));
 });
 
-// use
+
 app.get("/getPersons", (req, res) => {
   personDb.select('*').from('personData').then(data => {
     res.send(JSON.stringify(data));
   });
 });
 
-// use
 app.get("/getProfile/:code", (req, res) => {
   const { code } = req.params;
   const codeCyrillic = decodeURI(code);
@@ -165,7 +158,6 @@ app.get("/getProfile/:code", (req, res) => {
 });
 
 
-// use
 app.get("/addNewPerson/:code", async (req, res) => {
   let { code } = req.params;
   let nameCyrillic = decodeURI(code);
@@ -187,8 +179,6 @@ app.get("/addNewPerson/:code", async (req, res) => {
 
 /** ********************** DAY ********************************************** */
 
-
-// use
 app.get("/getDate/:day", (req, res) => {
   // http://192.168.1.150:6700/getDate/05-04-2020
   const { day } = req.params;
@@ -199,7 +189,6 @@ app.get("/getDate/:day", (req, res) => {
 });
 
 
-// use
 app.post("/chgNotes", (req, res) => {
   // {
   //   "day": "05-04-2020",
@@ -222,7 +211,6 @@ app.post("/chgNotes", (req, res) => {
 
 
 // Get  activ for day history
-// use
 app.get("/getVisits/:date", (req, res) => {
   // http://192.168.1.150:6700/getHistory/05-04-2020
   const { date } = req.params;
@@ -233,7 +221,6 @@ app.get("/getVisits/:date", (req, res) => {
 
 
 // Add new profile to day history
-// use
 app.post("/addToHistory", (req, res) => {
   /* {
    "code": "Иванов123",
@@ -250,7 +237,7 @@ app.post("/addToHistory", (req, res) => {
 });
 
 
-// use
+
 app.post("/changeActivityCode", (req, res) => {
   /* Get old and new code => add new activity to history about change
   ** Change all codes in activities db 
@@ -276,21 +263,8 @@ app.post("/changeActivityCode", (req, res) => {
           })));
 });
 
-/*
-// delete all activities by code
-app.get("/deleteActivities/:code", (req, res) => {
-  // http://192.168.1.150:6700/deleteActivities/ЕршовМаксимЛеонидович
-  const { code } = req.params;
-  const codeCyrillic = decodeURI(code);
-  activityDb.select('*').from('activityData').where("code", codeCyrillic).del()
-    .then(() => {
-      res.send('sucess');
-    });
-});
-*/
 
 // get activities by code
-// use
 app.get("/getActivities/:code", (req, res) => {
   // http://192.168.1.150:6700/getActivities/ЕршовМаксимЛеонидович
   const { code } = req.params;
@@ -302,7 +276,6 @@ app.get("/getActivities/:code", (req, res) => {
 
 
 // add activity by code
-// use
 app.post("/addActivity", (req, res) => {
   /* {
    "code": "ЕршовМаксимЛеонидович",
@@ -322,10 +295,7 @@ app.post("/addActivity", (req, res) => {
 });
 
 
-
-
 // del activity by code. date, time
-// use
 app.post("/delActivity", (req, res) => {
   /* {
    "code": "ЕршовМаксимЛеонидович",
@@ -349,23 +319,16 @@ app.post("/delActivity", (req, res) => {
 
 
 
-
-
-/** ********************** END ********************************************** */
-
-
-
-
 // FOR RFID SCANNER
-/*
+
 
 app.post('/code', (req, res) => {
   const code = (req.body.code).replace("\n", "");
   handleCode(code);
-  // console.log(req.body.code);
+  console.log(req.body.code);
   res.json("sucess");
 })
-
+/*
 
 function handleCode(code) {
   const todayData = format(new Date(), "dd-MM-yyyy");

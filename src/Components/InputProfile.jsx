@@ -12,9 +12,7 @@ const InputProfile = (props) => {
   const history = useHistory();
   const { codeLink } = useParams();
   const person = useSelector(state => state.profileStore.data);
-
   const [inputValue, setValue] = useState(baseValue);
-
   const oldFieldValue = person[inputType]
 
 
@@ -29,8 +27,9 @@ const InputProfile = (props) => {
       dispatch(chgProfileValue(codeLink, inputType, inputValue));
       dispatch(addToHistory(codeLink, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${inputType}`, "", `${oldFieldValue} => ${inputValue}`));
     }
-
   }
+
+
   return (
     <div className={`${inputType}Field absolute_position_button`}>
       <form name="myForm" onSubmit={sendToDb}>
@@ -47,7 +46,6 @@ const InputProfile = (props) => {
     </div>
   );
 }
-
 
 
 export default InputProfile;

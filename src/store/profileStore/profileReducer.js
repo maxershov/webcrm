@@ -28,8 +28,6 @@ export default function profileReducer(state = initialState, action) {
         error: true,
         errorMsg: action.err
       };
-    case "CHANGE_PROFILE_DATA":
-      return { ...state, data: action.data, loading: false }
     case "LOADING_PROFILE":
       return { ...state, loading: true }
     default:

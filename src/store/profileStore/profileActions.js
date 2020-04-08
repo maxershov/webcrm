@@ -1,39 +1,48 @@
 import { takeLatest, put, call } from "redux-saga/effects";
-import {pushNewPerson} from "../personsDataStore/personsDataActions";
+import { pushNewPerson } from "../personsDataStore/personsDataActions";
 import host from "../../../host";
 import { reqActivitiesSucess } from "../activitiesDataStore/activitiesDataActions";
+import {sleep} from "../storeGetters";
 
 export const reqProfile = () => {
   return { type: "REQUEST_PROFILE" };
 };
 
+
 export const reqProfileSucess = profile => {
   return { type: "REQUEST_PROFILE_SUCCEEDED", data: profile };
 };
+
 
 export const reqProfileError = err => {
   return { type: "REQUEST_PROFILE_FAILED", error: err };
 };
 
+
 export const fetchProfile = (code) => {
   return { type: "FETCHED_PROFILE", code };
 };
 
+
 export const chgProfileValue = (code, inputType, inputValue) => {
   return { type: "CHANGE_PROFILE_VALUE", code, inputType, inputValue };
-}
+};
+
 
 export const chgCode = (oldCode, code) => {
   return { type: "CHANGE_CODE", oldCode, code };
-}
+};
+
 
 export const addNewProfile = (code) => {
   return { type: "ADD_NEW_PROFILE", code };
-}
+};
+
 
 export const deleteProfile = (code) => {
-  return {type:"DELETE_PROFILE", code};
-}
+  return { type: "DELETE_PROFILE", code };
+};
+
 
 export function* watchFetchProfile() {
   yield takeLatest("FETCHED_PROFILE", fetchProfileAsync);
@@ -43,8 +52,6 @@ export function* watchFetchProfile() {
   yield takeLatest("DELETE_PROFILE", deleteProfileAsync);
 }
 
-
-/* ************************* functions ************************************************************* */
 
 function* fetchProfileAsync({ code }) {
   try {
@@ -59,12 +66,8 @@ function* fetchProfileAsync({ code }) {
   } catch (err) {
     yield put(reqProfileError(err));
   }
-}
+};
 
-
-function* sleep(time) {
-  yield new Promise(resolve => setTimeout(resolve, time));
-}
 
 function* changeFieldAsync({ code, inputType, inputValue }) {
   const requestOptions = {
@@ -81,7 +84,8 @@ function* changeFieldAsync({ code, inputType, inputValue }) {
   } catch (err) {
     yield put(reqProfileError(err));
   }
-}
+};
+
 
 function* changeCodeAsync({ oldCode, code }) {
   const requestOptions = {
@@ -104,7 +108,7 @@ function* changeCodeAsync({ oldCode, code }) {
   } catch (err) {
     yield put(reqProfileError(err));
   }
-}
+};
 
 
 function* addNewProfileAsync({ code }) {
@@ -114,14 +118,13 @@ function* addNewProfileAsync({ code }) {
         res.json()
       );
     });
-    
     // push new person to personData
     yield put(pushNewPerson(newPerson[0]));
     yield put(reqProfileSucess(newPerson[0]));
   } catch (err) {
     yield put(reqProfileError(err));
   }
-}
+};
 
 
 function* deleteProfileAsync({ code }) {
@@ -134,4 +137,4 @@ function* deleteProfileAsync({ code }) {
   } catch (err) {
     yield put(reqProfileError(err));
   }
-}
+};

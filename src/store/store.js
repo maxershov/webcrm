@@ -8,11 +8,9 @@ import dayDataReducer from "./dayDataStore/dayDataReducer";
 import activitiesDataReducer from "./activitiesDataStore/activitiesDataReducer";
 import profileReducer from "./profileStore/profileReducer";
 
-
 import rootSaga from "./root-saga";
 
 const sagaMiddleware = createSagaMiddlewate();
-
 const middlewares = [sagaMiddleware];
 
 if (process.env.NODE_ENV === 'development') {
@@ -25,8 +23,8 @@ const store = createStore(
   combineReducers({
     activitiesStore: activitiesDataReducer,
     personsStore: personsDataReducer,
-    dayStore:dayDataReducer,
-    profileStore:profileReducer
+    dayStore: dayDataReducer,
+    profileStore: profileReducer
   }),
   compose(applyMiddleware(...middlewares))
 );
