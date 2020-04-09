@@ -97,7 +97,7 @@ export const PersonParams = (props) => {
   return (
     <>
       <InputProfile formLabel="Дата рождения:" baseValue={person.dateBirth} inputType="dateBirth" />
-      <InputProfile formLabel="Абонемент:" baseValue={person.contract} inputType="contract" />
+      <InputProfile formLabel="Абонемент:" baseValue={person.contract} inputType="contract" listName="types" />
       <InputProfile formLabel="Остаток тренировок:" baseValue={person.remain} inputType="remain" />
       <InputProfile formLabel="Код карты:" baseValue={person.code} inputType="code" />
       <InputProfile formLabel="Месяц парковки:" baseValue={person.autoMonth} inputType="autoMonth" />
@@ -113,7 +113,7 @@ export const LeadParams = (props) => {
   const { person } = props;
   return (
     <>
-      <InputProfile formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" />
+      <InputProfile formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" listName="types"/>
       <CalendarHideable сalendarName="Дата первого обращения:" dateType="rent" date={person.rent} />
     </>
   )
@@ -125,7 +125,7 @@ export const EmployeeParams = (props) => {
   return (
     <>
       <InputProfile formLabel="Дата рождения:" baseValue={person.dateBirth} inputType="dateBirth" />
-      <InputProfile formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" />
+      <InputProfile formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" listName="types" />
       <InputProfile formLabel="Код карты:" baseValue={person.code} inputType="code" />
       <InputProfile formLabel="Парковка оплачена до:" baseValue={person.autoMonth} inputType="autoMonth" />
       <FieldDeposite depositeValue={person.deposite} />

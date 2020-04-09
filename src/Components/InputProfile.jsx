@@ -6,7 +6,7 @@ import { chgProfileValue, chgCode } from "../store/profileStore/profileActions";
 import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
 
 const InputProfile = (props) => {
-  const { formLabel, baseValue, inputType } = props;
+  const { formLabel, baseValue, inputType, listName } = props;
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -40,7 +40,18 @@ const InputProfile = (props) => {
           name={inputType}
           onChange={event => setValue(event.target.value)}
           value={inputValue}
+          list={listName}
         />
+        <datalist id="types">
+          <option value={inputValue}>{inputValue}</option>
+          <option value="СОТРУДНИК">тип профиля</option>
+          <option value="ЛИД">тип профиля</option>
+          <option value="НЕТ">тип профиля</option>
+          <option value="1 СВОБ">тип профиля</option>
+          <option value="1 СВОБ УТРО">тип профиля</option>
+          <option value="3 КФ">тип профиля</option>
+          <option value="6 ТА">тип профиля</option>
+        </datalist>
         <button type="submit">Изменить</button>
       </form>
     </div>
