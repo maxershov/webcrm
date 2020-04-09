@@ -41,10 +41,20 @@ module.exports = {
             }
           }
         ]
+      },{
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'images/',
+            esModule: false
+          }
+        }]
       },
       {
         loader: require.resolve("file-loader"),
-        exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/, /\.css$/],
+        exclude: [/\.(js|mjs|jsx|ts|tsx|jpe?g|png|gif|svg)$/, /\.html$/, /\.json$/, /\.css$/],
         options: {
           name: "static/media/[name].[hash:8].[ext]",
           esModule: false

@@ -42,10 +42,13 @@ export const UserPage = (props) => {
     const formData = new FormData()
     formData.append("img", file[0])
     console.log(file);
-    fetch(`http://${host.host}:6700/upload`, {
+    console.log("code", codeLink);
+    fetch(`http://${host.host}:6700/upload/${codeLink}`, {
       method: 'POST',
       body: formData
-    }).then(res => res.json())
+      // }).then(res => res.json())
+    })
+    // .then(() => history.push('/main'))
   }
 
   if (person === undefined) {
@@ -71,10 +74,12 @@ export const UserPage = (props) => {
 
   // <input type="file" name="photo" accept="image/*,image/jpeg" onChange={(e) => handleFiles(e.target.files)} />
   // <form action="/upload" encType="multipart/form-data" method="post">
+  
 
+  // src={getImg(person.photoId)}
   return loading ? <Spinner /> : (
     <div className="userPage">
-      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={getImg(person.photoId)} /></div>
+      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={`http://192.168.1.150:6700/images/${person.photoId}`} /></div>
       <div className="userPage-container">
         {renderPhotoId ? (
           <>

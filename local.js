@@ -291,13 +291,15 @@ app.post("/delActivity", (req, res) => {
 });
 
 
-
-
+// destination: path.join("src", "uploads"),
+// destination: path.join(homePath, "db"),
+// destination: path.join(homePath, "db", "images"),
 const storage = multer.diskStorage({
-  destination: path.join(homePath, "db"),
+  destination: "images",
   filename(req, file, cb) {
     // cb(null, `${Date.now()  }.jpg`) // Appending .jpg
-    cb(null, Date.now() + path.extname(file.originalname))
+    // cb(null, Date.now() + path.extname(file.originalname))
+    cb(null, req.params.code + path.extname(file.originalname))
   }
 });
 
@@ -306,10 +308,16 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 
-app.post('/upload', upload.single('img'), function (req, res, next) {
+app.post('/upload/:code', upload.single('img'), function (req, res, next) {
+  const { code } = req.params;
   console.log(`file${req.file}${req.files}`);
-  // res.send('Successfully uploaded!');
-  res.send(req.file.filename);
+  // add to all persons db
+  personDb('personData')
+    .where('code', code)
+    .update("photoId", req.file.filename)
+    // .then(() =>  res.send("sucess"));
+    .then(() => console.log('update Db', code, req.file.filename));
+    // console.log('update Db', code, req.file.filename);
 });
 
 
