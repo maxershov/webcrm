@@ -44,7 +44,7 @@ const TableForScanner = (props) => {
                 <img
                   alt="tablePhoto"
                   height={80}
-                  src={`http://${host.host}:6700/images/${personData[getIndexByCode(value)]?.photoId ?? "0.jpg"}`}
+                  src={`http://${host}:6700/images/${personData[getIndexByCode(value)]?.photoId ?? "0.jpg"}`}
                 />
               </button>
             )

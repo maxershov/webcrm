@@ -38,7 +38,7 @@ function* fetchDaysAsync({ date }) {
     yield put(reqDays());
     yield sleep(1000);
     const data = yield call(() => {
-      return fetch(`http://${host.host}:6700/getDate/${date}`).then(res => res.json());
+      return fetch(`http://${host}:6700/getDate/${date}`).then(res => res.json());
     });
     yield put(reqDaysSucess(data[0]));
   } catch (err) {
@@ -56,7 +56,7 @@ function* changeNotesAsync({ date, notes }) {
   try {
     yield put(reqDays());
     const updatedData = yield call(() => {
-      return fetch(`http://${host.host}:6700/chgNotes`, requestOptions)
+      return fetch(`http://${host}:6700/chgNotes`, requestOptions)
         .then(res => res.json());
     });
     yield put(reqDaysSucess(updatedData[0]));

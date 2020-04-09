@@ -2,7 +2,7 @@
 import puppeteer from '../../node_modules/puppeteer-core';
 import "regenerator-runtime/runtime";
 import { getIndexByCode, getDaysLeft } from '../App';
-import myLocalHost from '../../host';
+import host from '../../host';
 
 
 // puppeteer test
@@ -15,7 +15,7 @@ beforeAll(async () => {
     headless: false,
   });
   page = await browser.newPage();
-  await page.goto(myLocalHost.pagePath);
+  await page.goto(host.pagePath);
 });
 
 test("renders first link", async () => {

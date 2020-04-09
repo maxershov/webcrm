@@ -40,7 +40,7 @@ export const UserPage = (props) => {
   function handleFiles(file) {
     const formData = new FormData()
     formData.append("img", file[0])
-    fetch(`http://${host.host}:6700/upload/${codeLink}`, {
+    fetch(`http://${host}:6700/upload/${codeLink}`, {
       method: 'POST',
       body: formData
     }) // .then(() => history.push('/main'))
@@ -66,7 +66,7 @@ export const UserPage = (props) => {
 
   return loading ? <Spinner /> : (
     <div className="userPage">
-      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={`http://${host.host}:6700/images/${person.photoId}`} /></div>
+      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={`http://${host}:6700/images/${person.photoId}`} /></div>
       <div className="userPage-container">
         {renderPhotoId ? (
           <>

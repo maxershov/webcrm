@@ -58,7 +58,7 @@ function* fetchProfileAsync({ code }) {
     yield put(reqProfile());
     // yield sleep(1000);
     const data = yield call(() => {
-      return fetch(`http://${host.host}:6700/getProfile/${encodeURI(code)}`).then(res =>
+      return fetch(`http://${host}:6700/getProfile/${encodeURI(code)}`).then(res =>
         res.json()
       );
     });
@@ -77,7 +77,7 @@ function* changeFieldAsync({ code, inputType, inputValue }) {
   };
   try {
     const updatedData = yield call(() => {
-      return fetch(`http://${host.host}:6700/updateField`, requestOptions)
+      return fetch(`http://${host}:6700/updateField`, requestOptions)
         .then(res => res.json());
     });
     yield put(reqProfileSucess(updatedData[0]));
@@ -95,12 +95,12 @@ function* changeCodeAsync({ oldCode, code }) {
   };
   try {
     const updatedData = yield call(() => {
-      return fetch(`http://${host.host}:6700/updateCode`, requestOptions)
+      return fetch(`http://${host}:6700/updateCode`, requestOptions)
         .then(res => res.json());
     });
     // handle history change
     const updatedHistoryData = yield call(() => {
-      return fetch(`http://${host.host}:6700/changeActivityCode`, requestOptions)
+      return fetch(`http://${host}:6700/changeActivityCode`, requestOptions)
         .then(res => res.json());
     });
     yield put(reqProfileSucess(updatedData[0]));
@@ -114,7 +114,7 @@ function* changeCodeAsync({ oldCode, code }) {
 function* addNewProfileAsync({ code }) {
   try {
     const newPerson = yield call(() => {
-      return fetch(`http://${host.host}:6700/addNewPerson/${encodeURI(code)}`).then(res =>
+      return fetch(`http://${host}:6700/addNewPerson/${encodeURI(code)}`).then(res =>
         res.json()
       );
     });
@@ -131,7 +131,7 @@ function* deleteProfileAsync({ code }) {
   yield put(reqProfile());
   try {
     yield call(() => {
-      return fetch(`http://${host.host}:6700/deleteProfile/${encodeURI(code)}`)
+      return fetch(`http://${host}:6700/deleteProfile/${encodeURI(code)}`)
     });
     // yield put(reqProfileSucess(undefined));
   } catch (err) {

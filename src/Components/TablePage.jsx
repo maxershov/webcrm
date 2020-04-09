@@ -52,7 +52,7 @@ const TablePage = (props) => {
           width: widthForTable(15),
           headerClassName: 'tableHeader',
           Cell: (value) => (
-            <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={`http://${host.host}:6700/images/${value.original.photoId ?? "0.jpg"}`} /></button>)
+            <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={`http://${host}:6700/images/${value.original.photoId ?? "0.jpg"}`} /></button>)
         },
         {
           Header: 'Имя',
