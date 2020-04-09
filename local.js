@@ -12,6 +12,7 @@ const fs = require("fs");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const knex = require('knex')
+const multer = require('multer');
 const myLocalHost = require("./host");
 
 const staticFiles = express.static(path.join(__dirname, "dist"));
@@ -288,6 +289,29 @@ app.post("/delActivity", (req, res) => {
         res.send(JSON.stringify(data));
       }))
 });
+
+
+
+
+const storage = multer.diskStorage({
+  destination: path.join(homePath, "db"),
+  filename(req, file, cb) {
+    // cb(null, `${Date.now()  }.jpg`) // Appending .jpg
+    cb(null, Date.now() + path.extname(file.originalname))
+  }
+});
+
+// dest: 'uploads/'
+// const upload = multer({ dest: path.join(homePath, "db") })
+const upload = multer({ storage })
+
+
+app.post('/upload', upload.single('img'), function (req, res, next) {
+  console.log(`file${req.file}${req.files}`);
+  // res.send('Successfully uploaded!');
+  res.send(req.file.filename);
+});
+
 
 
 

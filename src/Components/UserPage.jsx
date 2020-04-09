@@ -13,6 +13,7 @@ import TableHistory from './TableHistory';
 import AreaNotes from './AreaNotes';
 import Spinner from './Spinner'
 import InputProfile from './InputProfile';
+import host from "../../host";
 
 
 function getPersonNames(data) {
@@ -36,6 +37,17 @@ export const UserPage = (props) => {
   }, [codeLink, dispatch]);
 
 
+  function handleFiles(file) {
+    // img
+    const formData = new FormData()
+    formData.append("img", file[0])
+    console.log(file);
+    fetch(`http://${host.host}:6700/upload`, {
+      method: 'POST',
+      body: formData
+    }).then(res => res.json())
+  }
+
   if (person === undefined) {
     history.push('/main');
   }
@@ -52,6 +64,14 @@ export const UserPage = (props) => {
   else if (person.contract === 'СОТРУДНИК') renderFields = <EmployeeParams person={person} />
   else renderFields = <PersonParams person={person} />
 
+  //   <form onSubmit={handleSubmit} action={`http://${host.host}:6700/upload`} encType="multipart/form-data" method="post">
+  //   <input type="file" name="img" accept="image/*" />
+  //   <input type="submit" value="Upload" />
+  // </form>
+
+  // <input type="file" name="photo" accept="image/*,image/jpeg" onChange={(e) => handleFiles(e.target.files)} />
+  // <form action="/upload" encType="multipart/form-data" method="post">
+
   return loading ? <Spinner /> : (
     <div className="userPage">
       <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={getImg(person.photoId)} /></div>
@@ -59,6 +79,7 @@ export const UserPage = (props) => {
         {renderPhotoId ? (
           <>
             <InputProfile formLabel="Изменить код фото:" baseValue={person.photoId} inputType="photoId" />
+            <input type="file" name="img" accept="image/*,image/jpeg" onChange={(e) => handleFiles(e.target.files)} />
             <label>Удаление:</label>
             <button type="button" onClick={() => delProfile(person.code)}>Удалить пользователя</button>
           </>
