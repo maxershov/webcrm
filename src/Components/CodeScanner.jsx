@@ -14,6 +14,7 @@ const CodeScanner = (props) => {
 
 
   function createProfile(code) {
+    // code.replace handle in backend => i need name for profile with spaces
     dispatch(addNewProfile(code));
     // open user page with new profile
     route.push(`/profile/${code.replace(/ /g, '')}`)
@@ -31,6 +32,7 @@ const CodeScanner = (props) => {
 
   function handleNewCode(code) {
     // find if in today history
+    code = code.replace(/ /g, '');
     const indexHistory = historyData.findIndex(person => person.code === code);
     let amount = "";
     if (indexHistory === -1) {

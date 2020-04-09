@@ -4,9 +4,11 @@ import React, { useEffect } from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from "react-router-dom";
-import { getDaysLeft, getIndexByCode, getImg } from '../App';
+import { getDaysLeft } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import Spinner from './Spinner'
+import host from "../../host";
+
 
 // set width to table colums by .className size
 function widthForTable(value) {
@@ -85,11 +87,10 @@ const TablePageShort = (props) => {
         columns={[
           {
             Header: 'Фото',
-            width: widthForTable(25),
+            width: widthForTable(15),
             headerClassName: 'tableHeader',
             Cell: (value) => (
-              // <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/0.jpg`)} /></button>)
-              <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={getImg(personData[getIndexByCode(value.original.code)].photoId)} /></button>)
+              <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={`http://${host.host}:6700/images/${value.original.photoId ?? "0.jpg"}`} /></button>)
           },
           {
             Header: 'Имя',

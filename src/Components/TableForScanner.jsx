@@ -2,8 +2,8 @@ import React from 'react';
 import ReactTable from "react-table-6/react-table.min";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { getIndexByCode, getImg } from "../App";
-
+import { getIndexByCode } from "../App";
+import host from "../../host";
 
 
 // set width to table colums by .className size
@@ -44,7 +44,7 @@ const TableForScanner = (props) => {
                 <img
                   alt="tablePhoto"
                   height={80}
-                  src={getImg(personData[getIndexByCode(value)].photoId)}
+                  src={`http://${host.host}:6700/images/${personData[getIndexByCode(value)]?.photoId ?? "0.jpg"}`}
                 />
               </button>
             )
@@ -55,7 +55,7 @@ const TableForScanner = (props) => {
             width: widthForTable(60),
             headerClassName: 'tableHeader',
             style: { whiteSpace: 'unset' },
-            Cell: ({ value }) => (<Link to={`/profile/${value}`}>{personData[getIndexByCode(value)].personName}</Link>)
+            Cell: ({ value }) => (<Link to={`/profile/${value}`}>{personData[getIndexByCode(value)]?.personName ?? value}</Link>)
           },
           {
             Header: "Время",

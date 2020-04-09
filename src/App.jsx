@@ -10,8 +10,6 @@ import Header from './Components/Header';
 import store from './store/store'
 import { getPersonStore } from './store/storeGetters'
 
-const path = require("path");
-
 
 const App = (props) => {
   return (
@@ -29,39 +27,6 @@ export function isToday(date) {
   const todayDate = format(new Date(), "dd-MM-yyyy");
   return todayDate === date;
 }
-
-// let imgPath = null;
-// process.platform === "win32"
-//   ? (imgPath = path.join(path.dirname(require("os").homedir()), "Public",  "db", "images"))
-//   : (imgPath = path.join(require("os").homedir(),"db", "images" ));
-
-export function getImg(photoPath) {
-  // console.log(imgPath);
-  try {
-    // return require(`../images/${photoPath}`)
-    // return path.join(imgPath, photoPath)
-    return `http://192.168.1.150:6700/images/${photoPath}`;
-  } catch (err) {
-    // return require('../images/0.jpg');
-    // return path.join(imgPath, "0.jpg")
-    return `http://192.168.1.150:6700/images/0.jpg`;
-  }
-}
-// export function getImg(photoId) {
-//   try {
-//     return require(`./images/${photoId}.JPG`)
-//   } catch (err) {
-//     try {
-//       return require(`./images/${photoId}.jpeg`);
-//     } catch (err) {
-//       try {
-//         return require(`./images/${photoId}.jpg`);
-//       } catch (err) {
-//         return require('./images/0.jpg');
-//       }
-//     }
-//   }
-// }
 
 
 export function getIndexByCode(code) {

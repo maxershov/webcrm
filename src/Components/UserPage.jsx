@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom'
 import { fetchProfile, deleteProfile } from "../store/profileStore/profileActions";
 import { fetchHistory } from "../store/activitiesDataStore/activitiesDataActions";
-import { getImg } from '../App';
 import CalendarHideable from './CalendarHideable';
 import FieldDeposite from './FieldDeposite';
 import FieldsAction from './FieldsAction';
@@ -20,6 +19,7 @@ function getPersonNames(data) {
   if (data === undefined) return [];
   return data.map(obj => { return obj.personName });
 }
+
 
 export const UserPage = (props) => {
   const persons = useSelector(state => state.personsStore.data);
@@ -38,18 +38,14 @@ export const UserPage = (props) => {
 
 
   function handleFiles(file) {
-    // img
     const formData = new FormData()
     formData.append("img", file[0])
-    console.log(file);
-    console.log("code", codeLink);
     fetch(`http://${host.host}:6700/upload/${codeLink}`, {
       method: 'POST',
       body: formData
-      // }).then(res => res.json())
-    })
-    // .then(() => history.push('/main'))
+    }) // .then(() => history.push('/main'))
   }
+
 
   if (person === undefined) {
     history.push('/main');
@@ -67,19 +63,10 @@ export const UserPage = (props) => {
   else if (person.contract === 'СОТРУДНИК') renderFields = <EmployeeParams person={person} />
   else renderFields = <PersonParams person={person} />
 
-  //   <form onSubmit={handleSubmit} action={`http://${host.host}:6700/upload`} encType="multipart/form-data" method="post">
-  //   <input type="file" name="img" accept="image/*" />
-  //   <input type="submit" value="Upload" />
-  // </form>
 
-  // <input type="file" name="photo" accept="image/*,image/jpeg" onChange={(e) => handleFiles(e.target.files)} />
-  // <form action="/upload" encType="multipart/form-data" method="post">
-  
-
-  // src={getImg(person.photoId)}
   return loading ? <Spinner /> : (
     <div className="userPage">
-      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={`http://192.168.1.150:6700/images/${person.photoId}`} /></div>
+      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={`http://${host.host}:6700/images/${person.photoId}`} /></div>
       <div className="userPage-container">
         {renderPhotoId ? (
           <>

@@ -13,6 +13,7 @@ const CalendarHideable = (props) => {
   const person = useSelector(state => state.profileStore.data);
   const oldFieldValue = person[props.dateType];
 
+
   function changeDate(dateTo) {
     const date = format(dateTo, 'dd-MM-yyyy');
     if (props.dateType === 'setParent') {
@@ -24,10 +25,13 @@ const CalendarHideable = (props) => {
     setRenderCalendar('none');
   }
 
+
   function deleteDate() {
     dispatch(chgProfileValue(codeLink, props.dateType, ""));
     setRenderCalendar('none');
   }
+
+
   return (
     <>
       <div className={`${props.dateType}Field`}>

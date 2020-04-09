@@ -4,10 +4,10 @@ import React, { useEffect } from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { getDaysLeft, getImg } from '../App';
+import { getDaysLeft } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import Spinner from './Spinner'
-
+import host from "../../host";
 
 // set width to table colums by .className size
 function widthForTable(value) {
@@ -23,10 +23,10 @@ const TablePage = (props) => {
   const dispatch = useDispatch();
 
 
-  
   useEffect(() => {
     dispatch(fetchPersons());
   }, []);
+
 
   return loadingPersons ? <Spinner /> : (
     <ReactTable
@@ -41,7 +41,7 @@ const TablePage = (props) => {
       ofText="из"
       rowsText="профилей"
       headerClassName="tableHeader"
-      data={props.all ? personData : 
+      data={props.all ? personData :
         personData.filter(obj => obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД')}
       filterable
       defaultFilterMethod={(filter, row) =>
@@ -52,9 +52,7 @@ const TablePage = (props) => {
           width: widthForTable(15),
           headerClassName: 'tableHeader',
           Cell: (value) => (
-            <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={getImg(value.original.photoId)} /></button>)
-            // <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/0.jpg`)} /></button>)
-          // <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/${value.original.photoId}.jpg`)} /></button>)
+            <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={`http://${host.host}:6700/images/${value.original.photoId ?? "0.jpg"}`} /></button>)
         },
         {
           Header: 'Имя',

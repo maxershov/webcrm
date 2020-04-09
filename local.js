@@ -295,7 +295,7 @@ app.post("/delActivity", (req, res) => {
 // destination: path.join(homePath, "db"),
 // destination: path.join(homePath, "db", "images"),
 const storage = multer.diskStorage({
-  destination: "images",
+  destination: path.join("dist", "images"),
   filename(req, file, cb) {
     // cb(null, `${Date.now()  }.jpg`) // Appending .jpg
     // cb(null, Date.now() + path.extname(file.originalname))
