@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { getDaysLeft } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
-import Spinner from './Spinner'
 import host from "../../host";
 
 
@@ -75,26 +74,26 @@ const TablePageShort = (props) => {
   if (props.tableType === 'СОТРУДНИК') tableRow = employeeObj;
   if (props.tableType === 'НЕТ') tableRow = lostObj;
 
-  return loadingPersons ? (<><Spinner /></>) : (
+  return loadingPersons ? <span className="spinner" /> : (
     <>
-    <h1 className="askPhoneTurn">Используйте альбомный режим<br />⤵</h1>
-    <div className="table">
-      <ReactTable
-        className="-striped -highlight"
-        page={parseInt(pageNum, 10) - 1}
-        onPageChange={(pageIndex) => { history.push(path + (pageIndex + 1)) }}
-        previousText="Назад"
-        nextText="Вперед"
-        loadingText="Загрузка"
-        noDataText="Нет данных"
-        pageText="Страница"
-        ofText="из"
-        rowsText="профилей"
-        data={personData.filter(obj => obj.contract === props.tableType)}
-        filterable
-        defaultFilterMethod={(filter, row) =>
+      <h1 className="askPhoneTurn">Используйте альбомный режим<br />⤵</h1>
+      <div className="table">
+        <ReactTable
+          className="-striped -highlight"
+          page={parseInt(pageNum, 10) - 1}
+          onPageChange={(pageIndex) => { history.push(path + (pageIndex + 1)) }}
+          previousText="Назад"
+          nextText="Вперед"
+          loadingText="Загрузка"
+          noDataText="Нет данных"
+          pageText="Страница"
+          ofText="из"
+          rowsText="профилей"
+          data={personData.filter(obj => obj.contract === props.tableType)}
+          filterable
+          defaultFilterMethod={(filter, row) =>
           String(row[filter.id]) === filter.value}
-        columns={[
+          columns={[
           {
             Header: 'Фото',
             width: widthCoeff * 15,
@@ -122,10 +121,10 @@ const TablePageShort = (props) => {
           },
           tableRow
         ]}
-        defaultSorted={[{ id: 'personName', desc: false }]}
-        defaultPageSize={20}
-      />
-    </div>
+          defaultSorted={[{ id: 'personName', desc: false }]}
+          defaultPageSize={20}
+        />
+      </div>
     </>
   )
 }

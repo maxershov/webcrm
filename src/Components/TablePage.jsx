@@ -6,7 +6,6 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { getDaysLeft } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
-import Spinner from './Spinner'
 import host from "../../host";
 
 
@@ -35,7 +34,7 @@ const TablePage = (props) => {
 }, []);
 
 
-  return loadingPersons ? <Spinner /> : (
+  return loadingPersons ? <span className="spinner" /> : (
     <>
       <h1 className="askPhoneTurn">Используйте альбомный режим<br />⤵</h1>
       <ReactTable

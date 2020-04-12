@@ -10,7 +10,6 @@ import AreaNotes from "./AreaNotes";
 import CodeScanner from "./CodeScanner";
 import { isToday } from "../App";
 import TableForScanner from './TableForScanner';
-import Spinner from './Spinner';
 
 
 export const MainPage = props => {
@@ -61,7 +60,7 @@ export const MainPage = props => {
       </div>
       <TableForScanner />
     </>
-  ) : <Spinner />
+  ) : <span className="spinner" />
 
 };
 

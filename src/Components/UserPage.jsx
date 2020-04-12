@@ -10,7 +10,6 @@ import FieldDeposite from './FieldDeposite';
 import FieldsAction from './FieldsAction';
 import TableHistory from './TableHistory';
 import AreaNotes from './AreaNotes';
-import Spinner from './Spinner'
 import InputProfile from './InputProfile';
 import host from "../../host";
 
@@ -64,7 +63,7 @@ export const UserPage = (props) => {
   else renderFields = <PersonParams person={person} />
 
 
-  return loading ? <Spinner /> : (
+  return loading ? <span className="spinner" /> : (
     <div className="userPage">
       <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={`http://${host}:6700/images/${person.photoId}`} /></div>
       <div className="userPage-container">
@@ -113,7 +112,7 @@ export const LeadParams = (props) => {
   const { person } = props;
   return (
     <>
-      <InputProfile formLabel="Тип профиля" baseValue={person.contract} inputType="contract" listName="types"/>
+      <InputProfile formLabel="Тип профиля" baseValue={person.contract} inputType="contract" listName="types" />
       <CalendarHideable сalendarName="Дата первого обращения" dateType="rent" date={person.rent} />
     </>
   )

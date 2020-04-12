@@ -1,9 +1,8 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import ReactTable from "react-table-6/react-table.min";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteHistoryObj } from '../store/activitiesDataStore/activitiesDataActions';
 import { getDaysLeft } from "../App";
-import Spinner from "./Spinner";
 
 
 // set width to table colums by .className size
@@ -16,14 +15,25 @@ const TableHistory = props => {
   const data = useSelector(state => state.activitiesStore.data);
   const loadingActivities = useSelector(state => state.activitiesStore.loading);
   const dispatch = useDispatch();
+  const [widthCoeff, setWidthCoeff] = useState(window.innerWidth/100); 
 
 
   function deleteHistory(obj) {
     dispatch(deleteHistoryObj(obj.code, obj.date, obj.time, obj.type, obj.person, obj.amount));
   }
 
+  function handleResize() {
+    setWidthCoeff(window.innerWidth/100);
+  }
 
-  return loadingActivities ? (<Spinner />) :
+
+  useEffect(() => {
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
+
+  return loadingActivities ? <span className="spinner" /> :
     (
       <div className="tableHistory">
         <ReactTable
@@ -39,22 +49,22 @@ const TableHistory = props => {
           columns={[
             {
               Header: '',
-              width: widthForTable(4),
+              width: widthCoeff * 4,
               headerClassName: 'tableHeader',
               Cell: (value) => (
                 <button id="DeleteButton" type="button" onClick={() => deleteHistory(value.original)}>X</button>)
             },
             {
               Header: "Тип",
+              width: widthCoeff* 16,
               accessor: "type",
               headerClassName: "tableHeader",
-              style: { whiteSpace: "unset" },
-              width: widthForTable(16)
+              style: { whiteSpace: "unset" }
             },
             {
               Header: "Дата",
               accessor: "date",
-              width: widthForTable(10),
+              width: widthCoeff * 10,
               headerClassName: "tableHeader",
               sortMethod: (a, b) => {
                 const dayA = getDaysLeft(a);
@@ -68,7 +78,7 @@ const TableHistory = props => {
             },
             {
               Header: "Время",
-              width: widthForTable(10),
+              width: widthCoeff * 10,
               accessor: "time",
               headerClassName: "tableHeader"
             },
@@ -76,13 +86,13 @@ const TableHistory = props => {
               Header: "Имя",
               accessor: "person",
               style: { whiteSpace: "unset" },
-              width: widthForTable(20),
+              width: widthCoeff * 20,
               headerClassName: "tableHeader"
             },
             {
               Header: "Значение",
               accessor: "amount",
-              width: widthForTable(40),
+              width: widthCoeff *40,
               headerClassName: "tableHeader",
               style: { whiteSpace: "unset" }
             }
