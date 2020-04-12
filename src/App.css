@@ -19,6 +19,10 @@
     --input-text-color: rgb(51, 51, 51);
 }
 
+body {
+    margin: 0;
+}
+
 ::-webkit-scrollbar {
     /*hide -y scrollbar*/
     display: none;
@@ -50,14 +54,18 @@ html {
 }
 
 @media (max-width: 600px) and (orientation: portrait) {
-    html {
+    /* html {
         visibility: hidden;
     }
+    */
     .askPhoneTurn {
         display: block;
         visibility: visible;
-        font-size: 4rem !important;
+        font-size: 1.3rem !important;
         text-align: center;
+    }
+    .table {
+        visibility: hidden;
     }
 }
 
@@ -65,12 +73,15 @@ html {
     background-color: var(--back-color);
     text-align: center;
     font-size: 1.1rem;
+    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
 }
+
 
 .tableHeader {
     white-space: pre-line !important;
     word-wrap: break-word;
 }
+
 
 #tablePhoto {
     align-items: center;
@@ -94,7 +105,7 @@ html {
 
 .menu-container {
     display: flex;
-    margin: 0 0 0.3em 0;
+    margin: 0.5rem 0 0.3em 0;
 }
 
 a {
@@ -114,6 +125,7 @@ a {
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     text-shadow: 1px 1px 0 var(--white);
+    /* margin-top: 0.3rem; */
 }
 
 .menu-container .menu-nav-active {
@@ -128,7 +140,13 @@ a {
     grid-template-rows: repeat(4, auto);
     justify-items: center;
     align-content: flex-start;
+
+    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    border-radius: 25px;
+    padding: 1rem;
 }
+
+
 
 .userPage-container {
     grid-column: 2/3;
@@ -177,21 +195,13 @@ a {
     text-transform: uppercase;
     font-weight: bold;
     text-shadow: 1px 1px 1px var(--white);
-    margin-bottom: 0.5rem;
+    margin: 1.3rem 0 0.5rem 0;
 }
 
 .tableHeader {
     font-size: 1rem;
     color: var(--grey);
     text-transform: uppercase;
-
-}
-
-
-.userPage {
-    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
-    border-radius: 25px;
-    padding: 1rem;
 }
 
 
@@ -208,6 +218,7 @@ a {
     appearance: none;
     -webkit-appearance: none;
     text-shadow: 0 0 0.1em rgb(255, 255, 255);
+    outline: none;
 }
 
 *>input:hover {
@@ -224,11 +235,14 @@ a {
     text-shadow: none;
 }
 
-.absolute_position_button button {
+/* .absolute_position_button button {
+    position: absolute;
+} */
+.absolute_position {
     position: absolute;
 }
 
-.userPage button {
+.userPage button, .notesMain button  {
     width: 30vw;
     border-style: none;
     text-transform: uppercase;
@@ -247,6 +261,8 @@ a {
 
 .userPage-container>*:hover>form>button, .userPage-container>*:hover>button, .FieldsAction>*:hover button, .newProfileField:hover button, .notesMain:hover button, .notesField:hover button {
     display: block;
+    /* z-index: 69; */
+    /* position: absolute;   */
 }
 
 .notesField textarea {

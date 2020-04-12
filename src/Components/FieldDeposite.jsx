@@ -47,8 +47,8 @@ const FieldDeposite = (props) => {
             <label>Сумма списания/пополнения</label>
             <br />
             <input className="numInput" type="number" width="40" height="50" value={amount} onChange={event => setAmount(event.target.value)} />
-            <button type="button" style={{ float: "left", height: "30px", width: "50px" }} onClick={plus}>+</button>
-            <button type="button" style={{ float: "left", height: "30px", width: "50px" }} onClick={minus}>-</button>
+            <button type="button" style={{ fontSize: "1.4em", display:"block", marginBottom:"1rem" }} onClick={plus}>+</button>
+            <button type="button" style={{ fontSize: "1.4em", display:"block" }} onClick={minus}>-</button>
           </form>
           <CalendarHideable setParentDate={setDateDeposite} сalendarName="Дата изменения депозита" dateType="setParent" date={dateDeposite} />
         </>

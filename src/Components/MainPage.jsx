@@ -47,7 +47,7 @@ export const MainPage = props => {
           value={parse(loadedDate, "dd-MM-yyyy", new Date())}
           onChange={date => changeLoadDate(date)}
         />
-        <div className="notesMain font-white-shadow">
+        <div className="notesMain">
           <AreaNotes type="DAY_DATA" notesValue={notesValue} date={loadedDate} />
         </div>
         {isToday(loadedDate) ? (

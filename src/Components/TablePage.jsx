@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState  } from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,11 +8,6 @@ import { getDaysLeft } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import Spinner from './Spinner'
 import host from "../../host";
-
-// set width to table colums by .className size
-function widthForTable(value) {
-  return Math.round(window.innerWidth * (value / 100))
-}
 
 
 const TablePage = (props) => {
@@ -22,36 +17,48 @@ const TablePage = (props) => {
   const loadingPersons = useSelector(state => state.personsStore.loading);
   const dispatch = useDispatch();
 
+  // add state for table to rerender
+  const [widthCoeff, setWidthCoeff] = useState(window.innerWidth/100); 
+
+
+  function handleResize() {
+    setWidthCoeff(window.innerWidth/100);
+  }
 
   useEffect(() => {
     dispatch(fetchPersons());
-  }, []);
+  }, [dispatch]);
 
+  useEffect(() => {
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
 
-  // <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={`http://${host}:6700/images/${value.original.photoId ?? "0.jpg"}`} /></button>)
 
   return loadingPersons ? <Spinner /> : (
-    <ReactTable
-      className="table -striped -highlight"
-      page={parseInt(pageNum, 10) - 1}
-      onPageChange={(pageIndex) => { history.push(`/clients/page/${pageIndex + 1}`) }}
-      previousText="Назад"
-      nextText="Вперед"
-      loadingText="Загрузка"
-      noDataText="Нет данных"
-      pageText="Страница"
-      ofText="из"
-      rowsText="профилей"
-      headerClassName="tableHeader"
-      data={props.all ? personData :
+    <>
+      <h1 className="askPhoneTurn">Используйте альбомный режим<br />⤵</h1>
+      <ReactTable
+        className="table -striped -highlight"
+        page={parseInt(pageNum, 10) - 1}
+        onPageChange={(pageIndex) => { history.push(`/clients/page/${pageIndex + 1}`) }}
+        previousText="Назад"
+        nextText="Вперед"
+        loadingText="Загрузка"
+        noDataText="Нет данных"
+        pageText="Страница"
+        ofText="из"
+        rowsText="профилей"
+        headerClassName="tableHeader"
+        data={props.all ? personData :
         personData.filter(obj => obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД')}
-      filterable
-      defaultFilterMethod={(filter, row) =>
+        filterable
+        defaultFilterMethod={(filter, row) =>
         String(row[filter.id]) === filter.value}
-      columns={[
+        columns={[
         {
           Header: 'Фото',
-          width: widthForTable(15),
+          width: widthCoeff * 15,
           headerClassName: 'tableHeader',
           Cell: (value) => (
             <input type="image" id="tablePhoto" onClick={() => history.push(`/profile/${value.original.code}`)} alt="Profile image" src={`http://${host}:6700/images/${value.original.photoId ?? "0.jpg"}`} />)
@@ -59,7 +66,7 @@ const TablePage = (props) => {
         {
           Header: 'Имя',
           id: 'rowCode',
-          width: widthForTable(20),
+          width: widthCoeff * 20,
           style: { whiteSpace: 'unset' },
           headerClassName: 'tableHeader',
           accessor: 'personName',
@@ -79,7 +86,7 @@ const TablePage = (props) => {
           accessor: 'contract',
           style: { whiteSpace: 'unset' },
           headerClassName: 'tableHeader',
-          width: widthForTable(17, 5),
+          width: widthCoeff * 17.5 ,
           filterMethod: (filter, row) => {
             if (row[filter.id].toLowerCase().startsWith(filter.value.toLowerCase())) return true;// sort by second word
             if (row[filter.id].includes(" ")) { // sort by first word
@@ -88,7 +95,7 @@ const TablePage = (props) => {
           },
         }, {
           Header: 'Остаток дней',
-          width: widthForTable(9),
+          width: widthCoeff * 9,
           accessor: 'days',
           headerClassName: 'tableHeader',
           sortMethod: (a, b) => {
@@ -99,12 +106,12 @@ const TablePage = (props) => {
           Cell: ({ value }) => (getDaysLeft(value))
         }, {
           Header: 'Тренировки',
-          width: widthForTable(9),
+          width: widthCoeff * 9,
           accessor: 'remain',
           headerClassName: 'tableHeader',
         }, {
           Header: 'Аренда дней',
-          width: widthForTable(9),
+          width: widthCoeff * 9,
           accessor: 'rent',
           headerClassName: 'tableHeader',
           sortMethod: (a, b) => {
@@ -115,19 +122,20 @@ const TablePage = (props) => {
           Cell: ({ value }) => (getDaysLeft(value)),
         }, {
           Header: 'Депозит',
-          width: widthForTable(11, 5),
+          width: widthCoeff * 11.5,
           accessor: 'deposite',
           headerClassName: 'tableHeader'
         }, {
           Header: 'Парковка',
-          width: widthForTable(9),
+          width:widthCoeff * 9,
           accessor: 'autoMonth',
           headerClassName: 'tableHeader'
         }
       ]}
-      defaultSorted={[{ id: 'personName', desc: false }]}
-      defaultPageSize={20}
-    />
+        defaultSorted={[{ id: 'personName', desc: false }]}
+        defaultPageSize={20}
+      />
+    </>
   )
 }
 

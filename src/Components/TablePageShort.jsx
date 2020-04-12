@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from "react-router-dom";
@@ -9,12 +9,6 @@ import { getDaysLeft } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import Spinner from './Spinner'
 import host from "../../host";
-
-
-// set width to table colums by .className size
-function widthForTable(value) {
-  return Math.round(window.innerWidth * (value / 100))
-}
 
 
 const TablePageShort = (props) => {
@@ -25,16 +19,29 @@ const TablePageShort = (props) => {
   const personData = useSelector(state => state.personsStore.data);
   const loadingPersons = useSelector(state => state.personsStore.loading);
   const dispatch = useDispatch();
+  const [widthCoeff, setWidthCoeff] = useState(window.innerWidth/100); 
+
+
+  function handleResize() {
+    setWidthCoeff(window.innerWidth/100);
+  }
+
 
   useEffect(() => {
     dispatch(fetchPersons());
+  }, []);
+
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // some obj's for table => don't repeat photo and name column 
   const leadObj = {
     Header: 'Дата первого контакта',
     accessor: 'rent',
-    width: widthForTable(25),
+    width: widthCoeff * 25,
     headerClassName: 'tableHeader',
     sortMethod: (a, b) => {
       const dayA = getDaysLeft(a);
@@ -45,7 +52,7 @@ const TablePageShort = (props) => {
 
   const employeeObj = {
     Header: 'Депозит',
-    width: widthForTable(25),
+    width: widthCoeff * 25,
     accessor: 'deposite',
     headerClassName: 'tableHeader'
   }
@@ -53,7 +60,7 @@ const TablePageShort = (props) => {
   const lostObj = {
     Header: 'Срок действия последнего абонемента',
     accessor: 'days',
-    width: widthForTable(25),
+    width: widthCoeff * 25,
     headerClassName: 'tableHeader',
     sortMethod: (a, b) => {
       const dayA = getDaysLeft(a);
@@ -69,6 +76,8 @@ const TablePageShort = (props) => {
   if (props.tableType === 'НЕТ') tableRow = lostObj;
 
   return loadingPersons ? (<><Spinner /></>) : (
+    <>
+    <h1 className="askPhoneTurn">Используйте альбомный режим<br />⤵</h1>
     <div className="table">
       <ReactTable
         className="-striped -highlight"
@@ -88,15 +97,15 @@ const TablePageShort = (props) => {
         columns={[
           {
             Header: 'Фото',
-            width: widthForTable(15),
+            width: widthCoeff * 15,
             headerClassName: 'tableHeader',
             Cell: (value) => (
-              <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={`http://${host}:6700/images/${value.original.photoId ?? "0.jpg"}`} /></button>)
+              <input type="image" id="tablePhoto" onClick={() => history.push(`/profile/${value.original.code}`)} alt="Profile image" src={`http://${host}:6700/images/${value.original.photoId ?? "0.jpg"}`} />)
           },
           {
             Header: 'Имя',
             id: 'rowCode',
-            width: widthForTable(50),
+            width: widthCoeff * 50,
             style: { whiteSpace: 'unset' },
             headerClassName: 'tableHeader',
             accessor: 'personName',
@@ -117,6 +126,7 @@ const TablePageShort = (props) => {
         defaultPageSize={20}
       />
     </div>
+    </>
   )
 }
 

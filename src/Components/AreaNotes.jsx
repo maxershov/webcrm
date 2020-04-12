@@ -27,7 +27,7 @@ const AreaNotes = props => {
         onKeyDown={saveNotes}
         value={notesData}
       />
-      <button type="button" id="clickNotes" onClick={saveNotes}>
+      <button className="absolute_position" type="button" id="clickNotes" onClick={saveNotes}>
         Изменить
       </button>
     </>

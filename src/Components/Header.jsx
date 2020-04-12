@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 const Header = () => {
   return (
     <nav className="menu-container">
-      <h1 className="askPhoneTurn">Используйте альбомный режим<br />⤵</h1>
       <NavLink activeClassName="menu-nav-active" to="/main">Главная</NavLink>
       <NavLink activeClassName="menu-nav-active" to="/all/page/1">Все</NavLink>
       <NavLink activeClassName="menu-nav-active" to="/clients/page/1">Клиенты</NavLink>

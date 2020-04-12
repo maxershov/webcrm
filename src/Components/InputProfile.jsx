@@ -31,7 +31,7 @@ const InputProfile = (props) => {
 
 
   return (
-    <div className={`${inputType}Field absolute_position_button`}>
+    <div className={`${inputType}Field`}>
       <form name="myForm" onSubmit={sendToDb}>
         <label>{formLabel}</label>
         <input
@@ -52,7 +52,7 @@ const InputProfile = (props) => {
           <option value="3 КФ">тип профиля</option>
           <option value="6 ТА">тип профиля</option>
         </datalist>
-        <button type="submit">Изменить</button>
+        <button className="absolute_position" type="submit">Изменить</button>
       </form>
     </div>
   );
