@@ -18,12 +18,7 @@ const TablePageShort = (props) => {
   const personData = useSelector(state => state.personsStore.data);
   const loadingPersons = useSelector(state => state.personsStore.loading);
   const dispatch = useDispatch();
-  const [widthCoeff, setWidthCoeff] = useState(window.innerWidth/100); 
-
-
-  function handleResize() {
-    setWidthCoeff(window.innerWidth/100);
-  }
+  const [widthCoeff, setWidthCoeff] = useState(window.innerWidth / 100);
 
 
   useEffect(() => {
@@ -31,10 +26,14 @@ const TablePageShort = (props) => {
   }, []);
 
 
+  function handleResize() {
+    setWidthCoeff(window.innerWidth / 100);
+  }
   useEffect(() => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
 
   // some obj's for table => don't repeat photo and name column 
   const leadObj = {
@@ -68,11 +67,13 @@ const TablePageShort = (props) => {
     }
   }
 
+
   // use different types of columns for lead, employee and lost table 
   let tableRow = {};
   if (props.tableType === 'ЛИД') tableRow = leadObj;
   if (props.tableType === 'СОТРУДНИК') tableRow = employeeObj;
   if (props.tableType === 'НЕТ') tableRow = lostObj;
+
 
   return loadingPersons ? <span className="spinner" /> : (
     <>
@@ -92,35 +93,35 @@ const TablePageShort = (props) => {
           data={personData.filter(obj => obj.contract === props.tableType)}
           filterable
           defaultFilterMethod={(filter, row) =>
-          String(row[filter.id]) === filter.value}
+            String(row[filter.id]) === filter.value}
           columns={[
-          {
-            Header: 'Фото',
-            width: widthCoeff * 15,
-            headerClassName: 'tableHeader',
-            Cell: (value) => (
-              <input type="image" id="tablePhoto" onClick={() => history.push(`/profile/${value.original.code}`)} alt="Profile image" src={`http://${host}:6700/images/${value.original.photoId ?? "0.jpg"}`} />)
-          },
-          {
-            Header: 'Имя',
-            id: 'rowCode',
-            width: widthCoeff * 50,
-            style: { whiteSpace: 'unset' },
-            headerClassName: 'tableHeader',
-            accessor: 'personName',
-            filterMethod: (filter, row) => {
-              const name = row._original.personName;
-              const { code } = row._original;
-              if (name.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by second name
-              if (code.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by code
-              if (name.includes(" ")) { // sort by first name
-                if (name.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) return true;
-              } return false;
+            {
+              Header: 'Фото',
+              width: widthCoeff * 15,
+              headerClassName: 'tableHeader',
+              Cell: (value) => (
+                <input type="image" id="tablePhoto" onClick={() => history.push(`/profile/${value.original.code}`)} alt="Profile image" src={`http://${host}:6700/images/${value.original.photoId ?? "0.jpg"}`} />)
             },
-            Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.personName}</Link>)
-          },
-          tableRow
-        ]}
+            {
+              Header: 'Имя',
+              id: 'rowCode',
+              width: widthCoeff * 50,
+              style: { whiteSpace: 'unset' },
+              headerClassName: 'tableHeader',
+              accessor: 'personName',
+              filterMethod: (filter, row) => {
+                const name = row._original.personName;
+                const { code } = row._original;
+                if (name.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by second name
+                if (code.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by code
+                if (name.includes(" ")) { // sort by first name
+                  if (name.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) return true;
+                } return false;
+              },
+              Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.personName}</Link>)
+            },
+            tableRow
+          ]}
           defaultSorted={[{ id: 'personName', desc: false }]}
           defaultPageSize={20}
         />

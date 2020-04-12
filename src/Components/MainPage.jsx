@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { format, parse } from "date-fns";
-// import Calendar from "react-calendar/dist/entry.nostyle";
 import Calendar from 'react-calendar';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import { fetchDays } from "../store/dayDataStore/dayDataActions";
@@ -62,7 +61,6 @@ export const MainPage = props => {
       <TableForScanner />
     </>
   ) : <span className="spinner" />
-
 };
 
 

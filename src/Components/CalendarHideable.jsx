@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns'
-// import Calendar from 'react-calendar/dist/entry.nostyle';
 import Calendar from 'react-calendar';
 import { useDispatch, useSelector } from "react-redux";
 import { chgProfileValue } from "../store/profileStore/profileActions";
 import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
+
 
 const CalendarHideable = (props) => {
   const dispatch = useDispatch();

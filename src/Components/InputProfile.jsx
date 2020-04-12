@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { chgProfileValue, chgCode } from "../store/profileStore/profileActions";
 import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
 
+
 const InputProfile = (props) => {
   const { formLabel, baseValue, inputType, listName } = props;
 

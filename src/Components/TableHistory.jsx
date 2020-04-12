@@ -1,21 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import ReactTable from "react-table-6/react-table.min";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteHistoryObj } from '../store/activitiesDataStore/activitiesDataActions';
 import { getDaysLeft } from "../App";
 
 
-// set width to table colums by .className size
-function widthForTable(value) {
-  return Math.round(window.innerWidth * (value / 100));
-}
-
-
 const TableHistory = props => {
   const data = useSelector(state => state.activitiesStore.data);
   const loadingActivities = useSelector(state => state.activitiesStore.loading);
   const dispatch = useDispatch();
-  const [widthCoeff, setWidthCoeff] = useState(window.innerWidth/100); 
+  const [widthCoeff, setWidthCoeff] = useState(window.innerWidth / 100);
 
 
   function deleteHistory(obj) {
@@ -23,14 +17,13 @@ const TableHistory = props => {
   }
 
   function handleResize() {
-    setWidthCoeff(window.innerWidth/100);
+    setWidthCoeff(window.innerWidth - 5 / 100);
   }
 
-
   useEffect(() => {
-  window.addEventListener('resize', handleResize);
-  return () => window.removeEventListener('resize', handleResize);
-}, []);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
 
   return loadingActivities ? <span className="spinner" /> :
@@ -48,7 +41,6 @@ const TableHistory = props => {
           data={data}
           columns={[
             {
-              Header: '',
               width: widthCoeff * 4,
               headerClassName: 'tableHeader',
               Cell: (value) => (
@@ -56,7 +48,7 @@ const TableHistory = props => {
             },
             {
               Header: "Тип",
-              width: widthCoeff* 16,
+              width: widthCoeff * 16,
               accessor: "type",
               headerClassName: "tableHeader",
               style: { whiteSpace: "unset" }
@@ -92,7 +84,7 @@ const TableHistory = props => {
             {
               Header: "Значение",
               accessor: "amount",
-              width: widthCoeff *40,
+              width: widthCoeff * 40,
               headerClassName: "tableHeader",
               style: { whiteSpace: "unset" }
             }

@@ -6,7 +6,7 @@ import burgerIcon from "../assets/burger.svg";
 const Header = () => {
   const [openMenu, chgMenu] = useState(false);
 
-  function handleClick(event){
+  function handleClick(event) {
     // close burger menu after click on anchor
     if (event.target instanceof HTMLAnchorElement) {
       chgMenu(false);
@@ -18,6 +18,7 @@ const Header = () => {
     window.addEventListener('click', handleClick);
     return () => window.removeEventListener('click', handleClick);
   }, []);
+
 
   return (
     <>

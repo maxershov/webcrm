@@ -13,35 +13,35 @@ const CodeScanner = (props) => {
   const dispatch = useDispatch();
 
 
-  function createProfile(code) {
+  function createProfile(codeTo) {
     // code.replace handle in backend => i need name for profile with spaces
-    dispatch(addNewProfile(code));
+    dispatch(addNewProfile(codeTo));
     // open user page with new profile
-    route.push(`/profile/${code.replace(/ /g, '')}`)
+    route.push(`/profile/${codeTo.replace(/ /g, '')}`)
   }
 
 
-  function substractOneRemain(code, index) {
+  function substractOneRemain(codeTo, index) {
     const person = personData[index];
     if (Number.isInteger(person.remain)) {
-      dispatch(chgProfileValue(code, 'remain', (person.remain - 1)));
+      dispatch(chgProfileValue(codeTo, 'remain', (person.remain - 1)));
       return `УЧЁТ ${person.remain} => ${(person.remain - 1)}`;
     } return "";
   }
 
 
-  function handleNewCode(code) {
+  function handleNewCode(codeTo) {
     // find if in today history
-    code = code.replace(/ /g, '');
-    const indexHistory = historyData.findIndex(person => person.code === code);
+    codeTo = codeTo.replace(/ /g, '');
+    const indexHistory = historyData.findIndex(person => person.code === codeTo);
     let amount = "";
     if (indexHistory === -1) {
       // find if in persons => if not => create new profile and add to history
-      const indexPerson = personData.findIndex(person => person.code === code);
-      if (indexPerson === -1) dispatch(addNewProfile(code));
-      else amount = substractOneRemain(code, indexPerson);
+      const indexPerson = personData.findIndex(person => person.code === codeTo);
+      if (indexPerson === -1) dispatch(addNewProfile(codeTo));
+      else amount = substractOneRemain(codeTo, indexPerson);
 
-      dispatch(addToVisits(code, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), amount));
+      dispatch(addToVisits(codeTo, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), amount));
     }
   }
 

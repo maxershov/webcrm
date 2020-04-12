@@ -10,7 +10,6 @@ import { isToday } from "../App";
 
 const FieldDeposite = (props) => {
   const person = useSelector(state => state.profileStore.data);
-
   const dispatch = useDispatch();
   const { codeLink } = useParams();
 
@@ -20,6 +19,7 @@ const FieldDeposite = (props) => {
   const [dateDeposite, setDateDeposite] = useState(format(new Date(), 'dd-MM-yyyy'))
   const oldFieldValue = person.deposite;
   let time = format(new Date(), 'HH:mm:ss');
+
 
   const plus = () => {
     const sum = +deposite + +amount;
@@ -39,6 +39,7 @@ const FieldDeposite = (props) => {
     dispatch(addToHistory(codeLink, dateDeposite, time, `Изменение депозита`, "", `${oldFieldValue} => ${sum}`));
   }
 
+
   return (
     renderDeposite ?
       (
@@ -47,8 +48,8 @@ const FieldDeposite = (props) => {
             <label>Сумма списания/пополнения</label>
             <br />
             <input className="numInput" type="number" width="40" height="50" value={amount} onChange={event => setAmount(event.target.value)} />
-            <button type="button" style={{ fontSize: "1.4em", display:"block", marginBottom:"1rem" }} onClick={plus}>+</button>
-            <button type="button" style={{ fontSize: "1.4em", display:"block" }} onClick={minus}>-</button>
+            <button type="button" style={{ fontSize: "1.4em", display: "block", marginBottom: "1rem" }} onClick={plus}>+</button>
+            <button type="button" style={{ fontSize: "1.4em", display: "block" }} onClick={minus}>-</button>
           </form>
           <CalendarHideable setParentDate={setDateDeposite} сalendarName="Дата изменения депозита" dateType="setParent" date={dateDeposite} />
         </>
