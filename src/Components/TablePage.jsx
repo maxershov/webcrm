@@ -28,6 +28,8 @@ const TablePage = (props) => {
   }, []);
 
 
+  // <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={`http://${host}:6700/images/${value.original.photoId ?? "0.jpg"}`} /></button>)
+
   return loadingPersons ? <Spinner /> : (
     <ReactTable
       className="table -striped -highlight"
@@ -52,7 +54,7 @@ const TablePage = (props) => {
           width: widthForTable(15),
           headerClassName: 'tableHeader',
           Cell: (value) => (
-            <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={`http://${host}:6700/images/${value.original.photoId ?? "0.jpg"}`} /></button>)
+            <input type="image" id="tablePhoto" onClick={() => history.push(`/profile/${value.original.code}`)} alt="Profile image" src={`http://${host}:6700/images/${value.original.photoId ?? "0.jpg"}`} />)
         },
         {
           Header: 'Имя',

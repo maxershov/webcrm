@@ -72,14 +72,12 @@ html {
     word-wrap: break-word;
 }
 
-#tablePhotoButton {
+#tablePhoto {
     align-items: center;
+    border-radius: 0;
+    box-shadow: none;
 }
 
-#tablePhoto {
-    height: 5em;
-    max-width: auto;
-}
 
 #tablePhoto:hover {
     position: absolute;
@@ -106,29 +104,22 @@ a {
 
 .menu-container>a {
     flex: 1;
-    /* text-shadow: 2px 1px 0.2em white; */
     padding: 0.4rem;
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
     cursor: pointer;
-    border: none;
     text-align: center;
     color: var(--light-grey);
     border-bottom-left-radius: 25px;
-    ;
     border-bottom-right-radius: 25px;
     text-shadow: 1px 1px 0 var(--white);
 }
 
-.menu-container .is-active {
-    border: none;
-    background-color: var(--back-color-light);
+.menu-container .menu-nav-active {
     color: var(--grey);
-    text-shadow: 1px 1px 0 var(--white);
-    outline: none;
     transition: color 0.2s linear;
-    box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
+    box-shadow:  inset 2px 1px 2px var(--light-grey), inset -2px -1px 2px var(--white);
 }
 
 .userPage {
@@ -220,15 +211,17 @@ a {
 }
 
 *>input:hover {
-    background-color: rgba(224, 224, 224, 0.4);
+    background-color: white;
     transition: background-color 0.5s linear;
+}
+*>input:focus {
+    box-shadow:  inset 1px 1px 2px var(--light-grey), inset -1px -1px 2px var(--white);
 }
 
 *>input::placeholder {
     font-size: 1.1rem;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--light-grey);
     text-shadow: none;
-    font-weight: initial;
 }
 
 .absolute_position_button button {
@@ -257,22 +250,9 @@ a {
 }
 
 .notesField textarea {
-    /* background-color: var(--form-color); */
     width: 80%;
     height: 15vh;
     font-size: inherit;
-
-/*     
-    padding: 0.5em;
-    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
-    color: var(--input-text-color);
-    border: none;
-    border-radius: 25px;
-    font-size: 1.2rem;
-    background-color: #EBECF0;
-    appearance: none;
-    -webkit-appearance: none;
-    text-shadow: 0 0 0.1em rgb(255, 255, 255); */
 }
 
 .notesField {
@@ -298,7 +278,8 @@ a {
 
 .calendar button {
     border-radius: 25px;
-    /* box-shadow: -5px -5px 20px var(--white); */
+    box-shadow:none;
+    border-radius: 25px;
 }
 
 .mainPage {
@@ -319,7 +300,6 @@ a {
 .calendarMain {
     grid-column: 1/2;
     grid-row: 1/3;
-    border-radius: 25px;
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
 }
 
@@ -332,19 +312,6 @@ a {
 .notesMain>textarea {
     width: 100%;
     height: 70%;
-    /* background-color: var(--back-color); */
-    /* font-size: 1.3em; */
-/* 
-    padding: 0.5em;
-    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
-    color: var(--input-text-color);
-    border: none;
-    border-radius: 25px;
-    font-size: 1.2rem;
-    background-color: #EBECF0;
-    appearance: none;
-    -webkit-appearance: none;
-    text-shadow: 0 0 0.1em rgb(255, 255, 255); */
 }
 
 .newProfileField {
