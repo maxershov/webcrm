@@ -100,7 +100,7 @@ html {
 .table input {
     background-color: var(--back-color) !important;
     cursor: pointer;
-    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    box-shadow: none;
 }
 
 .menu-container {
@@ -143,7 +143,6 @@ a {
 
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
     border-radius: 25px;
-    padding: 1rem;
 }
 
 
