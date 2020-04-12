@@ -239,7 +239,7 @@ a {
     outline: none;
 }
 
-*>input:hover {
+*>input:hover, a:hover{
     background-color: white;
     transition: background-color 0.5s linear;
 }
@@ -259,7 +259,8 @@ a {
 }
 
 .userPage button, .notesMain button {
-    width: 30vw;
+    margin: auto 10%;
+    /* width: 10vw; */
     border-style: none;
     text-transform: uppercase;
     font-weight: bold;

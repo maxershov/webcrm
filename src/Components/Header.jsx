@@ -1,9 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import burgerIcon from "../assets/burger.svg";
 
+
 const Header = () => {
   const [openMenu, chgMenu] = useState(false);
+
+  function handleClick(event){
+    // close burger menu after click on anchor
+    if (event.target instanceof HTMLAnchorElement) {
+      chgMenu(false);
+    }
+  }
+
+
+  useEffect(() => {
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
+  }, []);
+
   return (
     <>
       <input id="burgerBtn" type="image" alt="burgerImg" onClick={() => chgMenu(!openMenu)} src={burgerIcon} />
