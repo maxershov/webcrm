@@ -140,6 +140,9 @@ a {
     color: inherit;
     text-decoration: none;
 }
+a:hover {
+    color:var(--white);
+}
 
 .menu-container>a {
     flex: 1;
@@ -239,7 +242,7 @@ a {
     outline: none;
 }
 
-*>input:hover, a:hover {
+*>input:hover, .menu-container a:hover {
     background-color: white;
     transition: background-color 0.5s linear;
 }
@@ -380,4 +383,5 @@ a {
 #DeleteButton {
     color: var(--red);
     width: auto;
+    padding: 0.5rem;
 }
