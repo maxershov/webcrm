@@ -67,6 +67,13 @@ html {
         grid-template-rows: repeat(5, auto);
         grid-template-areas: "calendar" "notes" "newCode" "newProfile" "table" !important;
     }
+    .userPage {
+        display: grid;
+        grid-template-columns: 1fr 2fr !important;
+        grid-template-rows: repeat(4, auto);
+        grid-template-areas: "image userPage-container" "image userPage-container" "fieldsAction fieldsAction" "notesUser notesUser" "tableHistory tableHistory" !important;
+        text-align: center;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1366px) {}
@@ -158,6 +165,7 @@ a {
     display: grid;
     grid-template-columns: 1fr 2fr 2fr;
     grid-template-rows: repeat(4, auto);
+    grid-template-areas: "image userPage-container fieldsAction" "image userPage-container fieldsAction" "image userPage-container notesUser" "tableHistory tableHistory tableHistory";
     justify-items: center;
     align-content: flex-start;
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
@@ -165,14 +173,12 @@ a {
 }
 
 .userPage-container {
-    grid-column: 2/3;
-    grid-row: 1/3;
+    grid-area: userPage-container;
     width: 100%;
 }
 
 .userPage .img-container {
-    grid-column: 1/2;
-    grid-row: 1/3;
+    grid-area: image;
     width: 90%;
     height: 90%;
     display: flex;
@@ -181,7 +187,6 @@ a {
 }
 
 .userPage .img-container>img {
-    padding-top: 1rem;
     flex: 1;
     max-width: 95%;
     max-height: 95%;
@@ -281,22 +286,19 @@ a {
 }
 
 .notesField {
-    grid-column: 3/4;
-    grid-row: 2/3;
+    grid-area: notesUser;
     width: 100%;
 }
 
 .tableHistory {
     margin-top: 3rem;
-    grid-column: 1/4;
-    grid-row: 3/4;
+    grid-area: tableHistory;
     width: 95%;
     text-shadow: 1px 1px 0 var(--white);
 }
 
 .FieldsAction {
-    grid-column: 3/4;
-    grid-row: 1/2;
+    grid-area: fieldsAction;
     width: 100%;
 }
 
@@ -310,11 +312,12 @@ a {
     margin-top: 1rem;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: repeat(5, auto);
+    grid-template-rows: repeat(4, auto);
     grid-template-areas: "calendar notes" "calendar notes" "newCode newProfile" "table table";
     justify-items: center;
     align-content: flex-start;
     grid-row-gap: 1rem;
+    text-align: center;
 }
 
 .tableMain {
@@ -330,7 +333,6 @@ a {
 .notesMain {
     width: 100%;
     grid-area: notes;
-    text-align: center;
 }
 
 .notesMain>textarea {
@@ -341,11 +343,9 @@ a {
 .newProfileField {
     width: 100%;
     grid-area: newProfile;
-    text-align: center;
 }
 
 .newCodeField {
-    text-align: center;
     width: 100%;
     grid-area: newCode;
 }
@@ -367,6 +367,7 @@ a {
     display: inline-block;
     vertical-align: middle;
 }
+
 @keyframes spinner {
     0% {
         transform: rotate(0deg);
@@ -375,7 +376,6 @@ a {
         transform: rotate(360deg);
     }
 }
-
 
 #DeleteButton {
     color: var(--red);

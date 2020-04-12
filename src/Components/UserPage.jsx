@@ -82,7 +82,6 @@ export const UserPage = (props) => {
 
       </div>
       <div className="notesField">
-        <label>Заметки</label>
         <AreaNotes notesValue={person.notes} type="PERSON" />
       </div>
       <FieldsAction code={person.code} namesArr={getPersonNames(persons)} />
