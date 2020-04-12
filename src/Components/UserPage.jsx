@@ -70,20 +70,20 @@ export const UserPage = (props) => {
       <div className="userPage-container">
         {renderPhotoId ? (
           <>
-            <InputProfile formLabel="Изменить код фото:" baseValue={person.photoId} inputType="photoId" />
+            <InputProfile formLabel="Изменить код фото" baseValue={person.photoId} inputType="photoId" />
             <input type="file" name="img" accept="image/*,image/jpeg" onChange={(e) => handleFiles(e.target.files)} />
-            <label>Удаление:</label>
+            <label>Удаление</label>
             <button type="button" onClick={() => delProfile(person.code)}>Удалить пользователя</button>
           </>
         ) : undefined}
-        <InputProfile formLabel="Имя:" baseValue={person.personName} inputType="personName" />
-        <InputProfile formLabel="Номер телефона:" baseValue={person.telNum} inputType="telNum" />
+        <InputProfile formLabel="Имя" baseValue={person.personName} inputType="personName" />
+        <InputProfile formLabel="Номер телефона" baseValue={person.telNum} inputType="telNum" />
 
         {renderFields}
 
       </div>
       <div className="notesField">
-        <label>Заметки:</label>
+        <label>Заметки</label>
         <AreaNotes notesValue={person.notes} type="PERSON" />
       </div>
       <FieldsAction code={person.code} namesArr={getPersonNames(persons)} />
@@ -96,13 +96,13 @@ export const PersonParams = (props) => {
   const { person } = props;
   return (
     <>
-      <InputProfile formLabel="Дата рождения:" baseValue={person.dateBirth} inputType="dateBirth" />
-      <InputProfile formLabel="Абонемент:" baseValue={person.contract} inputType="contract" listName="types" />
-      <InputProfile formLabel="Остаток тренировок:" baseValue={person.remain} inputType="remain" />
-      <InputProfile formLabel="Код карты:" baseValue={person.code} inputType="code" />
-      <InputProfile formLabel="Месяц парковки:" baseValue={person.autoMonth} inputType="autoMonth" />
-      <CalendarHideable сalendarName="Срок контракта:" dateType="days" date={person.days} />
-      <CalendarHideable сalendarName="Срок аренды шкафа:" dateType="rent" date={person.rent} />
+      <InputProfile formLabel="Дата рождения" baseValue={person.dateBirth} inputType="dateBirth" />
+      <InputProfile formLabel="Абонемент" baseValue={person.contract} inputType="contract" listName="types" />
+      <InputProfile formLabel="Остаток тренировок" baseValue={person.remain} inputType="remain" />
+      <InputProfile formLabel="Код карты" baseValue={person.code} inputType="code" />
+      <InputProfile formLabel="Месяц парковки" baseValue={person.autoMonth} inputType="autoMonth" />
+      <CalendarHideable сalendarName="Срок контракта" dateType="days" date={person.days} />
+      <CalendarHideable сalendarName="Срок аренды шкафа" dateType="rent" date={person.rent} />
       <FieldDeposite depositeValue={person.deposite} />
     </>
   )
@@ -113,8 +113,8 @@ export const LeadParams = (props) => {
   const { person } = props;
   return (
     <>
-      <InputProfile formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" listName="types"/>
-      <CalendarHideable сalendarName="Дата первого обращения:" dateType="rent" date={person.rent} />
+      <InputProfile formLabel="Тип профиля" baseValue={person.contract} inputType="contract" listName="types"/>
+      <CalendarHideable сalendarName="Дата первого обращения" dateType="rent" date={person.rent} />
     </>
   )
 }
@@ -124,10 +124,10 @@ export const EmployeeParams = (props) => {
   const { person } = props;
   return (
     <>
-      <InputProfile formLabel="Дата рождения:" baseValue={person.dateBirth} inputType="dateBirth" />
-      <InputProfile formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" listName="types" />
-      <InputProfile formLabel="Код карты:" baseValue={person.code} inputType="code" />
-      <InputProfile formLabel="Парковка оплачена до:" baseValue={person.autoMonth} inputType="autoMonth" />
+      <InputProfile formLabel="Дата рождения" baseValue={person.dateBirth} inputType="dateBirth" />
+      <InputProfile formLabel="Тип профиля" baseValue={person.contract} inputType="contract" listName="types" />
+      <InputProfile formLabel="Код карты" baseValue={person.code} inputType="code" />
+      <InputProfile formLabel="Парковка оплачена до" baseValue={person.autoMonth} inputType="autoMonth" />
       <FieldDeposite depositeValue={person.deposite} />
     </>
   )

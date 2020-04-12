@@ -69,7 +69,7 @@ const TablePageShort = (props) => {
   if (props.tableType === 'НЕТ') tableRow = lostObj;
 
   return loadingPersons ? (<><Spinner /></>) : (
-    <div className="table font_white_shadow">
+    <div className="table">
       <ReactTable
         className="-striped -highlight"
         page={parseInt(pageNum, 10) - 1}

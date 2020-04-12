@@ -35,7 +35,7 @@ const InputProfile = (props) => {
       <form name="myForm" onSubmit={sendToDb}>
         <label>{formLabel}</label>
         <input
-          placeholder={`Добавить ${formLabel.slice(0, -1).toLowerCase()}`}
+          placeholder={`Добавить ${formLabel.toLowerCase()}`}
           type="text"
           name={inputType}
           onChange={event => setValue(event.target.value)}

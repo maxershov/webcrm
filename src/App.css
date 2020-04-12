@@ -1,5 +1,7 @@
 * {
-    font-family: "Roboto", sans-serif;
+    /* @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap"); */
+    font-family: "Montserrat", sans-serif;
+    /* font-family: "Roboto", sans-serif; */
     box-sizing: border-box;
     --img-width: 25vw;
     --img-height: 25vw;
@@ -7,7 +9,14 @@
     --back-color: rgba(224, 224, 224, 0.315);
     --back-color-light: rgba(224, 224, 224, 0.1);
     --form-color: rgba(224, 224, 224, 0.6);
-    --table-color: rgba(0, 92, 204);
+    --background-color: white;
+    --button-color: rgb(3, 118, 250);
+    letter-spacing: -0.2px;
+    --grey: rgb(143, 144, 148);
+    --white: #FFF;
+    --red: rgb(255, 15, 15);
+    --light-grey: #BABECC;
+    --input-text-color: rgb(51, 51, 51);
 }
 
 ::-webkit-scrollbar {
@@ -17,11 +26,7 @@
 
 html {
     font-size: 1rem;
-    background-image: url("./images/bg.jpeg");
-    background-size: 100vw;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-color: #151a20;
+    background-color: #EBECF0;
 }
 
 .askPhoneTurn {
@@ -31,14 +36,11 @@ html {
 @media (max-width: 768px) {
     html {
         font-size: 0.6em;
-        background-image: url("./images/bg768.jpg");
     }
 }
 
 @media (min-width: 769px) and (max-width: 1366px) {
-    html {
-        background-image: url("./images/bg1366.jpg");
-    }
+    html {}
 }
 
 @media (min-width: 3840px) {
@@ -50,7 +52,6 @@ html {
 @media (max-width: 600px) and (orientation: portrait) {
     html {
         visibility: hidden;
-        background-image: none;
     }
     .askPhoneTurn {
         display: block;
@@ -60,15 +61,10 @@ html {
     }
 }
 
-.font_white_shadow {
-    text-shadow: 2px 2px 0.1rem black;
-    font-size: 1.2rem;
-    color: white;
-}
-
 .table {
     background-color: var(--back-color);
     text-align: center;
+    font-size: 1.1rem;
 }
 
 .tableHeader {
@@ -89,21 +85,13 @@ html {
     position: absolute;
     height: 20em;
     width: auto;
-    background-color: rgba(0, 92, 204, 0.3);
-    cursor: pointer;
-}
-
-.table button {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: white;
     cursor: pointer;
 }
 
 .table input {
     background-color: var(--back-color) !important;
     cursor: pointer;
+    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
 }
 
 .menu-container {
@@ -117,26 +105,30 @@ a {
 }
 
 .menu-container>a {
-    color: black;
-    background-color: var(--back-color);
     flex: 1;
-    text-shadow: 2px 1px 0.2em white;
+    /* text-shadow: 2px 1px 0.2em white; */
     padding: 0.4rem;
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
     cursor: pointer;
     border: none;
     text-align: center;
+    color: var(--light-grey);
+    border-bottom-left-radius: 25px;
+    ;
+    border-bottom-right-radius: 25px;
+    text-shadow: 1px 1px 0 var(--white);
 }
 
 .menu-container .is-active {
     border: none;
     background-color: var(--back-color-light);
-    color: white;
+    color: var(--grey);
+    text-shadow: 1px 1px 0 var(--white);
     outline: none;
     transition: color 0.2s linear;
+    box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
 }
 
 .userPage {
@@ -171,10 +163,7 @@ a {
     object-fit: scale-down;
 }
 
-.userPage label,
-.table,
-.calendar,
-.mainPage textarea {
+.userPage label, .table, .calendar, .mainPage textarea {
     animation: fadein 0.5s;
 }
 
@@ -188,30 +177,46 @@ a {
     }
 }
 
-*>label,
-.tableHeader {
+*>label {
     display: block;
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-size: 1.2em;
     width: 80%;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
     text-align: center;
-    color: white;
-    text-shadow: 2px 2px 0.1rem black;
-    letter-spacing: 0.04em;
+    color: var(--grey);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px var(--white);
+    margin-bottom: 0.5rem;
 }
 
-*>input {
-    color: black;
+.tableHeader {
+    font-size: 1rem;
+    color: var(--grey);
+    text-transform: uppercase;
+
+}
+
+
+.userPage {
+    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    border-radius: 25px;
+    padding: 1rem;
+}
+
+
+
+*>input, * textarea {
+    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    color: var(--input-text-color);
     border: none;
-    border-bottom: 1px solid black;
+    border-radius: 25px;
+    padding: 0.4em 0.7em;
     width: 80%;
-    font-size: 1.35rem;
-    background-color: var(--back-color);
-    margin-bottom: 0.5rem;
-    font-weight: bolder;
-    text-shadow: 0 0 0.1em white;
+    font-size: 1.2rem;
+    background-color: #EBECF0;
+    appearance: none;
+    -webkit-appearance: none;
+    text-shadow: 0 0 0.1em rgb(255, 255, 255);
 }
 
 *>input:hover {
@@ -220,7 +225,7 @@ a {
 }
 
 *>input::placeholder {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: rgba(0, 0, 0, 0.5);
     text-shadow: none;
     font-weight: initial;
@@ -230,41 +235,44 @@ a {
     position: absolute;
 }
 
-.userPage button,
-.mainPage button {
+.userPage button {
     width: 30vw;
     border-style: none;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 0.3rem;
-    background-image: linear-gradient( to right, #005c97 0%, #363795 51%, #005c97 100%);
+    border-radius: 25px;
+    padding: 0.5rem;
+    text-shadow: 1px 1px 0 var(--white);
+    box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
 }
 
-.userPage-container form button,
-.FieldsAction button,
-.newProfileField button,
-.notesMain button {
+.userPage-container form button, .FieldsAction button, .newProfileField button, .notesMain button, .notesField button {
     display: none;
 }
 
-.userPage-container>*:hover>form>button,
-.userPage-container>*:hover>button,
-.FieldsAction>*:hover button,
-.newProfileField:hover button,
-.notesMain:hover button {
+.userPage-container>*:hover>form>button, .userPage-container>*:hover>button, .FieldsAction>*:hover button, .newProfileField:hover button, .notesMain:hover button, .notesField:hover button {
     display: block;
 }
 
-.notesField>button {
-    display: block;
-}
-
-.notesField>textarea {
-    background-color: var(--form-color);
+.notesField textarea {
+    /* background-color: var(--form-color); */
     width: 80%;
     height: 15vh;
     font-size: inherit;
+
+/*     
+    padding: 0.5em;
+    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    color: var(--input-text-color);
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    background-color: #EBECF0;
+    appearance: none;
+    -webkit-appearance: none;
+    text-shadow: 0 0 0.1em rgb(255, 255, 255); */
 }
 
 .notesField {
@@ -274,10 +282,12 @@ a {
 }
 
 .tableHistory {
-    margin-top: 1vw;
+    margin-top:3rem;
     grid-column: 1/4;
     grid-row: 3/4;
     width: 95%;
+    text-shadow: 1px 1px 0 var(--white);
+
 }
 
 .FieldsAction {
@@ -287,8 +297,8 @@ a {
 }
 
 .calendar button {
-    background-image: none;
-    font-size: 1em;
+    border-radius: 25px;
+    /* box-shadow: -5px -5px 20px var(--white); */
 }
 
 .mainPage {
@@ -301,8 +311,7 @@ a {
 }
 
 .tableMain {
-    margin-left: 2%;
-    margin-right: 2%;
+    margin-top:1rem;
     grid-column: 1/3;
     grid-row: 4/5;
 }
@@ -310,6 +319,8 @@ a {
 .calendarMain {
     grid-column: 1/2;
     grid-row: 1/3;
+    border-radius: 25px;
+    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
 }
 
 .notesMain {
@@ -321,8 +332,19 @@ a {
 .notesMain>textarea {
     width: 100%;
     height: 70%;
-    background-color: var(--back-color);
-    font-size: 1.3em;
+    /* background-color: var(--back-color); */
+    /* font-size: 1.3em; */
+/* 
+    padding: 0.5em;
+    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    color: var(--input-text-color);
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    background-color: #EBECF0;
+    appearance: none;
+    -webkit-appearance: none;
+    text-shadow: 0 0 0.1em rgb(255, 255, 255); */
 }
 
 .newProfileField {
@@ -338,7 +360,6 @@ a {
     grid-row: 3/4;
     width: 100%;
 }
-
 
 .spinner {
     margin: 100px auto;
@@ -378,9 +399,7 @@ a {
 }
 
 @-webkit-keyframes sk-stretchdelay {
-    0%,
-    40%,
-    100% {
+    0%, 40%, 100% {
         -webkit-transform: scaleY(0.4)
     }
     20% {
@@ -389,9 +408,7 @@ a {
 }
 
 @keyframes sk-stretchdelay {
-    0%,
-    40%,
-    100% {
+    0%, 40%, 100% {
         transform: scaleY(0.4);
         -webkit-transform: scaleY(0.4);
     }
@@ -440,9 +457,7 @@ a {
 }
 
 @-webkit-keyframes sk-stretchdelay {
-    0%,
-    40%,
-    100% {
+    0%, 40%, 100% {
         -webkit-transform: scaleY(0.4)
     }
     20% {
@@ -451,9 +466,7 @@ a {
 }
 
 @keyframes sk-stretchdelay {
-    0%,
-    40%,
-    100% {
+    0%, 40%, 100% {
         transform: scaleY(0.4);
         -webkit-transform: scaleY(0.4);
     }
@@ -464,8 +477,6 @@ a {
 }
 
 #DeleteButton {
-    background-color: rgba(255, 0, 0, 0.795);
-    color:rgba(255, 255, 255, 0.719);
-    background-image: none;
+    color: var(--red);
     width: auto;
 }

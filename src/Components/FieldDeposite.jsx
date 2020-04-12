@@ -44,20 +44,20 @@ const FieldDeposite = (props) => {
       (
         <>
           <form>
-            <label>Сумма списания/пополнения:</label>
+            <label>Сумма списания/пополнения</label>
             <br />
             <input className="numInput" type="number" width="40" height="50" value={amount} onChange={event => setAmount(event.target.value)} />
             <button type="button" style={{ float: "left", height: "30px", width: "50px" }} onClick={plus}>+</button>
             <button type="button" style={{ float: "left", height: "30px", width: "50px" }} onClick={minus}>-</button>
           </form>
-          <CalendarHideable setParentDate={setDateDeposite} сalendarName="Дата изменения депозита:" dateType="setParent" date={dateDeposite} />
+          <CalendarHideable setParentDate={setDateDeposite} сalendarName="Дата изменения депозита" dateType="setParent" date={dateDeposite} />
         </>
       )
       :
       (
         <>
           <form onSubmit={() => changeRenderDeposite(true)}>
-            <label>Депозит:</label>
+            <label>Депозит</label>
             <input onClick={() => changeRenderDeposite(true)} type="number" readOnly value={deposite} />
           </form>
         </>

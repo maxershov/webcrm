@@ -30,7 +30,7 @@ const TablePage = (props) => {
 
   return loadingPersons ? <Spinner /> : (
     <ReactTable
-      className="table font_white_shadow -striped -highlight"
+      className="table -striped -highlight"
       page={parseInt(pageNum, 10) - 1}
       onPageChange={(pageIndex) => { history.push(`/clients/page/${pageIndex + 1}`) }}
       previousText="Назад"

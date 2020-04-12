@@ -27,7 +27,7 @@ const TableHistory = props => {
     (
       <div className="tableHistory">
         <ReactTable
-          className="table font_white_shadow -striped -highlight"
+          className="table -striped -highlight"
           previousText="Назад"
           nextText="Вперед"
           loadingText="Загрузка"
