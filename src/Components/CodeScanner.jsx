@@ -58,7 +58,7 @@ const CodeScanner = (props) => {
 
   return (
     <div className={divName}>
-      <label>{type === 'PROFILE' ? "Создать профиль:" : "Сканер карт:"}</label>
+      <label>{type === 'PROFILE' ? "Создать профиль" : "Сканер карт"}</label>
       <form name="codeForm" onSubmit={enterCode}>
         <input required minLength={1} placeholder=" Введите данные" type="text" name={props.inputType} onChange={event => setCode(event.target.value)} value={code} />
       </form>

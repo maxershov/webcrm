@@ -46,6 +46,7 @@ html {
         height: 4rem;
         border: none;
         box-shadow: none;
+        display: block !important;
     }
     .menu-container {
         display: none !important;
@@ -61,11 +62,14 @@ html {
         font-size: 1.1em;
         width: 100%;
     }
+    .mainPage {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: repeat(5, auto);
+        grid-template-areas: "calendar" "notes" "newCode" "newProfile" "table" !important;
+    }
 }
 
-@media (min-width: 769px) and (max-width: 1366px) {
-    html {}
-}
+@media (min-width: 769px) and (max-width: 1366px) {}
 
 @media (min-width: 3840px) {
     html {
@@ -80,7 +84,7 @@ html {
         font-size: 1.3rem !important;
         text-align: center;
     }
-    .table {
+    .portrait-hide {
         visibility: hidden;
     }
 }
@@ -142,7 +146,6 @@ a {
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     text-shadow: 1px 1px 0 var(--white);
-    /* margin-top: 0.3rem; */
 }
 
 .menu-container .menu-nav-active {
@@ -246,7 +249,6 @@ a {
     text-shadow: none;
 }
 
-
 .absolute_position {
     position: absolute;
 }
@@ -305,74 +307,74 @@ a {
 }
 
 .mainPage {
-    margin: 1rem;
+    margin-top: 1rem;
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: repeat(5, auto);
+    grid-template-areas: "calendar notes" "calendar notes" "newCode newProfile" "table table";
     justify-items: center;
     align-content: flex-start;
+    grid-row-gap: 1rem;
 }
 
 .tableMain {
     margin-top: 1rem;
-    grid-column: 1/3;
-    grid-row: 4/5;
+    grid-area: table;
 }
 
 .calendarMain {
-    grid-column: 1/2;
-    grid-row: 1/3;
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    grid-area: calendar;
 }
 
 .notesMain {
-    grid-column: 2/3;
-    grid-row: 1/3;
     width: 100%;
+    grid-area: notes;
+    text-align: center;
 }
 
 .notesMain>textarea {
-    width: 100%;
-    height: 70%;
+    width: 80%;
+    height: 80%;
 }
 
 .newProfileField {
-    margin: 1rem;
-    grid-column: 2/3;
-    grid-row: 3/4;
-    width: 50%;
+    width: 100%;
+    grid-area: newProfile;
+    text-align: center;
 }
 
 .newCodeField {
-    margin: 1rem;
-    grid-column: 1/2;
-    grid-row: 3/4;
+    text-align: center;
     width: 100%;
+    grid-area: newCode;
 }
-
 
 .spinner {
     margin: 10% 50%;
     width: 5rem;
     height: 5rem;
     border-top-color: var(--grey);
-    border-left-color: var(--light-grey);;
+    border-left-color: var(--light-grey);
+    ;
     animation: spinner 800ms linear infinite;
     border-bottom-color: transparent;
     border-right-color: transparent;
     border-style: solid;
     border-width: 2px;
-    border-radius: 50%;  
+    border-radius: 50%;
     box-sizing: border-box;
     display: inline-block;
     vertical-align: middle;
-  }
-  
-  /* Animation styles */
-  @keyframes spinner {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+}
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 
 #DeleteButton {

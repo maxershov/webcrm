@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { changeNotes } from "../store/dayDataStore/dayDataActions";
 import { chgProfileValue } from "../store/profileStore/profileActions";
 
-const AreaNotes = props => {
+const AreaNotes = props                => {
   const { type, notesValue, date } = props;
   const [notesData, setNotesData] = useState(notesValue);
   const { codeLink } = useParams();
@@ -22,6 +22,7 @@ const AreaNotes = props => {
 
   return (
     <>
+      <label>Заметки</label>
       <textarea
         onChange={event => setNotesData(event.target.value)}
         onKeyDown={saveNotes}

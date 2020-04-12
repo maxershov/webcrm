@@ -38,7 +38,7 @@ const TablePage = (props) => {
     <>
       <h1 className="askPhoneTurn">Используйте альбомный режим<br />⤵</h1>
       <ReactTable
-        className="table -striped -highlight"
+        className="table -striped -highlight portrait-hide"
         page={parseInt(pageNum, 10) - 1}
         onPageChange={(pageIndex) => { history.push(`/clients/page/${pageIndex + 1}`) }}
         previousText="Назад"

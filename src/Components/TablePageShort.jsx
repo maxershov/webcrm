@@ -77,7 +77,7 @@ const TablePageShort = (props) => {
   return loadingPersons ? <span className="spinner" /> : (
     <>
       <h1 className="askPhoneTurn">Используйте альбомный режим<br />⤵</h1>
-      <div className="table">
+      <div className="table portrait-hide">
         <ReactTable
           className="-striped -highlight"
           page={parseInt(pageNum, 10) - 1}
