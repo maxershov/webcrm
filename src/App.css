@@ -157,6 +157,12 @@ a:hover {
     border-bottom-right-radius: 25px;
     text-shadow: 1px 1px 0 var(--white);
 }
+.menu-container a:first-child {
+    border-bottom-left-radius: 0;
+}
+.menu-container a:last-child {
+    border-bottom-right-radius: 0;
+}
 
 .menu-container .menu-nav-active {
     color: var(--grey);
@@ -309,6 +315,9 @@ a:hover {
     border-radius: 25px;
     box-shadow: none;
     border-radius: 25px;
+}
+.calendar abbr {
+    text-decoration:none !important;
 }
 
 .mainPage {
