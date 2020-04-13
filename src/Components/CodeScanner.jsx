@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { useDispatch, useSelector } from "react-redux";

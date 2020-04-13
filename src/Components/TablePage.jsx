@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable react/destructuring-assignment */
 import React, { useEffect, useState } from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { Link, useHistory, useParams } from "react-router-dom";
@@ -104,7 +103,7 @@ const TablePage = (props) => {
             },
             Cell: ({ value }) => (getDaysLeft(value))
           }, {
-            Header: 'Тренировки',
+            Header: 'Посещений',
             width: widthCoeff * 9,
             accessor: 'remain',
             headerClassName: 'tableHeader',

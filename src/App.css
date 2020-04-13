@@ -25,6 +25,11 @@
     background: var(--text-color);
 }
 
+.ReactTable .rt-thead.-header {
+    box-shadow: inset 0px 4px 4px var(--grey);
+    border-radius: 6px;
+}
+
 body {
     margin: 0;
 }
@@ -106,7 +111,7 @@ html {
     background-color: var(--back-color);
     text-align: center;
     font-size: 1.1rem;
-    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    /* box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white); */
     color: var(--input-text-color);
 }
 
@@ -115,17 +120,16 @@ html {
     word-wrap: break-word;
 }
 
-#tablePhoto {
+#tablePhoto, #profileImg, #scannerPhoto {
     align-items: center;
     border-radius: 0;
     box-shadow: none;
 }
 
-#tablePhoto:hover {
-    position: absolute;
-    height: 20em;
-    width: auto;
+#tablePhoto:hover, #profileImg:hover {
     cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .table input {
@@ -212,8 +216,12 @@ a:hover {
     object-fit: scale-down;
 }
 
-.userPage label, .table, .calendar, .mainPage textarea {
-    animation: fadein 0.5s;
+.userPage, .table, .mainPage {
+    animation: fadein 0.4s;
+}
+
+.userPage .img-container {
+    animation: fadein 1s;
 }
 
 @keyframes fadein {
@@ -288,6 +296,11 @@ a:hover {
     padding: 0.5rem 3rem;
     text-shadow: 1px 1px 0 var(--white);
     box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
+}
+
+.userPage button:hover, .notesMain button:hover {
+    color: var(--grey);
+    transition: color 0.2s linear;
 }
 
 .userPage-container form button, .FieldsAction button, .newProfileField button, .notesMain button, .notesField button {

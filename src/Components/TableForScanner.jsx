@@ -38,20 +38,17 @@ const TableForScanner = (props) => {
         columns={[
           {
             Header: "Фото",
-            width: widthCoeff * 20,
+            width: widthCoeff * 10,
             accessor: "code",
             headerClassName: "tableHeader",
             Cell: ({ value }) => (
-              <button
-                type="button"
+              <input
+                id="scannerPhoto"
+                type="image"
+                alt="tablePhoto"
                 onClick={() => history.push(`/profile/${value}`)}
-              >
-                <img
-                  alt="tablePhoto"
-                  height={80}
-                  src={`http://${host}:6700/images/${personData[getIndexByCode(value)]?.photoId ?? "0.jpg"}`}
-                />
-              </button>
+                src={`http://${host}:6700/images/${personData[getIndexByCode(value)]?.photoId ?? "0.jpg"}`}
+              />
             )
           },
           {
@@ -64,7 +61,7 @@ const TableForScanner = (props) => {
           },
           {
             Header: "Время",
-            width: widthCoeff * 20,
+            width: widthCoeff * 30,
             accessor: "time",
             headerClassName: "tableHeader"
           }
