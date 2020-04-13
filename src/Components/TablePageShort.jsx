@@ -7,6 +7,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { getDaysLeft } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import host from "../../host";
+import phoneSvg from "../assets/phone.svg"
 
 
 const TablePageShort = (props) => {
@@ -76,7 +77,7 @@ const TablePageShort = (props) => {
 
   return loadingPersons ? <span className="spinner" /> : (
     <>
-      <h1 className="askPhoneTurn">Используйте альбомный режим<br />⤵</h1>
+      <img className="askPhoneTurn" alt="turn to landscape" src={phoneSvg} />
       <div className="table portrait-hide">
         <ReactTable
           className="-striped -highlight"

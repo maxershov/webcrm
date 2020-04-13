@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getDaysLeft } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import host from "../../host";
-
+import phoneSvg from "../assets/phone.svg"
 
 const TablePage = (props) => {
   const history = useHistory();
@@ -35,7 +35,7 @@ const TablePage = (props) => {
 
   return loadingPersons ? <span className="spinner" /> : (
     <>
-      <h1 className="askPhoneTurn">Используйте альбомный режим<br />⤵</h1>
+      <img className="askPhoneTurn" alt="turn to landscape" src={phoneSvg} />
       <ReactTable
         className="table -striped -highlight portrait-hide"
         page={parseInt(pageNum, 10) - 1}
