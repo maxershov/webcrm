@@ -1,17 +1,11 @@
 * {
     /* @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap"); */
     font-family: "Montserrat", sans-serif;
-    /* font-family: "Roboto", sans-serif; */
     box-sizing: border-box;
-    --img-width: 25vw;
-    --img-height: 25vw;
-    --form-width: 25vw;
-    --back-color: rgba(224, 224, 224, 0.315);
-    --back-color-light: rgba(224, 224, 224, 0.1);
-    --form-color: rgba(224, 224, 224, 0.6);
-    --background-color: white;
-    --button-color: rgb(3, 118, 250);
     letter-spacing: -0.2px;
+    --back-color: rgba(224, 224, 224, 0.315);
+    --background-color: #EBECF0;
+    --button-color: rgb(3, 118, 250);
     --grey: rgb(143, 144, 148);
     --white: #FFF;
     --red: rgb(255, 15, 15);
@@ -30,7 +24,7 @@ body {
 
 html {
     font-size: 1rem;
-    background-color: #EBECF0;
+    background-color: var(--background-color);
 }
 
 .askPhoneTurn {
@@ -244,7 +238,7 @@ a:hover {
     padding: 0.4em 0.7em;
     width: 80%;
     font-size: 1.2rem;
-    background-color: #EBECF0;
+    background-color: var(--background-color);
     appearance: none;
     -webkit-appearance: none;
     text-shadow: 0 0 0.1em rgb(255, 255, 255);
@@ -252,7 +246,7 @@ a:hover {
 }
 
 *>input:hover, .menu-container a:hover {
-    background-color: white;
+    background-color: var(--white);
     transition: background-color 0.5s linear;
 }
 
