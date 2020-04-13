@@ -1,16 +1,28 @@
-* {
+:root {
     /* @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap"); */
     font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
     letter-spacing: -0.2px;
-    --back-color: rgba(224, 224, 224, 0.315);
+    --back-color: #DBDBDB;
     --background-color: #EBECF0;
-    --button-color: rgb(3, 118, 250);
-    --grey: rgb(143, 144, 148);
+    --button-color: #0376FA;
+    --grey: #8F9094;
     --white: #FFF;
-    --red: rgb(255, 15, 15);
+    --red: #FF0F0F;
     --light-grey: #BABECC;
-    --input-text-color: rgb(51, 51, 51);
+    --input-text-color: #333333;
+    --text-color: #BABECC;
+    /* --back-color: #272727;
+    --background-color: #272727;
+    --white: #212121;
+    --light-grey: #141414;
+    --grey: #feeeee;
+    --input-text-color: #feeeee;
+    --text-color: #868686; */
+}
+
+.ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
+    background: var(--text-color);
 }
 
 body {
@@ -95,6 +107,7 @@ html {
     text-align: center;
     font-size: 1.1rem;
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    color: var(--input-text-color);
 }
 
 .tableHeader {
@@ -147,7 +160,7 @@ a:hover {
     text-transform: uppercase;
     cursor: pointer;
     text-align: center;
-    color: var(--light-grey);
+    color: var(--text-color);
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     text-shadow: 1px 1px 0 var(--white);
@@ -241,7 +254,7 @@ a:hover {
     background-color: var(--background-color);
     appearance: none;
     -webkit-appearance: none;
-    text-shadow: 0 0 0.1em rgb(255, 255, 255);
+    text-shadow: 0 0 0.1em var(--white);
     outline: none;
 }
 
@@ -256,7 +269,7 @@ a:hover {
 
 *>input::placeholder {
     font-size: 1.1rem;
-    color: var(--light-grey);
+    color: var(--text-color);
     text-shadow: none;
 }
 
@@ -301,6 +314,13 @@ a:hover {
     grid-area: tableHistory;
     width: 95%;
     text-shadow: 1px 1px 0 var(--white);
+}
+
+#DeleteButton {
+    color: var(--red);
+    width: auto;
+    padding: 0.5rem;
+    text-shadow: none;
 }
 
 .FieldsAction {
@@ -385,10 +405,4 @@ a:hover {
     100% {
         transform: rotate(360deg);
     }
-}
-
-#DeleteButton {
-    color: var(--red);
-    width: auto;
-    padding: 0.5rem;
 }

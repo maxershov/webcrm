@@ -9,10 +9,6 @@
     flex-direction: column;
 }
 
-*{
-    --highlight-color: #BABECC;
-}
-
 .ReactTable * {
     box-sizing: border-box
 }
@@ -299,11 +295,6 @@
 
 .ReactTable.-striped .rt-tr.-odd {
     background: rgba(0, 0, 0, 0.05)
-}
-
-.ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
-    /* Set color for highlight */
-    background: var(--highlight-color);
 }
 
 .ReactTable .-pagination {
