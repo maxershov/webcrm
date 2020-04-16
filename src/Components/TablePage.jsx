@@ -25,7 +25,7 @@ const TablePage = (props) => {
 
   useEffect(() => {
     dispatch(fetchPersons());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
