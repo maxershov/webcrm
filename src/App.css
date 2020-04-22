@@ -61,16 +61,21 @@ html {
     .menu-container {
         display: none !important;
     }
+    .menu-container_open {
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        background-color: var(--background-color);
+    }
     .menu-container_open a {
         overflow: hidden;
         text-align: left;
         color: var(--grey);
         border-bottom: solid 1px var(--light-grey);
-        position: relative;
+        border-top: solid 1px var(--grey);
         padding: 0.7em;
         display: block;
-        font-size: 1.1em;
-        width: 100%;
+        font-size: 1.5em;
     }
     .mainPage {
         grid-template-columns: 1fr !important;
