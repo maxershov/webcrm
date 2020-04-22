@@ -300,6 +300,7 @@ a:hover {
     padding: 0.5rem 3rem;
     text-shadow: 1px 1px 0 var(--white);
     box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
+    font-family: inherit;
 }
 
 .calendar {
