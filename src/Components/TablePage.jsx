@@ -24,7 +24,9 @@ const TablePage = (props) => {
   }
 
   useEffect(() => {
+    document.title = "Клиенты CRM";
     dispatch(fetchPersons());
+    
   }, []);
 
   useEffect(() => {

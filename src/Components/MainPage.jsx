@@ -19,11 +19,13 @@ export const MainPage = props => {
   const notesValue = useSelector(state => state.dayStore.data.notes);
   const dispatch = useDispatch();
 
+
   const history = useHistory();
   const [loadedDate, setLoadedDate] = useState(
     format(new Date(), "dd-MM-yyyy")
   );
 
+  document.title = `${loadedDate } CRM`;
 
   useEffect(() => {
     dispatch(fetchVisits(loadedDate));

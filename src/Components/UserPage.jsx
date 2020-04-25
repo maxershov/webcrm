@@ -26,7 +26,7 @@ export const UserPage = (props) => {
   const { codeLink } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-
+  document.title =person.personName; 
 
   useEffect(() => {
     dispatch(fetchProfile(codeLink));

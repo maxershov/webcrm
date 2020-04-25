@@ -70,9 +70,18 @@ const TablePageShort = (props) => {
 
   // use different types of columns for lead, employee and lost table 
   let tableRow = {};
-  if (props.tableType === 'ЛИД') tableRow = leadObj;
-  if (props.tableType === 'СОТРУДНИК') tableRow = employeeObj;
-  if (props.tableType === 'НЕТ') tableRow = lostObj;
+  if (props.tableType === 'ЛИД') {
+    document.title = "Лид CRM"; 
+    tableRow = leadObj;
+  }
+  if (props.tableType === 'СОТРУДНИК') {
+    document.title = "Сотрудники CRM"; 
+    tableRow = employeeObj;
+  }
+  if (props.tableType === 'НЕТ') {
+    document.title = "Прошлые CRM"; 
+    tableRow = lostObj;
+  }
 
 
   return loadingPersons ? <span className="spinner" /> : (
