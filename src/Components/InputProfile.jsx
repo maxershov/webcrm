@@ -53,7 +53,7 @@ const InputProfile = (props) => {
           <option value="3 КФ">тип профиля</option>
           <option value="6 ТА">тип профиля</option>
         </datalist>
-        <button className="absolute_position" type="submit">Изменить</button>
+        <button className="absolute_btn" type="submit">Изменить</button>
       </form>
     </div>
   );
