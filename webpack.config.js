@@ -18,7 +18,11 @@ module.exports = {
   },
   resolve: {
     extensions: [".jsx", ".js", ".json"],
-    modules: ["node_modules"]
+    modules: ["node_modules"],
+    "alias": {
+      "react": "preact/compat",
+      "react-dom": "preact/compat"
+    },
   },
   module: {
     rules: [

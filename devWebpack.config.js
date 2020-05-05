@@ -32,10 +32,10 @@ module.exports = {
   resolve: {
     extensions: [".jsx", ".js", ".json"],
     modules: ["node_modules"],
-    alias: {
-      "react-dom$": "react-dom/profiling",
-      "scheduler/tracing": "scheduler/tracing-profiling"
-    }
+    "alias": {
+      "react": "preact/compat",
+      "react-dom": "preact/compat"
+    },
   },
   module: {
     rules: [
