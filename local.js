@@ -11,7 +11,8 @@ const format = require("date-fns/format")
 const fs = require("fs");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const knex = require('knex')
+const knex = require('knex');
+const open = require('open');
 const multer = require('multer');
 const host = require("./host");
 
@@ -307,8 +308,8 @@ app.post('/upload/:code', upload.single('img'), function (req, res, next) {
   personDb('personData')
     .where('code', code)
     .update("photoId", req.file.filename)
-    .then(() =>  res.send("sucess"));
-    // .then(() => console.log('update Db', code, req.file.filename));
+    .then(() => res.send("sucess"));
+  // .then(() => console.log('update Db', code, req.file.filename));
 });
 
 
@@ -351,6 +352,12 @@ app.use(staticFiles);
 app.use(history());
 
 const port = 6700;
+
+// open browser
+(async () => {
+  await open(`http://${host}:${port}/`);
+})();
+
 app.listen(port, host);
 app.use(staticFiles)
 console.log(`App is listening on port ${port}`);
