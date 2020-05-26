@@ -67,12 +67,6 @@ module.exports = {
       }
     ]
   },
-  optimization: {
-    runtimeChunk: "single",
-    splitChunks: {
-      chunks: "all"
-    }
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "assets", "index.html"),
