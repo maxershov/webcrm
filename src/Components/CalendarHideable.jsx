@@ -5,7 +5,7 @@ import Calendar from 'react-calendar';
 import { useDispatch, useSelector } from "react-redux";
 import { chgProfileValue } from "../store/profileStore/profileActions";
 import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
-
+import { activitiesTypes } from "../App";
 
 const CalendarHideable = (props) => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const CalendarHideable = (props) => {
       props.setParentDate(date)
     } else {
       dispatch(chgProfileValue(codeLink, props.dateType, date));
-      dispatch(addToHistory(codeLink, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${props.dateType}`, "", `${oldFieldValue} => ${date}`));
+      dispatch(addToHistory(codeLink, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${activitiesTypes[props.dateType]}`, "", `${oldFieldValue} => ${date}`));
     }
     setRenderCalendar('none');
   }

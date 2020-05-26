@@ -7,7 +7,7 @@ export const reqActivities = () => {
 };
 
 
-export const reqActivitiesSucess = activitiesData => {
+export const reqActivitiesSuccess = activitiesData => {
   return { type: "REQUEST_ACTIVITIES_SUCCEEDED", data: activitiesData };
 };
 
@@ -59,7 +59,7 @@ function* fetchVisitsAsync({ date }) {
         res.json()
       );
     });
-    yield put(reqActivitiesSucess(data));
+    yield put(reqActivitiesSuccess(data));
   } catch (err) {
     yield put(reqActivitiesError(err));
   }
@@ -75,7 +75,7 @@ function* fetchHistoryAsync({ code }) {
         res.json()
       );
     });
-    yield put(reqActivitiesSucess(data));
+    yield put(reqActivitiesSuccess(data));
   } catch (err) {
     yield put(reqActivitiesError(err));
   }
@@ -96,7 +96,7 @@ function* addToVisitsAsync({ code, date, time, amount }) {
         res.json()
       );
     });
-    yield put(reqActivitiesSucess(data));
+    yield put(reqActivitiesSuccess(data));
   } catch (err) {
     yield put(reqActivitiesError(err));
   }
@@ -119,7 +119,7 @@ function* addToHistoryAsync({ code, date, time, typeInput, person, amount }) {
         res.json()
       );
     });
-    yield put(reqActivitiesSucess(data));
+    yield put(reqActivitiesSuccess(data));
   } catch (err) {
     yield put(reqActivitiesError(err));
   }
@@ -141,7 +141,7 @@ function* deleteHistoryObjAsync({ code, date, time, typeInput, person, amount })
         res.json()
       );
     });
-    yield put(reqActivitiesSucess(data));
+    yield put(reqActivitiesSuccess(data));
   } catch (err) {
     yield put(reqActivitiesError(err));
   }

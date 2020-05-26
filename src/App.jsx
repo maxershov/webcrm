@@ -39,5 +39,20 @@ export function getDaysLeft(date) {
   return differenceInDays(startOfDay(parse(date, 'dd-MM-yyyy', new Date())), startOfDay(new Date()));
 }
 
+export const activitiesTypes = {
+  "personName": "имени",
+  "contract": "контракта",
+  "dateBirth": "даты рождения",
+  "telNum": "номера телефона",
+  "code": "кода",
+  "autoMonth": "парковки",
+  "remain": "разовых тренировок",
+  "days": "срока контракта",
+  "notes": "заметок",
+  "photoId": "фото",
+  "rent": "аренды",
+  "deposite": "депозита"
+};
+
 
 export default App;

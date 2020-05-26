@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { format } from 'date-fns';
 import { chgProfileValue, chgCode } from "../store/profileStore/profileActions";
 import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
-
+import { activitiesTypes } from "../App";
 
 const InputProfile = (props) => {
   const { formLabel, baseValue, inputType, listName } = props;
@@ -26,7 +26,7 @@ const InputProfile = (props) => {
     }
     else {
       dispatch(chgProfileValue(codeLink, inputType, inputValue));
-      dispatch(addToHistory(codeLink, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${inputType}`, "", `${oldFieldValue} => ${inputValue}`));
+      dispatch(addToHistory(codeLink, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${activitiesTypes[inputType]}`, "", `${oldFieldValue} => ${inputValue}`));
     }
   }
 
