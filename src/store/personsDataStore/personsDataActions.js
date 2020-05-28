@@ -15,7 +15,7 @@ export const setLoading = () => {
 }
 
 
-export const reqPersonsSucess = personsData => {
+export const reqPersonsSuccess = personsData => {
   return { type: "REQUEST_PERSONS_SUCCEEDED", data: personsData };
 };
 
@@ -50,7 +50,7 @@ function* fetchPersonsAsync() {
         res.json()
       );
     });
-    yield put(reqPersonsSucess(data));
+    yield put(reqPersonsSuccess(data));
 
   } catch (err) {
     yield put(reqPersonsError(err));
@@ -63,5 +63,5 @@ export function* pushNewPersonAsync({ newPerson }) {
   yield put(setLoading());
   const data = yield select(getStatePersonData);
   const updData = yield data.concat(newPerson);
-  yield put(reqPersonsSucess(updData));
+  yield put(reqPersonsSuccess(updData));
 };

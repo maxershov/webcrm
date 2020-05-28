@@ -1,7 +1,7 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import { pushNewPerson } from "../personsDataStore/personsDataActions";
 import host from "../../../host";
-import { reqActivitiesSucess } from "../activitiesDataStore/activitiesDataActions";
+import { reqActivitiesSuccess } from "../activitiesDataStore/activitiesDataActions";
 import {sleep} from "../storeGetters";
 
 export const reqProfile = () => {
@@ -9,7 +9,7 @@ export const reqProfile = () => {
 };
 
 
-export const reqProfileSucess = profile => {
+export const reqProfileSuccess = profile => {
   return { type: "REQUEST_PROFILE_SUCCEEDED", data: profile };
 };
 
@@ -62,7 +62,7 @@ function* fetchProfileAsync({ code }) {
         res.json()
       );
     });
-    yield put(reqProfileSucess(data[0]));
+    yield put(reqProfileSuccess(data[0]));
   } catch (err) {
     yield put(reqProfileError(err));
   }
@@ -80,7 +80,7 @@ function* changeFieldAsync({ code, inputType, inputValue }) {
       return fetch(`http://${host}:6700/updateField`, requestOptions)
         .then(res => res.json());
     });
-    yield put(reqProfileSucess(updatedData[0]));
+    yield put(reqProfileSuccess(updatedData[0]));
   } catch (err) {
     yield put(reqProfileError(err));
   }
@@ -103,8 +103,8 @@ function* changeCodeAsync({ oldCode, code }) {
       return fetch(`http://${host}:6700/changeActivityCode`, requestOptions)
         .then(res => res.json());
     });
-    yield put(reqProfileSucess(updatedData[0]));
-    yield put(reqActivitiesSucess(updatedHistoryData))
+    yield put(reqProfileSuccess(updatedData[0]));
+    yield put(reqActivitiesSuccess(updatedHistoryData))
   } catch (err) {
     yield put(reqProfileError(err));
   }
@@ -120,7 +120,7 @@ function* addNewProfileAsync({ code }) {
     });
     // push new person to personData
     yield put(pushNewPerson(newPerson[0]));
-    yield put(reqProfileSucess(newPerson[0]));
+    yield put(reqProfileSuccess(newPerson[0]));
   } catch (err) {
     yield put(reqProfileError(err));
   }
@@ -133,7 +133,7 @@ function* deleteProfileAsync({ code }) {
     yield call(() => {
       return fetch(`http://${host}:6700/deleteProfile/${encodeURI(code)}`)
     });
-    // yield put(reqProfileSucess(undefined));
+    // yield put(reqProfileSuccess(undefined));
   } catch (err) {
     yield put(reqProfileError(err));
   }

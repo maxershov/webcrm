@@ -88,7 +88,7 @@ app.get("/deleteProfile/:code", (req, res) => {
     .del().then(() =>
       activityDb.select('*').from('activityData').where("code", codeCyrillic).del()
         .then(() => {
-          res.send('sucess');
+          res.send('success');
         }
         ));
 });
@@ -308,7 +308,7 @@ app.post('/upload/:code', upload.single('img'), function (req, res, next) {
   personDb('personData')
     .where('code', code)
     .update("photoId", req.file.filename)
-    .then(() => res.send("sucess"));
+    .then(() => res.send("success"));
   // .then(() => console.log('update Db', code, req.file.filename));
 });
 
