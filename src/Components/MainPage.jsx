@@ -61,6 +61,9 @@ export const MainPage = props => {
           )}
       </div>
       <TableForScanner />
+      <div className="author">
+        <a href="https://twitter.com/MaksksE" className="authorLink">Max Ershov<br />2020</a>
+      </div>
     </>
   ) : <span className="spinner" />
 };

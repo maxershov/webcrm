@@ -14,7 +14,6 @@
     --opacity: 1;
 }
 
-
 [data-theme="dark"] {
     --back-color: #272727;
     --background-color: #272727;
@@ -398,6 +397,17 @@ a:hover {
     align-content: flex-start;
     grid-row-gap: 1rem;
     text-align: center;
+}
+
+.author {
+    text-align: center;
+}
+
+.authorLink {
+    font-size: 0.75em;
+    color: var(--grey);
+    font-weight: bold;
+    text-shadow: 1px 1px 1px var(--white);
 }
 
 .tableMain {
