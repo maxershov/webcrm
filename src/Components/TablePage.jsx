@@ -15,7 +15,7 @@ const TablePage = (props) => {
   const loadingPersons = useSelector(state => state.personsStore.loading);
   const dispatch = useDispatch();
 
-  // add state for table to rerender
+  // add state for table to re-render
   const [widthCoeff, setWidthCoeff] = useState(window.innerWidth / 100);
 
 

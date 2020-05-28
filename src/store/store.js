@@ -14,6 +14,7 @@ const sagaMiddleware = createSagaMiddlewate();
 const middlewares = [sagaMiddleware];
 
 if (process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line import/no-extraneous-dependencies
   const { logger } = require('redux-logger');
   middlewares.push(logger);
 }

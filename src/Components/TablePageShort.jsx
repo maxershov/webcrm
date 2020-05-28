@@ -35,7 +35,7 @@ const TablePageShort = (props) => {
   }, []);
 
 
-  // some obj's for table => don't repeat photo and name column 
+  // some object's for table => don't repeat photo and name column 
   const leadObj = {
     Header: 'Дата первого контакта',
     accessor: 'rent',

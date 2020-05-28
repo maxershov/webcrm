@@ -161,7 +161,7 @@ app.get("/addNewPerson/:code", async (req, res) => {
 /** ********************** DAY ********************************************** */
 
 app.get("/getDate/:day", (req, res) => {
-  // http://192.168.1.150:6700/getDate/05-04-2020
+  // http://:6700/getDate/05-04-2020
   const { day } = req.params;
   dayDb.raw(dayDb('dayData').insert({ "date": day }).toString().replace('insert', 'INSERT OR IGNORE'))
     .then(() => dayDb.select('*').from('dayData').where('date', day).then(data => {
@@ -189,9 +189,9 @@ app.post("/chgNotes", (req, res) => {
 
 /** ********************** ACTIVITY ********************************************** */
 
-// Get  activ for day history
+// Get  activities for day history
 app.get("/getVisits/:date", (req, res) => {
-  // http://192.168.1.150:6700/getHistory/05-04-2020
+  // http://:6700/getHistory/05-04-2020
   const { date } = req.params;
   activityDb.select('*').from('activityData').where({ 'date': date, 'type': 'Посещение' }).then(data => {
     res.send(JSON.stringify(data));
@@ -309,7 +309,6 @@ app.post('/upload/:code', upload.single('img'), function (req, res, next) {
     .where('code', code)
     .update("photoId", req.file.filename)
     .then(() => res.send("success"));
-  // .then(() => console.log('update Db', code, req.file.filename));
 });
 
 
