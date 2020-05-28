@@ -7,7 +7,7 @@ export const reqDays = () => {
 };
 
 
-export const reqDaysSucess = dayData => {
+export const reqDaysSuccess = dayData => {
   return { type: "REQUEST_DAYS_SUCCEEDED", data: dayData };
 };
 
@@ -40,7 +40,7 @@ function* fetchDaysAsync({ date }) {
     const data = yield call(() => {
       return fetch(`http://${host}:6700/getDate/${date}`).then(res => res.json());
     });
-    yield put(reqDaysSucess(data[0]));
+    yield put(reqDaysSuccess(data[0]));
   } catch (err) {
     yield put(reqDaysError(err));
   }
@@ -59,7 +59,7 @@ function* changeNotesAsync({ date, notes }) {
       return fetch(`http://${host}:6700/chgNotes`, requestOptions)
         .then(res => res.json());
     });
-    yield put(reqDaysSucess(updatedData[0]));
+    yield put(reqDaysSuccess(updatedData[0]));
   } catch (err) {
     yield put(reqDaysError(err));
   }

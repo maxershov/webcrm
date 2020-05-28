@@ -320,7 +320,7 @@ app.post('/code', (req, res) => {
   const code = (req.body.code).replace("\n", "");
   handleCode(code);
   console.log(req.body.code);
-  res.json("sucess");
+  res.json("success");
 })
 
 
