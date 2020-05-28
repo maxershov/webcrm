@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { format } from 'date-fns'
 import { useDispatch } from "react-redux";
-import CalendarHideable from './CalendarHideable';
+import CalendarHidable from './CalendarHidable';
 import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
 import { isToday } from "../App";
 
 
 const FieldsAction = (props) => {
   const [actionType, setActionType] = useState('');
-  const [actionAmout, setActionAmout] = useState('');
+  const [actionAmount, setActionAmount] = useState('');
   const [actionDate, setActionDate] = useState(format(new Date(), 'dd-MM-yyyy'));
   const [actionPerson, setActionPerson] = useState('');
   let time = format(new Date(), 'HH:mm:ss');
@@ -18,7 +18,7 @@ const FieldsAction = (props) => {
   const sendActionsToDb = (event) => {
     event.preventDefault();
     if (!isToday(actionDate)) time = "00:00:00";
-    dispatch(addToHistory(props.code, actionDate, time, actionType, actionPerson, actionAmout));
+    dispatch(addToHistory(props.code, actionDate, time, actionType, actionPerson, actionAmount));
   }
 
   return (
@@ -38,7 +38,7 @@ const FieldsAction = (props) => {
         </datalist>
         <div>
           <label>Данные события</label>
-          <input type="text" placeholder="Введите текст или сумму" onChange={event => setActionAmout(event.target.value)} value={actionAmout} />
+          <input type="text" placeholder="Введите текст или сумму" onChange={event => setActionAmount(event.target.value)} value={actionAmount} />
         </div>
         <div>
           <label>Клиент/сотрудник</label>
@@ -49,7 +49,7 @@ const FieldsAction = (props) => {
               <option key={person} value={person}>{person}</option>)}
           </datalist>
         </div>
-        <CalendarHideable setParentDate={setActionDate} сalendarName="Дата события" dateType="setParent" date={actionDate} />
+        <CalendarHidable setParentDate={setActionDate} calendarName="Дата события" dateType="setParent" date={actionDate} />
         <button className="absolute_btn" type="submit">Добавить событие</button>
       </form>
     </div>

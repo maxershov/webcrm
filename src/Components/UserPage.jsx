@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom'
 import { fetchProfile, deleteProfile } from "../store/profileStore/profileActions";
 import { fetchHistory } from "../store/activitiesDataStore/activitiesDataActions";
-import CalendarHideable from './CalendarHideable';
+import CalendarHidable from './CalendarHidable';
 import FieldDeposite from './FieldDeposite';
 import FieldsAction from './FieldsAction';
 import TableHistory from './TableHistory';
@@ -98,8 +98,8 @@ export const PersonParams = (props) => {
       <InputProfile formLabel="Остаток тренировок" baseValue={person.remain} inputType="remain" />
       <InputProfile formLabel="Код карты" baseValue={person.code} inputType="code" />
       <InputProfile formLabel="Месяц парковки" baseValue={person.autoMonth} inputType="autoMonth" />
-      <CalendarHideable сalendarName="Срок контракта" dateType="days" date={person.days} />
-      <CalendarHideable сalendarName="Срок аренды шкафа" dateType="rent" date={person.rent} />
+      <CalendarHidable calendarName="Срок контракта" dateType="days" date={person.days} />
+      <CalendarHidable calendarName="Срок аренды шкафа" dateType="rent" date={person.rent} />
       <FieldDeposite depositeValue={person.deposite} />
     </>
   )
@@ -111,7 +111,7 @@ export const LeadParams = (props) => {
   return (
     <>
       <InputProfile formLabel="Тип профиля" baseValue={person.contract} inputType="contract" listName="types" />
-      <CalendarHideable сalendarName="Дата первого обращения" dateType="rent" date={person.rent} />
+      <CalendarHidable calendarName="Дата первого обращения" dateType="rent" date={person.rent} />
     </>
   )
 }

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import { chgProfileValue } from "../store/profileStore/profileActions";
 import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
-import CalendarHideable from './CalendarHideable';
+import CalendarHidable from './CalendarHidable';
 import { isToday } from "../App";
 
 
@@ -51,7 +51,7 @@ const FieldDeposite = (props) => {
             <button type="button" style={{ fontSize: "1.4em", display: "block", marginBottom: "1rem" }} onClick={plus}>+</button>
             <button type="button" style={{ fontSize: "1.4em", display: "block" }} onClick={minus}>-</button>
           </form>
-          <CalendarHideable setParentDate={setDateDeposite} сalendarName="Дата изменения депозита" dateType="setParent" date={dateDeposite} />
+          <CalendarHidable setParentDate={setDateDeposite} calendarName="Дата изменения депозита" dateType="setParent" date={dateDeposite} />
         </>
       )
       :

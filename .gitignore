@@ -127,3 +127,4 @@ host.js
 monitor/stats.json
 *.jpg
 *.jpeg
+.vscode/settings.json

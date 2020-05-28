@@ -7,7 +7,7 @@ import { chgProfileValue } from "../store/profileStore/profileActions";
 import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
 import { activitiesTypes } from "../App";
 
-const CalendarHideable = (props) => {
+const CalendarHidable = (props) => {
   const dispatch = useDispatch();
   const [renderCalendar, setRenderCalendar] = useState('none');
   const { codeLink } = useParams();
@@ -36,7 +36,7 @@ const CalendarHideable = (props) => {
   return (
     <>
       <div className={`${props.dateType}Field`}>
-        <label>{props.сalendarName}</label>
+        <label>{props.calendarName}</label>
         <input onClick={() => setRenderCalendar('block')} type="text" readOnly value={props.date} />
       </div>
       <div style={{ display: renderCalendar }} className="calendar" id="calendar">
@@ -49,4 +49,4 @@ const CalendarHideable = (props) => {
 }
 
 
-export default CalendarHideable;
+export default CalendarHidable;
