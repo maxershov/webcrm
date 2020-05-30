@@ -17,7 +17,8 @@ function CopyDatabase(homePath) {
     if (fs.existsSync(pathTo)) {
         console.log('Database already copied today');
     } else {
-        fs.mkdir(pathTo, function error(err) {
+        // eslint-disable-next-line consistent-return
+        fs.mkdir(pathTo,(err) => {
             if (err) {
                 return console.error(err);
             };
