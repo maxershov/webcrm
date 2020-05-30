@@ -1,17 +1,17 @@
 /* eslint-disable no-console */
 const path = require("path");
+const format = require("date-fns/format")
+const fs = require("fs");
 
 
-function writeData(pathTo, dbName) {
-    const source = path.join(homePath, "db", dbName);
-    fs.copyFile(source, path.join(pathTo, dbName), (err) => {
+function writeData(pathTo, sourceFile) {
+    fs.copyFile(sourceFile, pathTo, (err) => {
         if (err) throw err;
-        console.log(`${dbName} was copied to ${pathTo}`);
     });
+    console.log(`Db was copied to ${pathTo}`);
 }
 
-
-export default function DbCopy() {
+function CopyDatabase(homePath) {
     const datePath = format(new Date(), "ddMMyyyy");
     const pathTo = path.join(homePath, "db", "copyData", datePath);
     if (fs.existsSync(pathTo)) {
@@ -20,10 +20,12 @@ export default function DbCopy() {
         fs.mkdir(pathTo, function error(err) {
             if (err) {
                 return console.error(err);
-            }
-            writeData(pathTo, "personDATA.db");
-            writeData(pathTo, "activityDATA.db");
-            writeData(pathTo, "dayDATA.db");
+            };
+            writeData(path.join(pathTo, "personDATA.db"), path.join(homePath, "db", "personDATA.db"));
+            writeData(path.join(pathTo, "activityDATA.db"), path.join(homePath, "db", "activityDATA.db"));
+            writeData(path.join(pathTo, "dayDATA.db"), path.join(homePath, "db", "dayDATA.db"));
         });
     }
 };
+
+module.exports = CopyDatabase;

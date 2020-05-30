@@ -14,15 +14,18 @@ const knex = require('knex');
 const open = require('open');
 const multer = require('multer');
 const host = require("../host");
+const CopyDatabase = require('./copyDb');
 
 const staticFiles = express.static(path.join(__dirname, '../', "dist"));
 
 
-let homePath = null;  
+let homePath = null;
 process.platform === "win32"
   ? (homePath = path.join(path.dirname(require("os").homedir()), "Public"))
   : (homePath = require("os").homedir());
 
+
+CopyDatabase(homePath);
 
 const personDb = knex({
   client: 'sqlite3',
@@ -45,34 +48,6 @@ const dayDb = knex({
 });
 
 
-
-/*
-function writeData(pathTo, dbName) {
-  const source = path.join(homePath, "db", dbName);
-  fs.copyFile(source, path.join(pathTo, dbName), (err) => {
-    if (err) throw err;
-    console.log(`${dbName} was copied to ${pathTo}`);
-  });
-}
-
-
-(function DbCopy() {
-  const datePath = format(new Date(), "ddMMyyyy");
-  const pathTo = path.join(homePath, "db", "copyData", datePath);
-  if (fs.existsSync(pathTo)) {
-    console.log('Database already copied today');
-  } else {
-    fs.mkdir(pathTo, function error(err) {
-      if (err) {
-        return console.error(err);
-      }
-      writeData(pathTo, "personDATA.db");
-      writeData(pathTo, "activityDATA.db");
-      writeData(pathTo, "dayDATA.db");
-    });
-  }
-})();
-*/
 
 const app = express();
 app.use(bodyParser.json());
