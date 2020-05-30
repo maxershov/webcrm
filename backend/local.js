@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const open = require("open");
 const host = require("../host");
 const API = require("./api");
-const CopyDatabase = require("./copyDb");
+const { CopyDatabase } = require("./copyDb");
 const homePath = require("./getHomePath");
 
 const staticFiles = express.static(path.join(__dirname, '../', "dist"));
