@@ -1,7 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
 // TODO try to move loading to components => if i change date in main page => just components load => and not all at once
-// TODO check for func => where i need to return new data (add new profile => route.push => fetchData)
 
 const express = require("express");
 const history = require("connect-history-api-fallback");
@@ -301,9 +300,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 
-app.post('/upload/:code', upload.single('img'), function (req, res, next) {
+app.post('/upload/:code', upload.single('img'), (req, res) => {
   const { code } = req.params;
-  console.log(`file${req.file}${req.files}`);
   // add to all persons db
   personDb('personData')
     .where('code', code)
