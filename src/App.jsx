@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'preact/compat';
 import './App.css';
 import './react-table.css';
 import './react-calendar.css';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'preact/compat';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns'
 import Calendar from 'react-calendar';

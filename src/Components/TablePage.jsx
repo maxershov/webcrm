@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'preact/compat';
 import ReactTable from 'react-table-6/react-table.min';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
@@ -27,6 +27,7 @@ const TablePage = (props) => {
     document.title = "Клиенты CRM";
     dispatch(fetchPersons());
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

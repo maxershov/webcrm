@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "preact/compat";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { changeNotes } from "../store/dayDataStore/dayDataActions";

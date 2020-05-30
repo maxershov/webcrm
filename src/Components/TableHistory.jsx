@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "preact/compat";
 import ReactTable from "react-table-6/react-table.min";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteHistoryObj } from '../store/activitiesDataStore/activitiesDataActions';

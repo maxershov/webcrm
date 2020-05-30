@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'preact/compat';
 import { NavLink } from 'react-router-dom';
 import burgerIcon from "../assets/burger.svg";
 

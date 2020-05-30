@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'preact/compat';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import UserPage from './UserPage';
 import TablePage from './TablePage';

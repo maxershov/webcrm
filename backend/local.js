@@ -13,12 +13,12 @@ const bodyParser = require("body-parser");
 const knex = require('knex');
 const open = require('open');
 const multer = require('multer');
-const host = require("./host");
+const host = require("../host");
 
-const staticFiles = express.static(path.join(__dirname, "dist"));
+const staticFiles = express.static(path.join(__dirname, '../', "dist"));
 
 
-let homePath = null;
+let homePath = null;  
 process.platform === "win32"
   ? (homePath = path.join(path.dirname(require("os").homedir()), "Public"))
   : (homePath = require("os").homedir());
@@ -45,6 +45,8 @@ const dayDb = knex({
 });
 
 
+
+/*
 function writeData(pathTo, dbName) {
   const source = path.join(homePath, "db", dbName);
   fs.copyFile(source, path.join(pathTo, dbName), (err) => {
@@ -70,7 +72,7 @@ function writeData(pathTo, dbName) {
     });
   }
 })();
-
+*/
 
 const app = express();
 app.use(bodyParser.json());

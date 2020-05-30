@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'preact/compat';
 import { format } from 'date-fns';
 import { useDispatch, useSelector } from "react-redux";
 import { chgProfileValue, addNewProfile } from "../store/profileStore/profileActions";

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'preact/compat';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { format } from 'date-fns';
