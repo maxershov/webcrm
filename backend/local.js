@@ -9,28 +9,20 @@ const open = require("open");
 const host = require("../host");
 const API = require("./api");
 const CopyDatabase = require("./copyDb");
+const homePath = require("./getHomePath");
 
 const staticFiles = express.static(path.join(__dirname, '../', "dist"));
 
-
-let homePath = null;
-process.platform === "win32"
-  ? (homePath = path.join(path.dirname(require("os").homedir()), "Public"))
-  : (homePath = require("os").homedir());
-
-
 CopyDatabase(homePath);
-
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-API(app, homePath);
+API(app);
 
 
 // app.use(helmet());
-// app.use(helmet.noCache());
 app.use(staticFiles);
 app.use(history());
 

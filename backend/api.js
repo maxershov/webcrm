@@ -2,9 +2,10 @@
 const knex = require('knex');
 const multer = require('multer');
 const path = require("path");
-const format = require("date-fns/format")
+const format = require("date-fns/format");
+const homePath = require("./getHomePath");
 
-function API(app, homePath) {
+function API(app) {
     const personDb = knex({
         client: 'sqlite3',
         connection: { filename: path.join(homePath, "db", "personDATA.db") },
