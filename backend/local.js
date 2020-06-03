@@ -10,6 +10,7 @@ const host = require("../host");
 const API = require("./api");
 const { CopyDatabase } = require("./copyDb");
 const homePath = require("./getHomePath");
+const dbObj= require("./db");
 
 const staticFiles = express.static(path.join(__dirname, '../', "dist"));
 
@@ -19,7 +20,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-API(app);
+API(app, dbObj);
 
 
 // app.use(helmet());

@@ -1,33 +1,12 @@
 /* eslint-disable no-console */
-const knex = require('knex');
 const multer = require('multer');
 const path = require("path");
 const format = require("date-fns/format");
-const homePath = require("./getHomePath");
 
-function API(app) {
-    const personDb = knex({
-        client: 'sqlite3',
-        connection: { filename: path.join(homePath, "db", "personDATA.db") },
-        useNullAsDefault: true
-    });
-
-
-    const activityDb = knex({
-        client: 'sqlite3',
-        connection: { filename: path.join(homePath, "db", "activityData.db") },
-        useNullAsDefault: true
-    });
-
-
-    const dayDb = knex({
-        client: 'sqlite3',
-        connection: { filename: path.join(homePath, "db", "dayData.db") },
-        useNullAsDefault: true
-    });
-
-
+function API(app, dbObj) {
     /* ************************* API************************* */
+    const {personDb, activityDb, dayDb} = dbObj;
+
 
     app.get("/deleteProfile/:code", (req, res) => {
         const { code } = req.params;
