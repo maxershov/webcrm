@@ -1,4 +1,4 @@
-import profileReducer from "../../store/profileStore/profileReducer";
+import profileReducer from "../../src/store/profileStore/profileReducer";
 
 const initialState = {
     data: [],

@@ -1,4 +1,4 @@
-import personDataReducer from "../../store/personsDataStore/personsDataReducer";
+import personDataReducer from "../../src/store/personsDataStore/personsDataReducer";
 
 const initialState = {
     data: [],

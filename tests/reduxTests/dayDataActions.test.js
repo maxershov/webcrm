@@ -1,6 +1,6 @@
 import createSagaMiddlewate from 'redux-saga';
 import configureStore from 'redux-mock-store';
-import { watchFetchDays } from "../../store/dayDataStore/dayDataActions";
+import { watchFetchDays } from "../../src/store/dayDataStore/dayDataActions";
 
 require('jest-fetch-mock').enableMocks();
 

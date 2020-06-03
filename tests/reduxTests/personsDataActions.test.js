@@ -1,6 +1,6 @@
 import createSagaMiddlewate from 'redux-saga';
 import configureStore from 'redux-mock-store';
-import { watchFetchActivities } from "../../store/activitiesDataStore/activitiesDataActions";
+import { watchFetchPersons } from "../../src/store/personsDataStore/personsDataActions";
 
 require('jest-fetch-mock').enableMocks();
 
@@ -8,20 +8,20 @@ const sagaMiddleware = createSagaMiddlewate();
 const mockStore = configureStore([sagaMiddleware]);
 
 
-describe('activitiesData saga test', () => {
+describe(" personData saga", () => {
 
     beforeEach(() => {
-        fetch.mockResponse(JSON.stringify({ activity: "Test" }))
+        fetch.mockResponse(JSON.stringify({ code: "1" }))
     })
 
-    it('should execute activitiesData actions', (done) => {
+    it('should execute personsData actions', (done) => {
         const store = mockStore({});
-        sagaMiddleware.run(watchFetchActivities);
+        sagaMiddleware.run(watchFetchPersons);
 
         const expectedActions = [
-            { type: "FETCHED_VISIT_ACTIVITIES" },
-            { type: "REQUEST_ACTIVITIES" },
-            { type: "REQUEST_ACTIVITIES_SUCCEEDED", data: { activity: "Test" } }
+            { type: "FETCHED_PERSONS" },
+            { type: "REQUEST_PERSONS" },
+            { type: "REQUEST_PERSONS_SUCCEEDED", data: { code: "1" } }
         ];
 
         store.subscribe(() => {
@@ -32,6 +32,6 @@ describe('activitiesData saga test', () => {
             }
         });
 
-        store.dispatch({ type: "FETCHED_VISIT_ACTIVITIES" });
+        store.dispatch({ type: "FETCHED_PERSONS" });
     });
 });

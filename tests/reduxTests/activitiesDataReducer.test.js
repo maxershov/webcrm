@@ -1,4 +1,4 @@
-import dayDataReducer from "../../store/dayDataStore/dayDataReducer";
+import activitiesDataReducer from "../../src/store/activitiesDataStore/activitiesDataReducer";
 
 const initialState = {
     data: [],
@@ -10,8 +10,8 @@ const initialState = {
 const action = {};
 
 
-test('should REQUEST_DAYS', () => {
-    const answer = dayDataReducer(initialState, action.type = "REQUEST_DAYS");
+test('should REQUEST_ACTIVITIES', () => {
+    const answer = activitiesDataReducer(initialState, action.type = "REQUEST_ACTIVITIES");
     expect(answer.toString()).toBe({
         data: [],
         loading: true,
@@ -21,9 +21,9 @@ test('should REQUEST_DAYS', () => {
 });
 
 
-test('should REQUEST_DAYS_SUCCEEDED', () => {
+test('should REQUEST_ACTIVITIES_SUCCEEDED', () => {
     action.date = { code: 1, name: "test" }
-    const answer = dayDataReducer(initialState, action.type = "REQUEST_DAYS_SUCCEEDED");
+    const answer = activitiesDataReducer(initialState, action.type = "REQUEST_ACTIVITIES_SUCCEEDED");
     expect(answer.toString()).toBe({
         data: [{ code: 1, name: "test" }],
         loading: true,

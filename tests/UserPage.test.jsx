@@ -1,17 +1,17 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/react-in-jsx-scope */
 import React from 'preact/compat';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux'
 import toJson from 'enzyme-to-json';
+import MockDate from 'mockdate';
 
-import store from '../store/store'
-import TablePageShort from '../Components/TablePageShort';
+import store from '../src/store/store'
+import UserPage from '../src/Components/UserPage';
 
 
 jest.mock('react-router-dom', () => ({
   useHistory: () => ({
-    location: { pathname: "test" }
+    push: jest.fn()
   }),
   useParams: () => ({
     push: jest.fn()
@@ -19,7 +19,8 @@ jest.mock('react-router-dom', () => ({
 }));
 
 
-test('should render TablePageShort correctly', () => {
-  const wrapper = mount(<Provider store={store}><TablePageShort /></Provider>);
+test('should render UserPage correctly', () => {
+  MockDate.set('2000-01-01')
+  const wrapper = mount(<Provider store={store}><UserPage /></Provider>);
   expect(toJson(wrapper)).toMatchSnapshot();
 });

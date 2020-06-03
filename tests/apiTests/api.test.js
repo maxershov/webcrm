@@ -2,7 +2,7 @@ import express from "express";
 import knex from "knex";
 import path from "path";
 import fetch from "cross-fetch";
-import API from "../../../backend/api";
+import API from "../../backend/api";
 
 const bodyParser = require("body-parser");
 

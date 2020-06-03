@@ -3,7 +3,7 @@ import React from 'preact/compat';
 import { mount, shallow, render } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
-import Header from '../Components/Header';
+import Header from '../src/Components/Header';
 
 
 jest.mock('react-router-dom', () => ({

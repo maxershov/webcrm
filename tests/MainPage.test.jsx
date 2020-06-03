@@ -5,8 +5,8 @@ import { Provider } from 'react-redux'
 import toJson from 'enzyme-to-json';
 import MockDate from 'mockdate';
 
-import store from '../store/store'
-import UserPage from '../Components/UserPage';
+import store from '../src/store/store'
+import MainPage from '../src/Components/MainPage';
 
 
 jest.mock('react-router-dom', () => ({
@@ -19,8 +19,8 @@ jest.mock('react-router-dom', () => ({
 }));
 
 
-test('should render UserPage correctly', () => {
+test('should render MainPage correctly', () => {
   MockDate.set('2000-01-01')
-  const wrapper = mount(<Provider store={store}><UserPage /></Provider>);
+  const wrapper = mount(<Provider store={store}><MainPage /></Provider>);
   expect(toJson(wrapper)).toMatchSnapshot();
 });
