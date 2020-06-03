@@ -1,22 +1,26 @@
-import React from 'react';
-import { shallow } from 'enzyme';
+/* eslint-disable react/react-in-jsx-scope */
+import React from 'preact/compat';
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux'
 import toJson from 'enzyme-to-json';
-import { MainPage } from '../Components/MainPage'
-import { persons } from './testData/testData'
+import MockDate from 'mockdate';
 
-// Set mock for router func => get url for navigation
+import store from '../store/store'
+import MainPage from '../Components/MainPage';
+
+
 jest.mock('react-router-dom', () => ({
   useHistory: () => ({
-    push: jest.fn(),
+    push: jest.fn()
   }),
+  useParams: () => ({
+    push: jest.fn()
+  })
 }));
-
-// Set default date to make all snapshots equal
-const defaultDate = new Date(0);
-jest.spyOn(global, 'Date').mockImplementation(() => defaultDate);
 
 
 test('should render MainPage correctly', () => {
-  const wrapper = shallow(<MainPage personData={JSON.stringify(persons)} />);
+  MockDate.set('2000-01-01')
+  const wrapper = mount(<Provider store={store}><MainPage /></Provider>);
   expect(toJson(wrapper)).toMatchSnapshot();
 });

@@ -3,10 +3,9 @@ import React from 'preact/compat';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux'
 import toJson from 'enzyme-to-json';
-import MockDate from 'mockdate';
 
 import store from '../store/store'
-import UserPage from '../Components/UserPage';
+import TablePage from '../Components/TablePage';
 
 
 jest.mock('react-router-dom', () => ({
@@ -19,8 +18,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 
-test('should render UserPage correctly', () => {
-  MockDate.set('2000-01-01')
-  const wrapper = mount(<Provider store={store}><UserPage /></Provider>);
+test('should render TablePage correctly', () => {
+  const wrapper = mount(<Provider store={store}><TablePage /></Provider>);
   expect(toJson(wrapper)).toMatchSnapshot();
 });
