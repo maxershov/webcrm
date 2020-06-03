@@ -2,7 +2,6 @@ import { takeLatest, put, call } from "redux-saga/effects";
 import { pushNewPerson } from "../personsDataStore/personsDataActions";
 import host from "../../../host";
 import { reqActivitiesSuccess } from "../activitiesDataStore/activitiesDataActions";
-import {sleep} from "../storeGetters";
 
 export const reqProfile = () => {
   return { type: "REQUEST_PROFILE" };

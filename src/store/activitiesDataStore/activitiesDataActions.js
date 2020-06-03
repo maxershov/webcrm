@@ -1,6 +1,6 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import host from "../../../host";
-import { sleep } from "../storeGetters";
+
 
 export const reqActivities = () => {
   return { type: "REQUEST_ACTIVITIES" };

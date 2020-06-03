@@ -1,6 +1,6 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import host from "../../../host";
-import {sleep} from "../storeGetters";
+
 
 export const reqDays = () => {
   return { type: "REQUEST_DAYS" };
@@ -36,7 +36,6 @@ export function* watchFetchDays() {
 function* fetchDaysAsync({ date }) {
   try {
     yield put(reqDays());
-    yield sleep(1000);
     const data = yield call(() => {
       return fetch(`http://${host}:6700/getDate/${date}`).then(res => res.json());
     });

@@ -5,7 +5,7 @@ const format = require("date-fns/format");
 
 function API(app, dbObj) {
     /* ************************* API************************* */
-    const {personDb, activityDb, dayDb} = dbObj;
+    const { personDb, activityDb, dayDb } = dbObj;
 
 
     app.get("/deleteProfile/:code", (req, res) => {
@@ -132,7 +132,7 @@ function API(app, dbObj) {
     app.post("/addToVisits", (req, res) => {
         /* {
          "code": "Иванов123",
-         "day": "05-04-2020",
+         "date": "05-04-2020",
          "time": "12:01:11",
          "amount":""
         } */
@@ -184,7 +184,7 @@ function API(app, dbObj) {
     app.post("/addActivity", (req, res) => {
         /* {
          "code": "ЕршовМаксимЛеонидович",
-         "day": "05-04-2020",
+         "date": "05-04-2020",
          "time": "10:01:11",
          "type": "ПТ",
          "person": "",
@@ -204,7 +204,7 @@ function API(app, dbObj) {
     app.post("/delActivity", (req, res) => {
         /* {
          "code": "ЕршовМаксимЛеонидович",
-         "day": "05-04-2020",
+         "date": "05-04-2020",
          "time": "10:01:11",
          "type": "ПТ",
          "person": "",
@@ -238,8 +238,6 @@ function API(app, dbObj) {
             .update("photoId", req.file.filename)
             .then(() => res.send("success"));
     });
-
-
 
 
     // FOR RFID SCANNER
