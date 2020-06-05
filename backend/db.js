@@ -6,7 +6,7 @@ const homePath = require("./getHomePath");
 
 const personDb = knex({
     client: 'sqlite3',
-    connection: { filename: path.join(homePath, "db", "personDATA.db") },
+    connection: { filename: path.join(homePath, "db", "personData.db") },
     useNullAsDefault: true
 });
 
