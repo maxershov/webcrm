@@ -94,6 +94,7 @@ const TablePage = (props) => {
                 if (row[filter.id].toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) return true;
               } return false;
             },
+            Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.contract}</Link>)
           }, {
             Header: 'Остаток дней',
             width: widthCoeff * 9,
@@ -104,12 +105,13 @@ const TablePage = (props) => {
               const dayB = getDaysLeft(b);
               return (dayA === "") - (dayB === "") || +(dayA > dayB) || -(dayA < dayB);
             },
-            Cell: ({ value }) => (getDaysLeft(value))
+            Cell: row => (<Link to={`/profile/${row.original.code}`}>{getDaysLeft(row.original.days)}</Link>)
           }, {
             Header: 'Посещений',
             width: widthCoeff * 9,
             accessor: 'remain',
             headerClassName: 'tableHeader',
+            Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.remain}</Link>)
           }, {
             Header: 'Аренда дней',
             width: widthCoeff * 9,
@@ -120,17 +122,19 @@ const TablePage = (props) => {
               const dayB = getDaysLeft(b);
               return (dayA === "") - (dayB === "") || +(dayA > dayB) || -(dayA < dayB);
             },
-            Cell: ({ value }) => (getDaysLeft(value)),
+            Cell: row => (<Link to={`/profile/${row.original.code}`}>{getDaysLeft(row.original.rent)}</Link>)
           }, {
             Header: 'Депозит',
             width: widthCoeff * 11.5,
             accessor: 'deposite',
-            headerClassName: 'tableHeader'
+            headerClassName: 'tableHeader',
+            Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.deposite}</Link>)
           }, {
             Header: 'Парковка',
             width: widthCoeff * 9,
             accessor: 'autoMonth',
-            headerClassName: 'tableHeader'
+            headerClassName: 'tableHeader',
+            Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.autoMonth}</Link>)
           }
         ]}
         defaultSorted={[{ id: 'personName', desc: false }]}

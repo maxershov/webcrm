@@ -45,14 +45,16 @@ const TablePageShort = (props) => {
       const dayA = getDaysLeft(a);
       const dayB = getDaysLeft(b);
       return (dayA === "") - (dayB === "") || +(dayA > dayB) || -(dayA < dayB);
-    }
+    },
+    Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.rent}</Link>)
   }
 
   const employeeObj = {
     Header: 'Депозит',
     width: widthCoeff * 25,
     accessor: 'deposite',
-    headerClassName: 'tableHeader'
+    headerClassName: 'tableHeader',
+    Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.deposite}</Link>)
   }
 
   const lostObj = {
@@ -64,7 +66,8 @@ const TablePageShort = (props) => {
       const dayA = getDaysLeft(a);
       const dayB = getDaysLeft(b);
       return (dayA === "") - (dayB === "") || +(dayA > dayB) || -(dayA < dayB);
-    }
+    },
+    Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.days}</Link>)
   }
 
 
