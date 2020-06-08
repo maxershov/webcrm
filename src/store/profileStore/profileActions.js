@@ -57,7 +57,7 @@ function* fetchProfileAsync({ code }) {
     yield put(reqProfile());
     // yield sleep(1000);
     const data = yield call(() => {
-      return fetch(`http://${host}:6700/getProfile/${encodeURI(code)}`).then(res =>
+      return fetch(`/getProfile/${encodeURI(code)}`).then(res =>
         res.json()
       );
     });
@@ -76,7 +76,7 @@ function* changeFieldAsync({ code, inputType, inputValue }) {
   };
   try {
     const updatedData = yield call(() => {
-      return fetch(`http://${host}:6700/updateField`, requestOptions)
+      return fetch(`/updateField`, requestOptions)
         .then(res => res.json());
     });
     yield put(reqProfileSuccess(updatedData[0]));
@@ -94,12 +94,12 @@ function* changeCodeAsync({ oldCode, code }) {
   };
   try {
     const updatedData = yield call(() => {
-      return fetch(`http://${host}:6700/updateCode`, requestOptions)
+      return fetch(`/updateCode`, requestOptions)
         .then(res => res.json());
     });
     // handle history change
     const updatedHistoryData = yield call(() => {
-      return fetch(`http://${host}:6700/changeActivityCode`, requestOptions)
+      return fetch(`/changeActivityCode`, requestOptions)
         .then(res => res.json());
     });
     yield put(reqProfileSuccess(updatedData[0]));
@@ -113,7 +113,7 @@ function* changeCodeAsync({ oldCode, code }) {
 function* addNewProfileAsync({ code }) {
   try {
     const newPerson = yield call(() => {
-      return fetch(`http://${host}:6700/addNewPerson/${encodeURI(code)}`).then(res =>
+      return fetch(`/${encodeURI(code)}`).then(res =>
         res.json()
       );
     });
@@ -130,7 +130,7 @@ function* deleteProfileAsync({ code }) {
   yield put(reqProfile());
   try {
     yield call(() => {
-      return fetch(`http://${host}:6700/deleteProfile/${encodeURI(code)}`)
+      return fetch(`/deleteProfile/${encodeURI(code)}`)
     });
     // yield put(reqProfileSuccess(undefined));
   } catch (err) {

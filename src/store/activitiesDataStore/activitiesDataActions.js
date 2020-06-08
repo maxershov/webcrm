@@ -55,7 +55,7 @@ function* fetchVisitsAsync({ date }) {
     yield put(reqActivities());
     // yield sleep(1000)
     const data = yield call(() => {
-      return fetch(`http://${host}:6700/getVisits/${encodeURI(date)}`).then(res =>
+      return fetch(`/${encodeURI(date)}`).then(res =>
         res.json()
       );
     });
@@ -71,7 +71,7 @@ function* fetchHistoryAsync({ code }) {
     yield put(reqActivities());
     // yield sleep(1000)
     const data = yield call(() => {
-      return fetch(`http://${host}:6700/getActivities/${encodeURI(code)}`).then(res =>
+      return fetch(`/${encodeURI(code)}`).then(res =>
         res.json()
       );
     });
@@ -92,7 +92,7 @@ function* addToVisitsAsync({ code, date, time, amount }) {
     yield put(reqActivities());
     // yield sleep(1000)
     const data = yield call(() => {
-      return fetch(`http://${host}:6700/addToVisits`, requestOptions).then(res =>
+      return fetch(`/addToVisits`, requestOptions).then(res =>
         res.json()
       );
     });
@@ -115,7 +115,7 @@ function* addToHistoryAsync({ code, date, time, typeInput, person, amount }) {
     yield put(reqActivities());
     // yield sleep(1000)
     const data = yield call(() => {
-      return fetch(`http://${host}:6700/addActivity`, requestOptions).then(res =>
+      return fetch(`/addActivity`, requestOptions).then(res =>
         res.json()
       );
     });
@@ -137,7 +137,7 @@ function* deleteHistoryObjAsync({ code, date, time, typeInput, person, amount })
     yield put(reqActivities());
     // yield sleep(1000)
     const data = yield call(() => {
-      return fetch(`http://${host}:6700/delActivity`, requestOptions).then(res =>
+      return fetch(`/delActivity`, requestOptions).then(res =>
         res.json()
       );
     });
