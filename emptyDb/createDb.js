@@ -10,6 +10,6 @@ fs.mkdir(pathTo, (err) => {
         return console.error(err);
     };
 });
-writeData(path.join(homePath, "db", "personDATA.db"), path.join(__dirname, '../', "emptyDb", "db", "personDATA.db"));
-writeData(path.join(homePath, "db", "activityDATA.db"), path.join(__dirname, '../', "emptyDb", "db", "activityDATA.db"));
-writeData(path.join(homePath, "db", "dayDATA.db"), path.join(__dirname, '../', "emptyDb", "db", "dayDATA.db"));
+writeData(path.join(homePath, "db", "personData.db"), path.join(__dirname, '../', "emptyDb", "db", "personData.db"));
+writeData(path.join(homePath, "db", "activityData.db"), path.join(__dirname, '../', "emptyDb", "db", "activityData.db"));
+writeData(path.join(homePath, "db", "dayData.db"), path.join(__dirname, '../', "emptyDb", "db", "dayData.db"));

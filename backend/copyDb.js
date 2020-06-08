@@ -26,9 +26,9 @@ function CopyDatabase(homePath) {
         fs.mkdir(pathTo, (err) => {
             if (err) { return console.error(err); }
         });
-        writeData(path.join(pathTo, "personData.db"), path.join(homePath, "db", "personDATA.db"));
-        writeData(path.join(pathTo, "activityData.db"), path.join(homePath, "db", "activityDATA.db"));
-        writeData(path.join(pathTo, "dayData.db"), path.join(homePath, "db", "dayDATA.db"));
+        writeData(path.join(pathTo, "personData.db"), path.join(homePath, "db", "personData.db"));
+        writeData(path.join(pathTo, "activityData.db"), path.join(homePath, "db", "activityData.db"));
+        writeData(path.join(pathTo, "dayData.db"), path.join(homePath, "db", "dayData.db"));
     }
 }
 
