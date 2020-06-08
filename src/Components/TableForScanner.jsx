@@ -3,7 +3,6 @@ import ReactTable from "react-table-6/react-table.min";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { getIndexByCode } from "../App";
-import host from "../../host";
 
 
 const TableForScanner = (props) => {
@@ -47,7 +46,7 @@ const TableForScanner = (props) => {
                 type="image"
                 alt="tablePhoto"
                 onClick={() => history.push(`/profile/${value}`)}
-                src={`http://${host}:6700/images/${personData[getIndexByCode(value)]?.photoId ?? "0.jpg"}`}
+                src={`/images/${personData[getIndexByCode(value)]?.photoId ?? "0.jpg"}`}
               />
             )
           },

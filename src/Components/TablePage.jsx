@@ -5,7 +5,6 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { getDaysLeft } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
-import host from "../../host";
 import phoneSvg from "../assets/phone.svg"
 
 const TablePage = (props) => {
@@ -62,7 +61,7 @@ const TablePage = (props) => {
             width: widthCoeff * 15,
             headerClassName: 'tableHeader',
             Cell: (value) => (
-              <input type="image" id="tablePhoto" onClick={() => history.push(`/profile/${value.original.code}`)} alt="Profile image" src={`http://${host}:6700/images/${value.original.photoId ?? "0.jpg"}`} />)
+              <input type="image" id="tablePhoto" onClick={() => history.push(`/profile/${value.original.code}`)} alt="Profile image" src={`/images/${value.original.photoId ?? "0.jpg"}`} />)
           },
           {
             Header: 'Имя',

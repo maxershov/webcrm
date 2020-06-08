@@ -1,5 +1,5 @@
 import { takeLatest, put, call, select } from "redux-saga/effects";
-import host from "../../../host";
+
 
 
 export const getStatePersonData = state => state.personsStore.data

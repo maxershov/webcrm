@@ -1,5 +1,5 @@
 import { takeLatest, put, call } from "redux-saga/effects";
-import host from "../../../host";
+
 
 
 export const reqActivities = () => {
@@ -55,7 +55,7 @@ function* fetchVisitsAsync({ date }) {
     yield put(reqActivities());
     // yield sleep(1000)
     const data = yield call(() => {
-      return fetch(`/${encodeURI(date)}`).then(res =>
+      return fetch(`/getVisits/${encodeURI(date)}`).then(res =>
         res.json()
       );
     });
@@ -71,7 +71,7 @@ function* fetchHistoryAsync({ code }) {
     yield put(reqActivities());
     // yield sleep(1000)
     const data = yield call(() => {
-      return fetch(`/${encodeURI(code)}`).then(res =>
+      return fetch(`/getActivities/${encodeURI(code)}`).then(res =>
         res.json()
       );
     });

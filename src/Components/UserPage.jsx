@@ -9,7 +9,6 @@ import FieldsAction from './FieldsAction';
 import TableHistory from './TableHistory';
 import AreaNotes from './AreaNotes';
 import InputProfile from './InputProfile';
-import host from "../../host";
 
 
 function getPersonNames(data) {
@@ -63,7 +62,7 @@ export const UserPage = (props) => {
 
   return loading ? <span className="spinner" /> : (
     <div className="userPage">
-      <div className="img-container"><input id="profileImg" type="image" onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={`http://${host}:6700/images/${person.photoId}`} /></div>
+      <div className="img-container"><input id="profileImg" type="image" onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={`/images/${person.photoId}`} /></div>
       <div className="userPage-container">
         {renderPhotoId ? (
           <>

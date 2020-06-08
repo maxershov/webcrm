@@ -1,5 +1,4 @@
 import { takeLatest, put, call } from "redux-saga/effects";
-import host from "../../../host";
 
 
 export const reqDays = () => {

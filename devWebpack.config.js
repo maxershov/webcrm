@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackMonitor = require('webpack-monitor');
-const host = require("./host");
+const ipAddress = require("./backend/findAddress")();
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -18,7 +18,7 @@ module.exports = {
     publicPath: "/"
   },
   devServer: {
-    host,
+    ipAddress,
     port: 6969,
     open: true,
     hot: true,

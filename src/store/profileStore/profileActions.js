@@ -1,6 +1,5 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import { pushNewPerson } from "../personsDataStore/personsDataActions";
-import host from "../../../host";
 import { reqActivitiesSuccess } from "../activitiesDataStore/activitiesDataActions";
 
 export const reqProfile = () => {
@@ -113,7 +112,7 @@ function* changeCodeAsync({ oldCode, code }) {
 function* addNewProfileAsync({ code }) {
   try {
     const newPerson = yield call(() => {
-      return fetch(`/${encodeURI(code)}`).then(res =>
+      return fetch(`/addNewPerson/${encodeURI(code)}`).then(res =>
         res.json()
       );
     });
