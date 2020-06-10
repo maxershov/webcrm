@@ -59,7 +59,7 @@ it('should req persons by code', async () => {
 
 
 it('should delete person by code', async () => {
-    const req = await fetch(`http://localhost:123/deleteProfile/1`)
+    await fetch(`http://localhost:123/deleteProfile/1`)
     const person = await personDb('personData').where('code', "1").select('*')
     return expect(person).toEqual([]);
 });
@@ -91,11 +91,8 @@ it('should add activity to day history', async () => {
 
 
 it('should get activities by code', async () => {
-    const dbb = await activityDb.select('*').from('activityData')
-    // console.log(dbb);
     const req = await fetch(`http://localhost:123/getActivities/1`)
     const activities = await req.json();
-    // console.log(activities);
 
     return expect(activities[0].code).toEqual("1");
 });

@@ -38,12 +38,12 @@ app.listen(port, ipAddress);
 
 
 
-process.on('uncaughtException', function (err) {
+process.on('uncaughtException', err => {
   if (err.errno === 'EADDRINUSE') {
-    open(`http://${ipAddress}:${port}/`, {wait: true}).then(() => {process.exit(1)});
+    open(`http://${ipAddress}:${port}/`, { wait: true }).then(() => { process.exit(1) });
   } else {
     process.exit(1);
-  } 
+  }
 });
 
 app.use(staticFiles)

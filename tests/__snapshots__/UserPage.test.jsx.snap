@@ -55,7 +55,7 @@ exports[`should render UserPage correctly 1`] = `
             alt="profilePhoto"
             id="profileImg"
             onClick={[Function]}
-            src="http://192.168.1.150:6700/images/undefined"
+            src="/images/undefined"
             type="image"
           />
         </div>

@@ -127,6 +127,7 @@ exports[`should render TablePage correctly 1`] = `
               "width": 204.8,
             },
             Object {
+              "Cell": [Function],
               "Header": "Контракт",
               "accessor": "contract",
               "filterMethod": [Function],
@@ -145,6 +146,7 @@ exports[`should render TablePage correctly 1`] = `
               "width": 92.16,
             },
             Object {
+              "Cell": [Function],
               "Header": "Посещений",
               "accessor": "remain",
               "headerClassName": "tableHeader",
@@ -159,12 +161,14 @@ exports[`should render TablePage correctly 1`] = `
               "width": 92.16,
             },
             Object {
+              "Cell": [Function],
               "Header": "Депозит",
               "accessor": "deposite",
               "headerClassName": "tableHeader",
               "width": 117.76,
             },
             Object {
+              "Cell": [Function],
               "Header": "Парковка",
               "accessor": "autoMonth",
               "headerClassName": "tableHeader",
@@ -850,7 +854,7 @@ exports[`should render TablePage correctly 1`] = `
                             column={
                               Object {
                                 "Aggregated": undefined,
-                                "Cell": undefined,
+                                "Cell": [Function],
                                 "Expander": undefined,
                                 "Filter": undefined,
                                 "Footer": undefined,
@@ -1004,7 +1008,7 @@ exports[`should render TablePage correctly 1`] = `
                             column={
                               Object {
                                 "Aggregated": undefined,
-                                "Cell": undefined,
+                                "Cell": [Function],
                                 "Expander": undefined,
                                 "Filter": undefined,
                                 "Footer": undefined,
@@ -1156,7 +1160,7 @@ exports[`should render TablePage correctly 1`] = `
                             column={
                               Object {
                                 "Aggregated": undefined,
-                                "Cell": undefined,
+                                "Cell": [Function],
                                 "Expander": undefined,
                                 "Filter": undefined,
                                 "Footer": undefined,
@@ -1232,7 +1236,7 @@ exports[`should render TablePage correctly 1`] = `
                             column={
                               Object {
                                 "Aggregated": undefined,
-                                "Cell": undefined,
+                                "Cell": [Function],
                                 "Expander": undefined,
                                 "Filter": undefined,
                                 "Footer": undefined,
@@ -6699,7 +6703,7 @@ exports[`should render TablePage correctly 1`] = `
                   },
                   Object {
                     "Aggregated": undefined,
-                    "Cell": undefined,
+                    "Cell": [Function],
                     "Expander": undefined,
                     "Filter": undefined,
                     "Footer": undefined,
@@ -6767,7 +6771,7 @@ exports[`should render TablePage correctly 1`] = `
                   },
                   Object {
                     "Aggregated": undefined,
-                    "Cell": undefined,
+                    "Cell": [Function],
                     "Expander": undefined,
                     "Filter": undefined,
                     "Footer": undefined,
@@ -6833,7 +6837,7 @@ exports[`should render TablePage correctly 1`] = `
                   },
                   Object {
                     "Aggregated": undefined,
-                    "Cell": undefined,
+                    "Cell": [Function],
                     "Expander": undefined,
                     "Filter": undefined,
                     "Footer": undefined,
@@ -6866,7 +6870,7 @@ exports[`should render TablePage correctly 1`] = `
                   },
                   Object {
                     "Aggregated": undefined,
-                    "Cell": undefined,
+                    "Cell": [Function],
                     "Expander": undefined,
                     "Filter": undefined,
                     "Footer": undefined,
@@ -6970,7 +6974,7 @@ exports[`should render TablePage correctly 1`] = `
                   },
                   Object {
                     "Aggregated": undefined,
-                    "Cell": undefined,
+                    "Cell": [Function],
                     "Expander": undefined,
                     "Filter": undefined,
                     "Footer": undefined,
@@ -7038,7 +7042,7 @@ exports[`should render TablePage correctly 1`] = `
                   },
                   Object {
                     "Aggregated": undefined,
-                    "Cell": undefined,
+                    "Cell": [Function],
                     "Expander": undefined,
                     "Filter": undefined,
                     "Footer": undefined,
@@ -7104,7 +7108,7 @@ exports[`should render TablePage correctly 1`] = `
                   },
                   Object {
                     "Aggregated": undefined,
-                    "Cell": undefined,
+                    "Cell": [Function],
                     "Expander": undefined,
                     "Filter": undefined,
                     "Footer": undefined,
@@ -7137,7 +7141,7 @@ exports[`should render TablePage correctly 1`] = `
                   },
                   Object {
                     "Aggregated": undefined,
-                    "Cell": undefined,
+                    "Cell": [Function],
                     "Expander": undefined,
                     "Filter": undefined,
                     "Footer": undefined,
@@ -7230,6 +7234,7 @@ exports[`should render TablePage correctly 1`] = `
                     "width": 204.8,
                   },
                   Object {
+                    "Cell": [Function],
                     "Header": "Контракт",
                     "accessor": "contract",
                     "filterMethod": [Function],
@@ -7248,6 +7253,7 @@ exports[`should render TablePage correctly 1`] = `
                     "width": 92.16,
                   },
                   Object {
+                    "Cell": [Function],
                     "Header": "Посещений",
                     "accessor": "remain",
                     "headerClassName": "tableHeader",
@@ -7262,12 +7268,14 @@ exports[`should render TablePage correctly 1`] = `
                     "width": 92.16,
                   },
                   Object {
+                    "Cell": [Function],
                     "Header": "Депозит",
                     "accessor": "deposite",
                     "headerClassName": "tableHeader",
                     "width": 117.76,
                   },
                   Object {
+                    "Cell": [Function],
                     "Header": "Парковка",
                     "accessor": "autoMonth",
                     "headerClassName": "tableHeader",
