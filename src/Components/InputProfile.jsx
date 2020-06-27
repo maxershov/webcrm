@@ -39,7 +39,7 @@ const InputProfile = (props) => {
           placeholder={`Добавить ${formLabel.toLowerCase()}`}
           type="text"
           name={inputType}
-          onChange={event => setValue(event.target.value)}
+          onChange={event => setValue(event.target.value.trim())}
           value={inputValue}
           list={listName}
         />
