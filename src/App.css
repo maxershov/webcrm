@@ -3,9 +3,9 @@
     font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
     letter-spacing: -0.2px;
-    --back-color: #DBDBDB;
-    --background-color: #EBECF0;
-    --grey: #8F9094;
+    --bg-color-darker: #DBDBDB;
+    --bg-color: #EBECF0;
+    --label-color: #8F9094;
     --white: #FFF;
     --red: #FF0F0F;
     --light-grey: #BABECC;
@@ -15,11 +15,11 @@
 }
 
 [data-theme="dark"] {
-    --back-color: #272727;
-    --background-color: #272727;
+    --bg-color-darker: #272727;
+    --bg-color: #272727;
     --white: #333333;
     --light-grey: rgb(17, 16, 16);
-    --grey: rgb(2, 120, 255);
+    --label-color: rgb(2, 120, 255);
     --input-text-color: #7991ff;
     --text-color: #2f3350;
     --opacity: 0.7;
@@ -30,7 +30,7 @@
 }
 
 .ReactTable .rt-thead.-header {
-    box-shadow: inset 0px 4px 4px var(--grey);
+    box-shadow: inset 0px 4px 4px var(--label-color);
     border-radius: 6px;
 }
 
@@ -45,7 +45,7 @@ body {
 
 html {
     font-size: 1rem;
-    background-color: var(--background-color);
+    background-color: var(--bg-color);
 }
 
 .askPhoneTurn {
@@ -70,14 +70,14 @@ html {
         position: absolute;
         z-index: 100;
         width: 100%;
-        background-color: var(--background-color);
+        background-color: var(--bg-color);
     }
     .menu-container_open a {
         overflow: hidden;
         text-align: left;
-        color: var(--grey);
+        color: var(--label-color);
         border-bottom: solid 1px var(--light-grey);
-        border-top: solid 1px var(--grey);
+        border-top: solid 1px var(--label-color);
         padding: 0.7em;
         display: block;
         font-size: 1.5em;
@@ -117,7 +117,7 @@ html {
 }
 
 .table {
-    background-color: var(--back-color);
+    background-color: var(--bg-color-darker);
     text-align: center;
     font-size: 1.1rem;
     color: var(--input-text-color);
@@ -153,7 +153,7 @@ html {
 }
 
 .table input {
-    background-color: var(--back-color) !important;
+    background-color: var(--bg-color-darker) !important;
     cursor: pointer;
     box-shadow: none;
 }
@@ -199,7 +199,7 @@ a:hover {
 }
 
 .menu-container .menu-nav-active {
-    color: var(--grey);
+    color: var(--label-color);
     transition: color 0.2s linear;
     box-shadow: inset 2px 1px 2px var(--light-grey), inset -2px -1px 2px var(--white);
 }
@@ -258,7 +258,7 @@ a:hover {
     font-size: 1.2em;
     width: 80%;
     text-align: center;
-    color: var(--grey);
+    color: var(--label-color);
     text-transform: uppercase;
     font-weight: bold;
     text-shadow: 1px 1px 1px var(--white);
@@ -267,7 +267,7 @@ a:hover {
 
 .tableHeader {
     font-size: 1rem;
-    color: var(--grey);
+    color: var(--label-color);
     text-transform: uppercase;
 }
 
@@ -279,7 +279,7 @@ a:hover {
     padding: 0.4em 0.7em;
     width: 80%;
     font-size: 1.2rem;
-    background-color: var(--background-color);
+    background-color: var(--bg-color);
     appearance: none;
     -webkit-appearance: none;
     text-shadow: 0 0 0.1em var(--white);
@@ -334,7 +334,7 @@ a:hover {
 }
 
 .userPage button:hover, .notesMain button:hover {
-    color: var(--grey);
+    color: var(--label-color);
     transition: color 0.2s linear;
 }
 
@@ -399,13 +399,25 @@ a:hover {
     text-align: center;
 }
 
+.scanner-btn {
+    margin-left: 5px;
+    border-style: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 25px;
+    background-color: var(--bg-color);
+    color:var(--label-color);
+    box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
+    font-family: inherit;
+}
+
 .author {
     text-align: center;
 }
 
 .authorLink {
     font-size: 0.75em;
-    color: var(--grey);
+    color: var(--label-color);
     font-weight: bold;
     text-shadow: 1px 1px 1px var(--white);
 }
@@ -445,7 +457,7 @@ a:hover {
     margin: 10% 50%;
     width: 5rem;
     height: 5rem;
-    border-top-color: var(--grey);
+    border-top-color: var(--label-color);
     border-left-color: var(--light-grey);
     ;
     animation: spinner 800ms linear infinite;
