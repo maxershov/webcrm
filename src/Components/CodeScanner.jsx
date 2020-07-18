@@ -10,6 +10,7 @@ const CodeScanner = (props) => {
   const personData = useSelector(state => state.personsStore.data);
   const historyData = useSelector(state => state.activitiesStore.data);
   const dispatch = useDispatch();
+  const [disBtn, setDisBtn] = useState(false);
 
 
   function createProfile(codeTo) {
@@ -44,6 +45,15 @@ const CodeScanner = (props) => {
     }
   }
 
+  function checkPi() {
+    setDisBtn(true);
+    setTimeout(() => setDisBtn(false), 15000);
+    const timer = setTimeout(() => alert('Ошибка! Проверьте подключение'), 10000);
+    fetch(`/connectPi/${window.location.host}`).then(res => res.json()).then(data => {
+      alert("Подключено")
+      clearTimeout(timer)
+    });
+  }
 
   const [code, setCode] = useState('');
 
@@ -57,7 +67,12 @@ const CodeScanner = (props) => {
 
   return (
     <div className={divName}>
-      <label>{type === 'PROFILE' ? "Создать профиль" : "Сканер карт"}</label>
+      {
+        type === 'PROFILE' ?
+          <label>Создать профиль</label>
+          :
+          <label>Сканер карт <button disabled={disBtn} type="button" className="scanner-btn" onClick={checkPi}>ПОДКЛЮЧЕНИЕ</button></label>
+      }
       <form name="codeForm" onSubmit={enterCode}>
         <input required minLength={1} placeholder=" Введите данные" type="text" name={props.inputType} onChange={event => setCode(event.target.value.trim())} value={code} />
       </form>
