@@ -29,7 +29,7 @@ const dayDb = knex({
 // initialize server with test db
 const app = express();
 app.use(bodyParser.json());
-const server = app.listen(123, "localhost");
+const server = app.listen(8079, "localhost");
 API(app, { personDb, activityDb, dayDb });
 
 
