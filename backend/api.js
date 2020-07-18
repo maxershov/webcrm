@@ -2,6 +2,8 @@
 const multer = require('multer');
 const path = require("path");
 const format = require("date-fns/format");
+const netList = require('network-list');
+const http = require("http");
 
 function API(app, dbObj) {
     /* ************************* API************************* */
@@ -240,7 +242,30 @@ function API(app, dbObj) {
     });
 
 
-    // FOR RFID SCANNER
+    /*************  FOR RFID SCANNER ***************** */
+
+    app.get("/connectPi/:ip", (req, res) => {
+        const { ip } = req.params;
+        netList.scanEach({}, (err, obj) => {
+            if (obj.hostname === "Raspberry Pi Foundation") {
+                http.get(`http://${obj.ip}:6752/ip/${ip}`, (resPi) => {
+                    let data = '';
+                    resPi.on('data', (chunk) => {
+                        data += chunk;
+                    });
+                    resPi.on('end', () => {
+                        res.send(JSON.stringify(data));
+                    });
+                }).on("error", (errPi) => {
+                    res.send(JSON.stringify(`Error: ${errPi.message}`));
+                });
+            }
+        });
+    });
+
+
+
+
     app.post('/code', (req, res) => {
         const code = (req.body.code).replace("\n", "");
         handleCode(code);
