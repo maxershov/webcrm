@@ -42,7 +42,7 @@ const TableHistory = props => {
           columns={[
             {
               width: widthCoeff * 4,
-              headerClassName: 'tableHeader',
+              headerClassName: 'table__header',
               Cell: (value) => (
                 <button id="DeleteButton" type="button" onClick={() => deleteHistory(value.original)}>X</button>)
             },
@@ -50,14 +50,14 @@ const TableHistory = props => {
               Header: "Тип",
               width: widthCoeff * 16,
               accessor: "type",
-              headerClassName: "tableHeader",
+              headerClassName: "table__header",
               style: { whiteSpace: "unset" }
             },
             {
               Header: "Дата",
               accessor: "date",
               width: widthCoeff * 10,
-              headerClassName: "tableHeader",
+              headerClassName: "table__header",
               sortMethod: (a, b) => {
                 const dayA = getDaysLeft(a);
                 const dayB = getDaysLeft(b);
@@ -72,20 +72,20 @@ const TableHistory = props => {
               Header: "Время",
               width: widthCoeff * 10,
               accessor: "time",
-              headerClassName: "tableHeader"
+              headerClassName: "table__header"
             },
             {
               Header: "Имя",
               accessor: "person",
               style: { whiteSpace: "unset" },
               width: widthCoeff * 20,
-              headerClassName: "tableHeader"
+              headerClassName: "table__header"
             },
             {
               Header: "Значение",
               accessor: "amount",
               width: widthCoeff * 40,
-              headerClassName: "tableHeader",
+              headerClassName: "table__header",
               style: { whiteSpace: "unset" }
             }
           ]}

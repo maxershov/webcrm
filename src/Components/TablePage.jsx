@@ -25,8 +25,8 @@ const TablePage = (props) => {
   useEffect(() => {
     document.title = "Клиенты CRM";
     dispatch(fetchPersons());
-    
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const TablePage = (props) => {
 
   return loadingPersons ? <span className="spinner" /> : (
     <>
-      <img className="askPhoneTurn" alt="turn to landscape" src={phoneSvg} />
+      <img className="warning-to-landscape" alt="turn to landscape" src={phoneSvg} />
       <ReactTable
         className="table -striped -highlight portrait-hide"
         page={parseInt(pageNum, 10) - 1}
@@ -49,7 +49,7 @@ const TablePage = (props) => {
         pageText="Страница"
         ofText="из"
         rowsText="профилей"
-        headerClassName="tableHeader"
+        headerClassName="table__header"
         data={props.all ? personData :
           personData.filter(obj => obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД')}
         filterable
@@ -59,7 +59,7 @@ const TablePage = (props) => {
           {
             Header: 'Фото',
             width: widthCoeff * 15,
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             Cell: (value) => (
               <input type="image" id="tablePhoto" onClick={() => history.push(`/profile/${value.original.code}`)} alt="Profile image" src={`/images/${value.original.photoId ?? "0.jpg"}`} />)
           },
@@ -68,7 +68,7 @@ const TablePage = (props) => {
             id: 'rowCode',
             width: widthCoeff * 20,
             style: { whiteSpace: 'unset' },
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             accessor: 'personName',
             filterMethod: (filter, row) => {
               const name = row._original.personName;
@@ -85,7 +85,7 @@ const TablePage = (props) => {
             Header: 'Контракт',
             accessor: 'contract',
             style: { whiteSpace: 'unset' },
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             width: widthCoeff * 17.5,
             filterMethod: (filter, row) => {
               if (row[filter.id].toLowerCase().startsWith(filter.value.toLowerCase())) return true;// sort by second word
@@ -98,7 +98,7 @@ const TablePage = (props) => {
             Header: 'Остаток дней',
             width: widthCoeff * 9,
             accessor: 'days',
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             sortMethod: (a, b) => {
               const dayA = getDaysLeft(a);
               const dayB = getDaysLeft(b);
@@ -109,13 +109,13 @@ const TablePage = (props) => {
             Header: 'Посещений',
             width: widthCoeff * 9,
             accessor: 'remain',
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.remain}</Link>)
           }, {
             Header: 'Аренда дней',
             width: widthCoeff * 9,
             accessor: 'rent',
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             sortMethod: (a, b) => {
               const dayA = getDaysLeft(a);
               const dayB = getDaysLeft(b);
@@ -126,13 +126,13 @@ const TablePage = (props) => {
             Header: 'Депозит',
             width: widthCoeff * 11.5,
             accessor: 'deposite',
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.deposite}</Link>)
           }, {
             Header: 'Парковка',
             width: widthCoeff * 9,
             accessor: 'autoMonth',
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.autoMonth}</Link>)
           }
         ]}

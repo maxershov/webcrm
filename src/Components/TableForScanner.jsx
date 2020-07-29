@@ -23,7 +23,7 @@ const TableForScanner = (props) => {
 
 
   return (
-    <div className="tableMain">
+    <div className="table__main-page">
       <ReactTable
         className="table -striped -highlight"
         previousText="Назад"
@@ -39,7 +39,7 @@ const TableForScanner = (props) => {
             Header: "Фото",
             width: widthCoeff * 10,
             accessor: "code",
-            headerClassName: "tableHeader",
+            headerClassName: "table__header",
             Cell: ({ value }) => (
               <input
                 id="scannerPhoto"
@@ -54,7 +54,7 @@ const TableForScanner = (props) => {
             Header: 'Имя',
             accessor: 'code',
             width: widthCoeff * 60,
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             style: { whiteSpace: 'unset' },
             Cell: ({ value }) => (<Link to={`/profile/${value}`}>{personData[getIndexByCode(value)]?.personName ?? value}</Link>)
           },
@@ -62,7 +62,7 @@ const TableForScanner = (props) => {
             Header: "Время",
             width: widthCoeff * 30,
             accessor: "time",
-            headerClassName: "tableHeader"
+            headerClassName: "table__header"
           }
         ]}
         defaultSorted={[

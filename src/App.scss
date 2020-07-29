@@ -11,7 +11,8 @@
     --light-grey: #babecc;
     --input-text-color: #464646;
     --text-color: #babecc;
-    --link-highlight: rgb(112, 110, 110);
+    --menu-highlight: rgb(0, 0, 0);
+    --link-highlight: rgb(161, 1, 1);
     --opacity: 1;
 }
 
@@ -23,7 +24,8 @@
     --label-color: rgb(2, 120, 255);
     --input-text-color: #7991ff;
     --text-color: #2f3350;
-    --link-highlight: rgb(250, 18, 18);
+    --menu-highlight: rgb(105, 1, 1);
+    --link-highlight: rgb(243, 9, 9);
     --opacity: 0.7;
 }
 
@@ -55,7 +57,7 @@ a {
     text-decoration: none;
 }
 
-.askPhoneTurn {
+.warning-to-landscape {
     display: none;
 }
 
@@ -78,9 +80,13 @@ a {
     text-align: center;
     font-size: 1.1rem;
     color: var(--input-text-color);
+
+    a:hover {
+        color: var(--link-highlight);
+    }
 }
 
-.tableHeader {
+.table__header {
     white-space: pre-line !important;
     word-wrap: break-word;
 }
@@ -151,7 +157,7 @@ a {
     &:hover {
         background-color: var(--bg-color-darker);
         transition: background-color 0.5s linear;
-        color: var(--link-highlight);
+        color: var(--menu-highlight);
     }
 }
 
@@ -237,7 +243,7 @@ a {
     margin: 1.3rem 0 0.5rem 0;
 }
 
-.tableHeader {
+.table__header {
     font-size: 1rem;
     color: var(--label-color);
     text-transform: uppercase;
@@ -406,7 +412,7 @@ a {
     text-shadow: 1px 1px 1px var(--white);
 }
 
-.tableMain {
+.table__main-page {
     margin-top: 1rem;
     grid-area: table;
 }
@@ -519,7 +525,7 @@ a {
 }
 
 @media (max-width: 600px) and (orientation: portrait) {
-    .askPhoneTurn {
+    .warning-to-landscape {
         display: block;
         visibility: visible;
         font-size: 1.3rem !important;
