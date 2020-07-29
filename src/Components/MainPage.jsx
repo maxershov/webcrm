@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { format, parse } from "date-fns";
 import Calendar from 'react-calendar';
+
+import AreaNotes from "./AreaNotes";
+import CodeScanner from "./CodeScanner";
+import ProfileCreator from "./ProfileCreator";
+import TableForScanner from './TableForScanner';
+import { isToday } from "../App";
+
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import { fetchDays } from "../store/dayDataStore/dayDataActions";
 import { fetchVisits } from "../store/activitiesDataStore/activitiesDataActions";
-import AreaNotes from "./AreaNotes";
-import CodeScanner from "./CodeScanner";
-import { isToday } from "../App";
-import TableForScanner from './TableForScanner';
 
 
 export const MainPage = props => {
@@ -25,7 +28,7 @@ export const MainPage = props => {
     format(new Date(), "dd-MM-yyyy")
   );
 
-  document.title = `${loadedDate } CRM`;
+  document.title = `${loadedDate} CRM`;
 
   useEffect(() => {
     dispatch(fetchVisits(loadedDate));
@@ -44,25 +47,25 @@ export const MainPage = props => {
     <>
       <div className="mainPage">
         <Calendar
-          className="calendar calendarMain"
+          className="calendar calendar--main"
           value={parse(loadedDate, "dd-MM-yyyy", new Date())}
           onChange={date => changeLoadDate(date)}
         />
-        <div className="notesMain">
+        <div className="mainPage-notes">
           <AreaNotes type="DAY_DATA" notesValue={notesValue} date={loadedDate} />
         </div>
         {isToday(loadedDate) ? (
           <>
-            <CodeScanner divName="newProfileField" route={history} type="PROFILE" />
-            <CodeScanner divName="newCodeField" type="SCANNER" />
+            <CodeScanner />
+            <ProfileCreator route={history} />
           </>
         ) : (
             undefined
           )}
       </div>
       <TableForScanner />
-      <div className="author">
-        <a href="https://twitter.com/MaksksE" className="authorLink">Max Ershov<br />2020</a>
+      <div className="footer">
+        <a href="https://twitter.com/MaksksE" className="footer__link">Max Ershov<br />2020</a>
       </div>
     </>
   ) : <span className="spinner" />
