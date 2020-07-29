@@ -36,6 +36,7 @@ const InputProfile = React.memo(props => {
       <form name="myForm" onSubmit={sendToDb}>
         <label className="label">{formLabel}</label>
         <input
+          className="input"
           placeholder={`Добавить ${formLabel.toLowerCase()}`}
           type="text"
           name={inputType}

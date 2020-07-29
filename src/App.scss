@@ -84,6 +84,11 @@ a {
     a:hover {
         color: var(--link-highlight);
     }
+    input {
+        background-color: var(--bg-color-darker) !important;
+        cursor: pointer;
+        box-shadow: none;
+    }
 }
 
 .table__header {
@@ -91,20 +96,18 @@ a {
     word-wrap: break-word;
 }
 
-#tablePhoto,
-#profileImg,
-#scannerPhoto {
+.person-img {
     align-items: center;
     border-radius: 0;
     box-shadow: none;
     opacity: var(--opacity);
-}
-
-#tablePhoto:hover,
-#profileImg:hover {
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.5s ease-in-out;
+    border-radius: 25px;
+    width: 80%;
+    &:hover {
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.5s ease-in-out;
+    }
 }
 
 .darkThemeIcon {
@@ -116,12 +119,6 @@ a {
     background: transparent;
     position: relative;
     top: 0.25em;
-}
-
-.table input {
-    background-color: var(--bg-color-darker) !important;
-    cursor: pointer;
-    box-shadow: none;
 }
 
 #burgerBtn {
@@ -250,10 +247,9 @@ a {
 }
 
 .notes {
-
-        width: 80%;
-        height: 80%;
-        // padding-left: 15px;
+    width: 80%;
+    height: 80%;
+    // padding-left: 15px;
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
     color: var(--input-text-color);
     border: none;
@@ -268,7 +264,7 @@ a {
     outline: none;
 }
 
-* > input {
+.input {
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
     color: var(--input-text-color);
     border: none;
@@ -281,23 +277,21 @@ a {
     -webkit-appearance: none;
     text-shadow: 0 0 0.1em var(--white);
     outline: none;
-}
 
-* > input:hover {
-    background-color: var(--white);
-    transition: background-color 0.5s linear;
-}
+    &:hover {
+        background-color: var(--white);
+        transition: background-color 0.5s linear;
+    }
 
-* > input:focus {
-    box-shadow: inset 1px 1px 2px var(--light-grey), inset -1px -1px 2px var(--white);
+    &:focus {
+        box-shadow: inset 1px 1px 2px var(--light-grey), inset -1px -1px 2px var(--white);
+    }
+    &::placeholder {
+        font-size: 1.1rem;
+        color: var(--text-color);
+        text-shadow: none;
+    }
 }
-
-* > input::placeholder {
-    font-size: 1.1rem;
-    color: var(--text-color);
-    text-shadow: none;
-}
-
 
 .button {
     // margin: auto 10%;
@@ -343,8 +337,6 @@ a {
     display: none;
 }
 
-
-
 .userPage-container > *:hover > form > button,
 .userPage-container > *:hover > button,
 .FieldsAction > *:hover button,
@@ -386,12 +378,12 @@ a {
 
 .calendar {
     button {
-    border-radius: 25px;
-    box-shadow: none;
-    border-radius: 15px;
+        border-radius: 25px;
+        box-shadow: none;
+        border-radius: 15px;
     }
     abbr {
-    text-decoration: none !important;
+        text-decoration: none !important;
     }
 }
 
@@ -411,7 +403,6 @@ a {
     width: 100%;
     grid-area: notes;
 }
-
 
 .code-scanner__button {
     margin-left: 10px;
@@ -445,8 +436,6 @@ a {
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
     grid-area: calendar;
 }
-
-
 
 .profile-creator {
     width: 100%;

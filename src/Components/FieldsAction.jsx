@@ -25,7 +25,7 @@ const FieldsAction = (props) => {
     <div className="FieldsAction">
       <form onSubmit={sendActionsToDb}>
         <label className="label">Тип события</label>
-        <input type="text" value={actionType} placeholder="Выберите или введите тип события" name="type" list="typeList" onChange={event => setActionType(event.target.value.trim())} />
+        <input className="input" type="text" value={actionType} placeholder="Выберите или введите тип события" name="type" list="typeList" onChange={event => setActionType(event.target.value.trim())} />
         <datalist id="typeList">
           <option value="">Выбрать тип</option>
           <option value="Заморозка">Заморозка</option>
@@ -38,11 +38,11 @@ const FieldsAction = (props) => {
         </datalist>
         <div>
           <label className="label">Данные события</label>
-          <input type="text" placeholder="Введите текст или сумму" onChange={event => setActionAmount(event.target.value)} value={actionAmount} />
+          <input className="input" type="text" placeholder="Введите текст или сумму" onChange={event => setActionAmount(event.target.value)} value={actionAmount} />
         </div>
         <div>
           <label className="label">Клиент/сотрудник</label>
-          <input type="text" value={actionPerson} placeholder="Выберите сотрудника/клиента" list="personList" onChange={event => setActionPerson(event.target.value)} />
+          <input className="input" type="text" value={actionPerson} placeholder="Выберите сотрудника/клиента" list="personList" onChange={event => setActionPerson(event.target.value)} />
           <datalist id="personList">
             <option value="">Выбрать тренера</option>
             {props.namesArr.map((person) =>

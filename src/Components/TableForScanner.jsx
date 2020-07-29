@@ -42,7 +42,7 @@ const TableForScanner = (props) => {
             headerClassName: "table__header",
             Cell: ({ value }) => (
               <input
-                id="scannerPhoto"
+                className="person-img"
                 type="image"
                 alt="tablePhoto"
                 onClick={() => history.push(`/profile/${value}`)}

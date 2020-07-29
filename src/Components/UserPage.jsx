@@ -64,12 +64,12 @@ export const UserPage = (props) => {
 
   return loading ? <span className="spinner" /> : (
     <div className="userPage">
-      <div className="img-container"><input id="profileImg" type="image" onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={`/images/${person.photoId}`} /></div>
+      <div className="img-container"><input className="person-img" type="image" onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={`/images/${person.photoId}`} /></div>
       <div className="userPage-container">
         {renderPhotoId ? (
           <>
             <InputProfile formLabel="Изменить код фото" baseValue={person.photoId} inputType="photoId" />
-            <input type="file" name="img" accept="image/*,image/jpeg" onChange={(e) => handleFiles(e.target.files)} />
+            <input className="input-file" type="file" name="img" accept="image/*,image/jpeg" onChange={(e) => handleFiles(e.target.files)} />
             <label className="label">Удаление</label>
             <button className="button" type="button" onClick={() => delProfile(person.code)}>Удалить пользователя</button>
           </>

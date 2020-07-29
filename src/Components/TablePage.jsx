@@ -61,7 +61,7 @@ const TablePage = (props) => {
             width: widthCoeff * 15,
             headerClassName: 'table__header',
             Cell: (value) => (
-              <input type="image" id="tablePhoto" onClick={() => history.push(`/profile/${value.original.code}`)} alt="Profile image" src={`/images/${value.original.photoId ?? "0.jpg"}`} />)
+              <input className="person-img" type="image" onClick={() => history.push(`/profile/${value.original.code}`)} alt="Profile image" src={`/images/${value.original.photoId ?? "0.jpg"}`} />)
           },
           {
             Header: 'Имя',

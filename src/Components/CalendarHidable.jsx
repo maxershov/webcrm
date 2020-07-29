@@ -37,7 +37,7 @@ const CalendarHidable = (props) => {
     <>
       <div className={`${props.dateType}Field`}>
         <label className="label">{props.calendarName}</label>
-        <input onClick={() => setRenderCalendar('block')} type="text" readOnly value={props.date} />
+        <input className="input" onClick={() => setRenderCalendar('block')} type="text" readOnly value={props.date} />
       </div>
       {renderCalendar ? (
         <div className="modal">

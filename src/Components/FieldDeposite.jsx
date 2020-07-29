@@ -62,7 +62,7 @@ const FieldDeposite = React.memo(props => {
         <>
           <form onSubmit={() => changeRenderDeposite(true)}>
             <label className="label">Депозит</label>
-            <input onClick={() => changeRenderDeposite(true)} type="number" readOnly value={deposite} />
+            <input className="input" onClick={() => changeRenderDeposite(true)} type="number" readOnly value={deposite} />
           </form>
         </>
       )
