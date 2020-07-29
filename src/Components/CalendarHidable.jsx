@@ -9,7 +9,7 @@ import { activitiesTypes } from "../App";
 
 const CalendarHidable = (props) => {
   const dispatch = useDispatch();
-  const [renderCalendar, setRenderCalendar] = useState('none');
+  const [renderCalendar, setRenderCalendar] = useState(false);
   const { codeLink } = useParams();
   const person = useSelector(state => state.profileStore.data);
   const oldFieldValue = person[props.dateType];
@@ -23,7 +23,7 @@ const CalendarHidable = (props) => {
       dispatch(chgProfileValue(codeLink, props.dateType, date));
       dispatch(addToHistory(codeLink, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${activitiesTypes[props.dateType]}`, "", `${oldFieldValue} => ${date}`));
     }
-    setRenderCalendar('none');
+    setRenderCalendar(false);
   }
 
 
@@ -39,11 +39,16 @@ const CalendarHidable = (props) => {
         <label>{props.calendarName}</label>
         <input onClick={() => setRenderCalendar('block')} type="text" readOnly value={props.date} />
       </div>
-      <div style={{ display: renderCalendar }} className="calendar" id="calendar">
-        <Calendar className="calendar" onChange={date => changeDate(date)} />
-        <button type="button" onClick={() => setRenderCalendar('none')}>Убрать календарь</button>
-        <button type="button" onClick={() => deleteDate()}>Удалить дату</button>
-      </div>
+      {renderCalendar ? (
+        <div className="modal">
+          <Calendar className="calendar" onChange={date => changeDate(date)} />
+          <div className="one-line-wrapper">
+            <button className="block-button" type="button" onClick={() => setRenderCalendar(false)}>Убрать календарь</button>
+            <button className="block-button" type="button" onClick={() => deleteDate()}>Удалить дату</button>
+          </div>
+        </div>
+      ) : undefined}
+
     </>
   );
 }

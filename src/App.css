@@ -52,6 +52,20 @@ html {
     display: none;
 }
 
+.modal {
+    position: fixed;
+    width: 70vw;
+    background-color: var(--bg-color);
+    top: 10vh;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 1em;
+    animation: fadein 0.4s;
+    z-index: 100;
+}
+
 @media (max-width: 768px) {
     html {
         font-size: 0.7em;
@@ -244,15 +258,15 @@ a:hover {
     animation: fadein 1s;
 }
 
-.deposite-btn-wrapper {
+.one-line-wrapper {
     display: flex;
+    justify-content: center;
     text-align: center;
-    width: 80%;
 }
 
-.deposite-button {
+.block-button {
     flex: 1;
-    font-size: 1.1em;
+    font-size: 1em;
     display: block !important;
     margin: 20px 5px 20px 5px !important;
 }
