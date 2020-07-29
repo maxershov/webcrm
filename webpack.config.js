@@ -32,20 +32,14 @@ module.exports = {
         exclude: [/node_modules/]
       },
       {
-        test: /\.css$/,
+        test: /\.(sc|c)ss$/,
         use: [
-          { loader: MiniCssExtractPlugin.loader },
-          { loader: "css-loader", options: { importLoaders: 1 } },
-          {
-            loader: "postcss-loader",
-            options: {
-              config: {
-                path: "postcss.config.js"
-              }
-            }
-          }
-        ]
-      },{
+            MiniCssExtractPlugin.loader,
+            { loader: 'css-loader', options: { importLoaders: 1 } },
+            'postcss-loader',
+            'sass-loader',
+        ],
+    },{
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: [{
           loader: 'file-loader',
@@ -58,7 +52,7 @@ module.exports = {
       },
       {
         loader: require.resolve("file-loader"),
-        exclude: [/\.(js|mjs|jsx|ts|tsx|jpe?g|png|gif|svg)$/, /\.html$/, /\.json$/, /\.css$/],
+        exclude: [/\.(js|mjs|jsx|ts|tsx|jpe?g|png|gif|svg)$/, /\.html$/, /\.json$/, /\.(sc|c)ss$/],
         options: {
           name: "static/media/[name].[hash:8].[ext]",
           esModule: false

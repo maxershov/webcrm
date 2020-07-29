@@ -3,14 +3,14 @@
     font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
     letter-spacing: -0.2px;
-    --bg-color-darker: #DBDBDB;
-    --bg-color: #EBECF0;
-    --label-color: #8F9094;
-    --white: #FFF;
-    --red: #FF0F0F;
-    --light-grey: #BABECC;
+    --bg-color-darker: #dbdbdb;
+    --bg-color: #ebecf0;
+    --label-color: #8f9094;
+    --white: #fff;
+    --red: #ff0f0f;
+    --light-grey: #babecc;
     --input-text-color: #464646;
-    --text-color: #BABECC;
+    --text-color: #babecc;
     --link-highlight: rgb(112, 110, 110);
     --opacity: 1;
 }
@@ -50,6 +50,11 @@ html {
     background-color: var(--bg-color);
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .askPhoneTurn {
     display: none;
 }
@@ -80,14 +85,17 @@ html {
     word-wrap: break-word;
 }
 
-#tablePhoto, #profileImg, #scannerPhoto {
+#tablePhoto,
+#profileImg,
+#scannerPhoto {
     align-items: center;
     border-radius: 0;
     box-shadow: none;
     opacity: var(--opacity);
 }
 
-#tablePhoto:hover, #profileImg:hover {
+#tablePhoto:hover,
+#profileImg:hover {
     cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.5s ease-in-out;
@@ -119,11 +127,6 @@ html {
     margin: 0.5rem 0 0.3em 0;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
 .menu-link {
     flex: 1;
     padding: 0.4rem;
@@ -136,20 +139,20 @@ a {
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     text-shadow: 1px 1px 0 var(--white);
-}
 
-.menu-link:first-child {
-    border-bottom-left-radius: 0;
-}
+    &:first-child {
+        border-bottom-left-radius: 0;
+    }
 
-.menu-link:last-child {
-    border-bottom-right-radius: 0;
-}
+    &:last-child {
+        border-bottom-right-radius: 0;
+    }
 
-.menu-link:hover {
-    background-color: var(--bg-color-darker);
-    transition: background-color 0.5s linear;
-    color: var(--link-highlight);
+    &:hover {
+        background-color: var(--bg-color-darker);
+        transition: background-color 0.5s linear;
+        color: var(--link-highlight);
+    }
 }
 
 .menu-container .menu-link--active {
@@ -183,14 +186,16 @@ a {
     align-items: center;
 }
 
-.userPage .img-container>img {
+.userPage .img-container > img {
     flex: 1;
     max-width: 95%;
     max-height: 95%;
     object-fit: scale-down;
 }
 
-.userPage, .table, .mainPage {
+.userPage,
+.table,
+.mainPage {
     animation: fadein 0.4s;
 }
 
@@ -220,7 +225,7 @@ a {
     }
 }
 
-*>label {
+* > label {
     display: block;
     font-size: 1.2em;
     width: 80%;
@@ -238,7 +243,8 @@ a {
     text-transform: uppercase;
 }
 
-*>input, * textarea {
+* > input,
+* textarea {
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
     color: var(--input-text-color);
     border: none;
@@ -253,16 +259,16 @@ a {
     outline: none;
 }
 
-*>input:hover {
+* > input:hover {
     background-color: var(--white);
     transition: background-color 0.5s linear;
 }
 
-*>input:focus {
+* > input:focus {
     box-shadow: inset 1px 1px 2px var(--light-grey), inset -1px -1px 2px var(--white);
 }
 
-*>input::placeholder {
+* > input::placeholder {
     font-size: 1.1rem;
     color: var(--text-color);
     text-shadow: none;
@@ -273,7 +279,8 @@ a {
     background-color: var(--text-color);
 }
 
-.userPage button, .notesMain button {
+.userPage button,
+.notesMain button {
     margin: auto 10%;
     border-style: none;
     text-transform: uppercase;
@@ -292,7 +299,7 @@ a {
 }
 
 .calendar button {
-    padding: .75em .5em;
+    padding: 0.75em 0.5em;
     display: block !important;
 }
 
@@ -300,16 +307,26 @@ a {
     background-color: var(--red) !important;
 }
 
-.userPage button:hover, .notesMain button:hover {
+.userPage button:hover,
+.notesMain button:hover {
     color: var(--label-color);
     transition: color 0.2s linear;
 }
 
-.userPage-container form button, .FieldsAction button, .newProfileField button, .notesMain button, .notesField button {
+.userPage-container form button,
+.FieldsAction button,
+.newProfileField button,
+.notesMain button,
+.notesField button {
     display: none;
 }
 
-.userPage-container>*:hover>form>button, .userPage-container>*:hover>button, .FieldsAction>*:hover button, .newProfileField:hover button, .notesMain:hover button, .notesField:hover button {
+.userPage-container > *:hover > form > button,
+.userPage-container > *:hover > button,
+.FieldsAction > *:hover button,
+.newProfileField:hover button,
+.notesMain:hover button,
+.notesField:hover button {
     display: block;
 }
 
@@ -404,7 +421,7 @@ a {
     grid-area: notes;
 }
 
-.notesMain>textarea {
+.notesMain > textarea {
     width: 80%;
     height: 80%;
     padding-left: 15px;
@@ -426,7 +443,6 @@ a {
     height: 5rem;
     border-top-color: var(--label-color);
     border-left-color: var(--light-grey);
-    ;
     animation: spinner 800ms linear infinite;
     border-bottom-color: transparent;
     border-right-color: transparent;
@@ -471,11 +487,13 @@ a {
         overflow: hidden;
         text-align: left;
         color: var(--label-color);
+
         border-bottom: solid 1px var(--light-grey);
         border-top: solid 1px var(--label-color);
         padding: 0.7em;
         display: block;
         font-size: 1.5em;
+        border-radius: 0px;
     }
     .mainPage {
         grid-template-columns: 1fr !important;
@@ -491,7 +509,8 @@ a {
     }
 }
 
-@media (min-width: 769px) and (max-width: 1366px) {}
+@media (min-width: 769px) and (max-width: 1366px) {
+}
 
 @media (min-width: 3840px) {
     html {
