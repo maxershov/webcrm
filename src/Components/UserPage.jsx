@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'preact/compat';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom'
-import { fetchProfile, deleteProfile } from "../store/profileStore/profileActions";
-import { fetchHistory } from "../store/activitiesDataStore/activitiesDataActions";
+
 import CalendarHidable from './CalendarHidable';
 import FieldDeposite from './FieldDeposite';
 import FieldsAction from './FieldsAction';
 import TableHistory from './TableHistory';
 import AreaNotes from './AreaNotes';
 import InputProfile from './InputProfile';
+
+import { fetchProfile, deleteProfile } from "../store/profileStore/profileActions";
+import { fetchHistory } from "../store/activitiesDataStore/activitiesDataActions";
 
 
 function getPersonNames(data) {
@@ -25,7 +27,7 @@ export const UserPage = (props) => {
   const { codeLink } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  document.title =person.personName; 
+  document.title = person.personName;
 
   useEffect(() => {
     dispatch(fetchProfile(codeLink));
@@ -36,7 +38,7 @@ export const UserPage = (props) => {
   function handleFiles(file) {
     const formData = new FormData()
     formData.append("img", file[0])
-    fetch(`/upload/${codeLink}`, {
+    fetch(`http://192.168.1.150:6700/upload/${codeLink}`, {
       method: 'POST',
       body: formData
     }) // .then(() => history.push('/main'))
@@ -68,8 +70,8 @@ export const UserPage = (props) => {
           <>
             <InputProfile formLabel="Изменить код фото" baseValue={person.photoId} inputType="photoId" />
             <input type="file" name="img" accept="image/*,image/jpeg" onChange={(e) => handleFiles(e.target.files)} />
-            <label>Удаление</label>
-            <button type="button" onClick={() => delProfile(person.code)}>Удалить пользователя</button>
+            <label className="label">Удаление</label>
+            <button className="button" type="button" onClick={() => delProfile(person.code)}>Удалить пользователя</button>
           </>
         ) : undefined}
         <InputProfile formLabel="Имя" baseValue={person.personName} inputType="personName" />

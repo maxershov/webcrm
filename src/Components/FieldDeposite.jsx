@@ -45,13 +45,13 @@ const FieldDeposite = React.memo(props => {
       (
         <>
           <form>
-            <label>Сумма списания/пополнения</label>
+            <label className="label">Сумма списания/пополнения</label>
             <br />
             <input className="numInput" type="number" width="40" height="50" value={amount} onChange={event => setAmount(event.target.value)} />
             <div className="one-line-wrapper">
-              <button className="block-button" type="button" onClick={plus}>+</button>
-              <button className="block-button" type="button" onClick={() => changeRenderDeposite(false)}>ЗАКРЫТЬ</button>
-              <button className="block-button" type="button" onClick={minus}>-</button>
+              <button className="button block-button" type="button" onClick={plus}>+</button>
+              <button className="button block-button" type="button" onClick={() => changeRenderDeposite(false)}>ЗАКРЫТЬ</button>
+              <button className="button block-button" type="button" onClick={minus}>-</button>
             </div>
           </form>
           <CalendarHidable setParentDate={setDateDeposite} calendarName="Дата изменения депозита" dateType="setParent" date={dateDeposite} />
@@ -61,7 +61,7 @@ const FieldDeposite = React.memo(props => {
       (
         <>
           <form onSubmit={() => changeRenderDeposite(true)}>
-            <label>Депозит</label>
+            <label className="label">Депозит</label>
             <input onClick={() => changeRenderDeposite(true)} type="number" readOnly value={deposite} />
           </form>
         </>

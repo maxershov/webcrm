@@ -34,7 +34,7 @@ const InputProfile = React.memo(props => {
   return (
     <div className={`${inputType}Field`}>
       <form name="myForm" onSubmit={sendToDb}>
-        <label>{formLabel}</label>
+        <label className="label">{formLabel}</label>
         <input
           placeholder={`Добавить ${formLabel.toLowerCase()}`}
           type="text"
@@ -53,7 +53,7 @@ const InputProfile = React.memo(props => {
           <option value="3 КФ">тип профиля</option>
           <option value="6 ТА">тип профиля</option>
         </datalist>
-        <button className="absolute_btn" type="submit">Изменить</button>
+        <button className="button button--hidable" type="submit">Изменить</button>
       </form>
     </div>
   );

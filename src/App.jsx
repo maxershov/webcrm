@@ -1,5 +1,5 @@
 import React from 'preact/compat';
-import './App.css';
+import './App.scss';
 import './react-table.css';
 import './react-calendar.css';
 import { format, differenceInDays, parse, startOfDay } from 'date-fns'
@@ -9,6 +9,12 @@ import MainContent from './Components/MainContent';
 import Header from './Components/Header';
 import store from './store/store'
 import { getPersonStore } from './store/storeGetters'
+
+
+if (process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line global-require
+  require("preact/debug");
+}
 
 
 const App = (props) => {

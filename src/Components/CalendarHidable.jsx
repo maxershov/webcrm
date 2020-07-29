@@ -36,15 +36,15 @@ const CalendarHidable = (props) => {
   return (
     <>
       <div className={`${props.dateType}Field`}>
-        <label>{props.calendarName}</label>
+        <label className="label">{props.calendarName}</label>
         <input onClick={() => setRenderCalendar('block')} type="text" readOnly value={props.date} />
       </div>
       {renderCalendar ? (
         <div className="modal">
           <Calendar className="calendar" onChange={date => changeDate(date)} />
           <div className="one-line-wrapper">
-            <button className="block-button" type="button" onClick={() => setRenderCalendar(false)}>Убрать календарь</button>
-            <button className="block-button" type="button" onClick={() => deleteDate()}>Удалить дату</button>
+            <button className="button block-button" type="button" onClick={() => setRenderCalendar(false)}>Убрать календарь</button>
+            <button className="button block-button" type="button" onClick={() => deleteDate()}>Удалить дату</button>
           </div>
         </div>
       ) : undefined}

@@ -24,7 +24,7 @@ const FieldsAction = (props) => {
   return (
     <div className="FieldsAction">
       <form onSubmit={sendActionsToDb}>
-        <label>Тип события</label>
+        <label className="label">Тип события</label>
         <input type="text" value={actionType} placeholder="Выберите или введите тип события" name="type" list="typeList" onChange={event => setActionType(event.target.value.trim())} />
         <datalist id="typeList">
           <option value="">Выбрать тип</option>
@@ -37,11 +37,11 @@ const FieldsAction = (props) => {
           <option value="Парковка">Парковка</option>
         </datalist>
         <div>
-          <label>Данные события</label>
+          <label className="label">Данные события</label>
           <input type="text" placeholder="Введите текст или сумму" onChange={event => setActionAmount(event.target.value)} value={actionAmount} />
         </div>
         <div>
-          <label>Клиент/сотрудник</label>
+          <label className="label">Клиент/сотрудник</label>
           <input type="text" value={actionPerson} placeholder="Выберите сотрудника/клиента" list="personList" onChange={event => setActionPerson(event.target.value)} />
           <datalist id="personList">
             <option value="">Выбрать тренера</option>
@@ -50,7 +50,7 @@ const FieldsAction = (props) => {
           </datalist>
         </div>
         <CalendarHidable setParentDate={setActionDate} calendarName="Дата события" dateType="setParent" date={actionDate} />
-        <button className="absolute_btn" type="submit">Добавить событие</button>
+        <button className="button" type="submit">Добавить событие</button>
       </form>
     </div>
   );

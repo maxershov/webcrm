@@ -231,7 +231,7 @@ a {
     }
 }
 
-* > label {
+.label {
     display: block;
     font-size: 1.2em;
     width: 80%;
@@ -249,8 +249,26 @@ a {
     text-transform: uppercase;
 }
 
-* > input,
-* textarea {
+.notes {
+
+        width: 80%;
+        height: 80%;
+        // padding-left: 15px;
+    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    color: var(--input-text-color);
+    border: none;
+    border-radius: 25px;
+    padding: 0.4em 0.7em;
+    width: 80%;
+    font-size: 1.2rem;
+    background-color: var(--bg-color);
+    appearance: none;
+    -webkit-appearance: none;
+    text-shadow: 0 0 0.1em var(--white);
+    outline: none;
+}
+
+* > input {
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
     color: var(--input-text-color);
     border: none;
@@ -280,14 +298,9 @@ a {
     text-shadow: none;
 }
 
-.absolute_btn {
-    position: absolute;
-    background-color: var(--text-color);
-}
 
-.userPage button,
-.notesMain button {
-    margin: auto 10%;
+.button {
+    // margin: auto 10%;
     border-style: none;
     text-transform: uppercase;
     font-weight: bold;
@@ -321,16 +334,20 @@ a {
 
 .userPage-container form button,
 .FieldsAction button,
-.newProfileField button,
 .notesMain button,
 .notesField button {
     display: none;
 }
 
+.button--hidable {
+    display: none;
+}
+
+
+
 .userPage-container > *:hover > form > button,
 .userPage-container > *:hover > button,
 .FieldsAction > *:hover button,
-.newProfileField:hover button,
 .notesMain:hover button,
 .notesField:hover button {
     display: block;
@@ -367,14 +384,15 @@ a {
     width: 100%;
 }
 
-.calendar button {
+.calendar {
+    button {
     border-radius: 25px;
     box-shadow: none;
     border-radius: 15px;
-}
-
-.calendar abbr {
+    }
+    abbr {
     text-decoration: none !important;
+    }
 }
 
 .mainPage {
@@ -389,8 +407,14 @@ a {
     text-align: center;
 }
 
-.scanner-btn {
-    margin-left: 5px;
+.mainPage-notes {
+    width: 100%;
+    grid-area: notes;
+}
+
+
+.code-scanner__button {
+    margin-left: 10px;
     border-style: none;
     text-transform: uppercase;
     cursor: pointer;
@@ -401,11 +425,11 @@ a {
     font-family: inherit;
 }
 
-.author {
+.footer {
     text-align: center;
 }
 
-.authorLink {
+.footer__link {
     font-size: 0.75em;
     color: var(--label-color);
     font-weight: bold;
@@ -417,28 +441,25 @@ a {
     grid-area: table;
 }
 
-.calendarMain {
+.calendar--main {
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
     grid-area: calendar;
 }
 
-.notesMain {
-    width: 100%;
-    grid-area: notes;
-}
 
-.notesMain > textarea {
-    width: 80%;
-    height: 80%;
-    padding-left: 15px;
-}
 
-.newProfileField {
+.profile-creator {
     width: 100%;
     grid-area: newProfile;
+
+    & :hover {
+        .button--hidable {
+            display: block;
+        }
+    }
 }
 
-.newCodeField {
+.code-scanner {
     width: 100%;
     grid-area: newCode;
 }
