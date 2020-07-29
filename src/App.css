@@ -11,6 +11,7 @@
     --light-grey: #BABECC;
     --input-text-color: #464646;
     --text-color: #BABECC;
+    --link-highlight: rgb(112, 110, 110);
     --opacity: 1;
 }
 
@@ -22,6 +23,7 @@
     --label-color: rgb(2, 120, 255);
     --input-text-color: #7991ff;
     --text-color: #2f3350;
+    --link-highlight: rgb(250, 18, 18);
     --opacity: 0.7;
 }
 
@@ -64,70 +66,6 @@ html {
     border-radius: 1em;
     animation: fadein 0.4s;
     z-index: 100;
-}
-
-@media (max-width: 768px) {
-    html {
-        font-size: 0.7em;
-    }
-    #burgerBtn {
-        width: 4rem;
-        height: 4rem;
-        border: none;
-        box-shadow: none;
-        display: block !important;
-    }
-    .menu-container {
-        display: none !important;
-    }
-    .menu-container_open {
-        position: absolute;
-        z-index: 100;
-        width: 100%;
-        background-color: var(--bg-color);
-    }
-    .menu-container_open a {
-        overflow: hidden;
-        text-align: left;
-        color: var(--label-color);
-        border-bottom: solid 1px var(--light-grey);
-        border-top: solid 1px var(--label-color);
-        padding: 0.7em;
-        display: block;
-        font-size: 1.5em;
-    }
-    .mainPage {
-        grid-template-columns: 1fr !important;
-        grid-template-rows: repeat(5, auto);
-        grid-template-areas: "calendar" "notes" "newCode" "newProfile" "table" !important;
-    }
-    .userPage {
-        display: grid;
-        grid-template-columns: 1fr 2fr !important;
-        grid-template-rows: repeat(4, auto);
-        grid-template-areas: "image userPage-container" "image userPage-container" "fieldsAction fieldsAction" "notesUser notesUser" "tableHistory tableHistory" !important;
-        text-align: center;
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1366px) {}
-
-@media (min-width: 3840px) {
-    html {
-        font-size: 2.5em;
-    }
-}
-
-@media (max-width: 600px) and (orientation: portrait) {
-    .askPhoneTurn {
-        display: block;
-        visibility: visible;
-        font-size: 1.3rem !important;
-        text-align: center;
-    }
-    .portrait-hide {
-        visibility: hidden;
-    }
 }
 
 .table {
@@ -186,11 +124,7 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    color: var(--white);
-}
-
-.menu-container>a {
+.menu-link {
     flex: 1;
     padding: 0.4rem;
     font-size: 1.2rem;
@@ -204,15 +138,21 @@ a:hover {
     text-shadow: 1px 1px 0 var(--white);
 }
 
-.menu-container a:first-child {
+.menu-link:first-child {
     border-bottom-left-radius: 0;
 }
 
-.menu-container a:last-child {
+.menu-link:last-child {
     border-bottom-right-radius: 0;
 }
 
-.menu-container .menu-nav-active {
+.menu-link:hover {
+    background-color: var(--bg-color-darker);
+    transition: background-color 0.5s linear;
+    color: var(--link-highlight);
+}
+
+.menu-container .menu-link--active {
     color: var(--label-color);
     transition: color 0.2s linear;
     box-shadow: inset 2px 1px 2px var(--light-grey), inset -2px -1px 2px var(--white);
@@ -313,7 +253,7 @@ a:hover {
     outline: none;
 }
 
-*>input:hover, .menu-container a:hover {
+*>input:hover {
     background-color: var(--white);
     transition: background-color 0.5s linear;
 }
@@ -504,5 +444,69 @@ a:hover {
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 0.7em;
+    }
+    #burgerBtn {
+        width: 4rem;
+        height: 4rem;
+        border: none;
+        box-shadow: none;
+        display: block !important;
+    }
+    .menu-container {
+        display: none;
+    }
+    .menu-container--open {
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        background-color: var(--bg-color);
+    }
+    .menu-container--open .menu-link {
+        overflow: hidden;
+        text-align: left;
+        color: var(--label-color);
+        border-bottom: solid 1px var(--light-grey);
+        border-top: solid 1px var(--label-color);
+        padding: 0.7em;
+        display: block;
+        font-size: 1.5em;
+    }
+    .mainPage {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: repeat(5, auto);
+        grid-template-areas: "calendar" "notes" "newCode" "newProfile" "table" !important;
+    }
+    .userPage {
+        display: grid;
+        grid-template-columns: 1fr 2fr !important;
+        grid-template-rows: repeat(4, auto);
+        grid-template-areas: "image userPage-container" "image userPage-container" "fieldsAction fieldsAction" "notesUser notesUser" "tableHistory tableHistory" !important;
+        text-align: center;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1366px) {}
+
+@media (min-width: 3840px) {
+    html {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+    .askPhoneTurn {
+        display: block;
+        visibility: visible;
+        font-size: 1.3rem !important;
+        text-align: center;
+    }
+    .portrait-hide {
+        visibility: hidden;
     }
 }
