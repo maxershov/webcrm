@@ -244,6 +244,19 @@ a:hover {
     animation: fadein 1s;
 }
 
+.deposite-btn-wrapper {
+    display: flex;
+    text-align: center;
+    width: 80%;
+}
+
+.deposite-button {
+    flex: 1;
+    font-size: 1.1em;
+    display: block !important;
+    margin: 20px 5px 20px 5px !important;
+}
+
 @keyframes fadein {
     from {
         opacity: 0;
@@ -406,7 +419,7 @@ a:hover {
     cursor: pointer;
     border-radius: 25px;
     background-color: var(--bg-color);
-    color:var(--label-color);
+    color: var(--label-color);
     box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
     font-family: inherit;
 }

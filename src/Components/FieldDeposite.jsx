@@ -22,7 +22,6 @@ const FieldDeposite = React.memo(props => {
 
 
   const plus = () => {
-    console.log("plussss")
     const sum = +deposite + +amount;
     setDeposite(sum);
     if (!isToday(dateDeposite)) time = "00:00:00";
@@ -49,8 +48,11 @@ const FieldDeposite = React.memo(props => {
             <label>Сумма списания/пополнения</label>
             <br />
             <input className="numInput" type="number" width="40" height="50" value={amount} onChange={event => setAmount(event.target.value)} />
-            <button type="button" style={{ fontSize: "1.4em", display: "block", marginBottom: "1rem" }} onClick={plus}>+</button>
-            <button type="button" style={{ fontSize: "1.4em", display: "block" }} onClick={minus}>-</button>
+            <div className="deposite-btn-wrapper">
+              <button className="deposite-button" type="button" onClick={plus}>+</button>
+              <button className="deposite-button" type="button" onClick={() => changeRenderDeposite(false)}>ЗАКРЫТЬ</button>
+              <button className="deposite-button" type="button" onClick={minus}>-</button>
+            </div>
           </form>
           <CalendarHidable setParentDate={setDateDeposite} calendarName="Дата изменения депозита" dateType="setParent" date={dateDeposite} />
         </>
