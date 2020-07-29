@@ -3696,7 +3696,15 @@ exports[`should render MainPage correctly 1`] = `
             className="newCodeField"
           >
             <label>
-              Сканер карт
+              Сканер карт 
+              <button
+                className="scanner-btn"
+                disabled={false}
+                onClick={[Function]}
+                type="button"
+              >
+                ПОДКЛЮЧЕНИЕ
+              </button>
             </label>
             <form
               name="codeForm"
