@@ -5,7 +5,7 @@ import { chgProfileValue, addNewProfile } from "../store/profileStore/profileAct
 import { addToVisits } from "../store/activitiesDataStore/activitiesDataActions";
 
 
-const CodeScanner = (props) => {
+const CodeScanner = React.memo(props => {
   const { type, route, divName } = props;
   const personData = useSelector(state => state.personsStore.data);
   const historyData = useSelector(state => state.activitiesStore.data);
@@ -49,7 +49,7 @@ const CodeScanner = (props) => {
     setDisBtn(true);
     setTimeout(() => setDisBtn(false), 15000);
     const timer = setTimeout(() => alert('Ошибка! Проверьте подключение'), 10000);
-    fetch(`/connectPi/${window.location.host}`).then(res => res.json()).then(data => {
+    fetch(`http://192.168.1.150:6700/connectPi/${window.location.host}`).then(res => res.json()).then(data => {
       alert("Подключено")
       clearTimeout(timer)
     });
@@ -78,7 +78,7 @@ const CodeScanner = (props) => {
       </form>
     </div>
   );
-}
+});
 
 
 export default CodeScanner;

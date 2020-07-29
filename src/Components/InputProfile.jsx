@@ -6,7 +6,7 @@ import { chgProfileValue, chgCode } from "../store/profileStore/profileActions";
 import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
 import { activitiesTypes } from "../App";
 
-const InputProfile = (props) => {
+const InputProfile = React.memo(props => {
   const { formLabel, baseValue, inputType, listName } = props;
 
   const dispatch = useDispatch();
@@ -57,7 +57,7 @@ const InputProfile = (props) => {
       </form>
     </div>
   );
-}
+});
 
 
 export default InputProfile;

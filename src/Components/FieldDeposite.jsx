@@ -8,7 +8,7 @@ import CalendarHidable from './CalendarHidable';
 import { isToday } from "../App";
 
 
-const FieldDeposite = (props) => {
+const FieldDeposite = React.memo(props => {
   const person = useSelector(state => state.profileStore.data);
   const dispatch = useDispatch();
   const { codeLink } = useParams();
@@ -22,6 +22,7 @@ const FieldDeposite = (props) => {
 
 
   const plus = () => {
+    console.log("plussss")
     const sum = +deposite + +amount;
     setDeposite(sum);
     if (!isToday(dateDeposite)) time = "00:00:00";
@@ -64,7 +65,7 @@ const FieldDeposite = (props) => {
         </>
       )
   );
-}
+});
 
 
 export default FieldDeposite;
