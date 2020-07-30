@@ -228,7 +228,6 @@ a {
 .label {
     display: block;
     font-size: 1.2em;
-    // width: 80%;
     text-align: center;
     color: var(--label-color);
     text-transform: uppercase;
@@ -240,7 +239,6 @@ a {
 .notes {
     width: 80%;
     height: 80%;
-    // padding-left: 15px;
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
     color: var(--input-text-color);
     border: none;
@@ -297,6 +295,7 @@ a {
         border-radius: 0 25px 25px 0;
         width: auto;
         font-size: 1rem;
+        box-shadow: 1px 1px 5px var(--light-grey);
     }
 }
 
@@ -315,7 +314,8 @@ a {
     border-radius: 25px;
     padding: 0.5rem 3rem;
     text-shadow: 1px 1px 0 var(--white);
-    box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
+    // box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
+    box-shadow: -1px -1px 3px var(--white), 1px 1px 5px var(--light-grey);
     font-family: inherit;
     -webkit-appearance: button;
 
@@ -333,10 +333,6 @@ a {
             background-color: var(--red) !important;
         }
     }
-}
-
-.button--hidable {
-    display: none;
 }
 
 .notesField textarea {
@@ -365,7 +361,7 @@ a {
     text-shadow: none;
 }
 
-.FieldsAction {
+.fields-action {
     grid-area: fieldsAction;
     width: 100%;
     text-align: center;
@@ -408,7 +404,7 @@ a {
     border-radius: 25px;
     background-color: var(--bg-color);
     color: var(--label-color);
-    box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
+    box-shadow: 1px 1px 5px var(--light-grey);
     font-family: inherit;
 }
 
@@ -437,29 +433,6 @@ a {
     width: 100%;
     grid-area: newProfile;
 }
-
-.input-form,
-.profile-creator,
-.FieldsAction {
-    & :hover {
-        .button--hidable {
-            display: block;
-            // margin-left: 5%;
-            // width: 30%;
-            position: absolute;
-
-            // left: 0;
-            //   right: 0;
-            margin-left: 30px;
-            margin-right: auto;
-        }
-    }
-}
-
-// .notesMain:hover button,
-// .notesField:hover button {
-//     display: block;
-// }
 
 .code-scanner {
     width: 100%;

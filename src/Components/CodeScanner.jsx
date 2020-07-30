@@ -58,7 +58,7 @@ const CodeScanner = React.memo(props => {
   return (
     <div className="code-scanner">
       <label className="label">Сканер карт
-        <button className="code-scanner__button" disabled={disBtn} type="button" onClick={checkPi}>ПОДКЛЮЧЕНИЕ</button>
+        <button className="code-scanner__button" disabled={disBtn} type="button" onClick={checkPi}>ПОДКЛЮЧИТЬ</button>
       </label>
       <form name="codeForm" onSubmit={enterCode}>
         <input className="input" required minLength={1} placeholder=" Введите данные" type="text" name="SCANNER" onChange={event => setCode(event.target.value.trim())} value={code} />

@@ -22,7 +22,7 @@ const FieldsAction = (props) => {
   }
 
   return (
-    <div className="FieldsAction">
+    <div className="fields-action">
       <form onSubmit={sendActionsToDb}>
         <label className="label">Тип события</label>
         <input className="input" type="text" value={actionType} placeholder="Выберите или введите тип события" name="type" list="typeList" onChange={event => setActionType(event.target.value.trim())} />
