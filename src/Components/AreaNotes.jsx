@@ -31,8 +31,8 @@ const AreaNotes = props => {
         onKeyDown={saveNotes}
         value={notesData}
       />
-      <button className="button button--hidable" type="button" id="clickNotes" onClick={saveNotes}>
-        Изменить
+      <button className="button notes__button" type="button" id="clickNotes" onClick={saveNotes}>
+        Сохранить
       </button>
     </>
   );

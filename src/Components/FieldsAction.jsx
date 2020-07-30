@@ -50,7 +50,7 @@ const FieldsAction = (props) => {
           </datalist>
         </div>
         <CalendarHidable setParentDate={setActionDate} calendarName="Дата события" dateType="setParent" date={actionDate} />
-        <button className="button button--hidable" type="submit">Добавить событие</button>
+        <button className="button" type="submit">Добавить событие</button>
       </form>
     </div>
   );

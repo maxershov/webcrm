@@ -26,9 +26,9 @@ const ProfileCreator = React.memo(props => {
   return (
     <div className="profile-creator">
       <label className="label">Создать профиль</label>
-      <form name="codeForm" onSubmit={enterCode}>
-        <input className="input" required minLength={4} placeholder=" Введите данные" type="text" name="PROFILE" onChange={event => setCode(event.target.value.trim())} value={code} />
-        <button className="button button--hidable" type="submit">СОЗДАТЬ</button>
+      <form className="code-form" name="codeForm" onSubmit={enterCode}>
+        <input className="input code-form__input" required minLength={4} placeholder=" Введите данные" type="text" name="PROFILE" onChange={event => setCode(event.target.value.trim())} value={code} />
+        <button className="input code-form__button" type="submit">СОЗДАТЬ</button>
       </form>
     </div >
   );

@@ -69,7 +69,7 @@ export const UserPage = (props) => {
         {renderPhotoId ? (
           <>
             <InputProfile formLabel="Изменить код фото" baseValue={person.photoId} inputType="photoId" />
-            <input className="input-file" type="file" name="img" accept="image/*,image/jpeg" onChange={(e) => handleFiles(e.target.files)} />
+            <input className="button input-file" type="file" name="img" accept="image/*,image/jpeg" onChange={(e) => handleFiles(e.target.files)} />
             <label className="label">Удаление</label>
             <button className="button" type="button" onClick={() => delProfile(person.code)}>Удалить пользователя</button>
           </>
