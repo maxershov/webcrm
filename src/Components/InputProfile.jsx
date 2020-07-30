@@ -16,6 +16,10 @@ const InputProfile = React.memo(props => {
   const [inputValue, setValue] = useState(baseValue);
   const oldFieldValue = person[inputType]
 
+  function askForChange(){
+    console.log(oldFieldValue);
+    console.log(inputValue)
+  }
 
   const sendToDb = (event) => {
     event.preventDefault();
@@ -32,15 +36,16 @@ const InputProfile = React.memo(props => {
 
 
   return (
-    <div className={`${inputType}Field`}>
+    <div className="input-form">
       <form name="myForm" onSubmit={sendToDb}>
         <label className="label">{formLabel}</label>
         <input
-          className="input"
+          className="input input--hidable"
           placeholder={`Добавить ${formLabel.toLowerCase()}`}
           type="text"
           name={inputType}
           onChange={event => setValue(event.target.value.trim())}
+          onBlur={() => alert("BLUR")}
           value={inputValue}
           list={listName}
         />

@@ -44,7 +44,7 @@ const TableHistory = props => {
               width: widthCoeff * 4,
               headerClassName: 'table__header',
               Cell: (value) => (
-                <button id="DeleteButton" type="button" onClick={() => deleteHistory(value.original)}>X</button>)
+                <button className="button table__delete-btn" type="button" onClick={() => deleteHistory(value.original)}>X</button>)
             },
             {
               Header: "Тип",

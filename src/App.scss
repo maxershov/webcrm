@@ -110,18 +110,18 @@ a {
     }
 }
 
-.darkThemeIcon {
-    fill: rgba(180, 108, 0, 0.63);
-}
-
-.darkThemeBtn {
+.dark-theme-btn {
     border: none;
     background: transparent;
     position: relative;
     top: 0.25em;
+
+    .dark-theme-btn__icon {
+        fill: rgba(180, 108, 0, 0.63);
+    }
 }
 
-#burgerBtn {
+.burger-btn {
     display: none;
 }
 
@@ -180,16 +180,17 @@ a {
     width: 100%;
 }
 
-.userPage .img-container {
+.img-container {
     grid-area: image;
     width: 90%;
     height: 90%;
     display: flex;
     background-color: inherit;
     align-items: center;
+    animation: fadein 1s;
 }
 
-.userPage .img-container > img {
+.person-img {
     flex: 1;
     max-width: 95%;
     max-height: 95%;
@@ -200,10 +201,6 @@ a {
 .table,
 .mainPage {
     animation: fadein 0.4s;
-}
-
-.userPage .img-container {
-    animation: fadein 1s;
 }
 
 .one-line-wrapper {
@@ -217,15 +214,6 @@ a {
     font-size: 1em;
     display: block !important;
     margin: 20px 5px 20px 5px !important;
-}
-
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }
 
 .label {
@@ -305,44 +293,25 @@ a {
     text-shadow: 1px 1px 0 var(--white);
     box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
     font-family: inherit;
+
+    &:hover {
+        color: var(--label-color);
+        transition: color 0.2s linear;
+    }
 }
 
 .calendar {
     margin: 0 auto;
-}
-
-.calendar button {
-    padding: 0.75em 0.5em;
-    display: block !important;
-}
-
-.calendar button:hover {
-    background-color: var(--red) !important;
-}
-
-.userPage button:hover,
-.notesMain button:hover {
-    color: var(--label-color);
-    transition: color 0.2s linear;
-}
-
-.userPage-container form button,
-.FieldsAction button,
-.notesMain button,
-.notesField button {
-    display: none;
+    button {
+        padding: 0.75em 0.5em;
+        &:hover {
+            background-color: var(--red) !important;
+        }
+    }
 }
 
 .button--hidable {
     display: none;
-}
-
-.userPage-container > *:hover > form > button,
-.userPage-container > *:hover > button,
-.FieldsAction > *:hover button,
-.notesMain:hover button,
-.notesField:hover button {
-    display: block;
 }
 
 .notesField textarea {
@@ -364,7 +333,7 @@ a {
     text-shadow: 1px 1px 0 var(--white);
 }
 
-#DeleteButton {
+.table__delete-btn {
     color: var(--red);
     width: auto;
     padding: 0.5rem;
@@ -440,13 +409,25 @@ a {
 .profile-creator {
     width: 100%;
     grid-area: newProfile;
+}
 
+.input-form,
+.profile-creator,
+.FieldsAction {
     & :hover {
         .button--hidable {
             display: block;
+            // margin-left: 5%;
+            width: 30%;
+            position: absolute;
         }
     }
 }
+
+// .notesMain:hover button,
+// .notesField:hover button {
+//     display: block;
+// }
 
 .code-scanner {
     width: 100%;
@@ -470,6 +451,15 @@ a {
     vertical-align: middle;
 }
 
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 @keyframes spinner {
     0% {
         transform: rotate(0deg);
@@ -483,7 +473,7 @@ a {
     html {
         font-size: 0.7em;
     }
-    #burgerBtn {
+    .burger-btn {
         width: 4rem;
         height: 4rem;
         border: none;
@@ -525,8 +515,8 @@ a {
     }
 }
 
-@media (min-width: 769px) and (max-width: 1366px) {
-}
+// @media (min-width: 769px) and (max-width: 1366px) {
+// }
 
 @media (min-width: 3840px) {
     html {

@@ -47,7 +47,7 @@ const FieldDeposite = React.memo(props => {
           <form>
             <label className="label">Сумма списания/пополнения</label>
             <br />
-            <input className="numInput" type="number" width="40" height="50" value={amount} onChange={event => setAmount(event.target.value)} />
+            <input className="input" type="number" width="40" height="50" value={amount} onChange={event => setAmount(event.target.value)} />
             <div className="one-line-wrapper">
               <button className="button block-button" type="button" onClick={plus}>+</button>
               <button className="button block-button" type="button" onClick={() => changeRenderDeposite(false)}>ЗАКРЫТЬ</button>
