@@ -14,12 +14,18 @@ const InputProfile = React.memo(props => {
   const { codeLink } = useParams();
   const person = useSelector(state => state.profileStore.data);
   const [inputValue, setValue] = useState(baseValue);
+  const [renderModal, setRenderModal] = useState(false);
   const oldFieldValue = person[inputType]
 
-  function askForChange(){
-    console.log(oldFieldValue);
-    console.log(inputValue)
+  function askForChange() {
+    if (oldFieldValue !== inputValue) setRenderModal(true);
   }
+
+  function closeModal() {
+    setRenderModal(false);
+    setValue(oldFieldValue);
+  }
+
 
   const sendToDb = (event) => {
     event.preventDefault();
@@ -32,6 +38,7 @@ const InputProfile = React.memo(props => {
       dispatch(chgProfileValue(codeLink, inputType, inputValue));
       dispatch(addToHistory(codeLink, format(new Date(), "dd-MM-yyyy"), format(new Date(), 'HH:mm:ss'), `Изменение ${activitiesTypes[inputType]}`, "", `${oldFieldValue} => ${inputValue}`));
     }
+    setRenderModal(false);
   }
 
 
@@ -45,22 +52,35 @@ const InputProfile = React.memo(props => {
           type="text"
           name={inputType}
           onChange={event => setValue(event.target.value.trim())}
-          onBlur={() => alert("BLUR")}
+          onBlur={askForChange}
           value={inputValue}
           list={listName}
         />
         <datalist id="types">
           <option value={inputValue}>{inputValue}</option>
           <option value="СОТРУДНИК">тип профиля</option>
-          <option value="ЛИД">тип профиля</option>
-          <option value="НЕТ">тип профиля</option>
           <option value="1 СВОБ">тип профиля</option>
           <option value="1 СВОБ УТРО">тип профиля</option>
-          <option value="3 КФ">тип профиля</option>
-          <option value="6 ТА">тип профиля</option>
+          <option value="1 КФ">тип профиля</option>
+          <option value="1 ТА">тип профиля</option>
+          <option value="1 ПОЛНЫЙ">тип профиля</option>
+          <option value="МГР">тип профиля</option>
+          <option value="ПТ">тип профиля</option>
+          <option value="ЛИД">тип профиля</option>
+          <option value="НЕТ">тип профиля</option>
         </datalist>
-        <button className="button button--hidable" type="submit">Изменить</button>
       </form>
+      {renderModal ? (
+        <div className="modal">
+          <p>Изменить:</p>
+          <p>{oldFieldValue} => {inputValue}</p>
+          <div className="one-line-wrapper">
+            <button className="button block-button" type="button" onClick={sendToDb}>ДА</button>
+            <button className="button block-button" type="button" onClick={closeModal}>НЕТ</button>
+          </div>
+        </div>
+      )
+        : undefined}
     </div>
   );
 });
