@@ -198,7 +198,6 @@ a {
     animation: fadein 1s;
 }
 
-
 .input-file {
     margin-top: 30px;
 }
@@ -301,7 +300,7 @@ a {
 }
 
 .button {
-    // margin: auto 10%;
+    background-color: var(--bg-color);
     margin: 0 auto;
     border-style: none;
     text-transform: uppercase;
@@ -311,7 +310,6 @@ a {
     border-radius: 25px;
     padding: 0.5rem 3rem;
     text-shadow: 1px 1px 0 var(--white);
-    // box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
     box-shadow: -1px -1px 3px var(--white), 1px 1px 5px var(--light-grey);
     font-family: inherit;
     -webkit-appearance: button;
@@ -332,14 +330,8 @@ a {
     }
 }
 
-.notesField textarea {
-    width: 80%;
-    height: 15vh;
-    font-size: inherit;
-    padding-left: 15px;
-}
 
-.notesField {
+.userPage__notes {
     grid-area: notesUser;
     width: 100%;
 }
@@ -519,8 +511,10 @@ a {
             max-width: 60%;
             margin: 15px auto 0 auto;
         }
+        .fields-action {
+            margin-top: 30px;
+        }
     }
-
 }
 
 // @media (min-width: 769px) and (max-width: 1366px) {

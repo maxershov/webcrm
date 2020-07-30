@@ -80,7 +80,7 @@ export const UserPage = (props) => {
         {renderFields}
 
       </div>
-      <div className="notesField">
+      <div className="userPage__notes">
         <AreaNotes notesValue={person.notes} type="PERSON" />
       </div>
       <FieldsAction code={person.code} namesArr={getPersonNames(persons)} />
