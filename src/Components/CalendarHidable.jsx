@@ -29,7 +29,7 @@ const CalendarHidable = (props) => {
 
   function deleteDate() {
     dispatch(chgProfileValue(codeLink, props.dateType, ""));
-    setRenderCalendar('none');
+    setRenderCalendar(false);
   }
 
 

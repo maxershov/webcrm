@@ -234,19 +234,22 @@ a {
 
 .notes {
     width: 80%;
-    height: 80%;
+    height: 70%;
     box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
     color: var(--input-text-color);
     border: none;
     border-radius: 25px;
-    padding: 0.4em 0.7em;
-    width: 80%;
+    padding: 1.4em 0.7em;
     font-size: 1.2rem;
     background-color: var(--bg-color);
     appearance: none;
     -webkit-appearance: none;
     text-shadow: 0 0 0.1em var(--white);
     outline: none;
+}
+
+.notes__button {
+    margin-bottom: 40px !important;
 }
 
 .input {
@@ -295,9 +298,6 @@ a {
     }
 }
 
-.notes__button {
-    margin-bottom: 40px !important;
-}
 
 .button {
     background-color: var(--bg-color);
@@ -334,6 +334,7 @@ a {
 .userPage__notes {
     grid-area: notesUser;
     width: 100%;
+    padding-bottom: 50px;
 }
 
 .tableHistory {
