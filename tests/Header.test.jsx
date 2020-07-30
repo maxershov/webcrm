@@ -19,16 +19,11 @@ test('should render Header menu', () => {
   expect(wrapper.find('.menu-container').exists()).toBe(true);
 });
 
-test('should render darkThemeBtn', () => {
-  const wrapper = shallow(<Header />);
-  const darkThemeBtn = wrapper.find('.darkThemeBtn');
-  expect(darkThemeBtn.length).toBe(1);
-});
 
 test('should toggle menu container', () => {
   const wrapper = mount(<Header />);
-  wrapper.find('#burgerBtn').simulate('click');
-  expect(wrapper.find('.menu-container_open').exists()).toBe(true);
+  wrapper.find('.burger-btn').simulate('click');
+  expect(wrapper.find('.menu-container--open').exists()).toBe(true);
   expect(wrapper.find('.menu-container').exists()).toBe(false);
 });
 

@@ -4,7 +4,7 @@ exports[`should render Header correctly 1`] = `
 <Header>
   <input
     alt="burgerImg"
-    id="burgerBtn"
+    className="burger-btn"
     onClick={[Function]}
     src={Object {}}
     type="image"
@@ -13,17 +13,18 @@ exports[`should render Header correctly 1`] = `
     className="menu-container"
   >
     <undefined
-      activeClassName="menu-nav-active"
+      activeClassName="menu-link--active"
+      className="menu-link"
       to="/main"
     >
       Главная
       <button
-        className="darkThemeBtn"
+        className="dark-theme-btn"
         onClick={[Function]}
         type="button"
       >
         <svg
-          className="darkThemeIcon"
+          className="dark-theme-btn__icon"
           height="1.7em"
           preserveAspectRatio="xMidYMid meet"
           viewBox="0 0 24 24"
@@ -37,31 +38,36 @@ exports[`should render Header correctly 1`] = `
       </button>
     </undefined>
     <undefined
-      activeClassName="menu-nav-active"
+      activeClassName="menu-link--active"
+      className="menu-link"
       to="/all/page/1"
     >
       Все
     </undefined>
     <undefined
-      activeClassName="menu-nav-active"
+      activeClassName="menu-link--active"
+      className="menu-link"
       to="/clients/page/1"
     >
       Клиенты
     </undefined>
     <undefined
-      activeClassName="menu-nav-active"
+      activeClassName="menu-link--active"
+      className="menu-link"
       to="/lead/page/1"
     >
       Лид
     </undefined>
     <undefined
-      activeClassName="menu-nav-active"
+      activeClassName="menu-link--active"
+      className="menu-link"
       to="/lost/page/1"
     >
       Прошлые
     </undefined>
     <undefined
-      activeClassName="menu-nav-active"
+      activeClassName="menu-link--active"
+      className="menu-link"
       to="/employee/page/1"
     >
       Сотрудники

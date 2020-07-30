@@ -49,8 +49,8 @@ exports[`should render MainPage correctly 1`] = `
         className="mainPage"
       >
         <Calendar
-          class="calendar calendarMain"
-          className="calendar calendarMain"
+          class="calendar calendar--main"
+          className="calendar calendar--main"
           maxDetail="month"
           minDetail="century"
           onChange={[Function]}
@@ -60,7 +60,7 @@ exports[`should render MainPage correctly 1`] = `
           value={1999-12-31T21:00:00.000Z}
         >
           <div
-            className="react-calendar calendar calendarMain"
+            className="react-calendar calendar calendar--main"
           >
             <Navigation
               activeStartDate={1999-12-31T21:00:00.000Z}
@@ -3635,96 +3635,118 @@ exports[`should render MainPage correctly 1`] = `
           </div>
         </Calendar>
         <div
-          className="notesMain"
+          className="mainPage-notes"
         >
           <AreaNotes
             date="01-01-2000"
             type="DAY_DATA"
           >
-            <label>
+            <label
+              className="label"
+            >
               Заметки
             </label>
             <textarea
+              className="notes"
               onKeyDown={[Function]}
               oninput={[Function]}
             />
             <button
-              className="absolute_btn"
-              id="clickNotes"
+              className="button notes__button"
               onClick={[Function]}
               type="button"
             >
-              Изменить
+              Сохранить
             </button>
           </AreaNotes>
         </div>
-        <CodeScanner
-          divName="newProfileField"
+        <Memo()>
+          <Component>
+            <div
+              className="code-scanner"
+            >
+              <label
+                className="label"
+              >
+                Сканер карт
+                <button
+                  className="code-scanner__button"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  ПОДКЛЮЧИТЬ
+                </button>
+              </label>
+              <form
+                name="codeForm"
+                onSubmit={[Function]}
+              >
+                <input
+                  className="input"
+                  minLength={1}
+                  name="SCANNER"
+                  oninput={[Function]}
+                  placeholder=" Введите данные"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+              </form>
+            </div>
+          </Component>
+        </Memo()>
+        <Memo()
           route={
             Object {
               "push": [MockFunction],
             }
           }
-          type="PROFILE"
         >
-          <div
-            className="newProfileField"
+          <Component
+            route={
+              Object {
+                "push": [MockFunction],
+              }
+            }
           >
-            <label>
-              Создать профиль
-            </label>
-            <form
-              name="codeForm"
-              onSubmit={[Function]}
+            <div
+              className="profile-creator"
             >
-              <input
-                minLength={1}
-                oninput={[Function]}
-                placeholder=" Введите данные"
-                required={true}
-                type="text"
-                value=""
-              />
-            </form>
-          </div>
-        </CodeScanner>
-        <CodeScanner
-          divName="newCodeField"
-          type="SCANNER"
-        >
-          <div
-            className="newCodeField"
-          >
-            <label>
-              Сканер карт 
-              <button
-                className="scanner-btn"
-                disabled={false}
-                onClick={[Function]}
-                type="button"
+              <label
+                className="label"
               >
-                ПОДКЛЮЧЕНИЕ
-              </button>
-            </label>
-            <form
-              name="codeForm"
-              onSubmit={[Function]}
-            >
-              <input
-                minLength={1}
-                oninput={[Function]}
-                placeholder=" Введите данные"
-                required={true}
-                type="text"
-                value=""
-              />
-            </form>
-          </div>
-        </CodeScanner>
+                Создать профиль
+              </label>
+              <form
+                className="code-form"
+                name="codeForm"
+                onSubmit={[Function]}
+              >
+                <input
+                  className="input code-form__input"
+                  minLength={4}
+                  name="PROFILE"
+                  oninput={[Function]}
+                  placeholder=" Введите данные"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+                <button
+                  className="input code-form__button"
+                  type="submit"
+                >
+                  СОЗДАТЬ
+                </button>
+              </form>
+            </div>
+          </Component>
+        </Memo()>
       </div>
       <TableForScanner>
         <div
-          className="tableMain"
+          className="table__main-page"
         >
           <t
             AggregatedComponent={[Function]}
@@ -3788,14 +3810,14 @@ exports[`should render MainPage correctly 1`] = `
                   "Cell": [Function],
                   "Header": "Фото",
                   "accessor": "code",
-                  "headerClassName": "tableHeader",
+                  "headerClassName": "table__header",
                   "width": 102.4,
                 },
                 Object {
                   "Cell": [Function],
                   "Header": "Имя",
                   "accessor": "code",
-                  "headerClassName": "tableHeader",
+                  "headerClassName": "table__header",
                   "style": Object {
                     "whiteSpace": "unset",
                   },
@@ -3804,7 +3826,7 @@ exports[`should render MainPage correctly 1`] = `
                 Object {
                   "Header": "Время",
                   "accessor": "time",
-                  "headerClassName": "tableHeader",
+                  "headerClassName": "table__header",
                   "width": 307.2,
                 },
               ]
@@ -3933,8 +3955,8 @@ exports[`should render MainPage correctly 1`] = `
                           role="row"
                         >
                           <ThComponent
-                            class="tableHeader rt-resizable-header -cursor-pointer"
-                            className="tableHeader rt-resizable-header -cursor-pointer"
+                            class="table__header rt-resizable-header -cursor-pointer"
+                            className="table__header rt-resizable-header -cursor-pointer"
                             key="0-code"
                             style={
                               Object {
@@ -3946,7 +3968,7 @@ exports[`should render MainPage correctly 1`] = `
                             toggleSort={[Function]}
                           >
                             <div
-                              className="rt-th tableHeader rt-resizable-header -cursor-pointer"
+                              className="rt-th table__header rt-resizable-header -cursor-pointer"
                               onClick={[Function]}
                               role="columnheader"
                               style={
@@ -3976,8 +3998,8 @@ exports[`should render MainPage correctly 1`] = `
                             </div>
                           </ThComponent>
                           <ThComponent
-                            class="tableHeader rt-resizable-header -cursor-pointer"
-                            className="tableHeader rt-resizable-header -cursor-pointer"
+                            class="table__header rt-resizable-header -cursor-pointer"
+                            className="table__header rt-resizable-header -cursor-pointer"
                             key="1-code"
                             style={
                               Object {
@@ -3989,7 +4011,7 @@ exports[`should render MainPage correctly 1`] = `
                             toggleSort={[Function]}
                           >
                             <div
-                              className="rt-th tableHeader rt-resizable-header -cursor-pointer"
+                              className="rt-th table__header rt-resizable-header -cursor-pointer"
                               onClick={[Function]}
                               role="columnheader"
                               style={
@@ -4019,8 +4041,8 @@ exports[`should render MainPage correctly 1`] = `
                             </div>
                           </ThComponent>
                           <ThComponent
-                            class="tableHeader rt-resizable-header -sort-desc -cursor-pointer"
-                            className="tableHeader rt-resizable-header -sort-desc -cursor-pointer"
+                            class="table__header rt-resizable-header -sort-desc -cursor-pointer"
+                            className="table__header rt-resizable-header -sort-desc -cursor-pointer"
                             key="2-time"
                             style={
                               Object {
@@ -4032,7 +4054,7 @@ exports[`should render MainPage correctly 1`] = `
                             toggleSort={[Function]}
                           >
                             <div
-                              className="rt-th tableHeader rt-resizable-header -sort-desc -cursor-pointer"
+                              className="rt-th table__header rt-resizable-header -sort-desc -cursor-pointer"
                               onClick={[Function]}
                               role="columnheader"
                               style={
@@ -4698,7 +4720,7 @@ exports[`should render MainPage correctly 1`] = `
                         "getFooterProps": [Function],
                         "getHeaderProps": [Function],
                         "getProps": [Function],
-                        "headerClassName": "tableHeader",
+                        "headerClassName": "table__header",
                         "headerStyle": Object {},
                         "id": "code",
                         "minResizeWidth": 11,
@@ -4731,7 +4753,7 @@ exports[`should render MainPage correctly 1`] = `
                         "getFooterProps": [Function],
                         "getHeaderProps": [Function],
                         "getProps": [Function],
-                        "headerClassName": "tableHeader",
+                        "headerClassName": "table__header",
                         "headerStyle": Object {},
                         "id": "code",
                         "minResizeWidth": 11,
@@ -4766,7 +4788,7 @@ exports[`should render MainPage correctly 1`] = `
                         "getFooterProps": [Function],
                         "getHeaderProps": [Function],
                         "getProps": [Function],
-                        "headerClassName": "tableHeader",
+                        "headerClassName": "table__header",
                         "headerStyle": Object {},
                         "id": "time",
                         "minResizeWidth": 11,
@@ -4803,7 +4825,7 @@ exports[`should render MainPage correctly 1`] = `
                         "getFooterProps": [Function],
                         "getHeaderProps": [Function],
                         "getProps": [Function],
-                        "headerClassName": "tableHeader",
+                        "headerClassName": "table__header",
                         "headerStyle": Object {},
                         "id": "code",
                         "minResizeWidth": 11,
@@ -4836,7 +4858,7 @@ exports[`should render MainPage correctly 1`] = `
                         "getFooterProps": [Function],
                         "getHeaderProps": [Function],
                         "getProps": [Function],
-                        "headerClassName": "tableHeader",
+                        "headerClassName": "table__header",
                         "headerStyle": Object {},
                         "id": "code",
                         "minResizeWidth": 11,
@@ -4871,7 +4893,7 @@ exports[`should render MainPage correctly 1`] = `
                         "getFooterProps": [Function],
                         "getHeaderProps": [Function],
                         "getProps": [Function],
-                        "headerClassName": "tableHeader",
+                        "headerClassName": "table__header",
                         "headerStyle": Object {},
                         "id": "time",
                         "minResizeWidth": 11,
@@ -4930,14 +4952,14 @@ exports[`should render MainPage correctly 1`] = `
                         "Cell": [Function],
                         "Header": "Фото",
                         "accessor": "code",
-                        "headerClassName": "tableHeader",
+                        "headerClassName": "table__header",
                         "width": 102.4,
                       },
                       Object {
                         "Cell": [Function],
                         "Header": "Имя",
                         "accessor": "code",
-                        "headerClassName": "tableHeader",
+                        "headerClassName": "table__header",
                         "style": Object {
                           "whiteSpace": "unset",
                         },
@@ -4946,7 +4968,7 @@ exports[`should render MainPage correctly 1`] = `
                       Object {
                         "Header": "Время",
                         "accessor": "time",
-                        "headerClassName": "tableHeader",
+                        "headerClassName": "table__header",
                         "width": 307.2,
                       },
                     ]
@@ -5208,10 +5230,10 @@ exports[`should render MainPage correctly 1`] = `
         </div>
       </TableForScanner>
       <div
-        className="author"
+        className="footer"
       >
         <a
-          className="authorLink"
+          className="footer__link"
           href="https://twitter.com/MaksksE"
         >
           Max Ershov

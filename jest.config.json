@@ -6,7 +6,7 @@
     "^react$": "preact/compat",
     "^react-dom$": "preact/compat",
     "^react-dom/test-utils$": "preact/test-utils",
-    "\\.(css|less)$": "<rootDir>/tests/__mocks__/styleMock.js",
+    "\\.(css|scss)$": "<rootDir>/tests/__mocks__/styleMock.js",
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tests/__mocks__/styleMock.js"
   }
 }

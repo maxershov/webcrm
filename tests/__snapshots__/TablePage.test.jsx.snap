@@ -47,7 +47,7 @@ exports[`should render TablePage correctly 1`] = `
     <TablePage>
       <img
         alt="turn to landscape"
-        className="askPhoneTurn"
+        className="warning-to-landscape"
         src={Object {}}
       />
       <t
@@ -111,7 +111,7 @@ exports[`should render TablePage correctly 1`] = `
             Object {
               "Cell": [Function],
               "Header": "Фото",
-              "headerClassName": "tableHeader",
+              "headerClassName": "table__header",
               "width": 153.6,
             },
             Object {
@@ -119,7 +119,7 @@ exports[`should render TablePage correctly 1`] = `
               "Header": "Имя",
               "accessor": "personName",
               "filterMethod": [Function],
-              "headerClassName": "tableHeader",
+              "headerClassName": "table__header",
               "id": "rowCode",
               "style": Object {
                 "whiteSpace": "unset",
@@ -131,7 +131,7 @@ exports[`should render TablePage correctly 1`] = `
               "Header": "Контракт",
               "accessor": "contract",
               "filterMethod": [Function],
-              "headerClassName": "tableHeader",
+              "headerClassName": "table__header",
               "style": Object {
                 "whiteSpace": "unset",
               },
@@ -141,7 +141,7 @@ exports[`should render TablePage correctly 1`] = `
               "Cell": [Function],
               "Header": "Остаток дней",
               "accessor": "days",
-              "headerClassName": "tableHeader",
+              "headerClassName": "table__header",
               "sortMethod": [Function],
               "width": 92.16,
             },
@@ -149,14 +149,14 @@ exports[`should render TablePage correctly 1`] = `
               "Cell": [Function],
               "Header": "Посещений",
               "accessor": "remain",
-              "headerClassName": "tableHeader",
+              "headerClassName": "table__header",
               "width": 92.16,
             },
             Object {
               "Cell": [Function],
               "Header": "Аренда дней",
               "accessor": "rent",
-              "headerClassName": "tableHeader",
+              "headerClassName": "table__header",
               "sortMethod": [Function],
               "width": 92.16,
             },
@@ -164,14 +164,14 @@ exports[`should render TablePage correctly 1`] = `
               "Cell": [Function],
               "Header": "Депозит",
               "accessor": "deposite",
-              "headerClassName": "tableHeader",
+              "headerClassName": "table__header",
               "width": 117.76,
             },
             Object {
               "Cell": [Function],
               "Header": "Парковка",
               "accessor": "autoMonth",
-              "headerClassName": "tableHeader",
+              "headerClassName": "table__header",
               "width": 92.16,
             },
           ]
@@ -226,7 +226,7 @@ exports[`should render TablePage correctly 1`] = `
         getTrGroupProps={[Function]}
         getTrProps={[Function]}
         groupedByPivotKey="_groupedByPivot"
-        headerClassName="tableHeader"
+        headerClassName="table__header"
         indexKey="_index"
         loading={false}
         loadingText="Загрузка"
@@ -303,8 +303,8 @@ exports[`should render TablePage correctly 1`] = `
                       role="row"
                     >
                       <ThComponent
-                        class="tableHeader rt-resizable-header -cursor-pointer"
-                        className="tableHeader rt-resizable-header -cursor-pointer"
+                        class="table__header rt-resizable-header -cursor-pointer"
+                        className="table__header rt-resizable-header -cursor-pointer"
                         key="0-undefined"
                         style={
                           Object {
@@ -316,7 +316,7 @@ exports[`should render TablePage correctly 1`] = `
                         toggleSort={[Function]}
                       >
                         <div
-                          className="rt-th tableHeader rt-resizable-header -cursor-pointer"
+                          className="rt-th table__header rt-resizable-header -cursor-pointer"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -346,8 +346,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader rt-resizable-header -cursor-pointer"
-                        className="tableHeader rt-resizable-header -cursor-pointer"
+                        class="table__header rt-resizable-header -cursor-pointer"
+                        className="table__header rt-resizable-header -cursor-pointer"
                         key="1-rowCode"
                         style={
                           Object {
@@ -359,7 +359,7 @@ exports[`should render TablePage correctly 1`] = `
                         toggleSort={[Function]}
                       >
                         <div
-                          className="rt-th tableHeader rt-resizable-header -cursor-pointer"
+                          className="rt-th table__header rt-resizable-header -cursor-pointer"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -389,8 +389,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader rt-resizable-header -cursor-pointer"
-                        className="tableHeader rt-resizable-header -cursor-pointer"
+                        class="table__header rt-resizable-header -cursor-pointer"
+                        className="table__header rt-resizable-header -cursor-pointer"
                         key="2-contract"
                         style={
                           Object {
@@ -402,7 +402,7 @@ exports[`should render TablePage correctly 1`] = `
                         toggleSort={[Function]}
                       >
                         <div
-                          className="rt-th tableHeader rt-resizable-header -cursor-pointer"
+                          className="rt-th table__header rt-resizable-header -cursor-pointer"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -432,8 +432,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader rt-resizable-header -cursor-pointer"
-                        className="tableHeader rt-resizable-header -cursor-pointer"
+                        class="table__header rt-resizable-header -cursor-pointer"
+                        className="table__header rt-resizable-header -cursor-pointer"
                         key="3-days"
                         style={
                           Object {
@@ -445,7 +445,7 @@ exports[`should render TablePage correctly 1`] = `
                         toggleSort={[Function]}
                       >
                         <div
-                          className="rt-th tableHeader rt-resizable-header -cursor-pointer"
+                          className="rt-th table__header rt-resizable-header -cursor-pointer"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -475,8 +475,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader rt-resizable-header -cursor-pointer"
-                        className="tableHeader rt-resizable-header -cursor-pointer"
+                        class="table__header rt-resizable-header -cursor-pointer"
+                        className="table__header rt-resizable-header -cursor-pointer"
                         key="4-remain"
                         style={
                           Object {
@@ -488,7 +488,7 @@ exports[`should render TablePage correctly 1`] = `
                         toggleSort={[Function]}
                       >
                         <div
-                          className="rt-th tableHeader rt-resizable-header -cursor-pointer"
+                          className="rt-th table__header rt-resizable-header -cursor-pointer"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -518,8 +518,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader rt-resizable-header -cursor-pointer"
-                        className="tableHeader rt-resizable-header -cursor-pointer"
+                        class="table__header rt-resizable-header -cursor-pointer"
+                        className="table__header rt-resizable-header -cursor-pointer"
                         key="5-rent"
                         style={
                           Object {
@@ -531,7 +531,7 @@ exports[`should render TablePage correctly 1`] = `
                         toggleSort={[Function]}
                       >
                         <div
-                          className="rt-th tableHeader rt-resizable-header -cursor-pointer"
+                          className="rt-th table__header rt-resizable-header -cursor-pointer"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -561,8 +561,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader rt-resizable-header -cursor-pointer"
-                        className="tableHeader rt-resizable-header -cursor-pointer"
+                        class="table__header rt-resizable-header -cursor-pointer"
+                        className="table__header rt-resizable-header -cursor-pointer"
                         key="6-deposite"
                         style={
                           Object {
@@ -574,7 +574,7 @@ exports[`should render TablePage correctly 1`] = `
                         toggleSort={[Function]}
                       >
                         <div
-                          className="rt-th tableHeader rt-resizable-header -cursor-pointer"
+                          className="rt-th table__header rt-resizable-header -cursor-pointer"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -604,8 +604,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader rt-resizable-header -cursor-pointer"
-                        className="tableHeader rt-resizable-header -cursor-pointer"
+                        class="table__header rt-resizable-header -cursor-pointer"
+                        className="table__header rt-resizable-header -cursor-pointer"
                         key="7-autoMonth"
                         style={
                           Object {
@@ -617,7 +617,7 @@ exports[`should render TablePage correctly 1`] = `
                         toggleSort={[Function]}
                       >
                         <div
-                          className="rt-th tableHeader rt-resizable-header -cursor-pointer"
+                          className="rt-th table__header rt-resizable-header -cursor-pointer"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -673,8 +673,8 @@ exports[`should render TablePage correctly 1`] = `
                       role="row"
                     >
                       <ThComponent
-                        class="tableHeader"
-                        className="tableHeader"
+                        class="table__header"
+                        className="table__header"
                         key="0-undefined"
                         style={
                           Object {
@@ -685,7 +685,7 @@ exports[`should render TablePage correctly 1`] = `
                         }
                       >
                         <div
-                          className="rt-th tableHeader"
+                          className="rt-th table__header"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -720,7 +720,7 @@ exports[`should render TablePage correctly 1`] = `
                                 "getFooterProps": [Function],
                                 "getHeaderProps": [Function],
                                 "getProps": [Function],
-                                "headerClassName": "tableHeader",
+                                "headerClassName": "table__header",
                                 "headerStyle": Object {},
                                 "minResizeWidth": 11,
                                 "minWidth": 100,
@@ -748,8 +748,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader"
-                        className="tableHeader"
+                        class="table__header"
+                        className="table__header"
                         key="1-rowCode"
                         style={
                           Object {
@@ -760,7 +760,7 @@ exports[`should render TablePage correctly 1`] = `
                         }
                       >
                         <div
-                          className="rt-th tableHeader"
+                          className="rt-th table__header"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -795,7 +795,7 @@ exports[`should render TablePage correctly 1`] = `
                                 "getFooterProps": [Function],
                                 "getHeaderProps": [Function],
                                 "getProps": [Function],
-                                "headerClassName": "tableHeader",
+                                "headerClassName": "table__header",
                                 "headerStyle": Object {},
                                 "id": "rowCode",
                                 "minResizeWidth": 11,
@@ -826,8 +826,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader"
-                        className="tableHeader"
+                        class="table__header"
+                        className="table__header"
                         key="2-contract"
                         style={
                           Object {
@@ -838,7 +838,7 @@ exports[`should render TablePage correctly 1`] = `
                         }
                       >
                         <div
-                          className="rt-th tableHeader"
+                          className="rt-th table__header"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -873,7 +873,7 @@ exports[`should render TablePage correctly 1`] = `
                                 "getFooterProps": [Function],
                                 "getHeaderProps": [Function],
                                 "getProps": [Function],
-                                "headerClassName": "tableHeader",
+                                "headerClassName": "table__header",
                                 "headerStyle": Object {},
                                 "id": "contract",
                                 "minResizeWidth": 11,
@@ -904,8 +904,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader"
-                        className="tableHeader"
+                        class="table__header"
+                        className="table__header"
                         key="3-days"
                         style={
                           Object {
@@ -916,7 +916,7 @@ exports[`should render TablePage correctly 1`] = `
                         }
                       >
                         <div
-                          className="rt-th tableHeader"
+                          className="rt-th table__header"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -951,7 +951,7 @@ exports[`should render TablePage correctly 1`] = `
                                 "getFooterProps": [Function],
                                 "getHeaderProps": [Function],
                                 "getProps": [Function],
-                                "headerClassName": "tableHeader",
+                                "headerClassName": "table__header",
                                 "headerStyle": Object {},
                                 "id": "days",
                                 "minResizeWidth": 11,
@@ -980,8 +980,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader"
-                        className="tableHeader"
+                        class="table__header"
+                        className="table__header"
                         key="4-remain"
                         style={
                           Object {
@@ -992,7 +992,7 @@ exports[`should render TablePage correctly 1`] = `
                         }
                       >
                         <div
-                          className="rt-th tableHeader"
+                          className="rt-th table__header"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -1027,7 +1027,7 @@ exports[`should render TablePage correctly 1`] = `
                                 "getFooterProps": [Function],
                                 "getHeaderProps": [Function],
                                 "getProps": [Function],
-                                "headerClassName": "tableHeader",
+                                "headerClassName": "table__header",
                                 "headerStyle": Object {},
                                 "id": "remain",
                                 "minResizeWidth": 11,
@@ -1056,8 +1056,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader"
-                        className="tableHeader"
+                        class="table__header"
+                        className="table__header"
                         key="5-rent"
                         style={
                           Object {
@@ -1068,7 +1068,7 @@ exports[`should render TablePage correctly 1`] = `
                         }
                       >
                         <div
-                          className="rt-th tableHeader"
+                          className="rt-th table__header"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -1103,7 +1103,7 @@ exports[`should render TablePage correctly 1`] = `
                                 "getFooterProps": [Function],
                                 "getHeaderProps": [Function],
                                 "getProps": [Function],
-                                "headerClassName": "tableHeader",
+                                "headerClassName": "table__header",
                                 "headerStyle": Object {},
                                 "id": "rent",
                                 "minResizeWidth": 11,
@@ -1132,8 +1132,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader"
-                        className="tableHeader"
+                        class="table__header"
+                        className="table__header"
                         key="6-deposite"
                         style={
                           Object {
@@ -1144,7 +1144,7 @@ exports[`should render TablePage correctly 1`] = `
                         }
                       >
                         <div
-                          className="rt-th tableHeader"
+                          className="rt-th table__header"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -1179,7 +1179,7 @@ exports[`should render TablePage correctly 1`] = `
                                 "getFooterProps": [Function],
                                 "getHeaderProps": [Function],
                                 "getProps": [Function],
-                                "headerClassName": "tableHeader",
+                                "headerClassName": "table__header",
                                 "headerStyle": Object {},
                                 "id": "deposite",
                                 "minResizeWidth": 11,
@@ -1208,8 +1208,8 @@ exports[`should render TablePage correctly 1`] = `
                         </div>
                       </ThComponent>
                       <ThComponent
-                        class="tableHeader"
-                        className="tableHeader"
+                        class="table__header"
+                        className="table__header"
                         key="7-autoMonth"
                         style={
                           Object {
@@ -1220,7 +1220,7 @@ exports[`should render TablePage correctly 1`] = `
                         }
                       >
                         <div
-                          className="rt-th tableHeader"
+                          className="rt-th table__header"
                           onClick={[Function]}
                           role="columnheader"
                           style={
@@ -1255,7 +1255,7 @@ exports[`should render TablePage correctly 1`] = `
                                 "getFooterProps": [Function],
                                 "getHeaderProps": [Function],
                                 "getProps": [Function],
-                                "headerClassName": "tableHeader",
+                                "headerClassName": "table__header",
                                 "headerStyle": Object {},
                                 "id": "autoMonth",
                                 "minResizeWidth": 11,
@@ -6655,7 +6655,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "minResizeWidth": 11,
                     "minWidth": 100,
@@ -6687,7 +6687,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "rowCode",
                     "minResizeWidth": 11,
@@ -6722,7 +6722,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "contract",
                     "minResizeWidth": 11,
@@ -6757,7 +6757,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "days",
                     "minResizeWidth": 11,
@@ -6790,7 +6790,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "remain",
                     "minResizeWidth": 11,
@@ -6823,7 +6823,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "rent",
                     "minResizeWidth": 11,
@@ -6856,7 +6856,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "deposite",
                     "minResizeWidth": 11,
@@ -6889,7 +6889,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "autoMonth",
                     "minResizeWidth": 11,
@@ -6926,7 +6926,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "minResizeWidth": 11,
                     "minWidth": 100,
@@ -6958,7 +6958,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "rowCode",
                     "minResizeWidth": 11,
@@ -6993,7 +6993,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "contract",
                     "minResizeWidth": 11,
@@ -7028,7 +7028,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "days",
                     "minResizeWidth": 11,
@@ -7061,7 +7061,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "remain",
                     "minResizeWidth": 11,
@@ -7094,7 +7094,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "rent",
                     "minResizeWidth": 11,
@@ -7127,7 +7127,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "deposite",
                     "minResizeWidth": 11,
@@ -7160,7 +7160,7 @@ exports[`should render TablePage correctly 1`] = `
                     "getFooterProps": [Function],
                     "getHeaderProps": [Function],
                     "getProps": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "headerStyle": Object {},
                     "id": "autoMonth",
                     "minResizeWidth": 11,
@@ -7218,7 +7218,7 @@ exports[`should render TablePage correctly 1`] = `
                   Object {
                     "Cell": [Function],
                     "Header": "Фото",
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "width": 153.6,
                   },
                   Object {
@@ -7226,7 +7226,7 @@ exports[`should render TablePage correctly 1`] = `
                     "Header": "Имя",
                     "accessor": "personName",
                     "filterMethod": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "id": "rowCode",
                     "style": Object {
                       "whiteSpace": "unset",
@@ -7238,7 +7238,7 @@ exports[`should render TablePage correctly 1`] = `
                     "Header": "Контракт",
                     "accessor": "contract",
                     "filterMethod": [Function],
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "style": Object {
                       "whiteSpace": "unset",
                     },
@@ -7248,7 +7248,7 @@ exports[`should render TablePage correctly 1`] = `
                     "Cell": [Function],
                     "Header": "Остаток дней",
                     "accessor": "days",
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "sortMethod": [Function],
                     "width": 92.16,
                   },
@@ -7256,14 +7256,14 @@ exports[`should render TablePage correctly 1`] = `
                     "Cell": [Function],
                     "Header": "Посещений",
                     "accessor": "remain",
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "width": 92.16,
                   },
                   Object {
                     "Cell": [Function],
                     "Header": "Аренда дней",
                     "accessor": "rent",
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "sortMethod": [Function],
                     "width": 92.16,
                   },
@@ -7271,14 +7271,14 @@ exports[`should render TablePage correctly 1`] = `
                     "Cell": [Function],
                     "Header": "Депозит",
                     "accessor": "deposite",
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "width": 117.76,
                   },
                   Object {
                     "Cell": [Function],
                     "Header": "Парковка",
                     "accessor": "autoMonth",
-                    "headerClassName": "tableHeader",
+                    "headerClassName": "table__header",
                     "width": 92.16,
                   },
                 ]
@@ -7338,7 +7338,7 @@ exports[`should render TablePage correctly 1`] = `
               getTrProps={[Function]}
               groupedByPivotKey="_groupedByPivot"
               hasHeaderGroups={false}
-              headerClassName="tableHeader"
+              headerClassName="table__header"
               headerGroups={Array []}
               indexKey="_index"
               isTop={false}
