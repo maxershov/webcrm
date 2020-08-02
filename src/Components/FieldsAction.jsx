@@ -11,14 +11,21 @@ const FieldsAction = (props) => {
   const [actionAmount, setActionAmount] = useState('');
   const [actionDate, setActionDate] = useState(format(new Date(), 'dd-MM-yyyy'));
   const [actionPerson, setActionPerson] = useState('');
-  let time = format(new Date(), 'HH:mm:ss');
+  let actionTime = format(new Date(), 'HH:mm:ss');
   const dispatch = useDispatch();
 
 
-  const sendActionsToDb = (event) => {
+  function setToDefault() {
+    setActionType('');
+    setActionAmount('');
+    setActionPerson('');
+  }
+
+  function sendActionsToDb(event) {
     event.preventDefault();
-    if (!isToday(actionDate)) time = "00:00:00";
-    dispatch(addToHistory(props.code, actionDate, time, actionType, actionPerson, actionAmount));
+    if (!isToday(actionDate)) actionTime = "00:00:00";
+    dispatch(addToHistory(props.code, actionDate, actionTime, actionType, actionPerson, actionAmount));
+    setToDefault();
   }
 
   return (
