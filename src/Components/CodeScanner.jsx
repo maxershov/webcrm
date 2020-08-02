@@ -40,7 +40,7 @@ const CodeScanner = React.memo(props => {
     setDisBtn(true);
     setTimeout(() => setDisBtn(false), 15000);
     const timer = setTimeout(() => alert('Ошибка! Проверьте подключение'), 10000);
-    fetch(`http://192.168.1.150:6700/connectPi/${window.location.host}`).then(res => res.json()).then(data => {
+    fetch(`/connectPi/${window.location.host}`).then(res => res.json()).then(data => {
       alert("Подключено")
       clearTimeout(timer)
     });

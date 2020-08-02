@@ -38,7 +38,7 @@ export const UserPage = (props) => {
   function handleFiles(file) {
     const formData = new FormData()
     formData.append("img", file[0])
-    fetch(`http://192.168.1.150:6700/upload/${codeLink}`, {
+    fetch(`/upload/${codeLink}`, {
       method: 'POST',
       body: formData
     }) // .then(() => history.push('/main'))
