@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import { h, render } from 'preact';
 import './assets/favicon.ico';
 import 'whatwg-fetch';

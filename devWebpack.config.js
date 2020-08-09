@@ -8,7 +8,7 @@ const WebpackMonitor = require('webpack-monitor');
 module.exports = {
   context: path.resolve(__dirname),
   mode: "development",
-  entry: ["@babel/polyfill", "./src/index.js"],
+  entry: ["@babel/polyfill", "./src/index.jsx"],
   devtool: "source-map",
   output: {
     path: path.join(__dirname, "dist"),

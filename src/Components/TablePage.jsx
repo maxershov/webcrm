@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { h } from "preact";
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'preact/compat';

@@ -2,7 +2,7 @@
     "name": "web-react-crm",
     "version": "2.0.0",
     "description": "CRM App",
-    "main": "index.js",
+    "main": "index.jsx",
     "keywords": [
         "react-table",
         "react-calendar",

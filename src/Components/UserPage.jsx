@@ -43,7 +43,7 @@ export const UserPage = () => {
     fetch(`/upload/${codeLink}`, {
       method: 'POST',
       body: formData
-    }) // .then(() => history.push('/main'))
+    })
   }
 
 

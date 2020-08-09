@@ -9,7 +9,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname),
-  entry: ["@babel/polyfill", "./src/index.js"],
+  entry: ["@babel/polyfill", "./src/index.jsx"],
   mode: "production",
   output: {
     path: path.join(__dirname, "dist"),
