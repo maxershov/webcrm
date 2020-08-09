@@ -1,4 +1,5 @@
-import React, { useState } from 'preact/compat';
+import { h } from "preact";
+import { memo, useState } from 'preact/compat';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { format } from 'date-fns';
@@ -6,7 +7,7 @@ import { chgProfileValue, chgCode } from "../store/profileStore/profileActions";
 import { addToHistory } from "../store/activitiesDataStore/activitiesDataActions";
 import { activitiesTypes } from "../App";
 
-const InputProfile = React.memo(props => {
+const InputProfile = memo(props => {
   const { formLabel, baseValue, inputType, listName } = props;
 
   const dispatch = useDispatch();
@@ -73,7 +74,7 @@ const InputProfile = React.memo(props => {
       {renderModal ? (
         <div className="modal">
           <p>Изменить:</p>
-          <p>{oldFieldValue} => {inputValue}</p>
+          <p>{oldFieldValue} =&gt; {inputValue}</p>
           <div className="one-line-wrapper">
             <button className="button block-button" type="button" onClick={sendToDb}>ДА</button>
             <button className="button block-button" type="button" onClick={closeModal}>НЕТ</button>

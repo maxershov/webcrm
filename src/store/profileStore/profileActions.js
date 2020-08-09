@@ -42,14 +42,6 @@ export const deleteProfile = (code) => {
 };
 
 
-export function* watchFetchProfile() {
-  yield takeLatest("FETCHED_PROFILE", fetchProfileAsync);
-  yield takeLatest("CHANGE_PROFILE_VALUE", changeFieldAsync);
-  yield takeLatest("CHANGE_CODE", changeCodeAsync);
-  yield takeLatest("ADD_NEW_PROFILE", addNewProfileAsync);
-  yield takeLatest("DELETE_PROFILE", deleteProfileAsync);
-}
-
 
 function* fetchProfileAsync({ code }) {
   try {
@@ -136,3 +128,11 @@ function* deleteProfileAsync({ code }) {
     yield put(reqProfileError(err));
   }
 };
+
+export function* watchFetchProfile() {
+  yield takeLatest("FETCHED_PROFILE", fetchProfileAsync);
+  yield takeLatest("CHANGE_PROFILE_VALUE", changeFieldAsync);
+  yield takeLatest("CHANGE_CODE", changeCodeAsync);
+  yield takeLatest("ADD_NEW_PROFILE", addNewProfileAsync);
+  yield takeLatest("DELETE_PROFILE", deleteProfileAsync);
+}

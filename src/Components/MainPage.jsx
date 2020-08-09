@@ -1,3 +1,5 @@
+import { h } from "preact";
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "preact/compat";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -15,7 +17,7 @@ import { fetchDays } from "../store/dayDataStore/dayDataActions";
 import { fetchVisits } from "../store/activitiesDataStore/activitiesDataActions";
 
 
-export const MainPage = props => {
+export const MainPage = () => {
   const loadingPersons = useSelector(state => state.personsStore.loading);
   const loadingDays = useSelector(state => state.dayStore.loading);
   const loadingActivities = useSelector(state => state.activitiesStore.loading);

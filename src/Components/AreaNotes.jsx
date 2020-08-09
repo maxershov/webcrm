@@ -1,3 +1,5 @@
+import { h } from "preact";
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "preact/compat";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -21,7 +23,7 @@ const AreaNotes = props => {
     }
   };
 
-  
+
   return (
     <>
       <label className="label">Заметки</label>

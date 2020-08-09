@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import React from 'preact/compat';
+import {h} from 'preact';
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 

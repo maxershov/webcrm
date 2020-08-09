@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 const express = require("express");
 const history = require("connect-history-api-fallback");
-const helmet = require("helmet");
 const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -22,8 +21,6 @@ app.use(cors());
 
 API(app, dbObj);
 
-
-// app.use(helmet());
 app.use(staticFiles);
 app.use(history());
 

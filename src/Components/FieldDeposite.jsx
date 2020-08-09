@@ -1,4 +1,6 @@
-import React, { useState } from 'preact/compat';
+import { h } from "preact";
+// eslint-disable-next-line no-unused-vars
+import React, { memo, useState } from 'preact/compat';
 import { format } from 'date-fns'
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
@@ -8,7 +10,7 @@ import CalendarHidable from './CalendarHidable';
 import { isToday } from "../App";
 
 
-const FieldDeposite = React.memo(props => {
+const FieldDeposite = memo(props => {
   const person = useSelector(state => state.profileStore.data);
   const dispatch = useDispatch();
   const { codeLink } = useParams();

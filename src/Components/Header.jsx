@@ -1,3 +1,5 @@
+import { h } from "preact";
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'preact/compat';
 import { NavLink } from 'react-router-dom';
 import burgerIcon from "../assets/burger.svg";
@@ -18,8 +20,11 @@ const Header = () => {
     e.preventDefault();
     e.stopPropagation();
     setDarkTheme(!darkTheme);
-    darkTheme ? document.documentElement.setAttribute('data-theme', 'dark')
-      : document.documentElement.setAttribute('data-theme', 'light');
+    if (darkTheme) {
+      document.documentElement.setAttribute('data-theme', 'dark')
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
   }
 
   useEffect(() => {

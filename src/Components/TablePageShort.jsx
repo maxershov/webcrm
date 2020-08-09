@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-underscore-dangle */
+import { h } from "preact";
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'preact/compat';
 import ReactTable from 'react-table-6/react-table.min';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,7 +9,6 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { getDaysLeft } from '../App';
 import { fetchPersons } from "../store/personsDataStore/personsDataActions";
 import phoneSvg from "../assets/phone.svg"
-
 
 const TablePageShort = (props) => {
   const { pageNum } = useParams();

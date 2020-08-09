@@ -41,15 +41,6 @@ export const deleteHistoryObj = (code, date, time, typeInput, person, amount) =>
 };
 
 
-export function* watchFetchActivities() {
-  yield takeLatest("FETCHED_VISIT_ACTIVITIES", fetchVisitsAsync);
-  yield takeLatest("FETCHED_HISTORY_ACTIVITIES", fetchHistoryAsync);
-  yield takeLatest("ADD_TO_VISITS", addToVisitsAsync);
-  yield takeLatest("ADD_TO_HISTORY", addToHistoryAsync);
-  yield takeLatest("DELETE_HISTORY_OBJECT", deleteHistoryObjAsync);
-};
-
-
 function* fetchVisitsAsync({ date }) {
   try {
     yield put(reqActivities());
@@ -145,4 +136,14 @@ function* deleteHistoryObjAsync({ code, date, time, typeInput, person, amount })
   } catch (err) {
     yield put(reqActivitiesError(err));
   }
+};
+
+
+
+export function* watchFetchActivities() {
+  yield takeLatest("FETCHED_VISIT_ACTIVITIES", fetchVisitsAsync);
+  yield takeLatest("FETCHED_HISTORY_ACTIVITIES", fetchHistoryAsync);
+  yield takeLatest("ADD_TO_VISITS", addToVisitsAsync);
+  yield takeLatest("ADD_TO_HISTORY", addToHistoryAsync);
+  yield takeLatest("DELETE_HISTORY_OBJECT", deleteHistoryObjAsync);
 };

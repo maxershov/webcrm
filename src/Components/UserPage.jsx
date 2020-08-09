@@ -1,3 +1,5 @@
+import { h } from "preact";
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'preact/compat';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom'
@@ -19,7 +21,7 @@ function getPersonNames(data) {
 }
 
 
-export const UserPage = (props) => {
+export const UserPage = () => {
   const persons = useSelector(state => state.personsStore.data);
   const person = useSelector(state => state.profileStore.data);
   const loading = useSelector(state => state.profileStore.loading);
@@ -51,7 +53,7 @@ export const UserPage = (props) => {
 
 
   function delProfile(code) {
-    dispatch(deleteProfile(person.code))
+    dispatch(deleteProfile(code))
     history.push('/main');
   }
 

@@ -1,4 +1,4 @@
-import React from 'preact/compat';
+import { h } from 'preact';
 import './App.scss';
 import './react-table.css';
 import './react-calendar.css';
@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 
-const App = (props) => {
+const App = () => {
   return (
     <Provider store={store}>
       <Router>

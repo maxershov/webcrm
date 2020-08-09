@@ -1,10 +1,11 @@
-import React, { useState } from 'preact/compat';
+import { h } from "preact";
+import { memo, useState } from 'preact/compat';
 import { useDispatch } from "react-redux";
 import { addNewProfile } from "../store/profileStore/profileActions";
 
 
 
-const ProfileCreator = React.memo(props => {
+const ProfileCreator = memo(props => {
   const dispatch = useDispatch();
 
   function createProfile(codeTo) {

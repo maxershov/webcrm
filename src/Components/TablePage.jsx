@@ -1,4 +1,6 @@
 /* eslint-disable no-underscore-dangle */
+import { h } from "preact";
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'preact/compat';
 import ReactTable from 'react-table-6/react-table.min';
 import { Link, useHistory, useParams } from "react-router-dom";

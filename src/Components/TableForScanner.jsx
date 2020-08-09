@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'preact/compat';
+import { h } from "preact";
+import { useEffect, useState } from 'preact/compat';
 import ReactTable from "react-table-6/react-table.min";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { getIndexByCode } from "../App";
 
 
-const TableForScanner = (props) => {
-
+const TableForScanner = () => {
   const personData = useSelector(state => state.personsStore.data);
   const historyData = useSelector(state => state.activitiesStore.data);
   const history = useHistory();

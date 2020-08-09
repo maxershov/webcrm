@@ -26,12 +26,6 @@ export const changeNotes = (date, notes) => {
 };
 
 
-export function* watchFetchDays() {
-  yield takeLatest("FETCHED_DAYS", fetchDaysAsync);
-  yield takeLatest("CHANGE_DATE_NOTES", changeNotesAsync);
-};
-
-
 function* fetchDaysAsync({ date }) {
   try {
     yield put(reqDays());
@@ -61,4 +55,9 @@ function* changeNotesAsync({ date, notes }) {
   } catch (err) {
     yield put(reqDaysError(err));
   }
+};
+
+export function* watchFetchDays() {
+  yield takeLatest("FETCHED_DAYS", fetchDaysAsync);
+  yield takeLatest("CHANGE_DATE_NOTES", changeNotesAsync);
 };

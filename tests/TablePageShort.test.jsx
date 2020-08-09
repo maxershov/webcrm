@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/react-in-jsx-scope */
-import React from 'preact/compat';
+import {h} from 'preact';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux'
 import toJson from 'enzyme-to-json';

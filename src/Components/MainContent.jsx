@@ -1,4 +1,4 @@
-import React from 'preact/compat';
+import { h } from 'preact';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import UserPage from './UserPage';
 import TablePage from './TablePage';
@@ -6,7 +6,7 @@ import TablePageShort from './TablePageShort';
 import MainPage from './MainPage';
 
 
-const MainContent = props => {
+const MainContent = () => {
   return (
     <Switch>
       <Redirect exact from="/" to="/main" />

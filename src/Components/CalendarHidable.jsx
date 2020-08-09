@@ -1,3 +1,5 @@
+import { h } from "preact";
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'preact/compat';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns'

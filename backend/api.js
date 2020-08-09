@@ -242,7 +242,7 @@ function API(app, dbObj) {
     });
 
 
-    /*************  FOR RFID SCANNER ***************** */
+    /** ***********  FOR RFID SCANNER ***************** */
 
     app.get("/connectPi/:ip", (req, res) => {
         const { ip } = req.params;
@@ -263,15 +263,6 @@ function API(app, dbObj) {
         });
     });
 
-
-
-
-    app.post('/code', (req, res) => {
-        const code = (req.body.code).replace("\n", "");
-        handleCode(code);
-        console.log(`Scan code from RFID (${req.body.code})`);
-        res.json("success");
-    })
 
 
     async function handleCode(code) {
@@ -295,6 +286,14 @@ function API(app, dbObj) {
                 .insert({ "code": code, "date": todayData, "time": time, "type": "Посещение", "person": "", "amount": amount });
         }
     }
+
+    
+    app.post('/code', (req, res) => {
+        const code = (req.body.code).replace("\n", "");
+        handleCode(code);
+        console.log(`Scan code from RFID (${req.body.code})`);
+        res.json("success");
+    })
 }
 
 module.exports = API;

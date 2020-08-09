@@ -1,4 +1,5 @@
-import React, { useState } from 'preact/compat';
+import { h } from "preact";
+import { useState } from 'preact/compat';
 import { format } from 'date-fns'
 import { useDispatch } from "react-redux";
 import CalendarHidable from './CalendarHidable';

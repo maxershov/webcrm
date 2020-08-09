@@ -1,11 +1,13 @@
-import React, { useState } from 'preact/compat';
+/* eslint-disable no-alert */
+import { h } from "preact";
+import { memo, useState } from 'preact/compat';
 import { format } from 'date-fns';
 import { useDispatch, useSelector } from "react-redux";
 import { chgProfileValue, addNewProfile } from "../store/profileStore/profileActions";
 import { addToVisits } from "../store/activitiesDataStore/activitiesDataActions";
 
 
-const CodeScanner = React.memo(props => {
+const CodeScanner = memo(() => {
   const personData = useSelector(state => state.personsStore.data);
   const historyData = useSelector(state => state.activitiesStore.data);
   const dispatch = useDispatch();
@@ -40,7 +42,7 @@ const CodeScanner = React.memo(props => {
     setDisBtn(true);
     setTimeout(() => setDisBtn(false), 15000);
     const timer = setTimeout(() => alert('Ошибка! Проверьте подключение'), 10000);
-    fetch(`/connectPi/${window.location.host}`).then(res => res.json()).then(data => {
+    fetch(`/connectPi/${window.location.host}`).then(res => res.json()).then(() => {
       alert("Подключено")
       clearTimeout(timer)
     });

@@ -35,11 +35,6 @@ export const fetchPersons = () => {
 };
 
 
-export function* watchFetchPersons() {
-  yield takeLatest("FETCHED_PERSONS", fetchPersonsAsync);
-  yield takeLatest("PUSH_NEW_PERSON", pushNewPersonAsync);
-}
-
 
 function* fetchPersonsAsync() {
   try {
@@ -65,3 +60,8 @@ export function* pushNewPersonAsync({ newPerson }) {
   const updData = yield data.concat(newPerson);
   yield put(reqPersonsSuccess(updData));
 };
+
+export function* watchFetchPersons() {
+  yield takeLatest("FETCHED_PERSONS", fetchPersonsAsync);
+  yield takeLatest("PUSH_NEW_PERSON", pushNewPersonAsync);
+}
