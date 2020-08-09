@@ -1,10 +1,18 @@
 {
   "extends": [
     "airbnb",
-    "react-app",
-    "prettier"
+    "preact",
+    "prettier",
+    "plugin:react/recommended"
   ],
   "rules": {
+    "no-unused-vars": 1,
+    "react/jsx-uses-react": 1,
+    "react/display-name": "off",
+    "react/jsx-fragments": [
+      "off",
+      "element"
+    ],
     "jsx-quotes": [
       1,
       "prefer-double"
@@ -18,6 +26,6 @@
     "no-param-reassign": 0
   },
   "plugins": [
-    "prettier"
+    "react", "prettier"
   ]
 }

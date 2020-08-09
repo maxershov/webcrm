@@ -10,6 +10,7 @@
     ],
     "scripts": {
         "test": "jest --config ./jest.config.json",
+        "lint": "eslint --ext .jsx --ext .js src/",
         "dev": "webpack-dev-server  --config ./devWebpack.config.js",
         "prod": "cross-env NODE_ENV=production webpack-dev-server --config ./webpack.config.js",
         "local": "cross-env NODE_ENV=production node ./backend/local.js",
@@ -38,7 +39,6 @@
         "date-fns": "^2.14.0",
         "express": "^4.17.1",
         "express-static-gzip": "^2.0.6",
-        "helmet": "^3.22.0",
         "knex": "^0.21.1",
         "multer": "^1.4.2",
         "network-list": "^1.1.5",
@@ -59,6 +59,7 @@
     ],
     "devDependencies": {
         "@babel/core": "^7.9.6",
+        "@babel/plugin-transform-react-jsx": "^7.10.4",
         "@babel/preset-env": "^7.9.6",
         "@babel/preset-react": "^7.9.4",
         "@testing-library/dom": "^7.7.1",
@@ -74,8 +75,8 @@
         "enzyme-to-json": "^3.5.0",
         "eslint": "^7.1.0",
         "eslint-config-airbnb": "^18.1.0",
+        "eslint-config-preact": "^1.1.1",
         "eslint-config-prettier": "^6.11.0",
-        "eslint-config-react-app": "^5.2.1",
         "eslint-plugin-flowtype": "^5.1.0",
         "eslint-plugin-import": "^2.20.2",
         "eslint-plugin-jsx-a11y": "^6.2.3",
