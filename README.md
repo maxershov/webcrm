@@ -1,4 +1,4 @@
-# CRM
+# CRM [![Build Status](https://travis-ci.org/maxershov/webcrm.svg?branch=master)](https://travis-ci.org/maxershov/webcrm)
 Функции:
 * Добавление/удаление/редактирование профилей
 * Сортировка и поиск профилей по различным параметрам
