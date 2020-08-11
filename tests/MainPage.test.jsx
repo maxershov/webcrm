@@ -20,7 +20,7 @@ jest.mock('react-router-dom', () => ({
 
 
 test('should render MainPage correctly', () => {
-  MockDate.set('2000-01-01')
+  MockDate.set(946944000000);
   const wrapper = mount(<Provider store={store}><MainPage /></Provider>);
   expect(toJson(wrapper)).toMatchSnapshot();
 });

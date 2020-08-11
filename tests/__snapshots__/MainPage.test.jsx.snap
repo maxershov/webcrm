@@ -57,7 +57,7 @@ exports[`should render MainPage correctly 1`] = `
           returnValue="start"
           showNavigation={true}
           showNeighboringMonth={true}
-          value={1999-12-31T21:00:00.000Z}
+          value={2000-01-03T21:00:00.000Z}
         >
           <div
             className="react-calendar calendar calendar--main"
@@ -148,7 +148,7 @@ exports[`should render MainPage correctly 1`] = `
                 onMouseLeave={null}
                 onMouseOver={null}
                 showNeighboringMonth={true}
-                value={1999-12-31T21:00:00.000Z}
+                value={2000-01-03T21:00:00.000Z}
                 valueType="day"
               >
                 <div
@@ -337,7 +337,7 @@ exports[`should render MainPage correctly 1`] = `
                         onMouseLeave={null}
                         onMouseOver={null}
                         showNeighboringMonth={true}
-                        value={1999-12-31T21:00:00.000Z}
+                        value={2000-01-03T21:00:00.000Z}
                         valueType="day"
                       >
                         <TileGroup
@@ -357,7 +357,7 @@ exports[`should render MainPage correctly 1`] = `
                           onMouseOver={null}
                           start={-4}
                           tile={[Function]}
-                          value={1999-12-31T21:00:00.000Z}
+                          value={2000-01-03T21:00:00.000Z}
                           valueType="day"
                         >
                           <Flex
@@ -769,12 +769,6 @@ exports[`should render MainPage correctly 1`] = `
                                 classes={
                                   Array [
                                     "react-calendar__tile",
-                                    "react-calendar__tile--now",
-                                    "react-calendar__tile--active",
-                                    "react-calendar__tile--range",
-                                    "react-calendar__tile--rangeStart",
-                                    "react-calendar__tile--rangeEnd",
-                                    "react-calendar__tile--rangeBothEnds",
                                   ]
                                 }
                                 currentMonthIndex={0}
@@ -799,12 +793,6 @@ exports[`should render MainPage correctly 1`] = `
                                   classes={
                                     Array [
                                       "react-calendar__tile",
-                                      "react-calendar__tile--now",
-                                      "react-calendar__tile--active",
-                                      "react-calendar__tile--range",
-                                      "react-calendar__tile--rangeStart",
-                                      "react-calendar__tile--rangeEnd",
-                                      "react-calendar__tile--rangeBothEnds",
                                       "react-calendar__month-view__days__day",
                                       "react-calendar__month-view__days__day--weekend",
                                       null,
@@ -829,7 +817,7 @@ exports[`should render MainPage correctly 1`] = `
                                   view="month"
                                 >
                                   <button
-                                    className="react-calendar__tile react-calendar__tile--now react-calendar__tile--active react-calendar__tile--range react-calendar__tile--rangeStart react-calendar__tile--rangeEnd react-calendar__tile--rangeBothEnds react-calendar__month-view__days__day react-calendar__month-view__days__day--weekend"
+                                    className="react-calendar__tile react-calendar__month-view__days__day react-calendar__month-view__days__day--weekend"
                                     onClick={[Function]}
                                     onFocus={null}
                                     onMouseOver={null}
@@ -1012,6 +1000,12 @@ exports[`should render MainPage correctly 1`] = `
                                 classes={
                                   Array [
                                     "react-calendar__tile",
+                                    "react-calendar__tile--now",
+                                    "react-calendar__tile--active",
+                                    "react-calendar__tile--range",
+                                    "react-calendar__tile--rangeStart",
+                                    "react-calendar__tile--rangeEnd",
+                                    "react-calendar__tile--rangeBothEnds",
                                   ]
                                 }
                                 currentMonthIndex={0}
@@ -1036,6 +1030,12 @@ exports[`should render MainPage correctly 1`] = `
                                   classes={
                                     Array [
                                       "react-calendar__tile",
+                                      "react-calendar__tile--now",
+                                      "react-calendar__tile--active",
+                                      "react-calendar__tile--range",
+                                      "react-calendar__tile--rangeStart",
+                                      "react-calendar__tile--rangeEnd",
+                                      "react-calendar__tile--rangeBothEnds",
                                       "react-calendar__month-view__days__day",
                                       null,
                                       null,
@@ -1060,7 +1060,7 @@ exports[`should render MainPage correctly 1`] = `
                                   view="month"
                                 >
                                   <button
-                                    className="react-calendar__tile react-calendar__month-view__days__day"
+                                    className="react-calendar__tile react-calendar__tile--now react-calendar__tile--active react-calendar__tile--range react-calendar__tile--rangeStart react-calendar__tile--rangeEnd react-calendar__tile--rangeBothEnds react-calendar__month-view__days__day"
                                     onClick={[Function]}
                                     onFocus={null}
                                     onMouseOver={null}
@@ -3638,7 +3638,7 @@ exports[`should render MainPage correctly 1`] = `
           className="mainPage-notes"
         >
           <AreaNotes
-            date="01-01-2000"
+            date="04-01-2000"
             type="DAY_DATA"
           >
             <label
