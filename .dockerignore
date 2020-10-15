@@ -1,0 +1,6 @@
+.git
+.cache
+.travis
+node_modules
+dist
+tests
