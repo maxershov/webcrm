@@ -27,9 +27,15 @@ app.use(history());
 const port = 6700;
 
 // open browser
-(async () => {
-  await open(`http://${ipAddress}:${port}/`);
-})();
+
+try {
+  (async () => {
+    await open(`http://${ipAddress}:${port}/`);
+  })();
+  
+} catch(error) {
+  console.log("Can't start browser");
+}
 
 app.listen(port, ipAddress);
 
