@@ -128,3 +128,4 @@ monitor/stats.json
 *.jpg
 *.jpeg
 .vscode/settings.json
+crm.tar
